@@ -14,8 +14,17 @@ import {ProgressComponent} from './progress.component';
 import {TooltipsComponent} from './tooltips.component';
 import {CashierComponent} from '../cashier/cashier.component';
 
+
 const routes: Routes = [
+
   {
+    path: 'cashier',
+        component: CashierComponent,
+        data: {
+          title: 'Cashier'
+    }
+  }
+  ,{
     path: '',
     data: {
       title: 'Base'
