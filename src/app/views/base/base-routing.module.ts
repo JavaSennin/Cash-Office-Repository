@@ -12,7 +12,7 @@ import { PaginationsComponent } from './paginations.component';
 import {PopoversComponent} from './popovers.component';
 import {ProgressComponent} from './progress.component';
 import {TooltipsComponent} from './tooltips.component';
-import {CashierComponent} from '../cashier/cashier.component';
+import {CashierComponent} from './cashier/cashier.component';
 
 
 const routes: Routes = [

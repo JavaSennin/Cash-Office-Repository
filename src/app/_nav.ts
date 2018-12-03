@@ -33,7 +33,7 @@ export const navItems = [
     children: [
       {
         name: 'Cashier',
-        url: '/cashier/cashier',
+        url: '/base/cashier',
         icon: 'icon-puzzle'
       },
       {
