@@ -17,14 +17,8 @@ import {CashierComponent} from '../cashier/cashier.component';
 
 const routes: Routes = [
 
+
   {
-    path: 'cashier',
-        component: CashierComponent,
-        data: {
-          title: 'Cashier'
-    }
-  }
-  ,{
     path: '',
     data: {
       title: 'Base'
@@ -35,6 +29,13 @@ const routes: Routes = [
         component: CardsComponent,
         data: {
           title: 'Cards'
+        }
+      },
+      {
+        path: 'cashier',
+            component: CashierComponent,
+            data: {
+              title: 'Cashier'
         }
       },
       {
@@ -108,7 +109,8 @@ const routes: Routes = [
         }
       }
     ]
-  }
+  },
+  
 ];
 
 @NgModule({
