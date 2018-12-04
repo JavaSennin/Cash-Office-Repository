@@ -39,7 +39,6 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { CashierComponent } from './views/base/cashier/cashier.component';
 
 @NgModule({
   imports: [
@@ -61,8 +60,7 @@ import { CashierComponent } from './views/base/cashier/cashier.component';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
-    CashierComponent
+    RegisterComponent
   ],
   providers: [{
     provide: LocationStrategy,

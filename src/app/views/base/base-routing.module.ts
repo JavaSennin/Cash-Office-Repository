@@ -12,12 +12,8 @@ import { PaginationsComponent } from './paginations.component';
 import {PopoversComponent} from './popovers.component';
 import {ProgressComponent} from './progress.component';
 import {TooltipsComponent} from './tooltips.component';
-import {CashierComponent} from './cashier/cashier.component';
-
 
 const routes: Routes = [
-
-
   {
     path: '',
     data: {
@@ -29,13 +25,6 @@ const routes: Routes = [
         component: CardsComponent,
         data: {
           title: 'Cards'
-        }
-      },
-      {
-        path: 'cashier',
-            component: CashierComponent,
-            data: {
-              title: 'Cashier'
         }
       },
       {
@@ -109,8 +98,7 @@ const routes: Routes = [
         }
       }
     ]
-  },
-  
+  }
 ];
 
 @NgModule({
