@@ -10,6 +10,7 @@ import { FormsComponent } from './forms.component';
 
 import { SwitchesComponent } from './switches.component';
 import { TablesComponent } from './tables.component';
+import { CashierComponent } from './cashier.component';
 
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';

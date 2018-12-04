@@ -6,6 +6,7 @@ import { FormsComponent } from './forms.component';
 import { SwitchesComponent } from './switches.component';
 import { TablesComponent } from './tables.component';
 import { TabsComponent } from './tabs.component';
+import { CashierComponent } from './cashier.component';
 import { CarouselsComponent } from './carousels.component';
 import { CollapsesComponent } from './collapses.component';
 import { PaginationsComponent } from './paginations.component';
@@ -21,10 +22,10 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'cards',
-        component: CardsComponent,
+        path: 'cashier',
+        component: CashierComponent,
         data: {
-          title: 'Cards'
+          title: 'Cashier'
         }
       },
       {
