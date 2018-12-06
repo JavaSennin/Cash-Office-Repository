@@ -398,45 +398,5 @@ export const navItems = [
       //icon: 'icon-bell'
     }
   ]
-  },
-  {
-    name: 'Admin',
-    url: '/notifications',
-    icon: 'icon-bell',
-    children: [
-      {
-        name: 'User Management',
-        url: '/notifications/alerts',
-        //icon: 'icon-bell'
-      },
-  /* {
-    name: 'Widgets',
-    url: '/widgets',
-    icon: 'icon-calculator',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    } */
-    {
-      name: 'Assign Role',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Group Master',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Page Access',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Reset Password',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
-    }
-  ]
   }
 ];
