@@ -397,6 +397,38 @@ export const navItems = [
       url: '/notifications/alerts',
       //icon: 'icon-bell'
     }
+
+    
+  ]
+  },
+
+  // Cash Office ADMIN Module
+  {
+    name: 'Admin',
+    url: '/admin',
+    icon: 'icon-people', // or user 'layers'
+    children: [
+      {
+      name: 'Assign Role',
+      url: '/admin/assign-role'
+    },
+    {
+      name: 'Group Master',
+      url: '/admin/group-master'
+    },
+    {
+      name: 'Page Access',
+      url: '/admin/page-access'
+    },
+    {
+      name: 'Reset Password',
+      url: '/admin/reset-password'
+    },
+    {
+      name: 'User Management',
+      url: '/admin/user-management'
+    }
   ]
   }
+
 ];
