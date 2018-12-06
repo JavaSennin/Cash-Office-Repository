@@ -439,9 +439,7 @@ export const navItems = [
     }
   ]
   }/* ,
-  {
-    divider: true
-  },
+  
   {
     title: true,
     name: 'Extras',
@@ -483,7 +481,7 @@ export const navItems = [
   {
     name: 'Try CoreUI PRO',
     url: 'http://coreui.io/pro/angular/',
-    icon: 'icon-layers',
+    icon: 'icon-layers'
     variant: 'danger'
   } */
 ];
