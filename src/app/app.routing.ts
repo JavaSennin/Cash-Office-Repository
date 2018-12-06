@@ -55,6 +55,10 @@ export const routes: Routes = [
         loadChildren: './views/base/base.module#BaseModule'
       },
       {
+        path: 'admin',
+        loadChildren: './views/admin/admin.module#AdminModule'
+      },
+      {
         path: 'buttons',
         loadChildren: './views/buttons/buttons.module#ButtonsModule'
       },
