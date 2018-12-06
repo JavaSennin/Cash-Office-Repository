@@ -7,6 +7,7 @@ import { SwitchesComponent } from './switches.component';
 import { TablesComponent } from './tables.component';
 import { TabsComponent } from './tabs.component';
 import { CashierComponent } from './cashier.component';
+import { PaymentComponent } from './payment.component';
 import { CarouselsComponent } from './carousels.component';
 import { CollapsesComponent } from './collapses.component';
 import { PaginationsComponent } from './paginations.component';
@@ -26,6 +27,12 @@ const routes: Routes = [
         component: CashierComponent,
         data: {
           title: 'Cashier'
+        }
+      },{
+        path: 'payment',
+        component: PaymentComponent,
+        data: {
+          title: 'Payment'
         }
       },
       {

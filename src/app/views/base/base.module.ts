@@ -11,6 +11,7 @@ import { FormsComponent } from './forms.component';
 import { SwitchesComponent } from './switches.component';
 import { TablesComponent } from './tables.component';
 import { CashierComponent } from './cashier.component';
+import { PaymentComponent } from './payment.component';
 
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -64,6 +65,7 @@ import { BaseRoutingModule } from './base-routing.module';
   declarations: [
     CardsComponent,
     CashierComponent,
+    PaymentComponent,
     FormsComponent,
     SwitchesComponent,
     TablesComponent,

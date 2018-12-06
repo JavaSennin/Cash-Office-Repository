@@ -38,7 +38,7 @@ export const navItems = [
       },
       {
         name: 'Payment Method',
-        url: '/base/carousels',
+        url: '/base/payment',
         icon: 'icon-puzzle'
       },
       {
