@@ -10,17 +10,10 @@ import { UserManagementComponent } from './user-management.component' ;
 const routes: Routes = [
   {
     path: '',
-    component: UserManagementComponent, 
+    // component: UserManagementComponent, 
     data: { title: 'Admin' } ,
 
     children: [
-      // {
-      //   path: 'buttons',  
-        // component: ButtonsComponent,
-      //   data: {
-      //     title: 'Buttons'
-      //   }
-      // },
       {
         path: 'assign-role',
         component: AssignRoleComponent,
