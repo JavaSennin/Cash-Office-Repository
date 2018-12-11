@@ -46,12 +46,12 @@ export const navItems = [
       {
         name: 'Cash Office',
         url: '/base/forms',
-        icon: 'icon-puzzle'
+        
       },
       {
         name: 'Assign Cashier',
         url: '/base/assigncashier',
-        icon: 'icon-puzzle'
+        
       }/*,
       {
         name: 'Popovers',
