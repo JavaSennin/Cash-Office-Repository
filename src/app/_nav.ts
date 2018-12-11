@@ -3,10 +3,7 @@ export const navItems = [
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer',
-    /*badge: {
-      variant: 'info',
-      text: 'NEW'
-    }**/
+    
   },
   /*{
     title: true,
@@ -34,17 +31,17 @@ export const navItems = [
       {
         name: 'Cashier',
         url: '/base/cashier',
-        icon: 'icon-puzzle'
+        
       },
       {
         name: 'Payment Method',
         url: '/base/payment',
-        icon: 'icon-puzzle'
+        
       },
       {
         name: 'Applications',
         url: '/base/collapses',
-        icon: 'icon-puzzle'
+       
       },
       {
         name: 'Cash Office',
@@ -53,7 +50,7 @@ export const navItems = [
       },
       {
         name: 'Assign Cashier',
-        url: '/base/paginations',
+        url: '/base/assigncashier',
         icon: 'icon-puzzle'
       }/*,
       {
