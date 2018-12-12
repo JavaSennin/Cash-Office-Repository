@@ -10,8 +10,6 @@ This template is based on Bootstrap 4.
 * [What's included](#whats-included)
 * [Documentation](#documentation)
 * [Creators](#creators)
-* [Community Projects](#community-projects)
-* [License](#license)
 
 ## Versions
 
@@ -64,13 +62,12 @@ free-angular-admin-template/
 
 ## Documentation
 
-The documentation for the Cash Office Angular Template is hosted at our website (https://www.sais-erp.com/)
+The documentation for the Cash Office Angular Template is hosted at our website
 
 ## Creators
 
 **Dev1**
 
-* <https://twitter.com/tefodraws>
 * <https://github.com/javasennin>
 
 **Dev2**
