@@ -15,7 +15,9 @@ import { CashierAssignmentComponent } from './cashier-assignment.component';
 import { CollectionAppBranchComponent } from './collection-app-branch.component';
 import { CollectionAppDetailComponent } from './collection-app-detail.component';
 import { CollectionAppSummaryComponent } from './collection-app-summary.component';
+import { DepositSlipComponent } from './deposit-slip.component' ;
 import { ReceiptListingComponent } from './receipt-listing.component' ;
+import { ReprintReceiptComponent } from './reprint-receipt.component' ;
 
 @NgModule({
   imports: [
@@ -29,7 +31,9 @@ import { ReceiptListingComponent } from './receipt-listing.component' ;
     CollectionAppBranchComponent,
     CollectionAppDetailComponent,
     CollectionAppSummaryComponent,
-    ReceiptListingComponent
+    DepositSlipComponent,
+    ReceiptListingComponent,
+    ReprintReceiptComponent
   ]
 })
 export class CashOfficeReportsModule { }

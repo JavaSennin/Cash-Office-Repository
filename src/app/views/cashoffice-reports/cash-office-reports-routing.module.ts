@@ -5,7 +5,10 @@ import { CashierAssignmentComponent } from './cashier-assignment.component' ;
 import { CollectionAppBranchComponent } from './collection-app-branch.component';
 import { CollectionAppDetailComponent } from './collection-app-detail.component';
 import { CollectionAppSummaryComponent } from './collection-app-summary.component';
+import { DepositSlipComponent } from './deposit-slip.component';
 import { ReceiptListingComponent } from './receipt-listing.component' ;
+import { ReprintReceiptComponent } from './reprint-receipt.component' ;
+
 
 const routes: Routes = [
   {
@@ -47,6 +50,20 @@ const routes: Routes = [
         component: ReceiptListingComponent,
         data: {
           title: 'Daily Receipt Listing'
+        }
+      },
+      {
+        path: 'deposit-slip',
+        component: DepositSlipComponent,
+        data: {
+          title: 'Reprint Deposit Slip' 
+        }
+      },
+      {
+        path: 'reprint-receipt',
+        component: ReprintReceiptComponent,
+        data: {
+          title: 'Reprint Receipt'
         }
       },
       {

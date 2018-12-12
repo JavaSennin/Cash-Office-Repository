@@ -444,15 +444,23 @@ export const navItems = [
       },
       {
         name: 'Collection - Application Detail',
-        url: 'collection-app-detail'
+        url: '/cashoffice-reports/collection-app-detail'
       },
       {
         name: 'Collection - Application Summary',
-        url: 'collection-app-summary'
+        url: '/cashoffice-reports/collection-app-summary'
       },
       {
-        path: 'Daily Receipt Listing',
-        url: 'receipt-listing'
+        name: 'Daily Receipt Listing',
+        url: '/cashoffice-reports/receipt-listing'
+      },
+      {
+        name: 'Reprint Deposit Slip',
+        url: '/cashoffice-reports/deposit-slip' 
+      },
+      {
+        name: 'Reprint Receipt',
+        url: '/cashoffice-reports/reprint-receipt' 
       }
     ]
   }, 
