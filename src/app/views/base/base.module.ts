@@ -11,6 +11,7 @@ import { FormsComponent } from './forms.component';
 import { SwitchesComponent } from './switches.component';
 import { TablesComponent } from './tables.component';
 import { CashierComponent } from './cashier.component';
+import { AssigncashierComponent } from './assigncashier.component';
 import { PaymentComponent } from './payment.component';
 
 // Tabs Component
@@ -65,6 +66,7 @@ import { BaseRoutingModule } from './base-routing.module';
   declarations: [
     CardsComponent,
     CashierComponent,
+    AssigncashierComponent,
     PaymentComponent,
     FormsComponent,
     SwitchesComponent,

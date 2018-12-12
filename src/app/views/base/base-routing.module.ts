@@ -7,6 +7,7 @@ import { SwitchesComponent } from './switches.component';
 import { TablesComponent } from './tables.component';
 import { TabsComponent } from './tabs.component';
 import { CashierComponent } from './cashier.component';
+import { AssigncashierComponent } from './assigncashier.component';
 import { PaymentComponent } from './payment.component';
 import { CarouselsComponent } from './carousels.component';
 import { CollapsesComponent } from './collapses.component';
@@ -33,6 +34,12 @@ const routes: Routes = [
         component: PaymentComponent,
         data: {
           title: 'Payment'
+        }
+      },{
+        path: 'assigncashier',
+        component: AssigncashierComponent,
+        data: {
+          title: 'Assign Cashier'
         }
       },
       {
