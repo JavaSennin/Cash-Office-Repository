@@ -63,6 +63,10 @@ export const routes: Routes = [
         loadChildren: './views/buttons/buttons.module#ButtonsModule'
       },
       {
+        path: 'cashoffice-reports',
+        loadChildren: './views/cashoffice-reports/cash-office-reports.module#CashOfficeReportsModule'
+      },
+      {
         path: 'charts',
         loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
       },
@@ -85,6 +89,10 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
+      },
+      {
+        path: 'user',
+        loadChildren: './views/user/user.module#UserModule'
       }
     ]
   }
