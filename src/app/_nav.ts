@@ -429,6 +429,49 @@ export const navItems = [
       url: '/admin/user-management'
     }
   ]
+  },
+
+  // Cash Office CASH OFFICE REPORTS Module
+  {
+    name: 'CashOffice Reports',
+    url: '/cashoffice-reports',
+    icon: 'icon-pie-chart', // or user 'layers'
+    children: [
+      {
+      name: 'Cashier Assignment',
+      url: '/cashoffice-reports/cashier-assignment'
+      },
+      {
+        name: 'Collection - Application Branch',
+        url: '/cashoffice-reports/collection-branch'
+      },
+      {
+        name: 'Collection - Application Detail',
+        url: 'collection-app-detail'
+      },
+      {
+        name: 'Collection - Application Summary',
+        url: 'collection-app-summary'
+      },
+      {
+        path: 'Daily Receipt Listing',
+        url: 'receipt-listing'
+      }
+    ]
+  }, 
+
+  // Cash Office USER Module
+  {
+    name: 'User',
+    url: '/user',
+    icon: 'icon-user',
+    children: [
+      {
+      name: 'Pass Management',
+      url: '/user/pass-mgt',
+      // icon: 'icon-lock-unlocked'
+      }
+    ]
   }
 
 ];
