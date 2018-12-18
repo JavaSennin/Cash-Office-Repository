@@ -472,7 +472,7 @@ export const navItems = [
     icon: 'icon-user',
     children: [
       {
-      name: 'Pass Management',
+      name: 'Password Management',
       url: '/user/pass-mgt',
       // icon: 'icon-lock-unlocked'
       }
