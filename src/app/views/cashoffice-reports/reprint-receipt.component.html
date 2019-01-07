@@ -1,68 +1,39 @@
 <!-- Reprint Receipt -->
 
 <div class="animated fadeIn">
-  <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> Reprint Receipt
+               <i class="fa fa-align-justify"></i> Reprint Receipt
             </div>
+         
+           <div class="card-body">
+               <form>
+                  <div class="form-row">
+                     <div class="col">
 
-            <div class="card-body">
-
-                <form>
-                    <div class="form-row">
-                      
-                      <div class="col-6">
-                        <input type="text" class="form-control" placeholder="USERNAME">
-                      </div>
-                        
-                    </div> 
-
-                    <br>
-
-                    <div class="form-row">
-                      <div>
-                        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                          <button type="button" class="btn btn-block btn-primary">Report</button>
+                        <div class="form-group row">
+                           <label class="col-md-3 col-form-label" for="text-input">Receipt Number:</label>
+                           <div class="col-md-3">
+                              <input type="text" class="form-control" [formControl]="receiptNumber">
+                           </div>
                         </div>
-                      </div>
-                    </div>   
+                        <!-- dbg <p> -->
+                           <p> receiptNumber is {{receiptNumber.value}} </p> 
 
-                </form>
-
+                        <div class="btn-toolbar">
+                           <div class="btn-group mr-2">
+                             <button type="submit" class="btn btn-md btn-primary " (click)="viewReport()">Report</button>
+                           </div>
+                        </div>
+                        
+                     </div>
+                      
+                  </div>
+               </form>
             </div>
-        </div>
-    </div>
-  </div>
+         </div>
+      </div>
+   </div>
 </div>
-
-
-<br>
-
-
-<div class="animated fadeIn">
-    <div class="card">
-        <div class="card-header">
-            <i class="fa fa-align-justify"></i> Reprint Receipt
-          </div>
-
-      <div class="card-body">
-          <form>
-              <div class="form-row">
-                
-                <div class="col-6">
-                  <input type="text" class="form-control" placeholder="USERNAME">
-                </div>
-                  
-              </div> 
-          </form>
-      </div>
-
-      <div class="card-footer">
-        <button type="button" class="btn btn-primary">Report</button>
-      </div>
-
-    </div>
-
-  </div>

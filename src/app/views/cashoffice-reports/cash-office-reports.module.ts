@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 // import { ButtonsComponent } from './buttons.component';
@@ -24,7 +24,7 @@ import { ReprintReceiptComponent } from './reprint-receipt.component' ;
     CommonModule,
     CashOfficeReportsRoutingModule,
     BsDropdownModule.forRoot(),
-    FormsModule
+    FormsModule, ReactiveFormsModule
   ],
   declarations: [
     CashierAssignmentComponent,
