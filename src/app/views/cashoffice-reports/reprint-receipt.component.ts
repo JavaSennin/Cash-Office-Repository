@@ -20,13 +20,11 @@ export class ReprintReceiptComponent {
 
   receiptNumber = new FormControl('') ;
 
-  reprintReceipt = new FormGroup({
-    
-  }) ;
+  // reprintReceipt = new FormGroup({}) ;
 
   viewReport(){
-    this.receiptNumber.setValue('R' +  this.receiptNumber.value ) ;
-    console.log(this.receiptNumber.value) ;
+    // this.receiptNumber.setValue('R' +  this.receiptNumber.value ) ;
+    console.log('Receipt No. ' + this.receiptNumber.value) ;
   }
 
   // constructor() { 
