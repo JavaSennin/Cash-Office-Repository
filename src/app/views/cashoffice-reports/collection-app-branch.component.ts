@@ -15,7 +15,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class CollectionAppBranchComponent {
 
-  branchCode = new FormControl('') ;
+  branchCode = new FormControl('', Validators.required) ;
 
   viewBranchReport(){
     console.log('Branch Code: ' + this.branchCode.value) ;
