@@ -9,14 +9,14 @@
         </div>
    
         <div class="card-body">
-          <form>
+          <form [formGroup] = "cashierInput" (ngSubmit)="onSubmit()">
             <div class="form-row">
               <div class="col">
                          
                 <div class = "form-group row">
                   <label class="col-md-3 col-form-label" >Branch Code</label>
                   <div>
-                    <select class="form-control" id="selectBrCode">
+                    <select class="form-control" id="selectBrCode" formControlName = "branchCode" required>
                       <option value="0">Please Select</option>
                       <option value="1">Branch CODE001</option>
                       <option value="2">Branch CODE002</option>
@@ -27,7 +27,7 @@
                 <div class = "form-group row">
                   <label class="col-md-3 col-form-label" >CashOffice Code</label>
                   <div>
-                    <select class="form-control" id="selectCOCode">
+                    <select class="form-control" id="selectCOCode" formControlName = "cashOfficeCode">
                       <option value="0">Please Select</option>
                       <option value="1">CashOffice 001</option>
                       <option value="2">CashOffice 002</option>
@@ -37,7 +37,7 @@
                                                 
                 <div class="btn-toolbar">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary ">Report</button>
+                    <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Report</button> 
                   </div>
                 </div>
                         
