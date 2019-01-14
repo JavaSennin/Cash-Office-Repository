@@ -11,7 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AllocationRoutingModule } from './allocation-routing.module';
 
 // Cash Office - CASH OFFICE REPORTS Module
-import { CashierAssignmentComponent } from './electronic.component';
+import { ElectronicComponent } from './electronic.component';
 import { CollectionAppBranchComponent } from './collection-app-branch.component';
 import { CollectionAppDetailComponent } from './collection-app-detail.component';
 import { CollectionAppSummaryComponent } from './collection-app-summary.component';
@@ -27,7 +27,7 @@ import { ReprintReceiptComponent } from './reprint-receipt.component' ;
     FormsModule, ReactiveFormsModule
   ],
   declarations: [
-    CashierAssignmentComponent,
+    ElectronicComponent,
     CollectionAppBranchComponent,
     CollectionAppDetailComponent,
     CollectionAppSummaryComponent,

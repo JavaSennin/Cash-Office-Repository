@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CashierAssignmentComponent } from './electronic.component' ;
+import { ElectronicComponent } from './electronic.component' ;
 import { CollectionAppBranchComponent } from './collection-app-branch.component';
 import { CollectionAppDetailComponent } from './collection-app-detail.component';
 import { CollectionAppSummaryComponent } from './collection-app-summary.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     children: [
       {
         path: 'electronic',
-        component: CashierAssignmentComponent,
+        component:ElectronicComponent,
         data: {
           title: 'Electronic Allocation'
         }
