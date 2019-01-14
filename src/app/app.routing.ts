@@ -59,6 +59,10 @@ export const routes: Routes = [
         loadChildren: './views/admin/admin.module#AdminModule'
       },
       {
+        path: 'allocation',
+        loadChildren: './views/allocation/allocation.module#AllocationModule'
+      },
+      {
         path: 'buttons',
         loadChildren: './views/buttons/buttons.module#ButtonsModule'
       },

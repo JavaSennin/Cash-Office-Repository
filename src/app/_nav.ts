@@ -257,75 +257,69 @@ export const navItems = [
     }
   ]
   },
+
+  // Cash Office ALLOCATION module
   {
     name: 'Allocation',
-    url: '/notifications',
-    icon: 'icon-bell',
+    url: '/allocation',
+    icon: 'icon-pie-chart',
     children: [
       {
         name: 'Electronic Allocation',
-        url: '/notifications/alerts',
+        url: '/allocation/electronic',
         //icon: 'icon-bell'
       },
-  /* {
-    name: 'Widgets',
-    url: '/widgets',
-    icon: 'icon-calculator',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    } */
     {
       name: 'Manual Allocation',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     },
     {
       name: 'Direct Debit Processing',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     },
     {
       name: 'Bank Stop Order Processing',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     },
     {
       name: 'Bank Statement Posting',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     },
     {
       name: 'MisAllocation Correction',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     }
     ,
     {
       name: 'PayPoint MisAllocation',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     }
     ,
     {
       name: 'Bank Statement Adjustment Voucher',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     }
     ,
     {
       name: 'Manual Adjustment Voucher',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     },
     {
       name: 'PayPoint Collection History',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     },
     {
       name: 'Partial MisAllocation Correction',
-      url: '/notifications/alerts',
+      url: '/allocation/alerts',
       //icon: 'icon-bell'
     }
   ]
