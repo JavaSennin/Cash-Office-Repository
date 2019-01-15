@@ -1,22 +1,54 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { BankAdjustmentComponent } from './bank-adjustment.component';
+import { BankPostingComponent } from './bank-posting.component';
 import { ElectronicComponent } from './electronic.component' ;
-import { CollectionAppBranchComponent } from './collection-app-branch.component';
-import { CollectionAppDetailComponent } from './collection-app-detail.component';
-import { CollectionAppSummaryComponent } from './collection-app-summary.component';
-import { DepositSlipComponent } from './deposit-slip.component';
-import { ReceiptListingComponent } from './receipt-listing.component' ;
-import { ReprintReceiptComponent } from './reprint-receipt.component' ;
+import { BankProcessingComponent } from './bank-processing.component';
+import { DirectDebitComponent } from './direct-debit.component';
+import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
+import { ManualAllocationComponent } from './manual-allocation.component' ;
+import { MisallocationCorrectionComponent } from './misallocation-correction.component' ;
+import { PartialCorrectionComponent } from './partial-correction.component' ;
+import { PaypointHistoryComponent } from './paypoint-history.component';
+import { PaypointMisallocationComponent } from './paypoint-misallocation.component';
+
 
 
 const routes: Routes = [
   {
     path: '',
-    // component: CashOfficeReportsComponent, 
-    data: { title: 'Cash Office Reports' } ,
+    data: { title: 'Allocation' } ,
 
     children: [
+      {
+        path: 'bank-adjustment',
+        component: BankAdjustmentComponent,
+        data: {
+          title: 'Bank Statement Adjustment Voucher'
+        }        
+      },
+      {
+        path: 'bank-posting',
+        component: BankPostingComponent, 
+        data: {
+          title: 'Bank Statement Posting'
+        }
+      },
+      {
+        path: 'bank-processing',
+        component: BankProcessingComponent,
+        data: {
+          title: 'Bank Stop Order Processing'
+        }
+      },
+      {
+        path: 'direct-debit',
+        component: DirectDebitComponent,
+        data: { 
+          title: 'Direct Debit Processing'
+        }
+      },
       {
         path: 'electronic',
         component:ElectronicComponent,
@@ -25,46 +57,41 @@ const routes: Routes = [
         }
       },
       {
-        path: 'collection-branch',
-        component: CollectionAppBranchComponent,
+        path: 'manual-adjustment',
+        component: ManualAdjustmentComponent,
         data: {
-          title: 'Collection - Application Branch'
-        }
+          title: 'Manual Adjustment Voucher'
+        }        
       },
       {
-        path: 'collection-app-detail',
-        component: CollectionAppDetailComponent,
+        path: 'manual-allocation',
+        component: ManualAllocationComponent,
         data: {
-          title: 'Collection - Application Detail'
-        }
+          title: 'Manual Allocation'
+        }        
+      },    
+      {
+        path: 'correction',
+        component: MisallocationCorrectionComponent,
+        data: {
+          title: 'MisAllocation Correction'
+        }        
       },
       {
-        path: 'collection-app-summary',
-        component: CollectionAppSummaryComponent,
-        data: {
-          title: 'Collection - Application Summary'
-        }
+        path: 'partial-correction',
+        component: PartialCorrectionComponent,
+        data: { title: 'Partial MisAllocation Correction' }
+        
       },
       {
-        path: 'receipt-listing',
-        component: ReceiptListingComponent,
-        data: {
-          title: 'Daily Receipt Listing'
-        }
+        path: 'paypoint-history',
+        component: PaypointHistoryComponent,
+        data: { title: 'PayPoint Collection History' }       
       },
       {
-        path: 'deposit-slip',
-        component: DepositSlipComponent,
-        data: {
-          title: 'Reprint Deposit Slip' 
-        }
-      },
-      {
-        path: 'reprint-receipt',
-        component: ReprintReceiptComponent,
-        data: {
-          title: 'Reprint Receipt'
-        }
+        path: 'paypoint-misallocation',
+        component: PaypointMisallocationComponent,
+        data: { title: 'PayPoint MisAllocation' }        
       },
       {
         path: '**',

@@ -12,18 +12,18 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 
 @Component({
-  templateUrl: 'collection-app-summary.component.html'
+  templateUrl: 'bank-posting.component.html'
 })
-export class CollectionAppSummaryComponent {
+export class BankPostingComponent {
 
-  summaryInput = new FormGroup({
+  detailInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),
     fromDate: new FormControl('2018-09-01', Validators.required),
     toDate: new FormControl('2018-09-30', Validators.required)
   });
 
-  summaryReport(){
-    console.table(this.summaryInput.value) ;
+  detailReport(){
+    console.table(this.detailInput.value) ;
 
     // form-processing code
   }

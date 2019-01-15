@@ -13,10 +13,10 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 })
 
 @Component({
-  selector: 'reprint-receipt',
-  templateUrl: './reprint-receipt.component.html'
+  // selector: 'reprint-receipt',
+  templateUrl: './manual-allocation.component.html'
 })
-export class ReprintReceiptComponent {
+export class ManualAllocationComponent {
 
   receiptNumber = new FormControl('') ;
 

@@ -13,9 +13,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 
 @Component({
   // selector: 'app-user-management',
-  templateUrl: './receipt-listing.component.html'
+  templateUrl: './manual-adjustment.component.html'
 })
-export class ReceiptListingComponent {
+export class ManualAdjustmentComponent {
 
   listingInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),

@@ -13,9 +13,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 
 @Component({
   // selector: 'app-user-management',
-  templateUrl: './electronic.component.html'
+  templateUrl: './paypoint-misallocation.component.html'
 })
-export class ElectronicComponent {
+export class PaypointMisallocationComponent {
  
   cashierInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),

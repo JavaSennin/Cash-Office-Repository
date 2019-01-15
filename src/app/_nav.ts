@@ -52,37 +52,7 @@ export const navItems = [
         name: 'Assign Cashier',
         url: '/base/assigncashier',
         
-      }/*,
-      {
-        name: 'Popovers',
-        url: '/base/popovers',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Progress',
-        url: '/base/progress',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Switches',
-        url: '/base/switches',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Tables',
-        url: '/base/tables',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Tabs',
-        url: '/base/tabs',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Tooltips',
-        url: '/base/tooltips',
-        icon: 'icon-puzzle'
-      }**/
+      }
     ]
   },
   {
@@ -143,11 +113,6 @@ export const navItems = [
       
     ]
   },
- /* {
-    name: 'Charts',
-    url: '/charts',
-    icon: 'icon-pie-chart'
-  },**/
   {
     name: 'Reports',
     url: '/icons',
@@ -155,12 +120,7 @@ export const navItems = [
     children: [
       {
         name: 'Daily Reciept Listing',
-        url: '/icons/coreui-icons',
-        //icon: 'icon-star',
-      /*   badge: {
-          variant: 'success',
-          text: 'NEW'
-        } */
+        url: '/icons/coreui-icons'
       },
       {
         name: 'Reprint Receipt',
@@ -169,12 +129,7 @@ export const navItems = [
       },
       {
         name: 'Reprint Deposit Slip',
-        url: '/icons/font-awesome',
-        //icon: 'icon-star',
-        /* badge: {
-          variant: 'secondary',
-          text: '4.7'
-        } */
+        url: '/icons/font-awesome'
       },
       {
         name: 'Collection By Branch',
@@ -232,14 +187,6 @@ export const navItems = [
         url: '/notifications/alerts',
         //icon: 'icon-bell'
       },
-  /* {
-    name: 'Widgets',
-    url: '/widgets',
-    icon: 'icon-calculator',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    } */
     {
       name: 'Split/Merge Debit File',
       url: '/notifications/alerts',
@@ -265,64 +212,55 @@ export const navItems = [
     icon: 'icon-pie-chart',
     children: [
       {
+        name: 'Bank Statement Adjustment Voucher',
+        url: '/allocation/bank-adjustment'
+      },
+      {
+        name: 'Bank Statement Posting',
+        url: '/allocation/bank-posting'
+      },
+      {
+        name: 'Bank Stop Order Processing',
+        url: '/allocation/bank-processing'
+      },
+      {
+        name: 'Direct Debit Processing',
+        url: '/allocation/direct-debit'
+      },
+      {
         name: 'Electronic Allocation',
-        url: '/allocation/electronic',
+        url: '/allocation/electronic'
+      },
+      {
+        name: 'Manual Adjustment Voucher',
+        url: '/allocation/manual-adjustment'
+      },
+      {
+        name: 'Manual Allocation',
+        url: '/allocation/manual-allocation',
+        //icon: 'icon-bell'
+      },    
+      {
+        name: 'MisAllocation Correction',
+        url: '/allocation/correction',
         //icon: 'icon-bell'
       },
-    {
-      name: 'Manual Allocation',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Direct Debit Processing',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Bank Stop Order Processing',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Bank Statement Posting',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'MisAllocation Correction',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    }
-    ,
-    {
-      name: 'PayPoint MisAllocation',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    }
-    ,
-    {
-      name: 'Bank Statement Adjustment Voucher',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    }
-    ,
-    {
-      name: 'Manual Adjustment Voucher',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'PayPoint Collection History',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    },
-    {
-      name: 'Partial MisAllocation Correction',
-      url: '/allocation/alerts',
-      //icon: 'icon-bell'
-    }
-  ]
+      {
+        name: 'Partial MisAllocation Correction',
+        url: '/allocation/partial-correction',
+        //icon: 'icon-bell'
+      },
+      {
+        name: 'PayPoint Collection History',
+        url: '/allocation/paypoint-history',
+        //icon: 'icon-bell'
+      },
+      {
+        name: 'PayPoint MisAllocation',
+        url: '/allocation/paypoint-misallocation',
+        //icon: 'icon-bell'
+      }
+    ]
   },
   {
     name: 'PayPoint Reports',

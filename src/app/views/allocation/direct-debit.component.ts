@@ -14,9 +14,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 
 @Component({
   // selector: 'app-user-management',
-  templateUrl: './deposit-slip.component.html'
+  templateUrl: './direct-debit.component.html'
 })
-export class DepositSlipComponent {
+export class DirectDebitComponent {
 
   depositNumber = new FormControl('') ;
 

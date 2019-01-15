@@ -10,14 +10,18 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // Admin Routing
 import { AllocationRoutingModule } from './allocation-routing.module';
 
-// Cash Office - CASH OFFICE REPORTS Module
+// Cash Office - ALLOCATION Module
 import { ElectronicComponent } from './electronic.component';
-import { CollectionAppBranchComponent } from './collection-app-branch.component';
-import { CollectionAppDetailComponent } from './collection-app-detail.component';
-import { CollectionAppSummaryComponent } from './collection-app-summary.component';
-import { DepositSlipComponent } from './deposit-slip.component' ;
-import { ReceiptListingComponent } from './receipt-listing.component' ;
-import { ReprintReceiptComponent } from './reprint-receipt.component' ;
+import { BankAdjustmentComponent } from './bank-adjustment.component';
+import { BankPostingComponent } from './bank-posting.component';
+import { BankProcessingComponent } from './bank-processing.component';
+import { DirectDebitComponent } from './direct-debit.component' ;
+import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
+import { ManualAllocationComponent } from './manual-allocation.component' ;
+import { MisallocationCorrectionComponent } from './misallocation-correction.component' ;
+import { PartialCorrectionComponent } from './partial-correction.component' ;
+import { PaypointHistoryComponent } from './paypoint-history.component';
+import { PaypointMisallocationComponent } from './paypoint-misallocation.component';
 
 @NgModule({
   imports: [
@@ -28,12 +32,16 @@ import { ReprintReceiptComponent } from './reprint-receipt.component' ;
   ],
   declarations: [
     ElectronicComponent,
-    CollectionAppBranchComponent,
-    CollectionAppDetailComponent,
-    CollectionAppSummaryComponent,
-    DepositSlipComponent,
-    ReceiptListingComponent,
-    ReprintReceiptComponent
+    BankAdjustmentComponent,
+    BankPostingComponent,
+    BankProcessingComponent,
+    DirectDebitComponent,
+    ManualAdjustmentComponent,
+    ManualAllocationComponent,
+    MisallocationCorrectionComponent,
+    PartialCorrectionComponent,
+    PaypointHistoryComponent,
+    PaypointMisallocationComponent
   ]
 })
 export class AllocationModule { }

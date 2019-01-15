@@ -11,9 +11,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 
 @Component({
-  templateUrl: 'collection-app-branch.component.html'
+  templateUrl: 'bank-adjustment.component.html'
 })
-export class CollectionAppBranchComponent {
+export class BankAdjustmentComponent {
 
   branchCode = new FormControl('', Validators.required) ;
 
