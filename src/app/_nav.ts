@@ -156,12 +156,12 @@ export const navItems = [
   },
   {
     name: 'PayPoint Master',
-    url: '/notifications',
+    url: '/paypoint-master',
     icon: 'icon-bell',
     children: [
       {
-        name: 'Debit file Template Assignment',
-        url: '/notifications/alerts',
+        name: 'Debit file Template',
+        url: '/paypoint-master/dfta',
         //icon: 'icon-bell'
       },
       {
