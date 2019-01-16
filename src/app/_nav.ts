@@ -169,11 +169,7 @@ export const navItems = [
         url: '/notifications/badges',
         //icon: 'icon-bell'
       },
-      /* {
-        name: 'Modals',
-        url: '/notifications/modals',
-        icon: 'icon-bell'
-      } */
+      
     ]
   },
 

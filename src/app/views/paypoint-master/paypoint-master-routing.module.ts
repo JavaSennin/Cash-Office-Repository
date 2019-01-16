@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DftaComponent } from './dfta.component' ;
 
-
-
 const routes: Routes = [
   {
     path: '',
-    // component: CashOfficeReportsComponent, 
+    // component: PaypointMasterModule, 
     data: { title: 'PayPoint Master' } ,
 
     children: [

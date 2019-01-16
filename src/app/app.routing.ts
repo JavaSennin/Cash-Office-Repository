@@ -59,6 +59,10 @@ export const routes: Routes = [
         loadChildren: './views/admin/admin.module#AdminModule'
       },
       {
+        path: 'paypoint-master',
+        loadChildren: './views/paypoint-master/paypoint-master.module#PaypointMasterModule'
+      },
+      {
         path: 'allocation',
         loadChildren: './views/allocation/allocation.module#AllocationModule'
       },

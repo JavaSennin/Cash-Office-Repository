@@ -12,7 +12,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 
 @Component({
-  // selector: 'app-user-management',
+  // selector: '',
   templateUrl: './electronic.component.html'
 })
 export class ElectronicComponent {

@@ -13,8 +13,6 @@ import { PartialCorrectionComponent } from './partial-correction.component' ;
 import { PaypointHistoryComponent } from './paypoint-history.component';
 import { PaypointMisallocationComponent } from './paypoint-misallocation.component';
 
-
-
 const routes: Routes = [
   {
     path: '',
