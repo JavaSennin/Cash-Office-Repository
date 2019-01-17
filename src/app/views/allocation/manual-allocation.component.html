@@ -1,39 +1,122 @@
-<!-- Reprint Receipt -->
+<!-- Manual Allocation - Allocation Module -->
 
 <div class="animated fadeIn">
-   <div class="row">
-      <div class="col-lg-12">
-         <div class="card">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
             <div class="card-header">
-               <i class="fa fa-align-justify"></i> Reprint Receipt
+              <i class="fa fa-align-justify"></i> Manual Allocation
             </div>
-         
-           <div class="card-body">
-               <form>
-                  <div class="form-row">
-                     <div class="col">
-
-                        <div class="form-group row">
-                           <label class="col-md-3 col-form-label" for="text-input">Receipt Number:</label>
-                           <div class="col-md-3">
-                              <input type="text" class="form-control" [formControl]="receiptNumber">
-                           </div>
+       
+            <div class="card-body"> <!-- BEGIN: Form Content-->
+              <form [formGroup] = "cashierInput" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+    
+                  <!-- 1st Column -->
+                  <div class="col-lg-12">
+    
+                    <div class="form-group row">
+                      <label class="col-md-2 col-form-label" for="text-input">RECEIPT No.</label>
+                        <div class="col-md-2">
+                          <input type="text" class="form-control" [formControl]="">
                         </div>
-                        <!-- dbg <p> -->
-                           <!-- <p> receiptNumber is {{receiptNumber.value}} </p>  -->
 
-                        <div class="btn-toolbar">
-                           <div class="btn-group mr-2">
-                             <button type="submit" class="btn btn-md btn-primary " (click)="viewReport()">Report</button>
-                           </div>
+                        <div class="btn mr-2">
+                           <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Search</button> 
                         </div>
-                        
-                     </div>
+                    </div>
+                       
+                    <div class="form-group row">
+                      <label class="col-md-4 col-form-label" for="text-input">RECEIPT PERIOD</label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" [formControl]="">
+                      </div>
+                    </div>
+                         
+                    <div class="form-group row">
+                      <label class="col-md-4 col-form-label" for="text-input">STATEMENT PERIOD</label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" [formControl]="">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-md-4 col-form-label">ALLOCATED PERIOD</label>
+                      <div class = "col-md-6">
+                        <input class="form-control" id="date-input" type="date" 
+                        formControlName = "toDate" name="date-input" value = "2018-09-30" required>
+                      </div>
+                    </div>
+                                                                          
+                  </div>
+                
+                  <!-- 2nd Column -->
+                  <!-- <div class="col-lg-6">
+    
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="text-input">PAYPOINT NAME</label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" [formControl]="">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="text-input">TOTAL CREDIT FILE AMOUNT</label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" [formControl]="">
+                      </div>
+                    </div>
+    
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="text-input"> GROSS AMOUNT</label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" [formControl]="">
+                      </div>
+                    </div>
+    
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="text-input">AMOUNT</label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" [formControl]="">
+                      </div>
+                    </div>
+                         
+                  </div> -->
+    
+                </div>
+    
+                <hr>
+                
+                <!-- form control buttons here:  -->
+                <div class = "form-row text-center btn-toolbar">
+                  <div class= "col-lg-12">
+                    <div class="btn-group mr-2">
+                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Save</button> 
+                    </div>
+    
+                    <div class="btn-group mr-2">
+                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Clear</button> 
+                    </div>
+    
+                    <div class="btn-group mr-2">
+                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Exit</button> 
+                    </div>
+
+                    <div class="btn-group mr-2">
+                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Post</button> 
+                    </div>
+
+                    <div class="btn-group mr-2">
+                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Allocated Policies</button> 
+                    </div>
                       
                   </div>
-               </form>
-            </div>
-         </div>
+                </div>
+    
+              </form>
+            </div> <!-- END: Form Content -->
+    
+          </div>
+        </div>
       </div>
-   </div>
-</div>
+    </div>

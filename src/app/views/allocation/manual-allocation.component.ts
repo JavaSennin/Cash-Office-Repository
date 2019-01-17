@@ -1,15 +1,16 @@
 // TO-DO: vlaueChanges subsription for receiptNumber field
 
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
 @NgModule({
   imports: [
     FormControl,
     FormGroup, 
     FormsModule,
-    ReactiveFormsModule]
+    ReactiveFormsModule,
+    Validators
+]
 })
 
 @Component({
@@ -18,16 +19,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 })
 export class ManualAllocationComponent {
 
-  receiptNumber = new FormControl('') ;
+  
+  cashierInput = new FormGroup({
+    branchCode: new FormControl('', Validators.required),
+    cashOfficeCode: new FormControl('', Validators.required)
+  });
 
-  // reprintReceipt = new FormGroup({}) ;
+  onSubmit(){
+    console.table(this.cashierInput.value) ;
+}
 
-  viewReport(){
-    // this.receiptNumber.setValue('R' +  this.receiptNumber.value ) ;
-    console.log('Receipt No. ' + this.receiptNumber.value) ;
-  }
-
-  // constructor() { 
-  //   // this.receiptNumber.setValue('234') ;
-  // }
 }
