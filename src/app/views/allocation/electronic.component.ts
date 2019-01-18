@@ -31,55 +31,14 @@ export class ElectronicComponent {
     grossAmountReceipt: new FormControl(''),
     grossAmountStatement: new FormControl('')
 
+    // buttons
+
   });
 
-  detailReport(){
+  electronicAllocation(){
     console.table(this.detailInput.value) ; //dbg
 
-    // dbg
-    console.log("Paypoint ID is " + this.detailInput.get("paypointID").value ) ;
-    this.detailInput.get("paypointName").setValue("pp name") ;
-    console.log("Paypoint Name is " + this.detailInput.get("paypointName").value ) ;
-  }
-
-  allocate(){
-    console.log("Paypoint ID is " + this.detailInput.get("paypointID").value ) ;
-    this.detailInput.get("paypointName").setValue("pp name") ;
-    console.log("Paypoint Name is " + this.detailInput.get("paypointName").value ) ;
+    // form processing code
   }
 
 }
-
-
-// import { Component, NgModule } from '@angular/core';
-// import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
-
-// @NgModule({
-//   imports: [
-//     FormControl,
-//     FormGroup, 
-//     FormsModule,
-//     ReactiveFormsModule,
-//     Validators
-// ]
-// })
-
-// @Component({
-//   // selector: '',
-//   templateUrl: './electronic.component.html'
-// })
-// export class ElectronicComponent {
- 
-//   eAllocationInput = new FormGroup({
-//     paypointID: new FormControl('sdssc'),
-//     paypointName: new FormControl('') 
-
-//   });
-
-//   onSubmit(){
-//     this.eAllocationInput.patchValue( {paypointName: "PN" + this.eAllocationInput.get('paypointID').value});
-//     console.table(this.eAllocationInput.value) ;
-//     // this.cashierInput.paypoint; // paypointID.s = this.cashierInput.get(branchCode) ;
-//     this.eAllocationInput.get('paypointName').value
-// }
-// }

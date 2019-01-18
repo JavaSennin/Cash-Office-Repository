@@ -9,7 +9,7 @@
           </div>
      
           <div class="card-body"> <!-- BEGIN: Form Content-->
-            <form [formGroup] = "detailInput"(ngSubmit)="detailReport()">
+            <form [formGroup] = "detailInput"(ngSubmit)="electronicAllocation()">
 
               <div class="form-row">
                 <!-- 1st Column -->
@@ -126,11 +126,11 @@
                   </div>
   
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary " [disabled]="!detailInput.valid">Clear</button> 
+                    <button type="button" class="btn btn-md btn-primary" (click)="detailInput.reset({allocatedPeriod:'2018-09-30'});">Clear</button>
                   </div>
   
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary " [disabled]="!detailInput.valid">Exit</button> 
+                    <button class="btn btn-md btn-primary">Exit</button> 
                   </div>
                 </div>
               </div>
