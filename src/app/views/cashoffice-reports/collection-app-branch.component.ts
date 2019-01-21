@@ -15,9 +15,20 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class CollectionAppBranchComponent {
 
-  branchCode = new FormControl('', Validators.required) ;
+  cashierInput = new FormGroup({
+  branchCode: new FormControl('', Validators.required)
+  });
+  onSubmit(){
+    this.displayReport = true ; // show container for the results. 
+  
+    console.table(this.cashierInput.value) ;
+  }
 
-  viewBranchReport(){
-    console.log('Branch Code: ' + this.branchCode.value) ;
+  
+  
+  displayReport = false ;
+
+  toggleDisplayReport(){
+    this.displayReport = !this.displayReport ; // false
   }
 }
