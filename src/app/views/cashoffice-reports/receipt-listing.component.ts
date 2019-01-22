@@ -24,9 +24,16 @@ export class ReceiptListingComponent {
     reportDate: new FormControl('2018-09-30', Validators.required)
   });
 
+  displayReport = false ;
+
+  toggleDisplayReport(){
+    this.displayReport = !this.displayReport ; // false
+  }
+
   onSubmit(){
     console.table(this.listingInput.value) ;
 
     // form-processing code
+    this.displayReport = true ; // show container for the results
   }
 }

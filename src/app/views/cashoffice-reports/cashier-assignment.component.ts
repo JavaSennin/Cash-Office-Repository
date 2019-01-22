@@ -23,7 +23,7 @@ export class CashierAssignmentComponent {
   });
 
   onSubmit(){
-    this.displayReport = true ; // show container for the results. 
+    this.displayReport = true ; // show container for the results
   
     console.table(this.cashierInput.value) ;
   }
