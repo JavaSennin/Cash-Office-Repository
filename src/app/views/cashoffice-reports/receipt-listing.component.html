@@ -1,8 +1,5 @@
 <!-- Daily Receipt Lisiting -->
 
-<!-- TO-DO: fix Report Date field not displaying default value "2018-09-30" -->
-<!-- TO-DO: validation warning messages on submitting the form with empty fields -->
-
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-lg-12">
@@ -79,52 +76,61 @@
       <div class="card">
         <div class="card-header">
           <i class="fa fa-align-justify"></i> Daily Receipts / Debit Listing
+          <span class="text float-right">21-Jun-18</span>
         </div>
    
         <div class="card-body">
           <div class="row">
             <div class="col-lg-12">
 
-              <div class="row">
-              <div class="col-lg-6 text-left">Report No. 1234</div>
-              <div class="col-lg-6 text-right">21-Jun-18</div></div>
-
-              <br> 
-              
               <p class="h5">BRANCH: Serowe Branch</p>
               <p class="h5">CASHIER CODE: JDOE - CASHIER NAME: Jane Doe</p>
-              <p class="h5">RECEIPT DATE: 21-Jun-18<br>--------------------------------------------------------------------------------</p>
+              <p class="h5">RECEIPT DATE: 21-Jun-18
+                <br>
+                --------------------------------------------------------------------------------</p>
               <p class="h5">STATUS: U</p>
               
               <br>
 
-              <!-- Payment Methods -->
+              <!-- Daily Receipts / Debit Listing -->
               <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                   <tr>
-                    <th>CODE</th>
-                    <th>DESCRIPTION</th>
-                    <th>START DATE</th>
-                    <th>END DATE</th>
+                    <th>RECEIPT NUMBER</th>
+                    <th>DRAWEE</th>
+                    <th>REFERENCE NUMBER</th>
+                    <th>REFERENCE DATE</th>
+                    <th>PAYEE/RECEIPT TYPE</th>
+                    <th>AMOUNT (Pula)</th>
                   </tr>
                 </thead>
                 
                 <tbody>
                   <tr>
-                    <td>CSH</td>
+                    <td>1234</td>
                     <td>Cash</td>
+                    <td></td>
                     <td>21-Jun-11</td>
                     <td></td>
+                    <td></td>
                   </tr>
+                  <!-- begin: loop for listing the receipts -->
+                  <tr><td colspan="6">Application: Policy</td></tr>
+                  <tr *ngIf="true"></tr> <!-- application = Group Life System -->
+                  <tr *ngIf="true"></tr> <!-- application = Group Life System -->
+                  <tr *ngIf="true"></tr> <!-- application = Policy -->
+                  <tr *ngIf="true"></tr> <!-- application = Policy -->
+                  <tr *ngIf="true"><td>Transaction Type</td><td>Amount</td></tr> <!-- application = Sundry Receipts -->
+                  <tr *ngIf="true"><td>Sundry Re-imbursement of Staff Advances</td><td>678.90</td></tr> <!-- application = Sundry Receipts -->
                   <tr>
-                    <td>CHQ</td>
-                    <td>Cheque</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
+                    <td>Total Payment Received</td>
+                    <td> 678.90</td>
                   </tr>
+                  <!-- end: loop for listing the receipts -->
                 </tbody>
               </table>
 
+              <!-- Page Scroller for the Receipt Listing -->
               <ul class="pagination justify-content-end">
                 <li class="page-item"><a class="page-link" href="#">Prev</a></li>
                 <li class="page-item active"> <a class="page-link" href="#">1</a>  </li>
@@ -133,92 +139,11 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
               </ul>
 
-              <!-- Application -->
-              <p class="h6">Application</p>
-              <table class="table table-bordered table-hover">
-                <thead class="thead-light">
-                  <tr>
-                    <th>CODE</th>
-                    <th>DESCRIPTION</th>
-                    <th>START DATE</th>
-                    <th>END DATE</th>
-                  </tr>
-                </thead>
-                
-                <tbody>
-                  <tr>
-                    <td>GPL</td>
-                    <td>Group Life System</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>SUN</td>
-                    <td>Sundry Receipts</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>TPP</td>
-                    <td>Thito Pay Point</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <ul class="pagination justify-content-end">
-                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                <li class="page-item active"> <a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
-
-              <!-- Cashiers -->
-              <p class="h6">Cashiers</p>
-              <table class="table table-bordered table-hover">
-                <thead class="thead-light">
-                  <tr>
-                    <th>CASHIER ID</th>
-                    <th>CASHIER NAME</th>
-                    <th>Snr. CASHIER (Y/N)</th>
-                    <th>START DATE</th>
-                    <th>END DATE</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>JDOE</td>
-                    <td>Jane Doe</td>
-                    <td>N</td>
-                    <td>21-Jan-11</td>
-                    <td>30-Jun-12</td>
-                  </tr>
-                  <tr>
-                    <td>EPOE</td>
-                    <td>Edgar Poe</td>
-                    <td>Y</td>
-                    <td>21-Jun-11</td>
-                    <td>31-Aug-12</td>
-                  </tr>
-                  <tr>
-                    <td>DOZZ</td>
-                    <td>Dawn Ozz</td>
-                    <td>Y</td>
-                    <td>21-Jun-11</td>
-                    <td>31-Dec-14</td>
-                  </tr>
-                </tbody>
-              </table>
-  
-              <ul class="pagination justify-content-end">
-                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a> </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>                  
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
+              <br>
+              <p class="h6 text-right">Total by Payment Methood: 1234.56</p>
+              <p class="h6 text-right">Total by Posting Status: 1234.56</p>
+              <br>
+              <p class="h6 text-right">Grand Total: 1234.56</p>
 
               <hr>
               <p class="h6">Supervisor's Signature: _______________</p><br>
