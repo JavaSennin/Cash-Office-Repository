@@ -16,16 +16,23 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class CollectionAppSummaryComponent {
 
-  summaryInput = new FormGroup({
+  detailInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),
     fromDate: new FormControl('2018-09-01', Validators.required),
     toDate: new FormControl('2018-09-30', Validators.required)
   });
+ 
 
-  summaryReport(){
-    console.table(this.summaryInput.value) ;
+  detailReport(){
+
+    this.displayReport = true ;
+    console.table(this.detailInput.value) ;
 
     // form-processing code
   }
+  displayReport = false ;
 
+  toggleDisplayReport(){
+    this.displayReport = !this.displayReport ; // false
+  }
 }
