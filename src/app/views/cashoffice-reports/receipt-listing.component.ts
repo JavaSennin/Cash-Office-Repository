@@ -36,4 +36,17 @@ export class ReceiptListingComponent {
     // form-processing code
     this.displayReport = true ; // show container for the results
   }
+
+  // dbg. dummy data for receipt items
+  application = "Policy" ; // Group Life System, or Sundry Receipts
+
+  // flag for print-preview data
+  printPreview = false ;
+
+  togglePrintPreview()
+  {
+    this.printPreview = ! this.printPreview ;
+
+    // call pdf print preview pop up window here
+  }
 }
