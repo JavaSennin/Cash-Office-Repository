@@ -1,8 +1,5 @@
-// TO-DO: vlaueChanges subsription for receiptNumber field
-
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
 @NgModule({
   imports: [
@@ -18,16 +15,29 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 })
 export class ReprintReceiptComponent {
 
-  receiptNumber = new FormControl('') ;
+  receiptInput = new FormGroup({
+    receiptNumber: new FormControl('', Validators.required) } );
 
-  // reprintReceipt = new FormGroup({}) ;
-
-  viewReport(){
-    // this.receiptNumber.setValue('R' +  this.receiptNumber.value ) ;
-    console.log('Receipt No. ' + this.receiptNumber.value) ;
+  onSubmit(){
+    this.displayReport = true ; // show container for the results
+  
+    console.table(this.receiptInput.value) ;
   }
 
-  // constructor() { 
-  //   // this.receiptNumber.setValue('234') ;
-  // }
+  displayReport = false ;
+
+  toggleDisplayReport() { 
+    this.displayReport = ! this.displayReport ;
+  }
+
+  printPreview = false ;
+
+  togglePrintPreview()
+  {
+    this.printPreview = ! this.printPreview ;
+
+    // call pdf print preview pop up window here
+  }
+
+  application = "Policy" ; // Or Group Life System, or Sundry Receipts
 }

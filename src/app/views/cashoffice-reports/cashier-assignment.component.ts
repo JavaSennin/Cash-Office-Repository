@@ -12,7 +12,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 
 @Component({
-  // selector: 'app-user-management',
   templateUrl: './cashier-assignment.component.html'
 })
 export class CashierAssignmentComponent {
