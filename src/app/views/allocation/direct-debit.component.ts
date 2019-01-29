@@ -1,4 +1,4 @@
-// REPRINT DEPOSIT SLIP
+// direct debit
 
 import { Component,NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'; 
