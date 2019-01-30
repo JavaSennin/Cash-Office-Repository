@@ -71,12 +71,12 @@
   </div>
 
   <!-- Report/Results Container displayReport-->
-  <div class="row" *ngIf="displayReport">
+  <div class="row" *ngIf="true">
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-align-justify"></i> Daily Receipts / Debit Listing
-          <span class="text float-right">21-Jun-18</span>
+          <span class="text float-right">{{ today | date : "d-MMM-y" }}</span>
         </div>
    
         <div class="card-body">
@@ -85,9 +85,10 @@
 
               <p class="h5">BRANCH: Serowe Branch</p>
               <p class="h5">CASHIER CODE: JDOE - CASHIER NAME: Jane Doe</p>
-              <p class="h5">RECEIPT DATE: 21-Jun-18
-                <br>
-                --------------------------------------------------------------------------------</p>
+              <p class="h5">RECEIPT DATE: 21-Jun-18</p>
+
+              <hr>
+
               <p class="h5">STATUS: U</p>
               
               <br>
@@ -115,43 +116,45 @@
                     <td></td>
                     <td></td>
                   </tr>
-                  
-                  <tr> <td colspan="6">
-                    <table class="h-100 w-100">
-                      <thead>
-                        <tr><td colspan="6">Application: {{application}} </td></tr>
 
-                        <tr *ngIf="application=='Group Life System'"> <!-- application = Group Life System -->
-                          <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th> </tr>
+<tr> <td colspan="6">
+    <table class="h-100 w-100">
+        <thead class="thead-light">
 
-                        <tr *ngIf="application=='Policy'"> <!-- application = Policy -->
-                          <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th></tr>
+          <tr><td colspan="6">Application: {{receipt.application}} </td></tr>
 
-                        <tr *ngIf="application=='Sundry Receipts'"> <!-- application = Sundry Receipts -->
-                          <th colspan="5">Transaction Type</th><th>Amount</th></tr>
-                      </thead>
-                      
-                      <tbody>
-                        <tr *ngIf="application=='Policy'">
-                          <td>Credit Class Premiums</td> <td>1234567</td> <td colspan="2">John Doe</td> <td>21-Jun-11</td> <td>678.90</td></tr> 
-                            
-                        <tr *ngIf="application=='Group Life System'">
-                          <td colspan="2">Group Funeral Premium Receipts</td> <td></td> <td colspan="2"></td> <td>678.90</td> </tr>
+            <tr *ngIf="receipt.application=='Group Life System'"> <!-- application = Group Life System -->
+              <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th> </tr>
 
-                        <tr *ngIf="application=='Sundry Receipts'"><td colspan="5">Sundry Re-imbursement of Staff Advances</td><td>678.90</td></tr>
+            <tr *ngIf="receipt.application=='Policy'"> <!-- application = Policy -->
+              <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th></tr>
 
-                        <tr>
-                          <td colspan="5" class="font-weight-bold">Total Payment Received</td>
-                          <td> 678.90</td>
-                        </tr>
+            <tr *ngIf="receipt.application=='Sundry Receipts'"> <!-- application = Sundry Receipts -->
+              <th colspan="5">Transaction Type</th><th>Amount</th></tr>
+          </thead>
+          
+          <tbody>
+            <tr *ngIf="receipt.application=='Policy'">
+              <td>{{receipt.transactionType}}</td> <td>{{receipt.policyNo}}</td> <td colspan="2">{{receipt.payer}}</td> 
+               <td>{{receipt.period}}</td> <td class="text-right">{{receipt.amount}}</td></tr> 
+                
+            <tr *ngIf="receipt.application=='Group Life System'">
+              <td colspan="2">{{receipt.transactionType}}</td> <td>{{receipt.paypointID}}</td> <td colspan="2">{{receipt.paypointName}}</td> 
+              <td class="text-right">{{receipt.amount}}</td> </tr>
 
-                      </tbody>
-                    </table>
-                  </td>
-                  </tr>                 
-                  
-                  <!-- end: loop for listing the receipts -->
+            <tr *ngIf="receipt.application=='Sundry Receipts'">
+              <td colspan="5">{{receipt.transactionType}}</td> <td class="text-right">{{receipt.amount}}</td></tr>
 
+            <tr class="font-weight-bold">
+              <td colspan="5" class="text-center">Total Payment Received</td>
+              <td class="text-right">{{receipt.amount}}</td>
+            </tr>
+
+          </tbody>
+    </table>
+  </td>
+  </tr>
+  
                 </tbody>
               </table>
 

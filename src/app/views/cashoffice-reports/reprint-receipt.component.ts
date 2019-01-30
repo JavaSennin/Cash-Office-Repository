@@ -27,10 +27,11 @@ export class ReprintReceiptComponent {
 
     // dbg: get a random item from the array
     this.receipt = this.receipts[ Math.floor( Math.random() * Math.floor( this.receipts.length ) )  ] ; 
+
   }
 
   receipt: any ;
-
+  
   displayReport = false ;
 
   toggleDisplayReport() { 
