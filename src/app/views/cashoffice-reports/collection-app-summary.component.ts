@@ -35,7 +35,7 @@ export class CollectionAppSummaryComponent {
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
   }
-  //Array for Dummy data
+  //Payment For Policy
   payments_p: any[]= [
     {payment_method:"Cheque",amount:"258,896.00",count:245},
     {payment_method:"Cash",amount:"558,896.00",count:240},
@@ -43,7 +43,7 @@ export class CollectionAppSummaryComponent {
     {payment_method:"Cash",amount:"8,896.00",count:802},
   
   ];
-
+ //Payment For Sundries
   payments_s: any[]= [
     {payment_method:"Cheque",amount:"258,896.00",count:245},
     {payment_method:"Cash",amount:"558,896.00",count:240},
@@ -51,7 +51,7 @@ export class CollectionAppSummaryComponent {
     {payment_method:"Cash",amount:"8,896.00",count:802},
   
   ];
-
+ //Payment For Group Life System
   payments_gls: any[]= [
     {payment_method:"Cheque",amount:"258,896.00",count:245},
     {payment_method:"Cash",amount:"558,896.00",count:240},
@@ -59,6 +59,7 @@ export class CollectionAppSummaryComponent {
     {payment_method:"Cash",amount:"8,896.00",count:802},
   
   ];
+   //Payment For Group Life System
   payments_gls2: any[]= [
     {payment_method:"Cheque",amount:"258,896.00",count:245},
     {payment_method:"Cash",amount:"558,896.00",count:240},
