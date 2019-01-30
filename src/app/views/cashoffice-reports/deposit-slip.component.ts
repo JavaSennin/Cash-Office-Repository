@@ -43,4 +43,23 @@ export class DepositSlipComponent {
 
     // call pdf print preview pop up window here
   }
+
+  // Dynamic Data
+  accountNumber = 123456789;
+  accountName = "Dollars Bank Inc";
+  valueDate = "21-Jun-11";
+  reference = "GHO";
+  totalCash: number = 0.00 ;
+  // totalCheques: number = 475.10 ;
+  
+  // An Array to hold dynamic data - Cheques
+  cheques = [
+    {drawer:"Gaborone Motors", chequeNo:"123", amount: 125.05},
+    {drawer:"Matsapa Butchery Inc", chequeNo:"346", amount: 200.00},
+    {drawer:"Tlokweng Insurance", chequeNo:"789", amount: 150.05}
+  ]
+
+  totalCheques: number = 
+    this.cheques.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
+
 }
