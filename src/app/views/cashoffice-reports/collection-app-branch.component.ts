@@ -14,7 +14,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: 'collection-app-branch.component.html'
 })
 export class CollectionAppBranchComponent {
-
+//Array for Dummy data
   reciepts: any[]= [
     {s_no:"",reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},
     {s_no:"",reciept_number:4567,reciept_date:"27/09/97",amount:"458,253.00"},
