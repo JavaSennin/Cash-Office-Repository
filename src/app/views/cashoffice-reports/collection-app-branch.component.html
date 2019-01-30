@@ -65,35 +65,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td>7895</td>
-                        <td>27-JAN-09</td>
-                        <td>28,897.25</td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td>4567</td>
-                        <td>25-NOV-05</td>
-                        <td>56,546.53</td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td>1234</td>
-                        <td>03-APR-10</td>
-                        <td>13,458.25</td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td>3546</td>
-                        <td>09-SEP-91</td>
-                        <td>100,000.00</td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td>1223</td>
-                        <td>03-APR-92</td>
-                        <td>200,898.35</td>
+                      <tr *ngFor="let reciept of reciepts">
+                        <td>{{reciept.s_no}}</td>
+                        <td>{{reciept.reciept_number}}</td>
+                        <td>{{reciept.reciept_date}}</td>
+                        <td>{{reciept.amount}}</td>
                       </tr>
                     </tbody>
                   </table>
