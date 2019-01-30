@@ -83,23 +83,11 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>340462</td>
-                            <td>03-JAN-19</td>
-                            <td>50</td>
+                          <tr *ngFor="let reciept_g of reciepts_gls">
+                            <td>{{reciept_g.reciept_number}}</td>
+                            <td>{{reciept_g.reciept_date}}</td>
+                            <td>{{reciept_g.amount}}</td>
                           
-                          </tr>
-                          <tr>
-                            <td>365089</td>
-                            <td>06-NOV-18</td>
-                            <td>345</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>569098</td>
-                            <td>07-SEP-17</td>
-                            <td>2455</td>
-                            
                           </tr>
                        
                          
@@ -140,24 +128,13 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>340462</td>
-                            <td>03-JAN-19</td>
-                            <td>50</td>
+                          <tr *ngFor="let reciept_p of reciepts_policy">
+                            <td>{{reciept_p.reciept_number}}</td>
+                            <td>{{reciept_p.reciept_date}}</td>
+                            <td>{{reciept_p.amount}}</td>
                           
                           </tr>
-                          <tr>
-                            <td>365089</td>
-                            <td>06-NOV-18</td>
-                            <td>345</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>569098</td>
-                            <td>07-SEP-17</td>
-                            <td>2455</td>
-                            
-                          </tr>
+                          
                        
                          
                         </tbody>
@@ -199,7 +176,7 @@
                           <tr *ngFor="let reciept of reciepts">
                             <td>{{reciept.reciept_number}}</td>
                             <td>{{reciept.reciept_date}}</td>
-                            <td>{{reciept.amount</td>
+                            <td>{{reciept.amount}}</td>
                           
                           </tr>
                           
