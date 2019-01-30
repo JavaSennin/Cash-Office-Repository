@@ -35,4 +35,35 @@ export class CollectionAppSummaryComponent {
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
   }
+  //Array for Dummy data
+  payments_p: any[]= [
+    {payment_method:"Cheque",amount:"258,896.00",count:245},
+    {payment_method:"Cash",amount:"558,896.00",count:240},
+    {payment_method:"Cash",amount:"8,896.00",count:502},
+    {payment_method:"Cash",amount:"8,896.00",count:802},
+  
+  ];
+
+  payments_s: any[]= [
+    {payment_method:"Cheque",amount:"258,896.00",count:245},
+    {payment_method:"Cash",amount:"558,896.00",count:240},
+    {payment_method:"Cheque",amount:"8,896.00",count:502},
+    {payment_method:"Cash",amount:"8,896.00",count:802},
+  
+  ];
+
+  payments_gls: any[]= [
+    {payment_method:"Cheque",amount:"258,896.00",count:245},
+    {payment_method:"Cash",amount:"558,896.00",count:240},
+    {payment_method:"Cheque",amount:"8,896.00",count:6062},
+    {payment_method:"Cash",amount:"8,896.00",count:802},
+  
+  ];
+  payments_gls2: any[]= [
+    {payment_method:"Cheque",amount:"258,896.00",count:245},
+    {payment_method:"Cash",amount:"558,896.00",count:240},
+    {payment_method:"Cheque",amount:"8,896.00",count:6062},
+    {payment_method:"Cheque",amount:"8,896.00",count:802},
+  
+  ];
 }

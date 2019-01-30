@@ -83,23 +83,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Cheque</td>
-                            <td>789,298.45</td>
-                            <td>123</td>
+                          <tr *ngFor="let pym of payments_p">
+                            <td>{{pym.payment_method}}</td>
+                            <td>{{pym.amount}}</td>
+                            <td>{{pym.count}}</td>
                           
-                          </tr>
-                          <tr>
-                            <td>Cash</td>
-                            <td>456,344.87</td>
-                            <td>345</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>Total</td>
-                            <td>877,435.78</td>
-                            <td>2455</td>
-                            
+                         
                           </tr>
                        
                          
@@ -139,23 +128,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Cheque</td>
-                            <td>789,298.45</td>
-                            <td>123</td>
+                          <tr *ngFor="let pyms of payments_s">
+                            <td>{{pyms.payment_method}}</td>
+                            <td>{{pyms.amount}}</td>
+                            <td>{{pyms.count}}</td>
                           
-                          </tr>
-                          <tr>
-                            <td>Cash</td>
-                            <td>456,344.87</td>
-                            <td>345</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>Total</td>
-                            <td>877,435.78</td>
-                            <td>2455</td>
-                            
+                         
                           </tr>
                         
                          
@@ -194,24 +172,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Cheque</td>
-                            <td>789,298.45</td>
-                            <td>123</td>
+                          <tr *ngFor="let pymg of payments_gls">
+                            <td>{{pymg.payment_method}}</td>
+                            <td>{{pymg.amount}}</td>
+                            <td>{{pymg.count}}</td>
                           
+                         
                           </tr>
-                          <tr>
-                            <td>Cash</td>
-                            <td>456,344.87</td>
-                            <td>345</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>Total</td>
-                            <td>877,435.78</td>
-                            <td>2455</td>
-                            
-                          </tr>
+                         
                         
                          
                         </tbody>
@@ -246,24 +214,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Cheque</td>
-                            <td>789,298.45</td>
-                            <td>123</td>
+                          <tr *ngFor="let pymg2 of payments_gls2">
+                            <td>{{pymg2.payment_method}}</td>
+                            <td>{{pymg2.amount}}</td>
+                            <td>{{pymg2.count}}</td>
                           
+                         
                           </tr>
-                          <tr>
-                            <td>Cash</td>
-                            <td>456,344.87</td>
-                            <td>345</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>Total</td>
-                            <td>877,435.78</td>
-                            <td>2455</td>
-                            
-                          </tr>
+                         
                         
                          
                         </tbody>
