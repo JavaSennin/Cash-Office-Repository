@@ -45,6 +45,7 @@
                       
             </div>
           </form>
+
         </div>
       </div>
     </div>
@@ -85,17 +86,11 @@
                 </thead>
                 
                 <tbody>
-                  <tr>
-                    <td>CSH</td>
-                    <td>Cash</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>CHQ</td>
-                    <td>Cheque</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
+                  <tr *ngFor="let pm of paymentMethods">
+                    <td>{{pm.code}}</td>
+                    <td>{{pm.description}}</td>
+                    <td>{{pm.start}}</td>
+                    <td>{{pm.end}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -113,23 +108,11 @@
                 </thead>
                 
                 <tbody>
-                  <tr>
-                    <td>GPL</td>
-                    <td>Group Life System</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>SUN</td>
-                    <td>Sundry Receipts</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>TPP</td>
-                    <td>Thito Pay Point</td>
-                    <td>21-Jun-11</td>
-                    <td></td>
+                  <tr *ngFor = "let app of applications">
+                    <td>{{app.code}}</td>
+                    <td>{{app.description}}</td>
+                    <td>{{app.start}}</td>
+                    <td>{{app.end}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -147,26 +130,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>JDOE</td>
-                    <td>Jane Doe</td>
-                    <td>N</td>
-                    <td>21-Jan-11</td>
-                    <td>30-Jun-12</td>
-                  </tr>
-                  <tr>
-                    <td>EPOE</td>
-                    <td>Edgar Poe</td>
-                    <td>Y</td>
-                    <td>21-Jun-11</td>
-                    <td>31-Aug-12</td>
-                  </tr>
-                  <tr>
-                    <td>DOZZ</td>
-                    <td>Dawn Ozz</td>
-                    <td>Y</td>
-                    <td>21-Jun-11</td>
-                    <td>31-Dec-14</td>
+                  <tr *ngFor = "let cashier of cashiers">
+                    <td>{{cashier.cashierID}}</td>
+                    <td>{{cashier.cashierName}}</td>
+                    <td>{{cashier.snrCashier}}</td>
+                    <td>{{cashier.start}}</td>
+                    <td>{{cashier.end}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -191,4 +160,4 @@
     </div>
   </div>
 
-</div>
+</div> 
