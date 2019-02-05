@@ -50,7 +50,6 @@ export class DepositSlipComponent {
   valueDate = "21-Jun-11";
   reference = "GHO";
   totalCash: number = 0.00 ;
-  // totalCheques: number = 475.10 ;
   
   // An Array to hold dynamic data - Cheques
   cheques = [
