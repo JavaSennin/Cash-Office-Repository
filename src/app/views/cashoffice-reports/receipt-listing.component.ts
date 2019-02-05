@@ -38,10 +38,11 @@ export class ReceiptListingComponent {
 
     console.log( this.today.toDateString ) ;
 
-    this.receipt = this.receipts[ Math.floor( Math.random() * Math.floor( this.receipts.length ) )  ] ; 
+    // this.receipt = this.receipts[ Math.floor( Math.random() * Math.floor( this.receipts.length ) )  ] ; 
+
   }
 
-  receipt: any ;
+  // receipt: any ;
   
   today = new Date() ;
 
@@ -60,8 +61,12 @@ export class ReceiptListingComponent {
 
   // An Array to hold dynamic data - Receipts
   receipts = [
-    { application: "Group Life System", transactionType: "Group Funeral Premium Receipts", paypointID: "", paypointName: "", amount: "123.45"},
-    { application: "Policy", transactionType: "Credit Class Premiums", policyNo: "1234567", payer: "John Doe", period: "21-Jun-11", amount: "678.90"},
-    { application: "Sundry Receipts", transactionType: "Sundry Re-imbursement of Staff Advances", amount: "101.11"}
+    { receiptNo: 1234, drawee: "", refNo: 44214, refDate: "24-Jan-2012", payeeType: "", rctAmount: 801.24, 
+      application: "Group Life System", transactionType: "Group Funeral Premium Receipts", paypointID: "", paypointName: "", appAmount: "123.45"},
+    { receiptNo: 1235, drawee: "", refNo: 44215, refDate: "25-Jun-2013", payeeType: "", rctAmount: 811.35, 
+      application: "Policy", transactionType: "Credit Class Premiums", policyNo: "1234567", payer: "John Doe", period: "21-Jun-11", appAmount: "678.90"},
+    { receiptNo: 1236, drawee: "", refNo: 44216, refDate: "27-Nov-2014", payeeType: "", rctAmount: 821.46, 
+      application: "Sundry Receipts", transactionType: "Sundry Re-imbursement of Staff Advances", appAmount: "101.11"}
   ]
+  
 }

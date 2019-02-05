@@ -65,7 +65,9 @@
                       
             </div>
           </form>
+
         </div>
+
       </div>
     </div>
   </div>
@@ -107,54 +109,60 @@
                 </thead>
                 
                 <tbody>
-                  <!-- begin: loop for listing the receipts -->
+                  <!-- begin: loop for listing the receipts --> 
+                  
+                  <ng-template ngFor let-receipt [ngForOf]="receipts">
+
                   <tr>
-                    <td>1234</td>
-                    <td>Cash</td>
-                    <td></td>
-                    <td>21-Jun-11</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{receipt.receiptNo}}</td>
+                    <td>{{receipt.drawee}}</td>
+                    <td>{{receipt.refNo}}</td>
+                    <td>{{receipt.refDate}}</td>
+                    <td>{{receipt.payeeType}}</td>
+                    <td class="text-right">{{receipt.rctAmount}}</td>                    
                   </tr>
 
-<tr> <td colspan="6">
-    <table class="h-100 w-100">
-        <thead class="thead-light">
+                  <tr> <td colspan="6">
+                    <table class="h-100 w-100">
+                      <thead class="thead-light">
 
-          <tr><td colspan="6">Application: {{receipt.application}} </td></tr>
+                        <tr><td colspan="6">Application: {{receipt.application}} </td></tr>
 
-            <tr *ngIf="receipt.application=='Group Life System'"> <!-- application = Group Life System -->
-              <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th> </tr>
+                          <tr *ngIf="receipt.application=='Group Life System'"> <!-- application = Group Life System -->
+                            <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th> </tr>
 
-            <tr *ngIf="receipt.application=='Policy'"> <!-- application = Policy -->
-              <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th></tr>
+                          <tr *ngIf="receipt.application=='Policy'"> <!-- application = Policy -->
+                            <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th></tr>
 
-            <tr *ngIf="receipt.application=='Sundry Receipts'"> <!-- application = Sundry Receipts -->
-              <th colspan="5">Transaction Type</th><th>Amount</th></tr>
-          </thead>
-          
-          <tbody>
-            <tr *ngIf="receipt.application=='Policy'">
-              <td>{{receipt.transactionType}}</td> <td>{{receipt.policyNo}}</td> <td colspan="2">{{receipt.payer}}</td> 
-               <td>{{receipt.period}}</td> <td class="text-right">{{receipt.amount}}</td></tr> 
-                
-            <tr *ngIf="receipt.application=='Group Life System'">
-              <td colspan="2">{{receipt.transactionType}}</td> <td>{{receipt.paypointID}}</td> <td colspan="2">{{receipt.paypointName}}</td> 
-              <td class="text-right">{{receipt.amount}}</td> </tr>
+                          <tr *ngIf="receipt.application=='Sundry Receipts'"> <!-- application = Sundry Receipts -->
+                            <th colspan="5">Transaction Type</th><th>Amount</th></tr>
+                      </thead>
+                            
+                      <tbody>
+                        <tr *ngIf="receipt.application=='Policy'">
+                          <td>{{receipt.transactionType}}</td> <td>{{receipt.policyNo}}</td> <td colspan="2">{{receipt.payer}}</td> 
+                          <td>{{receipt.period}}</td> <td class="text-right">{{receipt.appAmount}}</td></tr> 
+                                  
+                        <tr *ngIf="receipt.application=='Group Life System'">
+                          <td colspan="2">{{receipt.transactionType}}</td> <td>{{receipt.paypointID}}</td> <td colspan="2">{{receipt.paypointName}}</td> 
+                          <td class="text-right">{{receipt.appAmount}}</td> </tr>
 
-            <tr *ngIf="receipt.application=='Sundry Receipts'">
-              <td colspan="5">{{receipt.transactionType}}</td> <td class="text-right">{{receipt.amount}}</td></tr>
+                        <tr *ngIf="receipt.application=='Sundry Receipts'">
+                          <td colspan="5">{{receipt.transactionType}}</td> <td class="text-right">{{receipt.appAmount}}</td></tr>
 
-            <tr class="font-weight-bold">
-              <td colspan="5" class="text-center">Total Payment Received</td>
-              <td class="text-right">{{receipt.amount}}</td>
-            </tr>
+                        <tr class="font-weight-bold">
+                          <td colspan="5" class="text-center">Total Payment Received</td>
+                          <td class="text-right">{{receipt.appAmount}}</td>
+                        </tr>
 
-          </tbody>
-    </table>
-  </td>
-  </tr>
-  
+                        </tbody>
+
+                      </table>
+
+                    </td>
+                    </tr>
+                  </ng-template>
+
                 </tbody>
               </table>
 
