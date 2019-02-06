@@ -12,15 +12,16 @@
           <form 
           [formGroup] = "detailInput" 
           (ngSubmit)="detailReport()">
+
             <div class="form-row">
               <div class="col">
                          
                 <div class = "form-group row">
                   <label class="col-md-3 col-form-label" >Paypoint ID:</label>
-                  <div>
+                  <div class = "col-md-4">
                     <select class="form-control" id="selectBrCode" 
-                    formControlName = "PaypointID" >
-                      <option [value]="ppid"  *ngFor="let ppid of paypointIds">{{ppid.ppID}}</option>
+                    formControlName = "PayPointID" >
+                      <option [ngValue]="ppid"  *ngFor="let ppid of paypointIds">{{ppid.ppID}}</option>
                       
                     </select>
                   </div>
@@ -28,18 +29,19 @@
                         
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Paypoint Name:</label>
-                  <div >
+                  <div class = "col-md-4">
                     <input  class="form-control" id="disabled-input" type="text" 
-                    formControlName = "Paypoint_Name" name="disabled-input" placeholder="Enter Paypoint Name" value="paypointName()" required disabled>
+                    formControlName = "Paypoint_Name" name="disabled-input" placeholder="Enter Paypoint Name" 
+                      value={{detailInput.value.PayPointID.ppName}} required disabled>
                    
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Period:</label>
-                  <div>
+                  <div  class = "col-md-4">
                     <input class="form-control" id="date-input" type="date" 
-                    formControlName = "toDate" name="date-input" required>
+                    formControlName = "Period" name="date-input" required>
                   </div>
                 </div>
                         
@@ -53,6 +55,22 @@
 
             </div>
           </form>
+
+
+<!-- bgn -->
+<!-- <form [formGroup]="form">
+  <select formControlName="state">
+    <option *ngFor="let state of states" [ngValue]="state">
+      {{ state.abbrev }}
+    </option>
+  </select>
+</form>
+
+ <p>Form value: {{ form.value.state.name | json }}</p>  -->
+ 
+<!-- end -->
+
+
         </div>
       </div>
     </div>

@@ -18,8 +18,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
 export class OversandUndersComponent {
 
   detailInput = new FormGroup({
-    PayPointID: new FormControl('', Validators.required),
-    Paypoint_Name: new FormControl('', Validators.required),
+    PayPointID: new FormControl("", Validators.required),
+    
+    Paypoint_Name: new FormControl({value:"", disabled: true}, Validators.required),
     Period: new FormControl('2018-09-30', Validators.required)
   });
  
@@ -36,14 +37,16 @@ export class OversandUndersComponent {
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
   }
-  paypointIds: any[]= [
-    {ppID:1234},
-    {ppID:4567},
-    {ppID:4867},
-    {ppID:8897},
-    {ppID:9897}
+  // paypointIds: any[]= [
+  paypointIds = [ 
+    {ppID:1234, ppName: "Botswana Railways"},
+    {ppID:4567, ppName: "Botswana Post"},
+    {ppID:4867, ppName: "Botswana Meat Commission"},
+    {ppID:8897, ppName: "Botswana Life"},
+    {ppID:9897, ppName: "Hollard Insurance"}
   ];
 
+  // PayPointID1 = this.paypointIds[2] ;
 
   //Array for Dummy data [Group Life System]
   reciepts: any[]= [
@@ -68,4 +71,20 @@ export class OversandUndersComponent {
     {reciept_number:8897,reciept_date:"02/11/07",amount:"888,253.00"},
     {reciept_number:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
   ];
+
+  // bgn
+
+  // states = [
+  //   {name: 'Arizona', abbrev: 'AZ'},
+  //   {name: 'California', abbrev: 'CA'},
+  //   {name: 'Colorado', abbrev: 'CO'},
+  //   {name: 'New York', abbrev: 'NY'},
+  //   {name: 'Pennsylvania', abbrev: 'PA'},
+  // ];
+ 
+  // form = new FormGroup({
+  //   state: new FormControl(this.states[3]),
+  // });
+
+  // end
 }
