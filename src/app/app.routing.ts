@@ -63,6 +63,10 @@ export const routes: Routes = [
         loadChildren: './views/paypoint-master/paypoint-master.module#PaypointMasterModule'
       },
       {
+        path: 'paypoint-reports',
+        loadChildren: './views/paypoint-reports/paypoint-reports.module#PaypointReportsModule'
+      },
+      {
         path: 'allocation',
         loadChildren: './views/allocation/allocation.module#AllocationModule'
       },
