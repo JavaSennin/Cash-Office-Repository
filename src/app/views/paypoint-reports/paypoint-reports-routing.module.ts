@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { OversandUndersComponent } from './oversandunders.component' ;
+import { UnspecifiedBankComponent } from './unspecified-bank.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,13 @@ const routes: Routes = [
         component:OversandUndersComponent,
         data: {
           title: 'Overs and Unders'
+        }
+      },
+      {
+        path: 'unspecified-bank',
+        component: UnspecifiedBankComponent,
+        data: {
+          title: 'Unspecified Bank'
         }
       },
       {

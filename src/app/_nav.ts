@@ -297,7 +297,7 @@ export const navItems = [
     ,
     {
       name: 'Unspecified Bank',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/unspecified-bank',
       //icon: 'icon-bell'
     }
     ,
