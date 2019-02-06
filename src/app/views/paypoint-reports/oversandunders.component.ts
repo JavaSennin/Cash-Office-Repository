@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms'; 
 
 @NgModule({
   imports: [
@@ -8,6 +8,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     FormsModule,
     ReactiveFormsModule,
     Validators
+    
 ]
 })
 
@@ -17,9 +18,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class OversandUndersComponent {
 
   detailInput = new FormGroup({
-    branchCode: new FormControl('', Validators.required),
-    fromDate: new FormControl('2018-09-01', Validators.required),
-    toDate: new FormControl('2018-09-30', Validators.required)
+    PayPointID: new FormControl('', Validators.required),
+    Paypoint_Name: new FormControl('', Validators.required),
+    Period: new FormControl('2018-09-30', Validators.required)
   });
  
 
@@ -35,6 +36,15 @@ export class OversandUndersComponent {
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
   }
+  paypointIds: any[]= [
+    {ppID:1234},
+    {ppID:4567},
+    {ppID:4867},
+    {ppID:8897},
+    {ppID:9897}
+  ];
+
+
   //Array for Dummy data [Group Life System]
   reciepts: any[]= [
     {reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},

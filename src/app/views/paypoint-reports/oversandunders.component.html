@@ -19,19 +19,18 @@
                   <label class="col-md-3 col-form-label" >Paypoint ID:</label>
                   <div>
                     <select class="form-control" id="selectBrCode" 
-                    formControlName = "branchCode" >
-                      <option value="0">Please Select</option>
-                      <option value="1">Branch CODE001</option>
-                      <option value="2">Branch CODE002</option>
+                    formControlName = "PaypointID" >
+                      <option [value]="ppid"  *ngFor="let ppid of paypointIds">{{ppid.ppID}}</option>
+                      
                     </select>
                   </div>
                 </div>
                         
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Paypoint Name:</label>
-                  <div>
-                    <input class="form-control" id="disabled-input" type="text" 
-                    formControlName = "paypointName" name="disabled-input" placeholder="Enter Paypoint Name" required disabled>
+                  <div >
+                    <input  class="form-control" id="disabled-input" type="text" 
+                    formControlName = "Paypoint_Name" name="disabled-input" placeholder="Enter Paypoint Name" value="paypointName()" required disabled>
                    
                   </div>
                 </div>
