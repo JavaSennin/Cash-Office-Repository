@@ -260,12 +260,12 @@ export const navItems = [
   },
   {
     name: 'PayPoint Reports',
-    url: '/notifications',
+    url: '/paypoint-reports',
     icon: 'icon-bell',
     children: [
       {
         name: 'Overs And Unders',
-        url: '/notifications/alerts',
+        url: '/paypoint-reports/oversandunders',
         //icon: 'icon-bell'
       },
   
