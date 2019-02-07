@@ -8,12 +8,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaypointReportsRoutingModule } from './paypoint-reports-routing.module';
 
 import { OversandUndersComponent } from './oversandunders.component' ;
+import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 
 @NgModule({
   declarations: [
     OversandUndersComponent,
+    rejectionsComponent,
     UnspecifiedBankComponent,
     UnspecifiedGsoesoComponent
   ],

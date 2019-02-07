@@ -271,7 +271,7 @@ export const navItems = [
   
     {
       name: 'Rejections',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/rejections',
       //icon: 'icon-bell'
     },
     {

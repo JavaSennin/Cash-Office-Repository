@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { OversandUndersComponent } from './oversandunders.component' ;
+import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component';
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 
@@ -17,6 +18,13 @@ const routes: Routes = [
         component:OversandUndersComponent,
         data: {
           title: 'Overs and Unders'
+        }
+      },
+      {
+        path: 'rejections',
+        component:rejectionsComponent,
+        data: {
+          title: 'Rejections'
         }
       },
       {
