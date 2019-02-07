@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { OversandUndersComponent } from './oversandunders.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component';
+import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 
 const routes: Routes = [
   {
     path: '',
-    // component: PaypointMasterModule, 
+    // component: PaypointReportsModule, 
     data: { title: 'PayPoint Reports' } ,
 
     children: [
@@ -23,6 +24,13 @@ const routes: Routes = [
         component: UnspecifiedBankComponent,
         data: {
           title: 'Unspecified Bank'
+        }
+      },
+      {
+        path: 'unspecified-gsoeso',
+        component: UnspecifiedGsoesoComponent,
+        data: {
+          title: 'Unspecified GSO-ESO'
         }
       },
       {

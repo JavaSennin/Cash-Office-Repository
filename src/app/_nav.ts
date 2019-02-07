@@ -303,7 +303,7 @@ export const navItems = [
     ,
     {
       name: 'Unspecified GSO-ESO',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/unspecified-gsoeso',
       //icon: 'icon-bell'
     }
     ,

@@ -18,9 +18,7 @@ export class UnspecifiedBankComponent {
 
   unspecifiedInput = new FormGroup({
     fromDate: new FormControl('2018-09-01', Validators.required),
-    // fromDate: new FormControl({value: '2018-09-01', disabled: false}, Validators.required),
     toDate: new FormControl('2018-09-30', Validators.required)
-    // toDate: new FormControl({ value: '2018-09-30', diasbled: false } , Validators.required)
   });
 
   onSubmit(){

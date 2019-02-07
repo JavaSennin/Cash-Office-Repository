@@ -9,11 +9,13 @@ import { PaypointReportsRoutingModule } from './paypoint-reports-routing.module'
 
 import { OversandUndersComponent } from './oversandunders.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
+import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 
 @NgModule({
   declarations: [
     OversandUndersComponent,
-    UnspecifiedBankComponent
+    UnspecifiedBankComponent,
+    UnspecifiedGsoesoComponent
   ],
 
   imports: [
