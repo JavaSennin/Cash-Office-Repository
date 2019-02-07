@@ -32,7 +32,7 @@
                   <div class = "col-md-4">
                     <input  class="form-control" id="disabled-input" type="text" 
                     formControlName = "Paypoint_Name" name="disabled-input" placeholder="Enter Paypoint Name" 
-                      value={{detailInput.value.PayPointID.ppName}} required disabled>
+                      value={{detailInput.value.PayPointID.ppName}} [attr.disabled]="disabled ? '' : true" required>
                    
                   </div>
                 </div>
@@ -47,7 +47,7 @@
                         
                 <div class="btn-toolbar">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary "[disabled]="!detailInput.valid">Report</button>
+                    <button type="submit" class="btn btn-md btn-primary "[disabled]="detailInput.untouched || displayReport == true ">Report</button>
                   </div>
                 </div>
                         
@@ -102,10 +102,11 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let reciept_g of reciepts_gls">
+                          <tr *ngFor="let ppr of ppReport">
                             <td>{{detailInput.value.PayPointID.ppID}}</td>
                             <td>{{detailInput.value.PayPointID.ppName}}</td>
-                            <td>{{reciept_g.amount}}</td>
+                            <td>{{ppr.ppType}}</td>
+                            <td>{{ppr.pMode}}</td>
                           
                           </tr>
                        
@@ -133,24 +134,22 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="card">
-                    <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Application: </b>Policy
-                    </div>
+                   
                     <div class="card-body">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Reciept Number</th>
-                            <th>Reciept Date</th>
-                            <th>Amount (Pula)</th>
+                            <th>Collection Type</th>
+                            <th>Total</th>
+                            
                           
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let reciept_p of reciepts_policy">
-                            <td>{{reciept_p.reciept_number}}</td>
-                            <td>{{reciept_p.reciept_date}}</td>
-                            <td>{{reciept_p.amount}}</td>
+                          <tr *ngFor="let clt of ppReport2">
+                            <td>{{clt.collectionType}}</td>
+                            <td>{{clt.Total}}</td>
+                            
                           
                           </tr>
                           
@@ -179,23 +178,30 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Application: </b>Group Life System
-                    </div>
+                   
                     <div class="card-body">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Reciept Number</th>
-                            <th>Reciept Date</th>
-                            <th>Amount (Pula)</th>
+                            <th>Reference Number</th>
+                            <th>Reference Name</th>
+                            <th>Policy Code</th>
+                            <th>Status</th>
+                            <th>Dr Amount</th>
+                            <th>Allocated Amount</th>
+                            <th>Difference Amount</th>
                           
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let reciept of reciepts">
-                            <td>{{reciept.reciept_number}}</td>
-                            <td>{{reciept.reciept_date}}</td>
-                            <td>{{reciept.amount}}</td>
+                          <tr *ngFor="let ppr3 of ppReport3">
+                            <td>{{ppr3.ref_no}}</td>
+                            <td>{{ppr3.ref_name}}</td>
+                            <td>{{ppr3.policy_code}}</td>
+                            <td>{{ppr3.status}}</td>
+                            <td>{{ppr3.damount}}</td>
+                            <td>{{ppr3.aamount}}</td>
+                            <td>{{ppr3.difamount}}</td>
                           
                           </tr>
                           
