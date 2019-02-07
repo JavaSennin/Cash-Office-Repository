@@ -11,7 +11,7 @@
           
           <form 
           [formGroup] = "detailInput" 
-          (ngSubmit)="detailReport()">
+          (ngSubmit)="detailReport()" >
 
             <div class="form-row">
               <div class="col">
@@ -20,7 +20,7 @@
                   <label class="col-md-3 col-form-label" >Paypoint ID:</label>
                   <div class = "col-md-4">
                     <select class="form-control" id="selectBrCode" 
-                    formControlName = "PayPointID" >
+                    formControlName = "PayPointID" [disabled]="disableForm">
                       <option [ngValue]="ppid"  *ngFor="let ppid of paypointIds">{{ppid.ppID}}</option>
                       
                     </select>
@@ -80,7 +80,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> <b>Branch Name : </b>Gaborone Head Office
+              <i class="fa fa-align-justify"></i> Overs and Unders Report
             </div>
        <!--Tafole 1-->
             <div class="card-body">
@@ -88,22 +88,23 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Application: </b>Group Life System
+                      <i class="fa fa-align-justify"></i><b>Period: </b>{{detailInput.value.Period}}
                     </div>
                     <div class="card-body">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Reciept Number</th>
-                            <th>Reciept Date</th>
-                            <th>Amount (Pula)</th>
+                            <th>Paypoint ID</th>
+                            <th>Paypoint Name</th>
+                            <th>Paypoint Type</th>
+                            <th>Paypoint Mode</th>
                           
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let reciept_g of reciepts_gls">
-                            <td>{{reciept_g.reciept_number}}</td>
-                            <td>{{reciept_g.reciept_date}}</td>
+                            <td>{{detailInput.value.PayPointID.ppID}}</td>
+                            <td>{{detailInput.value.PayPointID.ppName}}</td>
                             <td>{{reciept_g.amount}}</td>
                           
                           </tr>
