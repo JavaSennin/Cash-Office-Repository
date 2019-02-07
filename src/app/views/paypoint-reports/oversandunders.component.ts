@@ -18,7 +18,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
 export class OversandUndersComponent {
 
   detailInput = new FormGroup({
-    PayPointID: new FormControl("", Validators.required),
+    PayPointID: new FormControl({value:"", disabled: false}, Validators.required),
     
     Paypoint_Name: new FormControl({value:"", disabled: true}, Validators.required),
     Period: new FormControl('2018-09-30', Validators.required)
@@ -28,14 +28,19 @@ export class OversandUndersComponent {
   detailReport(){
 
     this.displayReport = true ;
+    this.disableForm = true;
     console.table(this.detailInput.value) ;
 
     // form-processing code
   }
   displayReport = false ;
 
+  disableForm = false;
+
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
+    this.disableForm = !this.disableForm ; // false
+
   }
   // paypointIds: any[]= [
   paypointIds = [ 
@@ -49,12 +54,12 @@ export class OversandUndersComponent {
   // PayPointID1 = this.paypointIds[2] ;
 
   //Array for Dummy data [Group Life System]
-  reciepts: any[]= [
-    {reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},
-    {reciept_number:4567,reciept_date:"27/09/97",amount:"458,253.00"},
-    {reciept_number:4867,reciept_date:"02/09/97",amount:"488,253.00"},
-    {reciept_number:8897,reciept_date:"02/11/07",amount:"888,253.00"},
-    {reciept_number:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
+  ppReport: any[]= [
+    {pp_id:1234,reciept_date:"27/09/67",amount:"258,896.00"},
+    {pp_id:4567,reciept_date:"27/09/97",amount:"458,253.00"},
+    {pp_id:4867,reciept_date:"02/09/97",amount:"488,253.00"},
+    {pp_id:8897,reciept_date:"02/11/07",amount:"888,253.00"},
+    {pp_id:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
   ];
    //Array for Dummy data
    reciepts_policy: any[]= [
