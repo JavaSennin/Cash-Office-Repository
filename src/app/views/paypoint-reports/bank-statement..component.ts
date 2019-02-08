@@ -1,3 +1,6 @@
+// Bank Statement - Paypoint Reports Module
+// NOTE: Defines custom Pipe (MyFilterPipe) to filter transactions from transactions array
+
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 // import { ReceiptListingComponent } from './receipt-listing.component';
@@ -39,16 +42,6 @@ export class BankStatementComponent {
     this.displayReport = ! this.displayReport ;
   }
 
-  // printPreview = false ;
-
-  // togglePrintPreview()
-  // {
-  //   this.printPreview = ! this.printPreview ;
-
-  //   // call pdf print preview pop up window here
-    
-  // }
-
   // Dynamic Data: 
   receivedFrom = "Janet Dozen" ; 
   sum = 678.90 ;
@@ -63,5 +56,22 @@ export class BankStatementComponent {
     { application: "Policy", transactionType: "Credit Class Premiums", policyNo: "1234567", payer: "John Doe", period: "21-Jun-11", amount: "678.90"},
     { application: "Sundry Receipts", transactionType: "Sundry Re-imbursement of Staff Advances", amount: "101.11"}
   ]
+
+  // An Array to hold dynamic data - Bank Statements
+  bankStatement =
+    { bankAccNo: 747, bankStmID: 243, stmtNo: 10932, fromDate: "27-Jul-14", toDate: "27-Aug-14",
+      openingBalance: 442.11, bankName: "Ftown Bank", inputDate: "08-Aug-14", cashierCode: 256, 
+      cashierName: "Al Gore", closingBalance: 452.45 }
+  
+  // An Array to hold dynamic data - Statment Transations
+  stmTransactions = [
+    {bankStmID: 243, transDesc: "Auto Transfers", policyNo: "", policyPayor:"", payMode:"BSO", amount: 532.99},
+    {bankStmID: 247, transDesc: "Bank Charges", policyNo: "", policyPayor:"", payMode:"BSO", amount: 232.61},
+    {bankStmID: 243, transDesc: "Premium Receipts", policyNo: "", policyPayor:"", payMode:"BSO", amount: 362.55},
+    {bankStmID: 243, transDesc: "Bank Charges", policyNo: "", policyPayor:"", payMode:"BSO", amount: 232.61}    
+  ]
+
+  netMovement: number = 
+    this.stmTransactions.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
 
 }

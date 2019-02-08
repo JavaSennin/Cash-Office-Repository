@@ -13,6 +13,9 @@ import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 import { BankStatementComponent } from './bank-statement..component' ;
 
+// custom pipe
+// import { MyFilterPipe } from './my-filter-pipe.component' ;
+
 @NgModule({
   declarations: [
     OversandUndersComponent,
@@ -20,6 +23,7 @@ import { BankStatementComponent } from './bank-statement..component' ;
     UnspecifiedBankComponent,
     UnspecifiedGsoesoComponent,
     BankStatementComponent
+    // ,    MyFilterPipe
   ],
 
   imports: [
