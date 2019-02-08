@@ -5,6 +5,7 @@ import { OversandUndersComponent } from './oversandunders.component' ;
 import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component';
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
+import { BankStatementComponent } from './bank-statement..component' ;
 
 const routes: Routes = [
   {
@@ -39,6 +40,13 @@ const routes: Routes = [
         component: UnspecifiedGsoesoComponent,
         data: {
           title: 'Unspecified GSO-ESO'
+        }
+      },
+      {
+        path: 'bank-statement',
+        component: BankStatementComponent,
+        data: {
+          title: 'Bank Statement'
         }
       },
       {

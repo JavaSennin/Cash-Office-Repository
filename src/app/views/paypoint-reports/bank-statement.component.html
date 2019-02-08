@@ -1,0 +1,180 @@
+<!-- Reprint Receipt -->
+
+<div class="animated fadeIn">
+  <div class="row">
+      <div class="col-lg-12">
+         <div class="card">
+            <div class="card-header">
+               <i class="fa fa-align-justify"></i> Bank Statement
+            </div>
+         
+           <div class="card-body">
+               <form [formGroup] = "receiptInput" (ngSubmit)="onSubmit()">
+                  <div class="form-row">
+                     <div class="col">
+
+                        <div class="form-group row">
+                           <label class="col-md-3 col-form-label" for="text-input">Bank Statement ID:</label>
+                           <div class="col-md-3">
+                              <input type="number" min="0" class="form-control" formControlName="bankStatementID" required>
+                           </div>
+                        </div>
+                        
+                        <div class="btn-toolbar">
+                           <div class="btn-group mr-2">
+                             <button type="submit" class="btn btn-md btn-primary"
+                                 [disabled] = "!receiptInput.valid">Report</button>
+                           </div>
+                        </div>
+                        
+                     </div>
+                      
+                  </div>
+               </form>
+
+            </div>
+
+         </div>
+      </div>
+
+  </div>
+
+  <!-- Report/Results Container displayReport-->
+  <div class="row" *ngIf="true">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i>Bank Statement Posting Report
+          <span class="text float-right">{{ today | date : "d-MMM-y" }}</span>        </div>
+  
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-lg-6">
+              <div class="row">
+                <p class="col-lg-4 font-weight-bold">BANK ACCOUNT: </p>
+                <p class="col-lg-6">{{bankAccountNo}}</p>
+              </div>
+
+              <div class="row">
+                <p class="col-lg-4 font-weight-bold">BANK STATEMENT ID: </p>
+                <p class="col-lg-6">{{bankStatementID}}</p>
+              </div>
+
+              <div class="row">
+                <p class="col-lg-4 font-weight-bold">STATEMENT No.: </p>
+                <p class="col-lg-6">{{statementNo}}</p>
+              </div>
+
+              <div class="row">
+                <p class="col-lg-4 font-weight-bold">RECEIVED FROM: </p>
+                <p class="col-lg-6">{{receivedFrom}}</p>
+              </div>
+
+              <div class="row">
+                <p class="col-lg-4 font-weight-bold">THE SUM OF: </p>
+                <p class="col-lg-6">{{sum}}</p>
+              </div>
+
+              <div class="row">
+                <p class="col-lg-4 font-weight-bold">PAYMENT TYPE: </p>
+                <p class="col-lg-6">{{paymentType}}</p>
+              </div>
+              
+            </div>
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <p class="col-lg-4 font-weight-bold">DATE: </p>
+                    <p class="col-lg-6">{{date}}</p>
+                  </div>
+                  <div class="row">
+                      <p class="col-lg-4 font-weight-bold">BRANCH CODE: </p>
+                      <p class="col-lg-6">{{branchCode}}</p>
+                    </div>
+                    <div class="row">
+                        <p class="col-lg-4 font-weight-bold">CASHIER: </p>
+                        <p class="col-lg-6">{{cashier}}</p>
+                      </div>
+
+                      <div class="row">
+                        <p class="col-lg-4 font-weight-bold">BRANCH CODE: </p>
+                        <p class="col-lg-6">{{branchCode}}</p>
+                      </div>
+
+                      <br> 
+
+                      <div class="row">
+                          <p class="col-lg-4 font-weight-bold">CASHIER: </p>
+                          <p class="col-lg-6">{{cashier}}</p>
+                        </div>
+            </div>
+    
+          <br>
+
+           <div class="col-lg-12">
+
+            <!-- Reprint Receipt -->
+            <p class="h6">Application: {{receipt.application | uppercase}}</p>
+            <table class="table table-bordered table-hover">
+               <thead class="thead-light">
+
+                       <tr *ngIf="receipt.application=='Group Life System'"> <!-- application = Group Life System -->
+                         <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th> </tr>
+
+                       <tr *ngIf="receipt.application=='Policy'"> <!-- application = Policy -->
+                         <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th></tr>
+
+                       <tr *ngIf="receipt.application=='Sundry Receipts'"> <!-- application = Sundry Receipts -->
+                         <th colspan="5">Transaction Type</th><th>Amount</th></tr>
+                     </thead>
+                     
+                     <tbody>
+                       <tr *ngIf="receipt.application=='Policy'">
+                         <td>{{receipt.transactionType}}</td> <td>{{receipt.policyNo}}</td> <td colspan="2">{{receipt.payer}}</td> 
+                          <td>{{receipt.period}}</td> <td class="text-right">{{receipt.amount}}</td></tr> 
+                           
+                       <tr *ngIf="receipt.application=='Group Life System'">
+                         <td colspan="2">{{receipt.transactionType}}</td> <td>{{receipt.paypointID}}</td> <td colspan="2">{{receipt.paypointName}}</td> 
+                         <td class="text-right">{{receipt.amount}}</td> </tr>
+
+                       <tr *ngIf="receipt.application=='Sundry Receipts'">
+                         <td colspan="5">{{receipt.transactionType}}</td> <td class="text-right">{{receipt.amount}}</td></tr>
+
+                       <tr class="font-weight-bold">
+                         <td colspan="5" class="text-center">Total Payment Received</td>
+                         <td class="text-right">{{receipt.amount}}</td>
+                       </tr>
+
+                     </tbody>
+            </table>
+
+            <br>
+
+             <!-- <div *ngIf="printPreview">
+               <p class="h6">Signature: _________________</p>
+             </div> -->
+
+           </div>
+           
+          </div>
+
+          <div class="row btn-toolbar text-center">
+            <div class= "col-lg-12">
+              <div class="btn-group mr-2">
+                <button type="button" class="btn btn-md btn-primary">Print</button>
+              </div>
+ 
+              <div class="btn-group mr-2">
+                  <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
+                </div>
+            </div>
+            </div>
+
+        </div>       
+
+      </div>
+    </div>
+  </div>
+
+</div>

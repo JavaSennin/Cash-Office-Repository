@@ -11,13 +11,15 @@ import { OversandUndersComponent } from './oversandunders.component' ;
 import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
+import { BankStatementComponent } from './bank-statement..component' ;
 
 @NgModule({
   declarations: [
     OversandUndersComponent,
     rejectionsComponent,
     UnspecifiedBankComponent,
-    UnspecifiedGsoesoComponent
+    UnspecifiedGsoesoComponent,
+    BankStatementComponent
   ],
 
   imports: [

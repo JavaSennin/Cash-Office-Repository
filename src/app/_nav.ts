@@ -258,6 +258,8 @@ export const navItems = [
       }
     ]
   },
+
+  // Cash Office PAYPOINTS REPORTS module
   {
     name: 'PayPoint Reports',
     url: '/paypoint-reports',
@@ -298,19 +300,15 @@ export const navItems = [
     {
       name: 'Unspecified Bank',
       url: '/paypoint-reports/unspecified-bank',
-      //icon: 'icon-bell'
     }
     ,
     {
       name: 'Unspecified GSO-ESO',
       url: '/paypoint-reports/unspecified-gsoeso',
-      //icon: 'icon-bell'
-    }
-    ,
+    },
     {
       name: 'Bank Statement',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
+      url: '/paypoint-reports/bank-statement',
     },
     {
       name: 'Manual Adjustment Report',
