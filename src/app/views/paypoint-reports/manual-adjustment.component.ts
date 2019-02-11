@@ -39,36 +39,25 @@ export class ManualAdjustmentComponent {
       
   today = new Date() ;
 
-  reportNo = 1234 ;  
+  // reportNo = 1234 ;  
 
-  // An Array to hold dynamic data - Bank Statements:
-  receipts = [
+  // An Array to hold dynamic data - Manual Adjustments:
+  adjustments = [
     {
-      days: 20, payMode: "DDE", bankBranch: "Gaborone Main", 
-      receiptNo: "210611", rctDate: "21-Jun-2016", rcvFrom: "GSO-Permanent", 
-      gross: 142.34, allocated: 281.56, rctAmnt: 314.34, unallocated:213.44
+      mnAdjID: 20, policyCode: "100210611", transType: "Premium Allocation", policyID: "210611", 
+      period: "21-Jun-2016", payerName: "A. B. Doe", payerNo: 14234, amount: 281.56, comments: "Unprocessed Allocation", purpose: 2, postingStatus: "POSTED", bobiRefNo: 123456, creation: "21-Jun-2012"
     },
     {
-      days: 14, payMode: "BSO", bankBranch: "Serowe Satellite", 
-      receiptNo: "210617", rctDate: "21-Jan-2017", rcvFrom: "Annuitant Staff", 
-      gross: 152.34, allocated: 291.56, rctAmnt: 313.56, unallocated:323.84
+      mnAdjID: 14, policyCode: "100210617", transType: "Premium Allocation", policyID: "210617", 
+      period: "21-Jan-2017", payerName: "C. D. Doe", payerNo: 15234, amount: 291.56, comments: "Review the Allocation", purpose: 4, postingStatus: "UNPOSTED", bobiRefNo: 123457, creation: "21-Jun-2013"
     },
     {
-      days: 12, payMode: "DDE", bankBranch: "Francistown", 
-      receiptNo: "210618", rctDate: "21-Aug-2018", rcvFrom: "GSO-Permanent", 
-      gross: 162.34, allocated: 201.56, rctAmnt: 311.75, unallocated:123.45
+      mnAdjID: 12, policyCode: "100210618", transType: "Premium Allocation", policyID: "210618", 
+      period: "21-Aug-2018", payerName: "E. F. Doe", payerNo: 16234, amount: 201.56, comments: "Unprocessed Allocation", purpose: 5, postingStatus: "POSTED", bobiRefNo: 123458, creation: "21-Jun-2014"
     }
   ]
 
-  totalGross: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.gross}, 0 ) ;
+  totalAmount: number = 
+    this.adjustments.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
   
-  totalAllocated: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.allocated}, 0 ) ;
-    
-  totalReceipts: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.rctAmnt}, 0 ) ;
-    
-  totalUnallocated: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.unallocated}, 0 ) ;
 }
