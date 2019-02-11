@@ -39,8 +39,6 @@ export class ManualAdjustmentComponent {
       
   today = new Date() ;
 
-  // reportNo = 1234 ;  
-
   // An Array to hold dynamic data - Manual Adjustments:
   adjustments = [
     {
