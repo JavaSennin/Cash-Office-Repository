@@ -59,34 +59,11 @@ export class paypointSummaryComponent {
 
   //Array for Dummy data [Group Life System]
   ppReport: any[]= [
-    {pp_id:1234,ppType:"Employer",pMode:"ESO(Semi-Electronic"}
+    {pp_id:1234,ppType:"E",tCode:4567,sDate:"27/09/19",nP:197,gda:566253.47},
+    {pp_id:1234,ppType:"E",tCode:5567,sDate:"27/10/19",nP:755,gda:280371.33}
   ];
-   //Array for Dummy data
-   ppReport2: any[]= [
-    {collectionType:"Debits:",Total:234456.67},
-    {collectionType:"Credits:",Total:0}
-    
-  ];
-  ppReport3: any[]= [
-    {ref_no:"00",ref_name:"Nonofo Odubegile",party_id:"445889600",policy_no:"987564896",product_code:"BMFW-1",policy_status:"inforce",dramount:2121.58},
-    {ref_no:"01",ref_name:"Kate Badubi",party_id:"445589600",policy_no:"987564476",product_code:"UML2-1",policy_status:"inforce",dramount:2121.58},
-    
-    
-  ];
-
-  // bgn
-
-  // states = [
-  //   {name: 'Arizona', abbrev: 'AZ'},
-  //   {name: 'California', abbrev: 'CA'},
-  //   {name: 'Colorado', abbrev: 'CO'},
-  //   {name: 'New York', abbrev: 'NY'},
-  //   {name: 'Pennsylvania', abbrev: 'PA'},
-  // ];
+  totalRaisedAmount: number = 
+  this.ppReport.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.gda}, 0 ) ;
  
-  // form = new FormGroup({
-  //   state: new FormControl(this.states[3]),
-  // });
-
-  // end
+  
 }

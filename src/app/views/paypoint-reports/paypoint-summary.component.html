@@ -80,7 +80,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> Rejections
+              <i class="fa fa-align-justify"></i> Paypoint Debit Summary Report
             </div>
        <!--Tafole 1-->
             <div class="card-body">
@@ -88,32 +88,52 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Period: </b>{{detailInput.value.Period}}
+                      <i class="fa fa-align-justify"></i>Paypoint&nbsp;&nbsp;&nbsp;&nbsp;    <b>Date: </b>11 February 2019
                     </div>
                     <div class="card-body">
+                    <p>Paypoint ID: {{detailInput.value.PayPointID.ppID}}&nbsp;&nbsp;&nbsp;&nbsp;    <b>Date: </b>{{detailInput.value.Period}}
+                      &nbsp;&nbsp;&nbsp;&nbsp; Total Raised Amount : {{totalRaisedAmount | number : '.2-2' }} </p>
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Paypoint ID</th>
                             <th>Paypoint Name</th>
                             <th>Paypoint Type</th>
-                            <th>Paypoint Mode</th>
+                            <th>Transaction code</th>
+                            <th>Strike Day</th>
+                            <th>Number of Policies</th>
+                            <th>Generated Debit Amounts</th>
                           
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let ppr of ppReport">
-                            <td>{{detailInput.value.PayPointID.ppID}}</td>
                             <td>{{detailInput.value.PayPointID.ppName}}</td>
                             <td>{{ppr.ppType}}</td>
-                            <td>{{ppr.pMode}}</td>
+                            <td>{{ppr.tCode}}</td>
+                            <td>{{ppr.sDate}}</td>
+                            <td>{{ppr.nP}}</td>
+                            <td>{{ppr.gda}}</td>
                           
                           </tr>
+                          <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><b>Total: </b>{{totalRaisedAmount | number : '.2-2' }}</td>
+                            
+                            </tr>
                        
                          
                         </tbody>
+                        
                       </table>
 
+                      
+                      <p><b>Processed By</b>&nbsp;:______________________________________</p>
+                      <p><b>Authorised By</b>&nbsp;1:______________________________________&nbsp;&nbsp;2:______________________________________</p>
+                      <p><b>Date</b>&nbsp;:______________________________________</p>
                       
                      
                     </div>
@@ -129,101 +149,8 @@
           </div>
           <!--End Of tafole-->
 
-          <!--Table 2-->
-          <div class="card-body">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="card">
-                   
-                    <div class="card-body">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Collection Type</th>
-                            <th>Total</th>
-                            
-                          
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let clt of ppReport2">
-                            <td>{{clt.collectionType}}</td>
-                            <td>{{clt.Total}}</td>
-                            
-                          
-                          </tr>
-                          
-                       
-                         
-                        </tbody>
-                      </table>
-
-                      
-                     
-                    </div>
-                  </div>
-
-                  
-
-                  
-                </div>
-              </div>
-    
-              
-          </div>
-
-          <!--Table 3-->
-          <div class="card-body">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="card">
-                    <div class="card-header">
-                   
-                    <div class="card-body">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Reference Number</th>
-                            <th>Reference Name</th>
-                            <th>Party ID</th>
-                            <th>Policy Number</th>
-                            <th>Product Code</th>
-                            <th>Policy Status</th>
-                            <th>Debit Amount</th>
-                          
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let ppr3 of ppReport3">
-                            <td>{{ppr3.ref_no}}</td>
-                            <td>{{ppr3.ref_name}}</td>
-                            <td>{{ppr3.party_id}}</td>
-                            <td>{{ppr3.policy_no}}</td>
-                            <td>{{ppr3.product_code}}</td>
-                            <td>{{ppr3.policy_status}}</td>
-                            <td>{{ppr3.dramount}}</td>
-                          
-                          </tr>
-                          
-                       
-                         
-                        </tbody>
-                      </table>
-
-                      
-                     
-                    </div>
-                  </div>
-
-                  
-
-                  
-                </div>
-              </div>
-    
-              
-          </div>
-          <!--End Table-->
+        
+        
 
           <div class="card-body">
         <div class="row">

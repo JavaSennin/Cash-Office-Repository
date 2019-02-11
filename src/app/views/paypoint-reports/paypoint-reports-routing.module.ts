@@ -6,8 +6,12 @@ import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component';
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 import { BankStatementComponent } from './bank-statement.component' ;
+<<<<<<< HEAD
 import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
 import { StatementAllocationComponent } from './statement-allocation.component' ;
+=======
+import { paypointSummaryComponent } from './paypoint-summary.component' ;
+>>>>>>> paypoint-summary
 
 const routes: Routes = [
   {
@@ -28,6 +32,13 @@ const routes: Routes = [
         component:rejectionsComponent,
         data: {
           title: 'Rejections'
+        }
+      },
+      {
+        path: 'paypoint-summary',
+        component:paypointSummaryComponent,
+        data: {
+          title: 'Paypoint Summary'
         }
       },
       {
