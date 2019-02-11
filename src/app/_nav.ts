@@ -5,20 +5,6 @@ export const navItems = [
     icon: 'icon-speedometer',
     
   },
-  /*{
-    title: true,
-    name: 'Theme'
-  },
-  {
-    name: 'Colors',
-    url: '/theme/colors',
-    icon: 'icon-drop'
-  },
-  {
-    name: 'Typography',
-    url: '/theme/typography',
-    icon: 'icon-pencil'
-  },**/
   {
     title: true,
     name: 'Cash Office Menu'
@@ -111,47 +97,6 @@ export const navItems = [
         //icon: 'icon-cursor'
       }
       
-    ]
-  },
-  {
-    name: 'Reports',
-    url: '/icons',
-    icon: 'icon-star',
-    children: [
-      {
-        name: 'Daily Reciept Listing',
-        url: '/icons/coreui-icons'
-      },
-      {
-        name: 'Reprint Receipt',
-        url: '/icons/flags',
-       // icon: 'icon-star'
-      },
-      {
-        name: 'Reprint Deposit Slip',
-        url: '/icons/font-awesome'
-      },
-      {
-        name: 'Collection By Branch',
-        url: '/icons/simple-line-icons',
-        //icon: 'icon-star'
-      },
-      {
-        name: 'Collection By Application[Summary]',
-        url: '/icons/simple-line-icons',
-        //icon: 'icon-star'
-      },
-      {
-        name: 'Collection By Application[Detail]',
-        url: '/icons/simple-line-icons',
-        //icon: 'icon-star'
-      }
-      ,
-      {
-        name: 'Cashier Assignment',
-        url: '/icons/simple-line-icons',
-        //icon: 'icon-star'
-      }
     ]
   },
   {
@@ -312,15 +257,12 @@ export const navItems = [
     },
     {
       name: 'Manual Adjustment Report',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
+      url: '/paypoint-reports/manual-adjustment'
     },
     {
       name: 'Bank Statement Allocation',
-      url: '/notifications/alerts',
-      //icon: 'icon-bell'
+      url: '/paypoint-reports/statement-allocation'
     }
-
     
   ]
   },

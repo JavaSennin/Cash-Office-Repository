@@ -13,9 +13,8 @@ import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 import { BankStatementComponent } from './bank-statement.component' ;
 import { paypointSummaryComponent } from './paypoint-summary.component' ;
-
-// custom pipe
-// import { MyFilterPipe } from './my-filter-pipe.component' ;
+import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
+import { StatementAllocationComponent } from './statement-allocation.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,9 @@ import { paypointSummaryComponent } from './paypoint-summary.component' ;
     UnspecifiedBankComponent,
     UnspecifiedGsoesoComponent,
     BankStatementComponent,
-    paypointSummaryComponent
-    // ,    MyFilterPipe
+    paypointSummaryComponent,
+    ManualAdjustmentComponent,
+    StatementAllocationComponent
   ],
 
   imports: [

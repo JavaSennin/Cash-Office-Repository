@@ -6,6 +6,8 @@ import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component';
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 import { BankStatementComponent } from './bank-statement.component' ;
+import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
+import { StatementAllocationComponent } from './statement-allocation.component' ;
 
 const routes: Routes = [
   {
@@ -47,6 +49,20 @@ const routes: Routes = [
         component: BankStatementComponent,
         data: {
           title: 'Bank Statement'
+        }
+      },
+      {
+        path: 'manual-adjustment',
+        component: ManualAdjustmentComponent,
+        data: {
+          title: 'Manual Adjustment'
+        }
+      },
+      {
+        path: 'statement-allocation',
+        component: StatementAllocationComponent,
+        data: {
+          title: 'Bank Statement Allocation'
         }
       },
       {
