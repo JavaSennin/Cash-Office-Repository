@@ -228,7 +228,7 @@ export const navItems = [
     },
     {
       name: 'UnAllocated Cash Reciepts',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/unallocated-cashReciepts',
       //icon: 'icon-bell'
     },
     { 

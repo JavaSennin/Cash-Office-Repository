@@ -13,8 +13,15 @@ import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
 import { BankStatementComponent } from './bank-statement.component' ;
 import { paypointSummaryComponent } from './paypoint-summary.component' ;
+<<<<<<< HEAD
 import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
 import { StatementAllocationComponent } from './statement-allocation.component';
+=======
+import { unallocatedCashRecieptsComponent } from './unallocated-cashReciepts.component' ;
+
+// custom pipe
+// import { MyFilterPipe } from './my-filter-pipe.component' ;
+>>>>>>> unallocated-Cash Reciepts
 
 @NgModule({
   declarations: [
@@ -24,8 +31,13 @@ import { StatementAllocationComponent } from './statement-allocation.component';
     UnspecifiedGsoesoComponent,
     BankStatementComponent,
     paypointSummaryComponent,
+<<<<<<< HEAD
     ManualAdjustmentComponent,
     StatementAllocationComponent
+=======
+    unallocatedCashRecieptsComponent
+    // ,    MyFilterPipe
+>>>>>>> unallocated-Cash Reciepts
   ],
 
   imports: [
