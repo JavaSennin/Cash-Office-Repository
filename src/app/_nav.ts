@@ -278,7 +278,7 @@ export const navItems = [
     },
     {
       name: 'PayPoint Summary',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/paypoint-summary',
       //icon: 'icon-bell'
     },
     {
@@ -286,7 +286,7 @@ export const navItems = [
       url: '/notifications/alerts',
       //icon: 'icon-bell'
     },
-    {
+    { 
       name: 'Unmatched Credits',
       url: '/notifications/alerts',
       //icon: 'icon-bell'

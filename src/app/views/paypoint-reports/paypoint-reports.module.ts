@@ -11,7 +11,8 @@ import { OversandUndersComponent } from './oversandunders.component' ;
 import { rejectionsComponent } from './rejections.component' ;
 import { UnspecifiedBankComponent } from './unspecified-bank.component' ;
 import { UnspecifiedGsoesoComponent } from './unspecified-gsoeso.component' ;
-import { BankStatementComponent } from './bank-statement.component' ;
+import { BankStatementComponent } from './bank-statement..component' ;
+import { paypointSummaryComponent } from './paypoint-summary.component' ;
 
 // custom pipe
 // import { MyFilterPipe } from './my-filter-pipe.component' ;
@@ -22,7 +23,8 @@ import { BankStatementComponent } from './bank-statement.component' ;
     rejectionsComponent,
     UnspecifiedBankComponent,
     UnspecifiedGsoesoComponent,
-    BankStatementComponent
+    BankStatementComponent,
+    paypointSummaryComponent
     // ,    MyFilterPipe
   ],
 
