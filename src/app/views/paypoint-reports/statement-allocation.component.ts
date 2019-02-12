@@ -25,7 +25,6 @@ export class StatementAllocationComponent {
     PayPointID: new FormControl('', Validators.required),
     
     Paypoint_Name: new FormControl({value:"", disabled: true}, Validators.required),
-    // Period: new FormControl('2018-09-30', Validators.required), 
 
     bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ) 
   });
@@ -50,30 +49,24 @@ export class StatementAllocationComponent {
     
   }
   
-  // paypointIds: any[]= [
-  paypointIds = [ 
-    {ppID:1234, ppName: "Botswana Railways"},
-    {ppID:4567, ppName: "Botswana Post"},
-    {ppID:4867, ppName: "Botswana Meat Commission"},
-    {ppID:8897, ppName: "Botswana Life"},
-    {ppID:9897, ppName: "Hollard Insurance"}
+  // Array to hold Dynamic Data - Paypoints:
+  paypoints = [ 
+    {ppID:123, ppName: "Air Botswana"},
+    {ppID:456, ppName: "Botswana Post"},
+    {ppID:789, ppName: "Botswana Railways"}
   ];
 
-  //Array for Dummy data [Group Life System]
-  ppReport: any[]= [
-    {pp_id:1234,ppType:"Employer",pMode:"ESO(Semi-Electronic"}
+  // Array to hold Dynamic Data - allocations: 
+  allocations = [
+    { transType: "CRE", policyNo: "1010244", productCode: "BMW-M3", policyStatus: "Lapsed", partyName: "John Daimler", premium: 252.54, amount: 252.11 },
+    { transType: "CRE", policyNo: "1010245", productCode: "ULM4-7", policyStatus: "Terminated", partyName: "Takana Ohnda", premium: 472.54, amount: 262.11 },
+    { transType: "CRE", policyNo: "1010247", productCode: "BMW-M3", policyStatus: "Inforce", partyName: "Jane Benize", premium: 162.54, amount: 272.11 }
   ];
 
-  //Array for Dummy data
-  ppReport2: any[]= [
-    {collectionType:"Debits:",Total:234456.67},
-    {collectionType:"Credits:",Total:0}
-  ];
+  strikeTotal: number = 
+    this.allocations.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.premium}, 0 ) ;
 
-  ppReport3: any[]= [
-    {ref_no:"00",ref_name:"Nonofo Odubegile",policy_code:"445889600",status:"inforce",damount:9211.58,aamount:0.00,difamount:2121.58},
-    {ref_no:"00",ref_name:"Patricia Majalisa",policy_code:"345889600",status:"inforce",damount:2811.58,aamount:0.00,difamount:2211.58},
-    {ref_no:"00",ref_name:"Lucky Dube Lance",policy_code:"2589889600",status:"inforce",damount:2111.58,aamount:0.00,difamount:21221.58}
-  ];
-
+  totalAmount: number = 
+    this.allocations.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
+  
 }
