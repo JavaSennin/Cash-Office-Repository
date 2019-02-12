@@ -13,6 +13,7 @@ import { StatementAllocationComponent } from './statement-allocation.component' 
 import { paypointSummaryComponent } from './paypoint-summary.component' ;
 
 import { unallocatedCashRecieptsComponent} from './unallocated-cashReciepts.component' ;
+import { unmatchedCreditComponent} from './unmatchedCredit.component' ;
 
 
 const routes: Routes = [
@@ -50,6 +51,13 @@ const routes: Routes = [
           title: 'Unallocated Cash Reciepts'
         }
       },
+      {
+      path: 'unmatchedCredit',
+      component:unmatchedCreditComponent,
+      data: {
+        title: 'Unmatched Reciepts'
+      }
+    },
       {
         path: 'unspecified-bank',
         component: UnspecifiedBankComponent,

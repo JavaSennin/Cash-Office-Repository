@@ -233,7 +233,7 @@ export const navItems = [
     },
     { 
       name: 'Unmatched Credits',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/unmatchedCredit',
       //icon: 'icon-bell'
     },
     {
