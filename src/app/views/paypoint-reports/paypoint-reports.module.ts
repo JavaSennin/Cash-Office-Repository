@@ -28,10 +28,13 @@ import { unallocatedCashRecieptsComponent } from './unallocated-cashReciepts.com
     UnspecifiedGsoesoComponent,
     BankStatementComponent,
     paypointSummaryComponent,
+<<<<<<< HEAD
     ManualAdjustmentComponent,
-    StatementAllocationComponent,
+    StatementAllocationComponent
+=======
     unallocatedCashRecieptsComponent
     // ,    MyFilterPipe
+>>>>>>> unallocated-Cash Reciepts
   ],
 
   imports: [
