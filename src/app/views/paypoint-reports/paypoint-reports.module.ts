@@ -17,9 +17,6 @@ import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
 import { StatementAllocationComponent } from './statement-allocation.component';
 import { unallocatedCashRecieptsComponent } from './unallocated-cashReciepts.component' ;
 
-// custom pipe
-// import { MyFilterPipe } from './my-filter-pipe.component' ;
-
 @NgModule({
   declarations: [
     OversandUndersComponent,
@@ -28,13 +25,9 @@ import { unallocatedCashRecieptsComponent } from './unallocated-cashReciepts.com
     UnspecifiedGsoesoComponent,
     BankStatementComponent,
     paypointSummaryComponent,
-<<<<<<< HEAD
     ManualAdjustmentComponent,
-    StatementAllocationComponent
-=======
+    StatementAllocationComponent,
     unallocatedCashRecieptsComponent
-    // ,    MyFilterPipe
->>>>>>> unallocated-Cash Reciepts
   ],
 
   imports: [
