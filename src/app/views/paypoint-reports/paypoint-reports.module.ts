@@ -17,6 +17,7 @@ import { ManualAdjustmentComponent } from './manual-adjustment.component' ;
 import { StatementAllocationComponent } from './statement-allocation.component';
 import { unallocatedCashRecieptsComponent } from './unallocated-cashReciepts.component' ;
 import { unmatchedCreditComponent } from './unmatchedCredit.component' ;
+import { recieptAllocationStatusComponent} from './reciept-allocation-status.component' ;
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { unmatchedCreditComponent } from './unmatchedCredit.component' ;
     ManualAdjustmentComponent,
     StatementAllocationComponent,
     unallocatedCashRecieptsComponent,
-    unmatchedCreditComponent
+    unmatchedCreditComponent,
+    recieptAllocationStatusComponent
   ],
 
   imports: [

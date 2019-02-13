@@ -14,6 +14,7 @@ import { paypointSummaryComponent } from './paypoint-summary.component' ;
 
 import { unallocatedCashRecieptsComponent} from './unallocated-cashReciepts.component' ;
 import { unmatchedCreditComponent} from './unmatchedCredit.component' ;
+import { recieptAllocationStatusComponent} from './reciept-allocation-status.component' ;
 
 
 const routes: Routes = [
@@ -56,6 +57,13 @@ const routes: Routes = [
       component:unmatchedCreditComponent,
       data: {
         title: 'Unmatched Reciepts'
+      }
+    },
+    {
+      path: 'reciept-allocation-status',
+      component:recieptAllocationStatusComponent,
+      data: {
+        title: 'Reciept Allocation Status'
       }
     },
       {

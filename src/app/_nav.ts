@@ -238,7 +238,7 @@ export const navItems = [
     },
     {
       name: 'Reciept Allocation Status',
-      url: '/notifications/alerts',
+      url: '/paypoint-reports/reciept-allocation-status',
       //icon: 'icon-bell'
     }
     ,
