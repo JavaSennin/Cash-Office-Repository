@@ -68,13 +68,8 @@ export class StatementAllocationComponent {
   totalAmount: number = 
     this.allocations.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
   
-  // Array to hold Dynamic Data - Bank Statement Details
-  statement = // [
+  // Object to hold Dynamic Data - Bank Statement Details
+  statement =
     { stmtID: "210", bankName: "First Nation Bank", stmtNo: "FNB42/12012019", accNo: "4638001", 
-      accDesc: "DDE Collection Account", period: "21-Jan-2017", strikeDate: "21-Mar-17", allocatedAmount: 451.05} ; //,
-  //   { stmtID: "321", bankName: "Captial Bank", stmtNo: "CPB43/12012019", accNo: "4638002", 
-  //     accDesc: "BSO Collection Account", period: "21-Jun-2017", strikeDate: "21-Aug-17", alllocatedAmount: 452.14},
-  //   { stmtID: "432", bankName: "Bank Tlokweng", stmtNo: "BTL44/12012019", accNo: "4638007", 
-  //     accDesc: "DDE Collection Account", period: "21-Sep-2017", strikeDate: "21-Nov-17", alllocatedAmount: 455.44}
-  // ];
+      accDesc: "DDE Collection Account", period: "21-Jan-2017", strikeDate: "21-Mar-17", allocatedAmount: 451.05} ;
 }
