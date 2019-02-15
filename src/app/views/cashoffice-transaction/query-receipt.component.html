@@ -64,14 +64,14 @@
                         </div>
                     </form>
                   
-                   <!-- Beginning of Results -->
-                        <div class="row" *ngIf=displayReport>
+                    <form [formGroup]="QueryReciept" (ngSubmit)="onSubmit()" *ngIf=displayReport>
+                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <i class="fa fa-align-justify"></i> Reciept Details
                                     </div>
-                                    <form [formGroup]="QueryResult" (ngSubmit)="onSubmit()" >
+                                    <form novalidate method="post" [formGroup]="cashOfficeForm">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="card">
@@ -320,7 +320,7 @@
                         </form>
                 
                 
-                    
+                    </form>
                 </div>
             </div>
         </div>
