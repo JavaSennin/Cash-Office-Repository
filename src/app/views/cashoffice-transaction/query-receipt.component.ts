@@ -16,8 +16,17 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 
 })
 export class QueryReceiptComponent {
-  QueryReciept = FormGroup;
-  cashOfficeForm = new FormGroup({
+  //Main Form
+  QueryReciept = new FormGroup({
+    recieptDesc: new FormControl('', Validators.required),
+    cashier: new FormControl('', Validators.required),
+    startDate: new FormControl('', Validators.required),
+    endDate: new FormControl('', Validators.required)
+
+  });
+
+  //Results After Clicking Find
+  QueryResults = new FormGroup({
     recieptDesc: new FormControl('', Validators.required),
     cashier: new FormControl('', Validators.required),
     startDate: new FormControl('', Validators.required),
@@ -27,7 +36,7 @@ export class QueryReceiptComponent {
   onSubmit(){
     this.displayReport = true ; // show container for the results. 
   
-    console.table(this.cashOfficeForm.value) ;
+    console.table(this.QueryReciept.value) ;
   }
 
   

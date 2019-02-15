@@ -1,5 +1,5 @@
-<div class="animated fadeIn" action="" method="post" enctype="multipart/form-data">
-    <form [formGroup]="cashOfficeForm" (ngSubmit)="onSubmit()">
+<div class="animated fadeIn">
+    <!-- <form [formGroup]="cashOfficeForm" (ngSubmit)="onSubmit()"> -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -11,7 +11,7 @@
                             <i class="fa fa-align-justify"></i> Find Receipt Details
                         </div>
                     </div>
-                    <form novalidate method="post" [formGroup]="cashOfficeForm">
+                    <form [formGroup] = "QueryReciept" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">
@@ -64,14 +64,14 @@
                         </div>
                     </form>
                   
-                    <form [formGroup]="QueryReciept" (ngSubmit)="onSubmit()" *ngIf=displayReport>
-                        <div class="row">
+                   <!-- Beginning of Results -->
+                        <div class="row" *ngIf=displayReport>
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <i class="fa fa-align-justify"></i> Reciept Details
                                     </div>
-                                    <form novalidate method="post" [formGroup]="cashOfficeForm">
+                                    <form [formGroup]="QueryResult" (ngSubmit)="onSubmit()" >
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="card">
@@ -320,11 +320,11 @@
                         </form>
                 
                 
-                    </form>
+                    
                 </div>
             </div>
         </div>
-    </form>
+    <!-- </form> -->
 
     <!--form end -->
 </div>

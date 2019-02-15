@@ -7,12 +7,13 @@ import { CashOfficeTransactionRoutingModule } from './cash-office-transaction-ro
 
 @NgModule({
   declarations: [
-    FormsModule,
-    ReactiveFormsModule,
+   
     QueryReceiptComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     CashOfficeTransactionRoutingModule
   ]
 })
