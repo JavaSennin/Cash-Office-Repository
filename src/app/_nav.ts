@@ -43,7 +43,7 @@ export const navItems = [
   },
   {
     name: 'Transaction',
-    url: '/buttons',
+    url: '/cashoffice-transaction',
     icon: 'icon-cursor',
     children: [
       {
@@ -62,8 +62,8 @@ export const navItems = [
         //icon: 'icon-cursor'
       },
       {
-        name: 'Query Reciepts',
-        url: '/buttons/brand-buttons',
+        name: 'Query Receipts',
+        url: '/cashoffice-transaction/query-receipt',
         //icon: 'icon-cursor'
       },
       {

@@ -9,11 +9,9 @@ import { DepositSlipComponent } from './deposit-slip.component';
 import { ReceiptListingComponent } from './receipt-listing.component' ;
 import { ReprintReceiptComponent } from './reprint-receipt.component' ;
 
-
 const routes: Routes = [
   {
     path: '',
-    // component: CashOfficeReportsComponent, 
     data: { title: 'Cash Office Reports' } ,
 
     children: [
