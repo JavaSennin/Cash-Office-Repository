@@ -103,6 +103,10 @@ export const routes: Routes = [
         loadChildren: './views/theme/theme.module#ThemeModule'
       },
       {
+        path: 'transactions',
+        loadChildren: './views/transactions/transactions.module#TransactionsModule'
+      },
+      {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
       },

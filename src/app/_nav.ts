@@ -345,6 +345,24 @@ export const navItems = [
       // icon: 'icon-lock-unlocked'
       }
     ]
+  },
+
+  // Cash Office TRANSACTIONS Module
+  {
+    name: 'Transactions',
+    url: 'transactions',
+    icon: 'icon-calculator',
+
+    children: [
+      {
+        name: 'Cashier Assignment',
+        url: 'transactions/cashier-assignment'
+      },
+      {
+        name: 'Query Receipt',
+        url: '/transactions/query-receipt'
+      }
+    ]
   }
 
 ];
