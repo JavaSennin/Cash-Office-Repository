@@ -1,11 +1,11 @@
 <!-- Reprint Receipt -->
 
-<div class="animated fadeIn">
-    <div class="row">
+<div class="animated fadeIn" >
+    <div class="row"*ngIf="displaySearch">
         <div class="col-lg-12">
            <div class="card">
               <div class="card-header">
-                 <i class="fa fa-align-justify"></i> Bank Statement
+                 <i class="fa fa-align-justify"></i> Query Receipt
               </div>
            
              <div class="card-body">
@@ -14,16 +14,40 @@
                        <div class="col">
   
                           <div class="form-group row">
-                             <label class="col-md-3 col-form-label" for="text-input">Bank Statement ID:</label>
+                             <label class="col-md-3 col-form-label" for="text-input">Reciept Number</label>
                              <div class="col-md-3">
-                                <input type="number" min="0" class="form-control" formControlName="bankStatementID" required>
+                                <input type="number" min="0" class="form-control" formControlName="recieptNumber" placeholder="Enter Reciept Number" required>
                              </div>
                           </div>
-                          
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label">from Date :</label>
+                            <div  class = "col-md-3">
+                              <input class="form-control" id="date-input" type="date" 
+                              formControlName = "fromDate" name="date-input" required>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label">to Date :</label>
+                            <div  class = "col-md-3">
+                              <input class="form-control" id="date-input" type="date" 
+                              formControlName = "toDate" name="date-input" required>
+                            </div>
+                          </div>
+                          <div class = "form-group row">
+                            <label class="col-md-3 col-form-label" >Cashier:</label>
+                            <div class = "col-md-3">
+                              <select class="form-control" id="selectBrCode" 
+                              formControlName = "cashierName" [disabled]="disableForm">
+                                <option [ngValue]="cid"  *ngFor="let cid of cashiers">{{cid.cName}}</option>
+                                
+                              </select>
+                            </div>
+                          </div>
+                                  
                           <div class="btn-toolbar">
                              <div class="btn-group mr-2">
                                <button type="submit" class="btn btn-md btn-primary"
-                                   [disabled] = "!receiptInput.valid">Report</button>
+                               [disabled] = "!receiptInput.get('recieptNumber').valid" >Report</button>
                              </div>
                           </div>
                           
@@ -45,123 +69,302 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-align-justify"></i>Bank Statement Posting Report
-            <span class="text float-right">{{ today | date : "d-MMM-y" }}</span>        </div>
-    
-          <div class="card-body">
-            <div class="row">
-  
-              <div class="col-lg-6">
-                <div class="row">
-                  <p class="col-lg-4 font-weight-bold">BANK ACCOUNT: </p>
-                  <p class="col-lg-6">{{bankStatement.bankAccNo}}</p>
-                </div>
-  
-                <div class="row">
-                  <p class="col-lg-4 font-weight-bold">BANK STATEMENT ID: </p>
-                  <p class="col-lg-6">{{bankStatement.bankStmID}}</p>
-                </div>
-  
-                <div class="row">
-                  <p class="col-lg-4 font-weight-bold">STATEMENT No.: </p>
-                  <p class="col-lg-6">{{bankStatement.stmtNo}}</p>
-                </div>
-  
-                <div class="row">
-                  <p class="col-lg-4 font-weight-bold">DATE FROM: </p>
-                  <p class="col-lg-6">{{bankStatement.fromDate}}</p>
-                </div>
-  
-                <div class="row">
-                  <p class="col-lg-4 font-weight-bold">DATE TO: </p>
-                  <p class="col-lg-6">{{bankStatement.toDate}}</p>
-                </div>
-  
-                <div class="row">
-                  <p class="col-lg-4 font-weight-bold">OPENING BALANCE: </p>
-                  <p class="col-lg-6">{{bankStatement.openingBalance}}</p>
-                </div>
-                
-              </div>
-  
-              <div class="col-lg-6">
-                  <div class="row">
-                      <p class="col-lg-4 font-weight-bold">BANK NAME: </p>
-                      <p class="col-lg-6">{{bankStatement.bankName}}</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-lg-4 font-weight-bold">INPUT DATE: </p>
-                        <p class="col-lg-6">{{bankStatement.inputDate}}</p>
-                      </div>
-                      <div class="row">
-                          <p class="col-lg-4 font-weight-bold">CASHIER: CODE</p>
-                          <p class="col-lg-6">{{bankStatement.cashierCode}}</p>
-                        </div>
-  
-                        <div class="row">
-                          <p class="col-lg-4 font-weight-bold">CASHIER NAME: </p>
-                          <p class="col-lg-6">{{bankStatement.cashierName}}</p>
-                        </div>
-  
-                        <br> 
-  
-                        <div class="row">
-                          <p class="col-lg-4 font-weight-bold">CLOSING BALANCE: </p>
-                          <p class="col-lg-6">{{bankStatement.closingBalance}}</p>
-                        </div>
-              </div>
-      
-            <br>
-  
-             <div class="col-lg-12">
-  
-              <!-- Reprint Receipt -->
-                <table class="table table-bordered table-hover">
-                  <thead class="thead-light">
-                    <tr>
-                      <th>TRANSACTION DESCRIPTION</th>
-                      <th>POLICY NUMBER</th>
-                      <th>POLICY PAYER</th>
-                      <th>PAY MODE</th>
-                      <th>AMOUNT</th>
-                    </tr>
-                  </thead>
-                  
-                  <tbody>
-                    <!-- begin: loop for listing the receipts --> 
-                    <tr *ngFor="let transaction of stmTransactions">
-                      <td>{{transaction.transDesc}}</td>
-                      <td>{{transaction.policyNo}}</td>
-                      <td>{{transaction.policyPayor}}</td>
-                      <td>{{transaction.payMode}}</td>
-                      <td class="text-right">{{transaction.amount}}</td>
-                    </tr>
-  
-                    <tr class="font-weight-bold">
-                      <td class="text-center" colspan="4">Net Movement: </td><td class="text-right">{{netMovement | number : '.2-2' }}</td>
-                    </tr>
-  
-                  </tbody>
-  
-                </table>
-  
-             </div>
-             
-            </div>
-  
-            <div class="row btn-toolbar text-center">
-              <div class= "col-lg-12">
-                <div class="btn-group mr-2">
-                  <button type="button" class="btn btn-md btn-primary">Print</button>
-                </div>
-   
-                <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
+            <i class="fa fa-align-justify"></i>Query Receipt
                   </div>
-              </div>
-              </div>
-  
-          </div>       
+    
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="card">
+                            <div class="card-header">
+                              <i class="fa fa-align-justify"></i>Receipt Details
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup] = "receiptDetails" *ngFor="let rt of recDet" >
+                                    <div class="form-row">
+                                       <div class="col">
+                  
+                                          <div class="form-group row">
+                                            <!--Receipt Number-->
+                                             <label class="col-md-2 col-form-label" for="text-input">Reciept Number</label>
+                                             <div class="col-md-3">
+                                                <input type="number" min="0" class="form-control" formControlName="recieptNumber_r" value="{{receiptInput.value.recieptNumber}}" disabled required>
+                                             </div>
+                                               <!--Receipt Date-->
+                                             <label class="col-md-2 col-form-label" for="text-input">Reciept Date</label>
+                                             <div class="col-md-3">
+                                                <input type="text"  class="form-control" formControlName="recieptDate" value="{{rt.receiptDate}}" disabled required>
+                                             </div>
+                                          </div>
+                                          <div class="form-group row">
+                                            <!--Cash Office-->
+                                            <label class="col-md-2 col-form-label" for="text-input">Cash Office</label>
+                                            <div class="col-md-3">
+                                               <input type="text"  class="form-control" formControlName="cashOffice" value="{{rt.co}}" disabled required>
+                                            </div>
+                                             <!--Comments-->
+                                             <label class="col-md-2 col-form-label" for="text-input">Comments</label>
+                                             <div class="col-md-3">
+                                                <input type="text"  class="form-control" formControlName="comments" value="{{rt.comments}}" disabled required>
+                                             </div>
+                                            
+                                          </div>
+                                          <div class="form-group row">
+                                              <!--Received From-->
+                                              <label class="col-md-2 col-form-label" for="text-input">Recieved From</label>
+                                              <div class="col-md-3">
+                                                 <input type="text"  class="form-control" formControlName="recievedFrom" value="{{rt.recFrom}}" disabled required>
+                                              </div>
+                                               <!--Status/Batch No-->
+                                               <label class="col-md-2 col-form-label" for="text-input">Status/Batch No.</label>
+                                               <div class="col-md-3">
+                                                  <input type="text"  class="form-control" formControlName="pstat" value="{{rt.pStatus}}" disabled required>
+                                               </div>
+                                              
+                                            </div>
+                                            <div class="form-group row">
+                                                <!--Received From-->
+                                                <label class="col-md-2 col-form-label" >Payment Method:</label>
+                                                <div class = "col-md-3">
+                                                  <select class="form-control" id="selectBrCode" 
+                                                  formControlName = "cashier" [disabled]="disableForm">
+                                                    <option selected >{{rt.pMethod}}</option>
+                                                    
+                                                  </select>
+                                                </div>
+                                                 <!--Status/Batch No-->
+                                                 <label class="col-md-2 col-form-label" for="text-input">Cashier Name</label>
+                                                 <div class="col-md-3">
+                                                    <input type="text"  class="form-control" formControlName="pstat" value="{{rt.Cname}}" disabled required>
+                                                 </div>
+                                                
+                                              </div>
+                                              <div class="form-group row">
+                                                  <!--Receipt Amount-->
+                                                  <label class="col-md-2 col-form-label" for="text-input">Reciept Amount</label>
+                                                  <div class="col-md-3">
+                                                     <input type="text"  class="form-control" formControlName="recieptAmount" value="{{rt.rAmount}}" disabled required>
+                                                  </div>
+                                                   <!--Cancellation Reason-->
+                                                   <label class="col-md-2 col-form-label" for="text-input">Cancellation Reason</label>
+                                                   <div class="col-md-3">
+                                                      <input type="text"  class="form-control" formControlName="cancelR" value="{{rt.cReason}}" disabled required>
+                                                   </div>
+                                                  
+                                                </div>
+                                          <!-- <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">to Date :</label>
+                                            <div  class = "col-md-3">
+                                              <input class="form-control" id="date-input" type="date" 
+                                              formControlName = "toDate" name="date-input" required>
+                                            </div>
+                                          </div>
+                                          <div class = "form-group row">
+                                            <label class="col-md-3 col-form-label" >Cashier:</label>
+                                            <div class = "col-md-3">
+                                              <select class="form-control" id="selectBrCode" 
+                                              formControlName = "cashierName" [disabled]="disableForm">
+                                                <option [ngValue]="cid"  *ngFor="let cid of cashiers">{{cid.cName}}</option>
+                                                
+                                              </select>
+                                            </div>
+                                          </div>
+                                                  
+                                          <div class="btn-toolbar">
+                                             <div class="btn-group mr-2">
+                                               <button type="submit" class="btn btn-md btn-primary"
+                                                   [disabled] = "!receiptInput.valid">Report</button>
+                                             </div>
+                                          </div> -->
+                                          
+                                       </div>
+                                        
+                                    </div>
+                                 </form>
+        
+                              
+                             
+                            </div>
+                          </div>
+        
+                          
+        
+                          
+                        </div>
+                      </div>
+            
+                      
+                  </div>      
+
+                  <!--TOPL-->
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-align-justify"></i> 
+                                <button type="button" class="btn btn-primary"
+                                (click)="isCollapsed = !isCollapsed">TPOL
+                        </button>
+                        
+                            &nbsp;&nbsp;&nbsp;Receipt Applications
+                         
+                            </div>
+                            
+
+                            <!--TPOL Hidden Table-->
+                            <div class="card-body" (collapsed)="collapsed($event)"
+                            (expanded)="expanded($event)"
+                            [collapse]="isCollapsed">
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="card">
+                                     
+                                      <div class="card-body">
+                                          <table class="table table-bordered table-striped table-sm">
+                                          <thead>
+                                            <tr>
+                                              <th>Activity</th>
+                                              <th>Period</th>
+                                              <th>Policy Number</th>
+                                              <th>Status</th>
+                                              <th>Payer</th>
+                                              <th>Arrears</th>
+                                              <th>Expected Amount</th>
+                                              <th>Allocated Amount</th>
+                                              <th>Reallocation ID</th>
+                                            
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr *ngFor="let tp of topl">
+                                              <td>{{tp.activity}}</td>
+                                              <td>{{tp.period}}</td>
+                                              <td>{{tp.policyNo}}</td>
+                                              <td>{{tp.status}}</td>
+                                              <td>{{tp.payer}}</td>
+                                              <td>{{tp.arrears}}</td>
+                                              <td>{{tp.eamount}}</td>
+                                              <td>{{tp.aamount}}</td>
+                                              <td>{{tp.raId}}</td>
+                                            
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><b>Total: </b>{{topl[0].aamount}}</td>
+                                              
+                                              </tr>
+                                         
+                                           
+                                          </tbody>
+                                          
+                                        </table>
+                  
+                                       
+                                       
+                                      </div>
+                                    </div>
+                  
+                                    
+                  
+                                    
+                                  </div>
+                                </div>
+                      
+                                
+                          
+
+                                      </div>
+        
+                              
+                             
+                            </div>
+                          </div>
+        
+                          
+        
+                          
+                        </div>
+                      </div>
+                       <!--Receipt Allocation-->
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="card">
+                              <div class="card-header">
+                                  <i class="fa fa-align-justify"></i> Receipt Allocation
+                               </div>
+                            
+
+                            <!--TPOL Hidden Table-->
+                            <div class="card-body">
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="card">
+                                     
+                                      <div class="card-body">
+                                          <table class="table table-bordered table-striped table-sm">
+                                          <thead>
+                                            <tr>
+                                              <th>Applcation Mode</th>
+                                              <th>Application Description</th>
+                                              <th>Amount Allocated</th>
+                                             
+                                            
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr *ngFor="let ra of recAllo">
+                                              <td>{{ra.aMode}}</td>
+                                              <td>{{ra.aApplication}}</td>
+                                              <td>{{ra.aAllocated}}</td>
+                                              
+                                            
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><b>Total: </b></td>
+                                                <td>{{recAllo[0].aAllocated}}</td>
+                                              
+                                              </tr>
+                                         
+                                           
+                                          </tbody>
+                                          
+                                        </table>
+                  
+                                       
+                                       
+                                      </div>
+                                    </div>
+                  
+                                    
+                  
+                                    
+                                  </div>
+                                </div>
+                      
+                                
+                          
+
+                                      </div>
+        
+                              
+                             
+                            </div>
+                          </div>
+        
+                          
+        
+                          
+                        </div>
+                      </div>
+                      
+                  </div> 
   
         </div>
       </div>

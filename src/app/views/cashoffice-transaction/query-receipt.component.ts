@@ -20,12 +20,38 @@ export class queryReceiptComponent {
 
   today = new Date() ;
 
+  isCollapsed: boolean = true;
+
+  collapsed(event: any): void {
+    // console.log(event);
+  }
+
+  expanded(event: any): void {
+    // console.log(event);
+  }
+
+
   receiptInput = new FormGroup({
-    bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ) 
+    recieptNumber: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ), 
+    fromDate: new FormControl('', Validators.required),
+    toDate: new FormControl('', Validators.required),
+    cashierName: new FormControl('', Validators.required),
+  } ) ;
+  receiptDetails = new FormGroup({
+    recieptNumber_r: new FormControl('', Validators.required), 
+    recieptDate: new FormControl('', Validators.required),
+    cashOffice: new FormControl('', Validators.required),
+    comments: new FormControl('', Validators.required),
+    recievedFrom: new FormControl('', Validators.required),
+    pstat: new FormControl('', Validators.required),
+    cashier: new FormControl('', Validators.required),
+    recieptAmount: new FormControl('', Validators.required),
+    cancelR: new FormControl('', Validators.required),
   } ) ;
 
   onSubmit(){
     this.displayReport = true ; // show container for the results
+    this.displaySearch = false ; // show container for the results
   
     console.table(this.receiptInput.value) ;
 
@@ -33,10 +59,30 @@ export class queryReceiptComponent {
     this.receipt = this.receipts[ Math.floor( Math.random() * Math.floor( this.receipts.length ) )  ] ; 
 
   }
+  cashiers = [ 
+    {cName: "Kabelo Tsheole"},
+    {cName: "Ahmed Tselaeile"},
+    {cName: "Forest Gump"},
+    {cName: "Miller Life"},
+    {cName: "Kevin Hollard"}
+  ];
+  recAllo = [ 
+    {aMode: "TOPL",aApplication:"POLICY",aAllocated:"479.25"}
+  ];
+  topl = [ 
+    {activity: "GN",period:"Dec 1,2011",policyNo:"80764080",stat:"Lapsed",payer:"TSHENYEGO MALOPE",
+     arrears:"159.75",eamount:"159.75",aamount:"479.25",raId:"" }
+  ]; 
 
+  recDet = [ 
+    {receiptDate: "Dec 26,1929",co:"Pala",comments:"",recFrom:"Tefo Kadimo",pStatus:"POSTED",
+     pMethod:"CASH",Cname:"Miller Life",rAmount:"236.23",cReason:"" }
+  ]; 
+ 
   receipt: any ;
   
   displayReport = false ;
+  displaySearch = true ;
 
   toggleDisplayReport() { 
     this.displayReport = ! this.displayReport ;
