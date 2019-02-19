@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { QueryReceiptComponent } from './query-receipt.component' ;
+import { queryReceiptComponent } from './query-receipt.component' ;
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: 'query-receipt',
-        component: QueryReceiptComponent,
+        component: queryReceiptComponent,
         data: {
           title: 'Query Receipts'
         }
