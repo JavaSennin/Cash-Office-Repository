@@ -1,5 +1,5 @@
 <!-- Electroninc Allocation - Allocation Module -->
-
+<!-- TO-DO: Report screen design -->
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-12">
@@ -9,7 +9,7 @@
           </div>
      
           <div class="card-body"> <!-- BEGIN: Form Content-->
-            <form [formGroup] = "detailInput"(ngSubmit)="electronicAllocation()">
+            <form [formGroup] = "electronicInput" (ngSubmit)="electronicAllocation()">
 
               <div class="form-row">
                 <div class="col-lg-6">
@@ -17,17 +17,19 @@
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >PAYPOINT ID</label>
                     <div class = "col-md-6">
-                      <input type = "text" class="form-control" formControlName= "paypointID" required> 
+                      <select class="form-control" id="selectBrCode" 
+                        formControlName = "paypointID" [disabled]="disableForm">
+                          <option [ngValue]="ppid"  *ngFor="let ppid of paypoints">{{ppid.ppID}}</option> 
+                      </select>
                     </div>
                   </div>
     
-                  <div class = "form-group row">
+                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >CREDIT FILES</label>
                     <div class = "col-md-6">
-                      <select class="form-control" id="select" formControlName = "creditFiles">
-                        <option value="0">Please Select</option>
-                        <option value="1">Credit File 001</option>
-                        <option value="2">Credit File 002</option>
+                      <select class="form-control" id="selectCrFile" 
+                        formControlName = "creditFile" [disabled]="disableForm">
+                          <option [ngValue]="crFile" *ngFor="let crFile of creditFiles"> {{crFile.crFileNo}}</option>
                       </select>
                     </div>
                   </div>
@@ -35,10 +37,8 @@
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >RECEIPT No.</label>
                     <div class = "col-md-6">
-                      <select class="form-control" id="select" formControlName = "receiptNo">
-                        <option value="0">Please Select</option>
-                        <option value="1">Receipt No. 001</option>
-                        <option value="2">Receipt No. 002</option>
+                      <select class="form-control" id="selectReceiptNo" formControlName = "receiptNo" [disabled] = "disableForm">
+                        <option [ngValue]="receipt" *ngFor="let receipt of receipts">{{receipt.rctNo}}</option>
                       </select>
                     </div>
                   </div>
@@ -46,17 +46,15 @@
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >RECEIPT PERIOD</label>
                     <div class = "col-md-6">
-                      <input class="form-control" formControlName = "receiptPeriod">
+                      <input class="form-control" formControlName = "receiptPeriod" value={{electronicInput.value.receiptNo.rctPeriod}}>
                     </div>
                   </div>
                   
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >STATEMENT No.</label>
                     <div class = "col-md-6">
-                      <select class="form-control" id="select" formControlName = "statementNo">
-                        <option value="0">Please Select</option>
-                        <option value="1">Statement 001</option>
-                        <option value="2">Statement 002</option>
+                      <select class="form-control" id="selectStmtNo" formControlName = "statementNo" [disabled]="disableForm">
+                        <option [ngValue]="statement" *ngFor="let statement of statements">{{statement.stmtNo}}</option>
                       </select>
                     </div>
                   </div>
@@ -64,7 +62,7 @@
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >STATEMENT PERIOD</label>
                     <div class = "col-md-6">
-                      <input class="form-control" formControlName = "statementPeriod">
+                      <input class="form-control" formControlName = "statementPeriod" value={{electronicInput.value.statementNo.stmtPeriod}}>
                     </div>
                   </div>
 
@@ -84,21 +82,25 @@
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >PAYPOINT NAME</label>
                     <div class = "col-md-6">
-                      <input class="form-control" formControlName = "paypointName">
+                      <input  class="form-control" id="disabled-input" type="text" 
+                        formControlName = "paypointName" name="disabled-input" 
+                          value={{electronicInput.value.paypointID.ppName}}>
                     </div>
                   </div>
-              
+                              
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >CREDIT FILE AMOUNT</label>
                       <div class = "col-md-6">
-                        <input class="form-control" formControlName = "creditAmount">
+                        <input class="form-control" formControlName = "creditFileAmount"
+                          value = {{electronicInput.value.creditFile.crFileAmnt}}>
                       </div>
                   </div>
 
                   <div class = "form-group row">
                     <label class="col-md-4 col-form-label" >GROSS AMOUNT (R)</label>
                     <div class = "col-md-6">
-                      <input class="form-control" formControlName = "grossAmountReceipt">
+                      <input class="form-control" formControlName = "grossAmountReceipt"
+                        value = {{electronicInput.value.receiptNo.rctAmnt}}>
                     </div>
                   </div>
 
@@ -108,7 +110,8 @@
                   <p><div class = "form-group row">
                     <label class="col-md-4 col-form-label" >GROSS AMOUNT (S)</label>
                       <div class = "col-md-6">
-                        <input class="form-control" formControlName = "grossAmountStatement">
+                        <input class="form-control" formControlName = "grossAmountStatement"
+                          value = {{electronicInput.value.statementNo.stmtAmnt}}>
                       </div>
                   </div><p></p>
                         
@@ -122,15 +125,16 @@
               <div class = "form-row text-center btn-toolbar">
                 <div class= "col-lg-12">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary">Allocate</button> 
+                    <button type="submit" class="btn btn-md btn-primary" (click)= "allocate()">Allocate</button> 
+                    <!-- <button type="submit" class="btn btn-md btn-primary" [disabled] = "electronicInput.invalid" (click)= "allocate()">Allocate</button>  -->
                   </div>
   
                   <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-md btn-primary" (click)="detailInput.reset({allocatedPeriod:'2018-09-30'});">Clear</button>
+                    <button type="button" class="btn btn-md btn-primary" (click)="clear()">Clear</button>
                   </div>
   
                   <div class="btn-group mr-2">
-                    <button class="btn btn-md btn-primary" (click)="toggleDisplayAllocation">Exit</button> 
+                    <button class="btn btn-md btn-primary" (click)="exit()">Exit</button> 
                   </div>
                 </div>
               </div>
@@ -143,7 +147,7 @@
     </div>
 
       <!-- Report/Results Container displayAllocation -->
-  <div class="row" *ngIf="displayAllocation">
+  <div class="row" *ngIf="displayAllocation">  
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
