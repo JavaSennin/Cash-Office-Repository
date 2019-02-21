@@ -32,6 +32,10 @@ export class ManualAllocationComponent {
 
 displayReport = false;
 
+toggleDisplayReport(){
+  this.displayReport = !this.displayReport ; // false
+}
+
 recNo=[
   {receNo:"Bank Statement"},
   {receNo:"Reciept Number"}
