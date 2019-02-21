@@ -5,118 +5,136 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> Manual Allocation
+              <i class="fa fa-align-justify"></i> Manual Allocation Header Details
             </div>
        
             <div class="card-body"> <!-- BEGIN: Form Content-->
-              <form [formGroup] = "cashierInput" (ngSubmit)="onSubmit()">
+              <form [formGroup] = "ManualAll" (ngSubmit)="onSubmit()">
                 <div class="form-row">
     
                   <!-- 1st Column -->
                   <div class="col-lg-12">
     
                     <div class="form-group row">
-                      <label class="col-md-2 col-form-label" for="text-input">RECEIPT No.</label>
-                        <div class="col-md-2">
-                          <input type="text" class="form-control" [formControl]="">
+                      <div class = "col-md-3">
+                        <select class="form-control" id="selectBrCode" 
+                        formControlName= "receiptNumberLa">
+                          <option  *ngFor="let rn of recNo" selected>{{rn.receNo}}</option>
+                          
+                        </select>
+                      </div>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" formControlName="receiptNumber">
                         </div>
-
+                      </div>
+                      <div class="form-group row">
                         <div class="btn mr-2">
-                           <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Search</button> 
+                           <button type="submit" class="btn btn-md btn-primary " >Search</button> 
                         </div>
                     </div>
-                       
-                    <div class="form-group row">
-                      <label class="col-md-4 col-form-label" for="text-input">RECEIPT PERIOD</label>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" [formControl]="">
-                      </div>
-                    </div>
-                         
-                    <div class="form-group row">
-                      <label class="col-md-4 col-form-label" for="text-input">STATEMENT PERIOD</label>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" [formControl]="">
-                      </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                      <label class="col-md-4 col-form-label">ALLOCATED PERIOD</label>
-                      <div class = "col-md-6">
-                        <input class="form-control" id="date-input" type="date" 
-                        formControlName = "toDate" name="date-input" value = "2018-09-30" required>
-                      </div>
-                    </div>
+                               
                                                                           
                   </div>
                 
-                  <!-- 2nd Column -->
-                  <!-- <div class="col-lg-6">
     
-                    <div class="form-group row">
-                      <label class="col-md-5 col-form-label" for="text-input">PAYPOINT NAME</label>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" [formControl]="">
-                      </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                      <label class="col-md-5 col-form-label" for="text-input">TOTAL CREDIT FILE AMOUNT</label>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" [formControl]="">
-                      </div>
-                    </div>
-    
-                    <div class="form-group row">
-                      <label class="col-md-5 col-form-label" for="text-input"> GROSS AMOUNT</label>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" [formControl]="">
-                      </div>
-                    </div>
-    
-                    <div class="form-group row">
-                      <label class="col-md-5 col-form-label" for="text-input">AMOUNT</label>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" [formControl]="">
-                      </div>
-                    </div>
-                         
-                  </div> -->
-    
-                </div>
-    
-                <hr>
-                
-                <!-- form control buttons here:  -->
-                <div class = "form-row text-center btn-toolbar">
-                  <div class= "col-lg-12">
-                    <div class="btn-group mr-2">
-                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Save</button> 
-                    </div>
-    
-                    <div class="btn-group mr-2">
-                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Clear</button> 
-                    </div>
-    
-                    <div class="btn-group mr-2">
-                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Exit</button> 
-                    </div>
-
-                    <div class="btn-group mr-2">
-                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Post</button> 
-                    </div>
-
-                    <div class="btn-group mr-2">
-                      <button type="submit" class="btn btn-md btn-primary " [disabled]="!cashierInput.valid">Allocated Policies</button> 
-                    </div>
-                      
-                  </div>
                 </div>
     
               </form>
             </div> <!-- END: Form Content -->
+
+
+              <!-- Report/Results Container -->
+    <div class="animated fadeIn">
+      <div class="row" *ngIf="displayReport">
+        <div class="col-lg-12">
+          <div class="card">      
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="card">
+                             <table class="table table-bordered table-striped table-sm">
+                                      <thead>
+                                        <tr>
+                                          <th>Paypoint ID</th>
+                                          <th>Period</th>
+                                          <th>Gross Amount</th>
+                                          <th>Receipt Amount</th>
+                                          <th>Allocated Amount</th>
+                                          <th>Unallocated Amount</th>                                       
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let td of table1data">
+                                          <td>{{td.pID}}</td>
+                                          <td>{{td.per}}</td>
+                                          <td>{{td.gamount}}</td>
+                                          <td>{{td.ramount}}</td>
+                                          <td>{{td.aamount}}</td>
+                                          <td>{{td.uamount}}</td>                                       
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b>Total: </b>{{table1data[0].aamount}}</td>
+                                            <td><b>Total: </b>{{table1data[0].uamount}}</td>
+                                          
+                                          </tr>
+                                     
+                                       
+                                      </tbody>
+                                      
+                                    </table>
     
           </div>
+          <!--Allocated to-->
+          <div class="card">
+              <div class="card-header">
+                 Amount Allocated to
+                </div>
+              <table class="table table-bordered table-striped table-sm">
+                       <thead>
+                         <tr>
+                           <th>Policy Code</th>
+                           <th>Period</th>
+                           <th>Party ID</th>
+                           <th>Expected Amount</th>
+                           <th>Purpose</th>
+                           <th>Purpose ID</th>                                       
+                           <th>Posting Status</th>                                       
+                           <th>Allocated Amount</th>                                       
+                         </tr>
+                       </thead>
+                       <tbody>
+                         <tr *ngFor="let td2 of table2data">
+                           <td>{{td2.pCode}}</td>
+                           <td>{{td2.per}}</td>
+                           <td>{{td2.pID}}</td>
+                           <td>{{td2.eamount}}</td>
+                           <td>{{td2.purpose}}</td>
+                           <td>{{td2.purposeid}}</td>
+                           <td>{{td2.pstatus}}</td>                                       
+                           <td>{{td2.aamount}}</td>                                       
+                         </tr>
+                         <tr>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             
+                             <td><b>Total: </b>{{table2data[0].aamount}}</td>
+                           
+                           </tr>
+                      
+                        
+                       </tbody>
+                       
+                     </table>
+
+</div>
         </div>
       </div>
     </div>
