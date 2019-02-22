@@ -56,12 +56,11 @@ today = new Date() ;
   }
 
   clear(){
-    this.electronicInput.enable() ; 
-    this.electronicInput.get('Paypoint_Name').disable();
+    window.location.reload() ;
   }
 
   exit(){
-    // Re-load or do something
+    // Re-load or do something else /?
     window.location.reload() ;
   }
   

@@ -23,12 +23,15 @@ import { PartialCorrectionComponent } from './partial-correction.component' ;
 import { PaypointHistoryComponent } from './paypoint-history.component';
 import { PaypointMisallocationComponent } from './paypoint-misallocation.component';
 
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 @NgModule({
   imports: [
     CommonModule,
     AllocationRoutingModule,
     BsDropdownModule.forRoot(),
     FormsModule, ReactiveFormsModule
+    , TabsModule
   ],
   declarations: [
     ElectronicComponent,

@@ -29,4 +29,7 @@ export class ManualAdjustmentComponent {
 
     // form-processing code
   }
+
+  // Array to hold Dynamic Data - Record for Posting
+  postingRecords = "" ;
 }
