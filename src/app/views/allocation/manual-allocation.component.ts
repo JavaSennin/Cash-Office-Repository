@@ -30,10 +30,17 @@ export class ManualAllocationComponent {
     console.table(this.ManualAll.value) ;
 }
 
+showAll(){
+  this.displayReport1 = true;
+ 
+}
+
 displayReport = false;
+displayReport1 = false;
 
 toggleDisplayReport(){
   this.displayReport = !this.displayReport ; // false
+  this.displayReport1 = !this.displayReport1 ; // false
 }
 
 recNo=[
