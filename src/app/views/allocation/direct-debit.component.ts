@@ -22,6 +22,34 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
 export class DirectDebitComponent {
 
   today = new Date() ;
+
+  bnkAccDetails = new FormGroup({
+    paypointMode: new FormControl('', Validators.required),
+    bankName: new FormControl('', Validators.required),
+    creationDate: new FormControl({value:"2018-09-01", disabled: true}),
+    modifiedDate: new FormControl({value:"2018-09-30", disabled: true}),
+
+    bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ),
+    accountNo: new FormControl({value:'', disabled: true}, Validators.required),
+    accountDesc: new FormControl({value:'', disabled: true}, Validators.required),
+
+  }) ;
+
+  bnkStmtDetails = new FormGroup({
+    statementNo: new FormControl('', Validators.required),
+    fromDate: new FormControl("2018-09-01", Validators.required),
+    openingBalance: new FormControl('', Validators.required),
+    reversalPeriod: new FormControl("2018-04-30"),
+    branch: new FormControl({value: '', disabled: true}),
+
+    // bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ),
+    postingStatus: new FormControl({value:'', disabled: true}),
+    toDate: new FormControl('2018-09-30', Validators.required),
+    closingBalance: new FormControl('', Validators.required),
+    loginName: new FormControl({value: '', disabled: true})
+
+  }) ;
+
   displayReport = false ;
   disableForm = false;
 

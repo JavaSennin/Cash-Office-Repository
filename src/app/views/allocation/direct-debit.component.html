@@ -1,67 +1,216 @@
 <!-- Direct Debit Processing - Allocation Module -->
   
 <div class="animated fadeIn">
-      <!-- <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-header">
-                  <i class="fa fa-align-justify"></i>Bank Statement Allocations
-                </div>
+  <!-- Bank Account Details -->
+  <div class="row" *ngIf="false">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i>Bank Account Details
+        </div>
            
-                <div class="card-body">
-                  
-                  <form 
-                  [formGroup] = "detailInput" 
-                  (ngSubmit)="detailReport()" >
-        
-                    <div class="form-row">
-                      <div class="col">
-                                 
-                        <div class = "form-group row">
-                          <label class="col-md-3 col-form-label" >Paypoint ID:</label>
-                          <div class = "col-md-4">
-                            <select class="form-control" id="selectBrCode" 
-                            formControlName = "PayPointID" [disabled]="disableForm">
-                              <option [ngValue]="ppid"  *ngFor="let ppid of paypoints">{{ppid.ppID}}</option> 
-                              
-                            </select>
-                          </div>
-                        </div>
+        <div class="card-body">
+                 
+          <form [formGroup] = "bnkAccDetails" (ngSubmit)="detailReport()" >
+
+            <!-- bgn: get 2-column form -->
+            <div class="form-row">
+              <!-- 1st Column: Mostly Enabled -->
+              <div class="col-lg-6">
                                 
-                        <div class="form-group row">
-                          <label class="col-md-3 col-form-label">Paypoint Name:</label>
-                          <div class = "col-md-4">
-                            <input  class="form-control" id="disabled-input" type="text" 
-                            formControlName = "Paypoint_Name" name="disabled-input" 
-                              value={{detailInput.value.PayPointID.ppName}} [attr.disabled]="disabled ? '' : true" required>
-                           
-                          </div>
-                        </div>
-        
-                        <div class="form-group row">
-                          <label class="col-md-3 col-form-label" for="text-input">Bank Statement ID:</label>
-                          <div class="col-md-4">
-                             <input type="number" min="0" class="form-control" formControlName="bankStatementID" required>
-                          </div>
-                       </div>
-                                
-                        <div class="btn-toolbar">
-                          <div class="btn-group mr-2">
-                            <button type="submit" class="btn btn-md btn-primary "[disabled]="detailInput.untouched || displayReport == true ">Report</button>
-                          </div>
-                        </div>
-                                
-                    </div>
-        
-                    </div>
-                  </form>
-        
+                <div class = "form-group row">
+                  <label class="col-md-4 col-form-label" >PAYPOINT MODE</label>
+                  <div class = "col-md-6">
+                    <select class="form-control" id="selectPaypointMode" formControlName = "paypointMode">
+                      <option value="DDE" selected>DDE</option> 
+                    </select>
+                  </div>
                 </div>
+
+                        <!-- Input with Search Button -->
+                        <!-- <div class="form-group row">
+                            <label class="col-md-4 col-form-label">BANK NAME</label>
+                            <div class="col-md-6">
+                              <div class="input-group">
+                                <input id="input2-group2" name="input2-group2" class="form-control">
+                                <span class="input-group-append">
+                                  <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                </span>
+                              </div>
+                            </div>
+                          </div> -->
+          
+                <div class = "form-group row">
+                  <label class="col-md-4 col-form-label" >BANK NAME</label>
+                  <div class = "col-md-6">
+                    <select class="form-control" id="selectCrFile" 
+                      formControlName = "bankName" [disabled]="disableForm">
+                        <option [ngValue]="crFile" *ngFor="let crFile of bankNames"> {{crFile.crFileNo}}</option>
+                    </select>
+                  </div>
+                </div>
+                                      
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label">CREATION DATE</label>
+                    <div class = "col-md-6">
+                    <input class="form-control" id="date-input" type="date" 
+                      formControlName = "creationDate" name="date-input" value = "2018-09-01">
+                    </div>
+                </div>
+                         
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label">MODIFIED DATE</label>
+                  <div class = "col-md-6">
+                    <input class="form-control" id="date-input" type="date" 
+                      formControlName = "modifiedDate" name="date-input" value = "2018-09-30">
+                  </div>
+                </div>
+      
               </div>
+                      
+              <!-- 2nd Column: -->
+              <div class="col-lg-6">
+
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label" for="text-input">BANK STATEMENT ID:</label>
+                  <div class="col-md-6">
+                    <input type="number" min="0" class="form-control" formControlName="bankStatementID" required>
+                  </div>
+                </div>
+                                  
+                <div class = "form-group row">
+                  <label class="col-md-4 col-form-label" >ACCOUNT NUMBER</label>
+                  <div class = "col-md-6">
+                    <input  class="form-control" id="disabled-input" type="text" 
+                      formControlName = "accountNo" name="disabled-input" >
+                      <!--  value={{electronicInput.value.paypointID.ppName}}--> <!-- fcn was paypointID-->
+                  </div>
+                </div>
+                                    
+                <div class = "form-group row">
+                   <label class="col-md-4 col-form-label" >ACCOUNT DESCRIPTION</label>
+                    <div class = "col-md-6">
+                      <input class="form-control" formControlName = "accountDesc">
+                        <!--value = {{electronicInput.value.bankName.crFileAmnt}}--> <!-- fcn was bankNameAmount-->
+                    </div>
+                </div>                                                    
+                             
+              </div>
+        
             </div>
-          </div> -->
-            <!-- Report/Results Container displayReport-->
-            <div class="row" *ngIf="true">
+            <!-- end: get 2-column form -->
+
+          </form>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bank Statement Details -->
+  <div class="row" *ngIf="false">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i>Bank Statement Details
+        </div>
+   
+        <div class="card-body">
+          
+          <form [formGroup] = "bnkStmtDetails" (ngSubmit)="detailReport()" >
+
+            <!-- bgn: get 2-column form -->
+            <div class="form-row">
+              <!-- 1st Column: Mostly Enabled -->
+              <div class="col-lg-6">
+                       
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label" for="text-input">STATEMENT No.:</label>
+                  <div class="col-md-6">
+                    <input type="number" min="0" class="form-control" formControlName="statementNo" required>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label">DATE FROM</label>
+                  <div class = "col-md-6">
+                    <input class="form-control" id="date-input" type="date" 
+                      formControlName = "fromDate" name="date-input" value = "2018-09-01" required>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label" for="text-input">OPENING BALANCE:</label>
+                  <div class="col-md-6">
+                    <input type="number" class="form-control" formControlName="openingBalance" required>
+                  </div>
+                </div>
+                 
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label">REVERSAL PERIOD</label>
+                  <div class = "col-md-6">
+                    <input class="form-control" id="date-input" type="date" 
+                      formControlName = "reversalPeriod" name="date-input" value = "2018-04-30">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label" for="text-input">BRANCH:</label>
+                  <div class="col-md-6">
+                    <input class="form-control" formControlName="branch">
+                  </div>
+                </div>
+
+              </div>
+              
+              <!-- 2nd Column: -->
+              <div class="col-lg-6">
+
+                <div class="form-group row">
+                  <label class="col-md-4 col-form-label" for="text-input">POSTING STATUS:</label>
+                  <div class="col-md-6">
+                    <input type="number" min="0" class="form-control" formControlName="postingStatus">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-4 col-form-label">DATE TO</label>
+                   <div class = "col-md-6">
+                     <input class="form-control" id="date-input" type="date" 
+                      formControlName = "toDate" name="date-input" value = "2018-09-30" required>
+                    </div>
+                 </div>
+                          
+                 <div class="form-group row">
+                    <label class="col-md-4 col-form-label" for="text-input">CLOSING BALANCE:</label>
+                    <div class="col-md-6">
+                      <input type="number" min="0" class="form-control" formControlName="closingBalance" required>
+                    </div>
+                  </div>
+
+                  <br><br>
+                            
+                  <div class="form-group row">
+                      <label class="col-md-4 col-form-label" for="text-input">LOGIN NAME:</label>
+                      <div class="col-md-6">
+                        <input class="form-control" formControlName="loginName">
+                      </div>
+                    </div>
+                     
+              </div>
+
+            </div>
+            <!-- end: get 2-column form -->
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+            
+          <!-- Bank Statement Allocations -->
+            <div class="row">
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
@@ -114,8 +263,6 @@
                                  </tab>
                                </tabset>
                              </div> -->
-                           
-                             
                            
                            <!-- end: actual pill/tab thing -->
             
