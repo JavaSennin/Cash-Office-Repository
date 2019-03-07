@@ -1,4 +1,4 @@
-// Direct Debit Processing - Allocation Module
+// Direct Debit Processing - Allocation Module 
 
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms'; 
