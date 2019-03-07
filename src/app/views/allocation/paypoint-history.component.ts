@@ -1,4 +1,4 @@
-// TO-DO: Data - what goes for field3/item3
+// TO-DO: Data - what goes for field3/item3 ? 
 
 import { Component,NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
@@ -61,21 +61,21 @@ export class PaypointHistoryComponent {
 
   showDetail = false ;
 
-  // N. indexing starts at  0 for i
-  onSelect(x, i){
-    console.table(x);
-    console.log("Line No." + i);
+  selectedItem: any ; // placeholder for a specific collection item
+
+  onSelect(x){
+    this.selectedItem = x ;
     this.showDetail = true ;
   }
-  //---------------------------------------------------------------------------
- 
-  cashierInput = new FormGroup({
-    branchCode: new FormControl('', Validators.required),
-    cashOfficeCode: new FormControl('', Validators.required)
 
-  });
+  clear(){
+    window.location.reload() ;
+  }
 
-  onSubmit(){
-    console.table(this.cashierInput.value) ;
-}
+  exit(){
+    // Re-direct to app landing page
+    window.location.href = "http://localhost:4200/#/dashboard" ;
+    
+  }
+
 }

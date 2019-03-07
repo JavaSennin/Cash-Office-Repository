@@ -61,7 +61,7 @@
                           <td>
                             <div class="form-check">
                               <input class="form-check-input" type="radio" name="radios" id="radio2"
-                                 (click)="onSelect(collection, i)">
+                                 (click)="onSelect(collection)">
                               <label class="form-check-label" for="radio2">
                                 {{collection.period}}
                               </label>
@@ -99,14 +99,14 @@
                       <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="text-input">COLLECTION PERIOD</label>
                         <div class="col-md-4">
-                          <input class="form-control" formControlName="collPeriod" type="date" value={{collection.collPeriod}}>
+                          <input class="form-control" formControlName="collPeriod" type="date" value={{selectedItem.collPeriod}}>
                         </div>
                       </div>
                                  
                       <div class = "form-group row">
                         <label class="col-md-3 col-form-label" >RECEIPT No.</label>
                         <div class = "col-md-4">
-                          <input class="form-control" formControlName = "receiptNo" value={{collection.receiptNo}}>
+                          <input class="form-control" formControlName = "receiptNo" value={{selectedItem.receiptNo}}>
                         </div>
                       </div>
                       
@@ -114,7 +114,7 @@
                         <label class="col-md-3 col-form-label" >RECEIPT AMOUNT</label>
                         <div class = "col-md-4">
                           <input  class="form-control" type="text" 
-                              formControlName = "rcptAmnt" value={{collection.amount}}>
+                              formControlName = "rcptAmnt" value={{selectedItem.amount}}>
                         </div>
                       </div>
                       
@@ -122,7 +122,7 @@
                         <label class="col-md-3 col-form-label" >RECEIPT DATE</label>
                         <div class="col-md-4">
                           <input class="form-control" formControlName="rcptDate" type="date" value="2018-09-30"
-                            value={{collection.period}}>
+                            value={{selectedItem.period}}>
                         </div>
                       </div>
 
@@ -131,11 +131,11 @@
             <div class = "form-row text-center btn-toolbar">
                 <div class= "col-lg-12">
                   <div class="btn-group mr-2">
-                    <button class="btn btn-md btn-primary ">Clear</button> 
+                    <button class="btn btn-md btn-primary" (click)="clear()">Clear</button> 
                   </div>
   
                   <div class="btn-group mr-2">
-                    <button  class="btn btn-md btn-primary ">Exit</button> 
+                    <button  class="btn btn-md btn-primary" (click)="exit()">Exit</button>
                   </div>
                   
                 </div>
