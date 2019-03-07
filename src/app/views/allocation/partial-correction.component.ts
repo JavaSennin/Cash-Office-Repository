@@ -21,38 +21,44 @@ export class PartialCorrectionComponent {
  
   // --------------------------------------------------------------------------
 
-  
+  reverse ; 
+
+  search(x){
+    console.log("Searching " + x) ;
+    this.reverse = true ;
+  }
+    
+  misallocatedInput = new FormGroup({
+    policyCode: new FormControl('', Validators.required),
+    period: new FormControl("2018-09-01", Validators.required),
+    misallocationID: new FormControl({value: '', disabled: true}),
+  }) ;
+
+// An Array to hold dynamic data - Collection History:  
+collections = [
+  {
+    collID: 20, xpectedAmount: 210.61, transType: "Premium Allocation", policyID: "210611", period: "2012-06-21",
+     comments: "Unprocessed Allocation", amount: 432.11, collStatus: "C", receiptNo: 123456, collPeriod: "2012-06-21"
+  },
+  {
+    collID: 14, xpectedAmount: 270.41, transType: "Reverse Offset", policyID: "210617", period: "2013-06-21",
+     comments: "Review the Allocation", amount: 114.32, collStatus: "D", receiptNo: 123457, collPeriod: "2013-06-21"
+  },
+  {
+    collID: 12, xpectedAmount: 240.84, transType: "Premium Allocation", policyID: "210618", period: "2014-06-21",
+     comments: "Unprocessed Allocation", amount: 413.12, collStatus: "C", receiptNo: 123458, collPeriod: "2014-06-21"
+  }
+]
+
+selectedItem: any ; // placeholder for a specific collection item
+ 
+onSelect(x) 
+{
+  this.selectedItem = x ;
+  // this.showDetail = true ;
+}
 
   // --------------------------------------------------------------------------
-  
-  today = new Date() ;
-
-  bnkAccDetails = new FormGroup({
-    paypointMode: new FormControl('', Validators.required),
-    bankName: new FormControl('', Validators.required),
-    creationDate: new FormControl({value:"2018-09-01", disabled: true}),
-    modifiedDate: new FormControl({value:"2018-09-30", disabled: true}),
-
-    bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ),
-    accountNo: new FormControl({value:'', disabled: true}, Validators.required),
-    accountDesc: new FormControl({value:'', disabled: true}, Validators.required),
-
-  }) ;
-
-  bnkStmtDetails = new FormGroup({
-    statementNo: new FormControl('', Validators.required),
-    fromDate: new FormControl("2018-09-01", Validators.required),
-    openingBalance: new FormControl('', Validators.required),
-    reversalPeriod: new FormControl("2018-04-30"),
-    branch: new FormControl({value: '', disabled: true}),
-
-    // bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ),
-    postingStatus: new FormControl({value:'', disabled: true}),
-    toDate: new FormControl('2018-09-30', Validators.required),
-    closingBalance: new FormControl('', Validators.required),
-    loginName: new FormControl({value: '', disabled: true})
-
-  }) ;
 
   // bgn: Editable Table
   editField: string;
