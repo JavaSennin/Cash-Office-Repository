@@ -3,6 +3,8 @@
 import { Component,NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
+import { FormBuilder, FormArray } from '@angular/forms'; // form array things require FormGroup as well
+
 @NgModule({
   imports: [
     FormControl,
@@ -10,6 +12,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     FormsModule,
     ReactiveFormsModule,
     Validators
+
+    , FormArray, FormBuilder
 ]
 })
 
@@ -57,6 +61,96 @@ onSelect(x)
   this.selectedItem = x ;
   // this.showDetail = true ;
 }
+
+clear(){
+  window.location.reload() ;
+}
+
+exit(){
+  // Re-direct to app landing page
+  window.location.href = "http://localhost:4200/#/dashboard" ;
+}
+
+save(){}
+
+post(){}
+
+/// bgn: firebase form array
+
+myForm: FormGroup;
+  
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      email: '',
+      phones: this.fb.array([])
+    })
+
+  }
+
+  get phoneForms() {
+    return this.myForm.get('phones') as FormArray
+  }
+
+  addPhone() {
+
+    const phone = this.fb.group({ 
+      area: [],
+      prefix: [],
+      line: [],
+    })
+
+    this.phoneForms.push(phone);
+  }
+
+  deletePhone(i) {
+    this.phoneForms.removeAt(i)
+  }
+
+  postPhone(){
+    console.table(this.myForm.get('phones').value) ;
+  }
+/// end: firebase form array
+
+// bgn: form array things
+
+// orderForm: FormGroup;
+// items: FormArray;
+
+// constructor(private formBuilder: FormBuilder) {}
+
+// ngOnInit() {
+//   this.orderForm = this.formBuilder.group({
+//     customerName: '',
+//     email: '',
+//     items: this.formBuilder.array([ this.createItem('', '', '') ])
+//   });
+// }
+
+// createItem(x, y, z): FormGroup {
+//   return this.formBuilder.group({
+//     name: x,
+//     description: y,
+//     price: z
+//   });
+// }
+
+// addItem(a, b, c): void {
+//   this.items = this.orderForm.get('items') as FormArray;
+//   this.items.push(this.createItem(a, b, c));
+// }
+
+// removeItem(x): void{
+//   this.items = this.orderForm.get('items') as FormArray ;
+//   this.items.removeAt(x) ;
+// }
+
+// printa(){
+//   console.table( this.items.at(1) ) ;
+// }
+// end: form array things
 
   // --------------------------------------------------------------------------
 
