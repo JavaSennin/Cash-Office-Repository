@@ -25,11 +25,24 @@ export class PartialCorrectionComponent {
  
   // --------------------------------------------------------------------------
 
-  reverse ; 
+  viewMisallocations = false ;
+  makeCorrections = true ; // show editable table for "Premium Reallocation" transactions.
+
+  toggleMakeCorrections(transaction_type){
+    if ( transaction_type == 'allocate')
+    {
+      this.makeCorrections = true ;
+    }
+
+    if ( transaction_type == 'reverse')
+    {
+      this.makeCorrections = false ;
+    }
+  }
 
   search(x){
     console.log("Searching " + x) ;
-    this.reverse = true ;
+    this.viewMisallocations = true ;
   }
     
   misallocatedInput = new FormGroup({
@@ -61,10 +74,11 @@ collections = [
 
 selectedItem: any ; // placeholder for a specific collection item
  
-onSelect(x) 
+onSelect(x, position) 
 {
   this.selectedItem = x ;
   // this.showDetail = true ;
+  console.log("Selected item No. " + ( position +1 ) ) ; // dbg
 }
 
 clear(){
