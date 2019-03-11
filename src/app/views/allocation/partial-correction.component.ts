@@ -35,7 +35,12 @@ export class PartialCorrectionComponent {
   misallocatedInput = new FormGroup({
     policyCode: new FormControl('', Validators.required),
     period: new FormControl("2018-09-01", Validators.required),
+
     misallocationID: new FormControl({value: '', disabled: true}),
+
+    radios: new FormControl(''), // radio button things
+
+    transType: new FormControl('') // radio button things
   }) ;
 
 // An Array to hold dynamic data - Collection History:  
@@ -78,7 +83,6 @@ post(){}
 /// bgn: firebase form array
 
 myForm: FormGroup;
-  
 
   constructor(private fb: FormBuilder) { }
 
