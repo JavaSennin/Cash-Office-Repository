@@ -60,20 +60,27 @@
                 <table class="table table-bordered table-hover">
                   <thead class="thead-light">
                     <tr>
-                      <th>COLLECTION PERIOD</th>
-                      <th>EXPECTED AMOUNT</th>
-                      <th>COLLECTION STATUS</th>
+                      <th>ID</th>
+                      <th>POLICY CODE</th>
+                      <th>POLICY STATUS</th>
+                      <th>PERIOD</th>
+                      <th>PAYER</th>
+                      <th>RECEIPT NUMBER</th>
+                      <th>AMOUNT</th>
+                      <th>POSTING STATUS</th>
+                      <TH></TH>
                     </tr>
                   </thead>
                     
                   <tbody *ngIf="viewMisallocations">
                       <!-- loop for listing the misalloations formControlName="radios" --> 
                     <tr *ngFor="let collection of collections; let i = index">
+                      <!-- <td></td> -->
                       <td>
                         <div class="form-check">
                           <input class="form-check-input" type="radio" name="radios" id="radio2"
                               (click)="onSelect(collection, i)">
-                          <label class="form-check-label" for="radio2">{{collection.period}}</label>
+                          <label class="form-check-label" for="radio2">{{collection.collID}}</label>
                         </div> 
                       </td>
                       
@@ -221,6 +228,7 @@
                           
                         </table>
 
+                        <br> 
                         <p class="h6 text-right">Total Allocated Amount: BWP {{strikeTotal | number : '.2-2' }}</p>
     
                   <div class="btn-toolbar">
