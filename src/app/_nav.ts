@@ -2,7 +2,7 @@ export const navItems = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
+    
     
   },
   {
@@ -12,7 +12,7 @@ export const navItems = [
   {
     name: 'CASHOFFICE MASTER',
     url: '/base',
-    icon: 'icon-puzzle',
+   
     children: [
       {
         name: 'Setup Cashier',
@@ -44,57 +44,57 @@ export const navItems = [
   {
     name: 'CASHOFFICE TRANSACTION',
     url: '/cashoffice-transaction',
-    icon: 'icon-cursor',
+    
     children: [
       {
         name: 'Cash Office Activity',
         url: '/buttons/buttons',
-        //icon: 'icon-cursor'
+      
       },
       {
         name: 'Cash Till Activity',
         url: '/buttons/dropdowns',
-        //icon: 'icon-cursor'
+        
       },
       {
         name: 'Payment Reciepts',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+        
       },
       {
         name: 'Query Receipts',
         url: '/cashoffice-transaction/query-receipt',
-        //icon: 'icon-cursor'
+      
       },
       {
         name: 'Cancel Payment Reciepts',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+        
       } ,
       {
         name: 'Approve Reciept Cancellation',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+       
       },
       {
         name: 'Print Bank Deposit Slip',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+       
       },
       {
         name: 'Reciept Posting',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+        
       },
       {
         name: 'Adjustment Voucher Reciept',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+       
       },
       {
         name: 'Secure Loan Enquiry',
         url: '/buttons/brand-buttons',
-        //icon: 'icon-cursor'
+        
       }
       
     ]
@@ -103,7 +103,7 @@ export const navItems = [
   {
     name: 'CASHOFFICE REPORTS',
     url: '/cashoffice-reports',
-    icon: 'icon-pie-chart', // or user 'layers'
+    
     children: [
       {
       name: 'Cashier Assignment',
@@ -139,17 +139,17 @@ export const navItems = [
   {
     name: 'PAYPOINT MASTER',
     url: '/paypoint-master',
-    icon: 'icon-bell',
+    
     children: [
       {
         name: 'Debit file Template',
         url: '/paypoint-master/dfta',
-        //icon: 'icon-bell'
+       
       },
       {
         name: 'File Designer',
         url: '/notifications/badges',
-        //icon: 'icon-bell'
+       
       },
       
     ]
@@ -158,27 +158,27 @@ export const navItems = [
   {
     name: 'PAYPOINT TRANSACTION',
     url: '/notifications',
-    icon: 'icon-bell',
+    
     children: [
       {
         name: 'Generate Debit File',
         url: '/notifications/alerts',
-        //icon: 'icon-bell'
+        
       },
     {
       name: 'Split/Merge Debit File',
       url: '/notifications/alerts',
-      //icon: 'icon-bell'
+      
     },
     {
       name: 'Split/Merge Search',
       url: '/notifications/alerts',
-      //icon: 'icon-bell'
+   
     },
     {
       name: 'Upload Credit File',
       url: '/notifications/alerts',
-      //icon: 'icon-bell'
+      
     }
   ]
   },
@@ -187,7 +187,7 @@ export const navItems = [
   {
     name: 'ALLOCATION',
     url: '/allocation',
-    icon: 'icon-pie-chart',
+    
     children: [
       {
         name: 'Electronic Allocation',
@@ -196,7 +196,7 @@ export const navItems = [
       {
         name: 'Manual Allocation',
         url: '/allocation/manual-allocation',
-        //icon: 'icon-bell'
+        
       },
       {
         name: 'Direct Debit Processing',
@@ -209,12 +209,12 @@ export const navItems = [
       {
         name: 'MisAllocation Correction',
         url: '/allocation/correction',
-        //icon: 'icon-bell'
+        
       },
       {
         name: 'PayPoint MisAllocation',
         url: '/allocation/paypoint-misallocation',
-        //icon: 'icon-bell'
+        
       },
       {
         name: 'Bank Statement Adjustment Voucher',
@@ -227,12 +227,12 @@ export const navItems = [
       {
         name: 'PayPoint Collection History',
         url: '/allocation/paypoint-history',
-        //icon: 'icon-bell'
+        
       },
       {
         name: 'Partial MisAllocation Correction',
         url: '/allocation/partial-correction',
-        //icon: 'icon-bell'
+        
       },
       {
         name: 'Bank Statement Posting',
@@ -250,38 +250,38 @@ export const navItems = [
   {
     name: 'PAYPOINT REPORTS',
     url: '/paypoint-reports',
-    icon: 'icon-bell',
+
     children: [
       {
         name: 'Overs And Unders',
         url: '/paypoint-reports/oversandunders',
-        //icon: 'icon-bell'
+      
       },
   
     {
       name: 'Rejections',
       url: '/paypoint-reports/rejections',
-      //icon: 'icon-bell'
+    
     },
     {
       name: 'PayPoint Summary',
       url: '/paypoint-reports/paypoint-summary',
-      //icon: 'icon-bell'
+      
     },
     {
       name: 'UnAllocated Cash Reciepts',
       url: '/paypoint-reports/unallocated-cashReciepts',
-      //icon: 'icon-bell'
+      
     },
     { 
       name: 'Unmatched Credits',
       url: '/paypoint-reports/unmatchedCredit',
-      //icon: 'icon-bell'
+    
     },
     {
       name: 'Reciept Allocation Status',
       url: '/paypoint-reports/reciept-allocation-status',
-      //icon: 'icon-bell'
+      
     }
     ,
     {
@@ -313,7 +313,7 @@ export const navItems = [
   {
     name: 'ADMIN',
     url: '/admin',
-    icon: 'icon-people', // or user 'layers'
+    
     children: [
       {
       name: 'Assign Role',
@@ -343,12 +343,12 @@ export const navItems = [
   {
     name: 'USER',
     url: '/user',
-    icon: 'icon-user',
+   
     children: [
       {
       name: 'Password Management',
       url: '/user/pass-mgt',
-      // icon: 'icon-lock-unlocked'
+     
       }
     ]
   },
@@ -357,7 +357,7 @@ export const navItems = [
   {
     name: 'STANBIC HOST TO HOST',
     url: 'transactions',
-    icon: 'icon-calculator',
+  
 
     children: [
       {
