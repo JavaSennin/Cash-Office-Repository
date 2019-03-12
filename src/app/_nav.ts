@@ -190,37 +190,43 @@ export const navItems = [
     icon: 'icon-pie-chart',
     children: [
       {
-        name: 'Bank Statement Adjustment Voucher',
-        url: '/allocation/bank-adjustment'
+        name: 'Electronic Allocation',
+        url: '/allocation/electronic'
       },
       {
-        name: 'Bank Statement Posting',
-        url: '/allocation/bank-posting'
-      },
-      {
-        name: 'Bank Stop Order Processing',
-        url: '/allocation/bank-processing'
+        name: 'Manual Allocation',
+        url: '/allocation/manual-allocation',
+        //icon: 'icon-bell'
       },
       {
         name: 'Direct Debit Processing',
         url: '/allocation/direct-debit'
       },
       {
-        name: 'Electronic Allocation',
-        url: '/allocation/electronic'
+        name: 'Bank Stop Order Processing',
+        url: '/allocation/bank-processing'
+      },
+      {
+        name: 'MisAllocation Correction',
+        url: '/allocation/correction',
+        //icon: 'icon-bell'
+      },
+      {
+        name: 'PayPoint MisAllocation',
+        url: '/allocation/paypoint-misallocation',
+        //icon: 'icon-bell'
+      },
+      {
+        name: 'Bank Statement Adjustment Voucher',
+        url: '/allocation/bank-adjustment'
       },
       {
         name: 'Manual Adjustment Voucher',
         url: '/allocation/manual-adjustment'
       },
       {
-        name: 'Manual Allocation',
-        url: '/allocation/manual-allocation',
-        //icon: 'icon-bell'
-      },    
-      {
-        name: 'MisAllocation Correction',
-        url: '/allocation/correction',
+        name: 'PayPoint Collection History',
+        url: '/allocation/paypoint-history',
         //icon: 'icon-bell'
       },
       {
@@ -229,15 +235,14 @@ export const navItems = [
         //icon: 'icon-bell'
       },
       {
-        name: 'PayPoint Collection History',
-        url: '/allocation/paypoint-history',
-        //icon: 'icon-bell'
-      },
-      {
-        name: 'PayPoint MisAllocation',
-        url: '/allocation/paypoint-misallocation',
-        //icon: 'icon-bell'
+        name: 'Bank Statement Posting',
+        url: '/allocation/bank-posting'
       }
+       
+     
+    
+   
+      
     ]
   },
 
@@ -350,7 +355,7 @@ export const navItems = [
 
   // Cash Office TRANSACTIONS Module
   {
-    name: 'STANBIC TO HOST',
+    name: 'STANBIC HOST TO HOST',
     url: 'transactions',
     icon: 'icon-calculator',
 
