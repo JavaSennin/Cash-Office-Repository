@@ -53,19 +53,19 @@ export class PartialCorrectionComponent {
     transType: new FormControl('') // radio button things
   }) ;
 
-// An Array to hold dynamic data - Collection History:  
-collections = [
+// An Array to hold dynamic data - Misallocations:  
+misallocations = [
   {
-    collID: 20, xpectedAmount: 210.61, transType: "Premium Allocation", policyID: "210611", period: "2012-06-21",
-     comments: "Unprocessed Allocation", amount: 432.11, collStatus: "C", receiptNo: 123456, collPeriod: "2012-06-21"
+    collID: 20, policyCode: "210611", policyStatus: "Terminated", period: "2012-06-21",
+     payer: "Jane Doe", amount: 432.11, postingStatus: "T", receiptNo: 123456
   },
   {
-    collID: 14, xpectedAmount: 270.41, transType: "Reverse Offset", policyID: "210617", period: "2013-06-21",
-     comments: "Review the Allocation", amount: 114.32, collStatus: "D", receiptNo: 123457, collPeriod: "2013-06-21"
+    collID: 14, policyCode: "210617", policyStatus: "Terminated", period: "2013-06-21",
+     payer: "John Doe", amount: 114.32, postingStatus: "U", receiptNo: 123457
   },
   {
-    collID: 12, xpectedAmount: 240.84, transType: "Premium Allocation", policyID: "210618", period: "2014-06-21",
-     comments: "Unprocessed Allocation", amount: 413.12, collStatus: "C", receiptNo: 123458, collPeriod: "2014-06-21"
+    collID: 12, policyCode: "210618", policyStatus: "Terminated", period: "2014-06-21",
+     payer: "Joanne Odin", amount: 413.12, postingStatus: "V", receiptNo: 123458
   }
 ]
 
@@ -88,65 +88,48 @@ exit(){
 
 save(){}
 
-post(){}
-
-/// bgn: firebase form array
-
 myForm: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      email: '',
-      phones: this.fb.array([])
+      corrections: this.fb.array([])
     })
 
   }
 
-  get phoneForms() {
-    return this.myForm.get('phones') as FormArray
+  get correctionForms() {
+    return this.myForm.get('corrections') as FormArray
   }
 
-  addPhone() {
+  addCorrection() {
 
-    const phone = this.fb.group({ 
-      area: [],
-      prefix: [],
-      line: [],
+    const correction = this.fb.group({ 
+      corSelect:[],
+      corPolicyCode: [],
+      corPeriod: [],
+      corPartyID: [],
+      corPayerName: [],
+      corExpectedAmnt: [],
+      corPurpose: [],
+      corAllocatedAmnt: []
+      
     })
 
-    this.phoneForms.push(phone);
+    this.correctionForms.push(correction);
   }
 
-  deletePhone(i) {
-    this.phoneForms.removeAt(i)
+  deleteCorrection(i) {
+    this.correctionForms.removeAt(i)
   }
 
-  postPhone(){
-    console.table(this.myForm.get('phones').value) ;
+  post(){
+    console.table(this.myForm.get('corrections').value) ; // dbg
+
+    // other form-processing code here:
   }
 
-  // displayReport = false ;
-  // disableForm = false;
-
-  // detailInput = new FormGroup({
-  //   PayPointID: new FormControl('', Validators.required),
-    
-  //   Paypoint_Name: new FormControl({value:"", disabled: true}, Validators.required),
-
-  //   bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ) 
-  // });
-
-  // detailReport(){
-  //   this.detailInput.disable() ;
-  //   this.displayReport = true ;
-    
-  //   console.table(this.detailInput.value) ; // dbg
-
-  //   // form-processing code
-  // }
-
-  strikeTotal: number = 136.22 ;
+  totalAllocatedAmount: number ;
 
 }
