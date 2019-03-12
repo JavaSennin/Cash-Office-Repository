@@ -16,37 +16,31 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class MisallocationCorrectionComponent {
 
-  BankStatInput = new FormGroup({
-    paymentMode: new FormControl('', Validators.required),
-    Bdid: new FormControl('', Validators.required),
-    BName: new FormControl('', Validators.required),
-    accNumber: new FormControl('', Validators.required),
-    CrDate: new FormControl('', Validators.required),
-    mdDate: new FormControl('', Validators.required),
-    AccDesc: new FormControl('', Validators.required),
-    statementNumber: new FormControl('', Validators.required),
-    postingStatus: new FormControl('UNPOSTED', Validators.required),
-    dateFrom: new FormControl('', Validators.required),
-    dateTo: new FormControl('', Validators.required),
-    loginName: new FormControl('tkadimo', Validators.required),
-    opBalance: new FormControl('', Validators.required),
-    closingBalance: new FormControl('', Validators.required),
-    Branch: new FormControl('Gaborone HQ', Validators.required),
+  MisAllCorr = new FormGroup({
+    policyCode: new FormControl('', Validators.required),
+    misAllId: new FormControl('', Validators.required),
+    
   });
 
-  summaryReport(){
-    console.table(this.BankStatInput.value) ;
+  onSubmit(){
+    this.displayReport = true;
+    console.table(this.MisAllCorr.value) ;
+}
+displayReport = false;
 
-    // form-processing code
-  }
   editField: string;
   personList: Array<any> = [
-    { id: 1, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
-    { id: 2, name: 'Guerra Cortez', age: 45, companyName: 'Insectus', country: 'USA', city: 'San Francisco' },
-    { id: 3, name: 'Guadalupe House', age: 26, companyName: 'Isotronic', country: 'Germany', city: 'Frankfurt am Main' },
-    { id: 4, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
-    { id: 5, name: 'Elisa Gallagher', age: 31, companyName: 'Portica', country: 'United Kingdom', city: 'London' },
+    { id: 1, policyc: '098664832', policys: "inforce", period: '20/05/1994', payer: 'Spanish Inquisition', receiptnu: '5836757',amount:1226.23,postings:"Unposted" },
+    { id: 2, policyc: '790064832', policys: "inforce", period: '20/05/1994', payer: 'Danish Inquisition', receiptnu: '06836857',amount:1226.23,postings:"Unposted" },
+    { id: 3, policyc: '3969664832', policys: "lapsed", period: '20/05/1994', payer: 'Botswana Inquisition', receiptnu: '0836757',amount:1226.23,postings:"Unposted" },
+    { id: 4, policyc: '594564832', policys: "terminated", period: '20/05/1994', payer: 'Spanish Inquisition', receiptnu: '2836757',amount:1226.23,postings:"Unposted" },
+    { id: 5, policyc: '498664832', policys: "Suspended", period: '20/05/1994', payer: 'Spanish Inquisition', receiptnu: '4836757',amount:1226.23,postings:"Unposted" },
+    
   ];
+
+  totalAmount: number = 
+    this.personList.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
+  
 
   awaitingPersonList: Array<any> = [
     { id: 6, name: 'George Vega', age: 28, companyName: 'Classical', country: 'Russia', city: 'Moscow' },

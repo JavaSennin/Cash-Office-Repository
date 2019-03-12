@@ -10,7 +10,7 @@
    
         <div class="card-body">
 
-          <form [formGroup] = "BankStatInput" (ngSubmit)="summaryReport()">
+          <form [formGroup] = "MisAllCorr" (ngSubmit)="onSubmit()">
            <!--Bank Account Details-->
             <div class="form-row">
               <div class="col">
@@ -18,70 +18,81 @@
                 <div class = "form-group row">
                   <label class="col-sm-2 col-form-label" >Policy Code</label>
                   <div class="col-md-3">
-                    <input class="form-control" id="text-input" type="text" formControlName = "paymentMode">
+                    <input class="form-control" id="text-input" type="text" formControlName = "policyCode">
                   </div>
                   </div>
                   <div class = "form-group row">
                   <label class="col-md-2 col-form-label" >MisAllocation ID:</label>
                   <div class="col-md-3">
-                    <input class="form-control" id="text-input" type="text" formControlName = "Bdid" disabled/>
+                    <input class="form-control" id="text-input" type="text" formControlName = "misAllId" disabled/>
                   </div>
                 </div>
 
                 <div class = "form-group row">
                 <a class="text-success" >
                   <div class="col-md-3 text-center">
-                      <button type="button" class="btn btn-md btn-ghost-primary" (click)="add()">Search</button>
+                      <button type="submit" class="btn btn-md btn-ghost-primary">Search</button>
                     </div>
               </a>
            </div>
            </div>
            </div>
            </form>
+           <div class="card" *ngIf="displayReport">
+              <div class="card-header">
+                </div>
+                <div class="card-body">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Policy Code</th>
+                  <th>Policy Status</th>
+                  <th>Period</th>
+                  <th>Payer</th>
+                  <th>Receipt Number</th>
+                  <th>Amount</th>
+                  <th>Posting Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ppl of personList">
+                  <td>{{ppl.id}}</td>
+                  <td>{{ppl.policyc}}</td>
+                  <td>{{ppl.policys}}</td>
+                  <td>{{ppl.period}}</td>
+                  <td>{{ppl.payer}}</td>
+                  <td>{{ppl.receiptnu}}</td>
+                  <td>{{ppl.amount}}</td>
+                  <td>{{ppl.postings}}</td>
+                </tr>
+               
+               
+                 
+                  <tr class="font-weight-bold text-center" >
+                     
+                      
+                      <td></td>
+                      <td></td>
+                      <td colspan="3"></td>
+                      <td>Total</td>
+          
+                      <td class="text-right">{{totalAmount | number : '.2-2' }}</td>
+                      <td colspan="5"></td>
+          
+                   
+              </tbody>
+             
+            </table>
+            </div>
+          </div>
+
          
                         
                
         
   </div>
 </div>
-<div class="card">
-  <table class="table table-bordered table-striped table-sm">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Policy Code</th>
-        <th>Policy Status</th>
-        <th>Period</th>
-        <th>Payer</th>
-        <th>Receipt Number</th>
-        <th>Amount</th>
-        <th>Posting Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Total:</td>
-        <td></td>
-      </tr>
-    </tbody>
-   
-  </table>
-</div>
+
 </div>
 </div>
