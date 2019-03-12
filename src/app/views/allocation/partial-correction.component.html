@@ -20,7 +20,7 @@
                 <div class="form-group row">
                   <label class="col-md-4 col-form-label" for="text-input">POLICY CODE</label>
                   <div class="col-md-6">
-                    <input type="number" min="0" class="form-control" formControlName="policyCode" required>
+                    <input type="number" min="0" class="form-control" formControlName="policyCode">
                   </div>
                 </div>
     
@@ -28,13 +28,14 @@
                   <label class="col-md-4 col-form-label">PERIOD</label>
                   <div class = "col-md-6">
                     <input class="form-control" id="date-input" type="date" 
-                      formControlName = "period" value = "2018-09-01" required>
+                      formControlName = "period" value = "2018-09-01">
                   </div>
                 </div>
                     
                 <div class="btn-toolbar">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary" (click)="search(misallocatedInput.policyCode)">Search</button> 
+                    <button type="submit" class="btn btn-md btn-primary" (click)="search(misallocatedInput.policyCode)"
+                      [disabled]="!misallocatedInput.valid">Search</button> 
                     </div>
                 </div>
 
@@ -154,7 +155,7 @@
           <th>EXPECTED AMOUNT</th>
           <th>PURPOSE</th>
           <th>ALLOCATED AMOUNT</th>
-          <th></th>
+          <th>Delete?</th>
         </tr>
       </thead>
       

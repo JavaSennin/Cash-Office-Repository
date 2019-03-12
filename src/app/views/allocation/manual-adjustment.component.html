@@ -1,5 +1,4 @@
 <!-- Manual Adjustment Voucher - Allocation Module -->
-<!-- TO-DO: On Page load not displaying navigation side bar  -->
 
 <div class="animated fadeIn">
 
@@ -9,7 +8,6 @@
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> Record for Posting
-            <!-- <span class="text float-right">{{ today | date : "d-MMM-y" }}</span> -->
           </div>
      
           <div class="card-body">
@@ -31,7 +29,6 @@
                     <!-- loop for listing the adjustments --> 
                     <tr *ngFor="let adjustment of adjustments; let i = index" >
                       <td>
-                        <!-- <form [formGroup]="adjList"> -->
                           <div class="form-check">
                           <input class="form-check-input" type="radio" name="radios" id="radio2"
                           (click)="onSelect(adjustment, i)">
@@ -39,7 +36,6 @@
                             {{adjustment.mnAdjID}}
                           </label>
                         </div> 
-                      <!-- </form> -->
                       </td>
                       <td>{{adjustment.policyCode}}</td>
                       <td>{{adjustment.transType}}</td>
@@ -61,7 +57,7 @@
 
   </div>
 
-<!-- New Transaction v2 Dynamic -->
+<!-- New Transaction -->
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
@@ -141,7 +137,6 @@
                     <div class = "col-md-6">
                       <input class="form-control" formControlName = "bnkStmtNo" value={{item.bobiRefNo}}>
                     </div>
-                    <!-- <p>{{ today | date : "d-MMM-y" }}</p> -->
                 </div>
                       
               </div>

@@ -1,4 +1,6 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+// Manual Adjustment Voucher - Allocation Module
+
+import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
 @NgModule({
@@ -29,8 +31,6 @@ export class ManualAdjustmentComponent {
 
   });
 
-  // radios = new FormControl('', Validators.required)  ;
-
   // An Array to hold dynamic data - Manual Adjustments:  
   adjustments = [
     {
@@ -47,30 +47,25 @@ export class ManualAdjustmentComponent {
     }
   ]
 
-  // Record for Posting Controls
-  
-  item ; 
+  // Placeholder record for a selected item
+  item = { mnAdjID: "", policyCode: "", transType: "", policyID: "", 
+  comments: "", amount: "", postingStatus: "", bobiRefNo: "", period: "2018-09-01" }; 
 
   onSelect(x, i) {
     this.item = x ;
-    // console.log("Selected item Id: " + selectedItem.policyCode); // You get the Id of the selected item here
-    console.log("this trans type is " + this.item.transType ) ;
-    console.log(this.adjustments[i].comments)
+    console.log(this.adjustments[i].comments) ; // dbg
 }
-
-  // New Transaction Controls
-  clear(){
-
+  
+clear(){
+  window.location.reload() ;
   }
 
-  exit(){ this.clear() ;  }
+  exit(){   
+    // Re-direct to app landing page
+  window.location.href = "http://localhost:4200/#/dashboard" ;  }
 
-  post(){
+  post(){}
 
-  }
-
-  save(){
-
-  }
+  save(){}
 
 }

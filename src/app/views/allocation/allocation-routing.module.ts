@@ -58,7 +58,7 @@ const routes: Routes = [
         path: 'manual-adjustment',
         component: ManualAdjustmentComponent,
         data: {
-          title: 'Manual Adjustment Voucher'
+          title: 'Manual Adjustment'
         }        
       },
       {
