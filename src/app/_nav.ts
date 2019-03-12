@@ -10,27 +10,27 @@ export const navItems = [
     name: 'Cash Office Menu'
   },
   {
-    name: 'Master [Set-Up]',
+    name: 'CASHOFFICE MASTER',
     url: '/base',
     icon: 'icon-puzzle',
     children: [
       {
-        name: 'Cashier',
+        name: 'Setup Cashier',
         url: '/base/cashier',
         
       },
       {
-        name: 'Payment Method',
+        name: 'Setup Payment Method',
         url: '/base/payment',
         
       },
       {
-        name: 'Applications',
+        name: 'Setup Applications',
         url: '/base/collapses',
        
       },
       {
-        name: 'Cash Office',
+        name: 'Setup Cash Office',
         url: '/base/forms',
         
       },
@@ -42,7 +42,7 @@ export const navItems = [
     ]
   },
   {
-    name: 'Transaction',
+    name: 'CASHOFFICE TRANSACTION',
     url: '/cashoffice-transaction',
     icon: 'icon-cursor',
     children: [
@@ -99,8 +99,45 @@ export const navItems = [
       
     ]
   },
+  // Cash Office CASH OFFICE REPORTS Module
   {
-    name: 'PayPoint Master',
+    name: 'CASHOFFICE REPORTS',
+    url: '/cashoffice-reports',
+    icon: 'icon-pie-chart', // or user 'layers'
+    children: [
+      {
+      name: 'Cashier Assignment',
+      url: '/cashoffice-reports/cashier-assignment'
+      },
+      {
+        name: 'Collection - Application Branch',
+        url: '/cashoffice-reports/collection-branch'
+      },
+      {
+        name: 'Collection - Application Detail',
+        url: '/cashoffice-reports/collection-app-detail'
+      },
+      {
+        name: 'Collection - Application Summary',
+        url: '/cashoffice-reports/collection-app-summary'
+      },
+      {
+        name: 'Daily Receipt Listing',
+        url: '/cashoffice-reports/receipt-listing'
+      },
+      {
+        name: 'Reprint Deposit Slip',
+        url: '/cashoffice-reports/deposit-slip' 
+      },
+      {
+        name: 'Reprint Receipt',
+        url: '/cashoffice-reports/reprint-receipt' 
+      }
+    ]
+  }, 
+
+  {
+    name: 'PAYPOINT MASTER',
     url: '/paypoint-master',
     icon: 'icon-bell',
     children: [
@@ -119,7 +156,7 @@ export const navItems = [
   },
 
   {
-    name: 'PayPoint Transaction',
+    name: 'PAYPOINT TRANSACTION',
     url: '/notifications',
     icon: 'icon-bell',
     children: [
@@ -148,7 +185,7 @@ export const navItems = [
 
   // Cash Office ALLOCATION module
   {
-    name: 'Allocation',
+    name: 'ALLOCATION',
     url: '/allocation',
     icon: 'icon-pie-chart',
     children: [
@@ -206,7 +243,7 @@ export const navItems = [
 
   // Cash Office PAYPOINTS REPORTS module
   {
-    name: 'PayPoint Reports',
+    name: 'PAYPOINT REPORTS',
     url: '/paypoint-reports',
     icon: 'icon-bell',
     children: [
@@ -269,7 +306,7 @@ export const navItems = [
 
   // Cash Office ADMIN Module
   {
-    name: 'Admin',
+    name: 'ADMIN',
     url: '/admin',
     icon: 'icon-people', // or user 'layers'
     children: [
@@ -296,46 +333,10 @@ export const navItems = [
   ]
   },
 
-  // Cash Office CASH OFFICE REPORTS Module
-  {
-    name: 'CashOffice Reports',
-    url: '/cashoffice-reports',
-    icon: 'icon-pie-chart', // or user 'layers'
-    children: [
-      {
-      name: 'Cashier Assignment',
-      url: '/cashoffice-reports/cashier-assignment'
-      },
-      {
-        name: 'Collection - Application Branch',
-        url: '/cashoffice-reports/collection-branch'
-      },
-      {
-        name: 'Collection - Application Detail',
-        url: '/cashoffice-reports/collection-app-detail'
-      },
-      {
-        name: 'Collection - Application Summary',
-        url: '/cashoffice-reports/collection-app-summary'
-      },
-      {
-        name: 'Daily Receipt Listing',
-        url: '/cashoffice-reports/receipt-listing'
-      },
-      {
-        name: 'Reprint Deposit Slip',
-        url: '/cashoffice-reports/deposit-slip' 
-      },
-      {
-        name: 'Reprint Receipt',
-        url: '/cashoffice-reports/reprint-receipt' 
-      }
-    ]
-  }, 
-
+  
   // Cash Office USER Module
   {
-    name: 'User',
+    name: 'USER',
     url: '/user',
     icon: 'icon-user',
     children: [
@@ -349,7 +350,7 @@ export const navItems = [
 
   // Cash Office TRANSACTIONS Module
   {
-    name: 'Transactions',
+    name: 'STANBIC TO HOST',
     url: 'transactions',
     icon: 'icon-calculator',
 
