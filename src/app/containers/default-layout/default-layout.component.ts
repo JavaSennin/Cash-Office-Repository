@@ -10,6 +10,7 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
+  
   constructor() {
 
     this.changes = new MutationObserver((mutations) => {
@@ -19,5 +20,9 @@ export class DefaultLayoutComponent {
     this.changes.observe(<Element>this.element, {
       attributes: true
     });
+
+    
   }
+ currdat = Date.now();
+  
 }

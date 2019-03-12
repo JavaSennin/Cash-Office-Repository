@@ -110,15 +110,15 @@ export const navItems = [
       url: '/cashoffice-reports/cashier-assignment'
       },
       {
-        name: 'Collection - Application Branch',
+        name: 'Collection-App Branch',
         url: '/cashoffice-reports/collection-branch'
       },
       {
-        name: 'Collection - Application Detail',
+        name: 'Collection-App Detail',
         url: '/cashoffice-reports/collection-app-detail'
       },
       {
-        name: 'Collection - Application Summary',
+        name: 'Collection-App Summary',
         url: '/cashoffice-reports/collection-app-summary'
       },
       {
