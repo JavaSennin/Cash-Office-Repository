@@ -24,7 +24,7 @@
                   <div class = "form-group row">
                   <label class="col-md-2 col-form-label" >MisAllocation ID:</label>
                   <div class="col-md-3">
-                    <input class="form-control" id="text-input" type="text" formControlName = "misAllId" disabled/>
+                    <input class="form-control" id="text-input" type="text" formControlName = "misAllId" value="0" disabled/>
                   </div>
                 </div>
 
@@ -45,6 +45,7 @@
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>
+                  <th></th>
                   <th>ID</th>
                   <th>Policy Code</th>
                   <th>Policy Status</th>
@@ -57,6 +58,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let ppl of personList">
+                  <td><div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"></div></td>
                   <td>{{ppl.id}}</td>
                   <td>{{ppl.policyc}}</td>
                   <td>{{ppl.policys}}</td>
@@ -92,6 +95,88 @@
                
         
   </div>
+</div>
+
+<div class="card" *ngIf="displayReport">
+  <div class="card-header">
+    <i class="fa fa-align-justify"></i> Policy Allocation (Correction)
+
+  <div class="card-body">
+
+    <form [formGroup] = "MisAllCorr" (ngSubmit)="onSubmit()">
+     <!--Bank Account Details-->
+      <div class="form-row">
+        <div class="col">
+           
+          <div class = "form-group row">
+            <label class="col-sm-2 col-form-label" >Policy Code</label>
+            <div class="col-md-3">
+              <input class="form-control" id="text-input" type="text" formControlName = "policyCode">
+            </div>
+            </div>
+            <div class = "form-group row">
+            <label class="col-md-2 col-form-label" >MisAllocation ID:</label>
+            <div class="col-md-3">
+              <input class="form-control" id="text-input" type="text" formControlName = "misAllId" disabled/>
+            </div>
+          </div>
+
+          <div class = "form-group row">
+          <a class="text-success" >
+            <div class="col-md-3 text-center">
+                <button type="submit" class="btn btn-md btn-ghost-primary">Search</button>
+              </div>
+        </a>
+     </div>
+     </div>
+     </div>
+     </form>
+     <div class="card" >
+        <div class="card-header">
+          </div>
+          <div class="card-body">
+      <table class="table table-bordered table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Allocated Amount</th>
+            <th>Receipt Number</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ppl of personList">
+            <td>{{ppl.id}}</td>
+            <td>{{ppl.policyc}}</td>
+            <td>{{ppl.policys}}</td>
+            
+          </tr>
+         
+         
+           
+            <tr class="font-weight-bold text-center" >
+               
+                
+                <td></td>
+                <td></td>
+                <td colspan="3"></td>
+                <td>Total</td>
+    
+                <td class="text-right">{{totalAmount | number : '.2-2' }}</td>
+                <td colspan="5"></td>
+    
+             
+        </tbody>
+       
+      </table>
+      </div>
+    </div>
+
+   
+                  
+         
+  
+</div>
 </div>
 
 </div>
