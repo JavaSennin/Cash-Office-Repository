@@ -23,7 +23,7 @@ const routes: Routes = [
         path: 'bank-adjustment',
         component: BankAdjustmentComponent,
         data: {
-          title: 'Bank Statement Adjustment Voucher'
+          title: 'Bank Statement Re-Allocation'
         }        
       },
       {

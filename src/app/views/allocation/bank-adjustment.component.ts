@@ -1,3 +1,5 @@
+// Bank Statement Adjustment Voucher - Allocation Module
+
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
