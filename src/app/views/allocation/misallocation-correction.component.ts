@@ -1,5 +1,9 @@
-import { Component, NgModule } from '@angular/core';
+// Partial MisAllocation Correction - Allocation Module
+
+import { Component,NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { FormBuilder, FormArray } from '@angular/forms'; // form array things require FormGroup as well
 
 @NgModule({
   imports: [
@@ -8,68 +12,120 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     FormsModule,
     ReactiveFormsModule,
     Validators
+
+    , FormArray, FormBuilder
 ]
 })
 
 @Component({
-  templateUrl: 'misallocation-correction.component.html'
+  templateUrl: './misallocation-correction.component.html'
 })
 export class MisallocationCorrectionComponent {
+ 
+  viewMisallocations = false ;
+  makeCorrections = false ; // show editable table for "Premium Reallocation" transactions.
 
-  MisAllCorr = new FormGroup({
-    policyCode: new FormControl('', Validators.required),
-    misAllId: new FormControl('', Validators.required),
-    
-  });
+  toggleMakeCorrections(transaction_type){
+    if ( transaction_type == 'allocate')
+    {
+      this.makeCorrections = true ;
+    }
 
-  onSubmit(){
-    this.displayReport = true;
-    console.table(this.MisAllCorr.value) ;
-}
-displayReport = false;
-
-  editField: string;
-  personList: Array<any> = [
-    { id: 1, policyc: '098664832', policys: "inforce", period: '20/05/1994', payer: 'Spanish Inquisition', receiptnu: '5836757',amount:1226.23,postings:"Unposted" },
-    { id: 2, policyc: '790064832', policys: "inforce", period: '20/05/1994', payer: 'Danish Inquisition', receiptnu: '06836857',amount:1226.23,postings:"Unposted" },
-    { id: 3, policyc: '3969664832', policys: "lapsed", period: '20/05/1994', payer: 'Botswana Inquisition', receiptnu: '0836757',amount:1226.23,postings:"Unposted" },
-    { id: 4, policyc: '594564832', policys: "terminated", period: '20/05/1994', payer: 'Spanish Inquisition', receiptnu: '2836757',amount:1226.23,postings:"Unposted" },
-    { id: 5, policyc: '498664832', policys: "Suspended", period: '20/05/1994', payer: 'Spanish Inquisition', receiptnu: '4836757',amount:1226.23,postings:"Unposted" },
-    
-  ];
-
-  totalAmount: number = 
-    this.personList.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
-  
-
-  awaitingPersonList: Array<any> = [
-    { id: 6, name: 'George Vega', age: 28, companyName: 'Classical', country: 'Russia', city: 'Moscow' },
-    { id: 7, name: 'Mike Low', age: 22, companyName: 'Lou', country: 'USA', city: 'Los Angeles' },
-    { id: 8, name: 'John Derp', age: 36, companyName: 'Derping', country: 'USA', city: 'Chicago' },
-    { id: 9, name: 'Anastasia John', age: 21, companyName: 'Ajo', country: 'Brazil', city: 'Rio' },
-    { id: 10, name: 'John Maklowicz', age: 36, companyName: 'Mako', country: 'Poland', city: 'Bialystok' },
-  ];
-
-  updateList(id: number, property: string, event: any) {
-    const editField = event.target.textContent;
-    this.personList[id][property] = editField;
-  }
-
-  remove(id: any) {
-    this.awaitingPersonList.push(this.personList[id]);
-    this.personList.splice(id, 1);
-  }
-
-  add() {
-    if (this.awaitingPersonList.length > 0) {
-      const person = this.awaitingPersonList[0];
-      this.personList.push(person);
-      this.awaitingPersonList.splice(0, 1);
+    if ( transaction_type == 'reverse')
+    {
+      this.makeCorrections = false ;
     }
   }
 
-  changeValue(id: number, property: string, event: any) {
-    this.editField = event.target.textContent;
+  search(x){
+    console.log("Searching " + x) ;
+    this.viewMisallocations = true ;
+  console.log( this.selectedItem2.length );
+
   }
+    
+  misallocatedInput = new FormGroup({
+    policyCode: new FormControl('', Validators.required),
+    misallocationID: new FormControl({value: '0', disabled: true}),
+
+    radios: new FormControl(''), // radio button things
+
+    transType: new FormControl('') // radio button things
+  }) ;
+  myForm = new FormGroup({
+    policyCode2: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required),
+    payer: new FormControl('', Validators.required),
+
+    
+  }) ;
+
+
+// An Array to hold dynamic data - Misallocations:  
+misallocations = [
+  {
+    collID: 20, policyCode: "210611", policyStatus: "Terminated", period: "2012-06-21",
+     payer: "Jane Doe", amount: 432.11, postingStatus: "T", receiptNo: 123456
+  },
+  {
+    collID: 14, policyCode: "210617", policyStatus: "Terminated", period: "2013-06-21",
+     payer: "John Doe", amount: 114.32, postingStatus: "U", receiptNo: 123457
+  },
+  {
+    collID: 12, policyCode: "210618", policyStatus: "Terminated", period: "2014-06-21",
+     payer: "Joanne Odin", amount: 413.12, postingStatus: "V", receiptNo: 123458
+  }
+]
+
+selectedItem: any ; // placeholder for a specific collection item
+selectedItem2=[] ; // placeholder for a specific collection item
+ 
+onSelect(x, position) 
+{
+  var element = <HTMLInputElement> document.getElementById(position);
+  var isChecked = element.checked;
+  
+  this.selectedItem = x ;
+  console.log("Selected item No. " + position ) ; // dbg
+  
+  if(isChecked){
+    this.selectedItem2.push(x);
+    // console.log("issa chkd") ; //dbg
+  }
+  else
+  {
+    // console.table(this.selectedItem2);
+    this.selectedItem2.splice( this.selectedItem2.findIndex(a => a.collID==x.collID) ,1);
+    // console.table(this.selectedItem2);
+    // position-1;
+
+  }
+  
+  console.log( this.selectedItem2.length );
+  this.makeCorrections = true;
+}
+
+clear(){
+  this.selectedItem2 = [];
+  this.misallocatedInput.get('policyCode').reset();
+  this.misallocatedInput.get('misallocationID').setValue(0);
+  this.viewMisallocations = false;
+  this.makeCorrections = false;
+}
+
+exit(){
+  // Re-direct to app landing page
+  window.location.href = "http://localhost:4200/#/dashboard" ;
+}
+
+save(){}
+
+// 
+
+  total: number = 
+    this.misallocations.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
+    total2: number = 
+    this.selectedItem2.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
+
 
 }

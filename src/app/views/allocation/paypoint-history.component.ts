@@ -69,7 +69,10 @@ export class PaypointHistoryComponent {
   }
 
   clear(){
-    window.location.reload() ;
+    //window.location.reload() ;
+    this.detailInput.reset();
+    this.showDetail = false ;
+
   }
 
   exit(){
