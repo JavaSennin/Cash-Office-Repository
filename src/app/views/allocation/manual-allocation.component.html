@@ -31,8 +31,8 @@
                   
                 <div class="btn-toolbar">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary" (click)="search(misallocatedInput.policyCode)"
-                      [disabled]="!misallocatedInput.valid">Search</button> 
+                    <button type="submit" class="btn btn-md btn-primary" (click)="search(misallocatedInput.receiptNo)"
+                      >Search</button> 
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
 
             <br>
 
-            <div class="form-row">
+            <div class="form-row" *ngIf="viewMisallocations">
 
               <!-- Items up for correction -->
               <div class="table-responsive">
@@ -58,46 +58,41 @@
                     </tr>
                   </thead>
                     
-                  <tbody *ngIf="viewMisallocations">
+                  <tbody>
                     <tr *ngFor="let misallocation of misallocations; let i = index">
                       <td>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="radios" id="radio2"
-                              (click)="onSelect(misallocation, i)">
-                          <label class="form-check-label" for="radio2">{{misallocation.collID}}</label>
-                        </div> 
+                       {{misallocation.ppID}}
                       </td>
-                      <td>{{misallocation.policyCode}}</td>
-                      <td>{{misallocation.policyStatus}}</td>
                       <td>{{misallocation.period}}</td>
-                      <td>{{misallocation.payer}}</td>
-                      <td>{{misallocation.receiptNo}}</td>
-                      <td class="text-right">{{misallocation.amount}}</td>
-                      <td>{{misallocation.postingStatus}}</td>
+                      <td>{{misallocation.gAmount}}</td>
+                      <td>{{misallocation.rNo}}</td>
+                      <td class="text-right">{{misallocation.aAmount}}</td>
+                      <td>{{misallocation.uAmount}}</td>
                     </tr>
                       
                   </tbody>
     
                 </table>
               </div>
-
+              <p class="h6 text-right">Total Allocated Amount: BWP {{totalAllocatedAmount | number : '.2-2' }}  | Total Unallocated Amount: BWP {{totalAllocatedAmount | number : '.2-2' }}</p>
             </div>
 
            
     
           </form>
-
+         
         </div>
+        
       </div>
     </div>
   </div>
   
   <!-- Policy Allocation (Correction) -->
-  <div class="row" *ngIf="makeCorrections">
+  <div class="row" *ngIf="makeCorrections" >
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i>Policy Allocation (Correction)
+          <i class="fa fa-align-justify"></i>Amount Allocated to
         </div>
         
         <div class="card-body">
@@ -110,24 +105,50 @@
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
         <tr>
-          <th>POLICY CODE</th>
-          <th>PERIOD</th>
-          <th>PARTY ID</th>
-          <th>PAYER NAME</th>
-          <th>EXPECTED AMOUNT</th>
-          <th>PURPOSE</th>
-          <th>ALLOCATED AMOUNT</th>
+          <th></th>
+          <th>Policy Code</th>
+          <th>Period</th>
+          <th>Party ID</th>
+          <th>Payer Name</th>
+          <th>Expected Amount</th>
+          <th>Purpose</th>
+          <th>Purpose ID</th>
+          <th>Posting Status</th>
+          <th>Allocated Amount</th>
           <th>Delete?</th>
         </tr>
       </thead>
       
       <tbody formArrayName="corrections">
 
+        <tr *ngFor= "let pro of propInfo">
+        <td><div class="form-check">
+                <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
+                
+              </div></td>
+          <td>{{pro.pcode}}</td>
+          <td>{{pro.period}}</td>
+          <td>{{pro.pID}}</td>
+          <td>{{pro.pName}}</td>
+          <td>{{pro.eAmount}}</td>
+          <td>{{pro.purp}}</td>
+          <td>{{pro.purpID}}</td>
+          <td>{{pro.pstatus}}</td>
+          <td>{{pro.aAmount}}</td>
+
+        </tr>
+
         <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+          <td><div class="form-check">
+              <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
+              
+            </div></td>
+          
+
           <td>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
+              
               <label class="form-check-label" for="corSelect">
                   <input formControlName="corPolicyCode"></label>
             </div>
@@ -140,16 +161,18 @@
               <td><input formControlName="corPayerName"></td>
               <td><input formControlName="corExpectedAmnt"></td>
               <td><input formControlName="corPurpose"></td>
+              <td><input formControlName="corPurposeID"></td>
+              <td><input formControlName="corPostStatus"></td>
               <td><input formControlName="corAllocatedAmnt"></td>
               <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()"><i class="fa fa-trash"></i></button></td>
             </tr>
 
       </tbody>
     </table>
-    
+    <p class="h6 text-right">Total Allocated Amount: BWP {{totalAllocatedAmount | number : '.2-2' }}</p> 
 </div>
 
-<p class="h6 text-right">Total Allocated Amount: BWP {{totalAllocatedAmount | number : '.2-2' }}</p>
+
     
                   <div class="btn-toolbar">
                       <div class="btn-group mr-2">

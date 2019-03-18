@@ -23,49 +23,28 @@ import { FormBuilder, FormArray } from '@angular/forms'; // form array things re
 export class ManualAllocationComponent {
  
   viewMisallocations = false ;
-  makeCorrections = true ; // show editable table for "Premium Reallocation" transactions.
+  makeCorrections = false ; // show editable table for "Premium Reallocation" transactions.
 
-  toggleMakeCorrections(transaction_type){
-    if ( transaction_type == 'allocate')
-    {
-      this.makeCorrections = true ;
-    }
-
-    if ( transaction_type == 'reverse')
-    {
-      this.makeCorrections = false ;
-    }
-  }
 
   search(x){
     console.log("Searching " + x) ;
     this.viewMisallocations = true ;
+    this.makeCorrections = true ;
   }
     
   misallocatedInput = new FormGroup({
     receiptNo: new FormControl('', Validators.required),
-    BSFlag: new FormControl("2018-09-01", Validators.required),
+    BSFlag: new FormControl('', Validators.required),
 
-    misallocationID: new FormControl({value: '', disabled: true}),
+    misallocationID: new FormControl({value: '0', disabled: true}),
 
-    radios: new FormControl(''), // radio button things
-
-    transType: new FormControl('') // radio button things
+    
   }) ;
 
 // An Array to hold dynamic data - Misallocations:  
 misallocations = [
   {
-    collID: 20, policyCode: "210611", policyStatus: "Terminated", period: "2012-06-21",
-     payer: "Jane Doe", amount: 432.11, postingStatus: "T", receiptNo: 123456
-  },
-  {
-    collID: 14, policyCode: "210617", policyStatus: "Terminated", period: "2013-06-21",
-     payer: "John Doe", amount: 114.32, postingStatus: "U", receiptNo: 123457
-  },
-  {
-    collID: 12, policyCode: "210618", policyStatus: "Terminated", period: "2014-06-21",
-     payer: "Joanne Odin", amount: 413.12, postingStatus: "V", receiptNo: 123458
+    ppID: 234, period: "2012-06-21", gAmount: 123.677,rNo:123445, aAmount: 432.11,uAmount:345.97
   }
 ]
 
@@ -83,7 +62,8 @@ clear(){
 
 exit(){
   // Re-direct to app landing page
-  window.location.href = "http://localhost:4200/#/dashboard" ;
+  this.viewMisallocations = false ;
+    this.makeCorrections = false ;
 }
 
 save(){}
@@ -113,12 +93,24 @@ myForm: FormGroup;
       corPayerName: [],
       corExpectedAmnt: [],
       corPurpose: [],
+      corPurposeID: [],
+      corPostStatus: [],
       corAllocatedAmnt: []
       
     })
 
     this.correctionForms.push(correction);
   }
+  propInfo =[
+    {
+      pcode:25902873,period:"27/09/1991",pID:58956,pName:"Gregory Seal",eAmount:789965.56,purp:"NB",purpID:2,
+      pstatus:"POSTED",aAmount:758.69
+     },
+     {
+      pcode:759432873,period:"02/09/1998",pID:78956,pName:"Liam Seal",eAmount:7965.56,purp:"NB",purpID:2,
+      pstatus:"POSTED",aAmount:758.69
+     }
+];
 
   deleteCorrection(i) {
     this.correctionForms.removeAt(i)
