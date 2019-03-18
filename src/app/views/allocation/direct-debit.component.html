@@ -11,7 +11,7 @@
            
         <div class="card-body">
                  
-          <form [formGroup] = "bnkAccDetails" (ngSubmit)="detailReport()" >
+          <form [formGroup]="bnkAccDetails">
 
             <!-- bgn: get 2-column form -->
             <div class="form-row">
@@ -19,9 +19,9 @@
               <div class="col-lg-6">
                                 
                 <div class = "form-group row">
-                  <label class="col-md-4 col-form-label" >PAYPOINT MODE</label>
+                  <label class="col-md-4 col-form-label" >PAYMENT MODE</label>
                   <div class = "col-md-6">
-                    <select class="form-control" id="selectPaypointMode" formControlName = "paypointMode">
+                    <select class="form-control" id="selectPaymentMode" formControlName = "paymentMode">
                       <option value="DDE" selected>DDE</option> 
                     </select>
                   </div>
@@ -43,9 +43,9 @@
                 <div class = "form-group row">
                   <label class="col-md-4 col-form-label" >BANK NAME</label>
                   <div class = "col-md-6">
-                    <select class="form-control" id="selectCrFile" 
+                    <select class="form-control" id="selectBank" 
                       formControlName = "bankName" [disabled]="disableForm">
-                        <option [ngValue]="crFile" *ngFor="let crFile of bankNames"> {{crFile.crFileNo}}</option>
+                        <option [ngValue]="bank" *ngFor="let bank of banks"> {{bank.bankName}}</option>
                     </select>
                   </div>
                 </div>
@@ -54,7 +54,7 @@
                   <label class="col-md-4 col-form-label">CREATION DATE</label>
                     <div class = "col-md-6">
                     <input class="form-control" id="date-input" type="date" 
-                      formControlName = "creationDate" name="date-input" value = "2018-09-01">
+                      formControlName = "creationDate" name="date-input" value = "{{ (bnkAccDetails.value.bankName.creation ) || '2018-09-01'}}">
                     </div>
                 </div>
                          
@@ -62,7 +62,7 @@
                   <label class="col-md-4 col-form-label">MODIFIED DATE</label>
                   <div class = "col-md-6">
                     <input class="form-control" id="date-input" type="date" 
-                      formControlName = "modifiedDate" name="date-input" value = "2018-09-30">
+                      formControlName = "modifiedDate" name="date-input" value ="{{( bnkAccDetails.value.bankName.modified ) || '2018-09-30' }}"> 
                   </div>
                 </div>
       
@@ -72,9 +72,9 @@
               <div class="col-lg-6">
 
                 <div class="form-group row">
-                  <label class="col-md-4 col-form-label" for="text-input">BANK STATEMENT ID:</label>
+                  <label class="col-md-4 col-form-label" for="text-input">BANK STATEMENT ID</label>
                   <div class="col-md-6">
-                    <input type="number" min="0" class="form-control" formControlName="bankStatementID" required>
+                    <input type="number" min="0" class="form-control" formControlName="bankStatementID">
                   </div>
                 </div>
                                   
@@ -82,16 +82,16 @@
                   <label class="col-md-4 col-form-label" >ACCOUNT NUMBER</label>
                   <div class = "col-md-6">
                     <input  class="form-control" id="disabled-input" type="text" 
-                      formControlName = "accountNo" name="disabled-input" >
-                      <!--  value={{electronicInput.value.paypointID.ppName}}--> <!-- fcn was paypointID-->
+                      formControlName = "accountNo" name="disabled-input"
+                       value={{bnkAccDetails.value.bankName.accountNo}}>
                   </div>
                 </div>
                                     
                 <div class = "form-group row">
                    <label class="col-md-4 col-form-label" >ACCOUNT DESCRIPTION</label>
                     <div class = "col-md-6">
-                      <input class="form-control" formControlName = "accountDesc">
-                        <!--value = {{electronicInput.value.bankName.crFileAmnt}}--> <!-- fcn was bankNameAmount-->
+                      <input class="form-control" formControlName = "accountDesc"
+                        value = {{bnkAccDetails.value.bankName.accountDesc}}>
                     </div>
                 </div>                                                    
                              
@@ -117,7 +117,7 @@
    
         <div class="card-body">
           
-          <form [formGroup] = "bnkStmtDetails" (ngSubmit)="detailReport()" >
+          <form [formGroup] = "bnkStmtDetails">
 
             <!-- bgn: get 2-column form -->
             <div class="form-row">
@@ -125,9 +125,9 @@
               <div class="col-lg-6">
                        
                 <div class="form-group row">
-                  <label class="col-md-4 col-form-label" for="text-input">STATEMENT No.:</label>
+                  <label class="col-md-4 col-form-label" for="text-input">STATEMENT No.</label>
                   <div class="col-md-6">
-                    <input type="number" min="0" class="form-control" formControlName="statementNo" required>
+                    <input type="number" min="0" class="form-control" formControlName="statementNo">
                   </div>
                 </div>
 
@@ -135,14 +135,14 @@
                   <label class="col-md-4 col-form-label">DATE FROM</label>
                   <div class = "col-md-6">
                     <input class="form-control" id="date-input" type="date" 
-                      formControlName = "fromDate" name="date-input" value = "2018-09-01" required>
+                      formControlName = "fromDate" name="date-input" value = "2018-09-01">
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-4 col-form-label" for="text-input">OPENING BALANCE:</label>
+                  <label class="col-md-4 col-form-label" for="text-input">OPENING BALANCE</label>
                   <div class="col-md-6">
-                    <input type="number" class="form-control" formControlName="openingBalance" required>
+                    <input type="number" class="form-control" formControlName="openingBalance">
                   </div>
                 </div>
                  
@@ -154,12 +154,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                  <label class="col-md-4 col-form-label" for="text-input">BRANCH:</label>
-                  <div class="col-md-6">
-                    <input class="form-control" formControlName="branch">
-                  </div>
-                </div>
+                
 
               </div>
               
@@ -167,9 +162,10 @@
               <div class="col-lg-6">
 
                 <div class="form-group row">
-                  <label class="col-md-4 col-form-label" for="text-input">POSTING STATUS:</label>
+                  <label class="col-md-4 col-form-label" for="text-input">POSTING STATUS</label>
                   <div class="col-md-6">
-                    <input type="number" min="0" class="form-control" formControlName="postingStatus">
+                    <input class="form-control" formControlName="postingStatus"
+                      value={{postingStatus}}>
                   </div>
                 </div>
 
@@ -177,25 +173,32 @@
                     <label class="col-md-4 col-form-label">DATE TO</label>
                    <div class = "col-md-6">
                      <input class="form-control" id="date-input" type="date" 
-                      formControlName = "toDate" name="date-input" value = "2018-09-30" required>
+                      formControlName = "toDate" name="date-input" value = "2018-09-30">
                     </div>
                  </div>
                           
                  <div class="form-group row">
                     <label class="col-md-4 col-form-label" for="text-input">CLOSING BALANCE:</label>
                     <div class="col-md-6">
-                      <input type="number" min="0" class="form-control" formControlName="closingBalance" required>
+                      <input type="number" min="0" class="form-control" formControlName="closingBalance">
                     </div>
                   </div>
 
-                  <br><br>
+                  <br>
                             
                   <div class="form-group row">
                       <label class="col-md-4 col-form-label" for="text-input">LOGIN NAME:</label>
                       <div class="col-md-6">
-                        <input class="form-control" formControlName="loginName">
+                        <input class="form-control" formControlName="loginName" value={{loginName}}>
                       </div>
                     </div>
+
+                    <div class="form-group row">
+                  <label class="col-md-4 col-form-label" for="text-input">BRANCH</label>
+                  <div class="col-md-6">
+                    <input class="form-control" formControlName="branch" value = {{branch}}>
+                  </div>
+                </div>
                      
               </div>
 
@@ -214,8 +217,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Bank Statement Allocations <!--Report-->
-          <span class="text float-right">{{ today | date : "d-MMM-y" }}</span>
+          <i class="fa fa-align-justify"></i> Bank Statement Allocations
         </div>
         
         <div class="card-body">
@@ -227,19 +229,75 @@
               <tabset>
                 <tab heading="DDE/EFT">
                   <div class="card-body">
+
+                    <!-- bgn: actual editable -->
+                    <form [formGroup]="myForm">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th>TRANSACTION TYPE</th>
+                                  <th>PERIOD</th>
+                                  <th>PAYPOINT CODE</th>
+                                  <th>PAYPOINT NAME</th>
+                                  <th>STRIKE DATE</th>
+                                  <th>GROSS AMOUNT</th>
+                                  <th>ALLOCATED AMOUNT</th>
+                                  <th>DELETE</th>
+                                </tr>
+                              </thead>
+                              
+                              <tbody formArrayName="corrections">
+                        
+                                <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                                  <td>
+                        
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
+                                      <label class="form-check-label" for="corSelect">
+                                          <input formControlName="corPolicyCode"></label>
+                                    </div>
+                        
+                                  </td>
+                        
+                                      <td><input class="form-control" type="date" 
+                                        formControlName = "corPeriod" value = "2018-09-01"></td>
+                                      <td><input formControlName="corPartyID"></td>
+                                      <td><input formControlName="corPayerName"></td>
+                                      <td><input formControlName="corExpectedAmnt"></td>
+                                      <td><input formControlName="corPurpose"></td>
+                                      <td><input formControlName="corAllocatedAmnt"></td>
+                                      <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
+                                        <i class="fa fa-trash"></i></button></td>
+                                    </tr>
+                        
+                              </tbody>
+                            </table>
+                            
+                        </div>
+
+                        <br>
+                        <br>
+                        
+                        <p class="h6 text-right">Total Allocated Amount: BWP {{totalAllocatedAmount | number : '.2-2' }}</p>
+                            
+                                          <div class="btn-toolbar">
+                                              <div class="btn-group mr-2">
+                                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                                              </div>
+                                          </div>
+                        
+                        </form>
+
+                    <!-- end: actual editable -->
+
                     <!-- bgn: table thing -->
-                    <div class="table-responsive" *ngIf=true>
+                    <div class="table-responsive" *ngIf="false">
                       <table class="table table-bordered table-hover">
                         <thead class="thead-light">
                           <tr>
                             <TH></TH>
-                            <th>TRANSACTION TYPE</th>
-                            <th>PERIOD</th>
-                            <th>PAYPOINT CODE</th>
-                            <th>PAYPOINT NAME</th>
-                            <th>STRIKE DATE</th>
-                            <th>GROSS AMOUNT</th>
-                            <th>ALLOCATED AMOUNT</th>
+                            
                             <TH></TH>
                           </tr>
                         </thead>

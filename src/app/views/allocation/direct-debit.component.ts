@@ -1,7 +1,9 @@
 // Direct Debit Processing - Allocation Module 
 
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms'; 
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { FormBuilder, FormArray } from '@angular/forms'; // form array things require FormGroup as well
 
 // import { TabsModule } from 'ngx-bootstrap/tabs';
 
@@ -13,6 +15,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
     ReactiveFormsModule
     // ,TabsModule
     // ,  TabsModule.forRoot()
+
+    , FormArray, FormBuilder
 ]
 })
 
@@ -24,16 +28,26 @@ export class DirectDebitComponent {
   today = new Date() ;
 
   bnkAccDetails = new FormGroup({
-    paypointMode: new FormControl('', Validators.required),
+    paymentMode: new FormControl('', Validators.required),
     bankName: new FormControl('', Validators.required),
     creationDate: new FormControl({value:"2018-09-01", disabled: true}),
     modifiedDate: new FormControl({value:"2018-09-30", disabled: true}),
 
-    bankStatementID: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$") ] ),
-    accountNo: new FormControl({value:'', disabled: true}, Validators.required),
-    accountDesc: new FormControl({value:'', disabled: true}, Validators.required),
+    bankStatementID: new FormControl('', Validators.pattern("^[0-9]*$") ),
+    accountNo: new FormControl({value:'', disabled: true}), // , Validators.required), // auto-filled
+    accountDesc: new FormControl({value:'', disabled: true}) // , Validators.required) // auto-filled
 
   }) ;
+
+  // Array to hold dynamic data - Bank Account Details
+  banks = [
+    {bankName:"Bank ABC", accountNo:"ABC-2018", accountDesc: "Bank ABC Satellite", creation: "2013-01-01", 
+      modified: "2016-08-24"},
+    {bankName:"Bank Gaborone", accountNo:"BG-01234", accountDesc: " Bank GC Main Mall", creation: "2015-06-11", 
+      modified: "2018-03-31"},
+    {bankName:"Bank of Baroda", accountNo:"BB-43210", accountDesc: "Baroda RailPark ATM", creation: "2017-01-21", 
+      modified: "2014-10-10"}
+  ];
 
   bnkStmtDetails = new FormGroup({
     statementNo: new FormControl('', Validators.required),
@@ -50,6 +64,64 @@ export class DirectDebitComponent {
 
   }) ;
 
+  // Array to hold dynamic data - Bank Statement Details
+  // statements = [
+    // { stmtID: "210", bankName: "First Nation Bank", stmtNo: "FNB42/12012019", accNo: "4638001", 
+      // accDesc: "DDE Collection Account", period: "21-Jan-2017", strikeDate: "21-Mar-17", allocatedAmount: 451.05}
+    // ]
+
+  // Dynamic Data - Branch/login-name
+  loginName = "user1" ;
+  branch = "Gaborone Head Office";
+  postingStatus = "UNPOSTED" ;
+
+  // bgn: Complete Editable Table
+
+  myForm: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      corrections: this.fb.array([])
+    })
+
+  }
+
+  get correctionForms() {
+    return this.myForm.get('corrections') as FormArray
+  }
+
+  addCorrection() {
+
+    const correction = this.fb.group({ 
+      corSelect:[],
+      corPolicyCode: [],
+      corPeriod: [],
+      corPartyID: [],
+      corPayerName: [],
+      corExpectedAmnt: [],
+      corPurpose: [],
+      corAllocatedAmnt: []
+      
+    })
+
+    this.correctionForms.push(correction);
+  }
+
+  deleteCorrection(i) {
+    this.correctionForms.removeAt(i)
+  }
+
+  post(){
+    console.table(this.myForm.get('corrections').value) ; // dbg
+
+    // other form-processing code here:
+  }
+
+  // end: Complete Editable Table
+
+  // -----------------------------------------------------------------------------------------------------
   // bgn: Editable Table
   editField: string;
   personList: Array<any> = [
@@ -66,7 +138,6 @@ export class DirectDebitComponent {
   ];
 
   
-
   updateList(id: number, property: string, event: any) {
     const editField = event.target.textContent;
     this.personList[id][property] = editField;
@@ -141,11 +212,6 @@ export class DirectDebitComponent {
   totalAmount: number = 
     this.allocations.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
   
-  // Object to hold Dynamic Data - Bank Statement Details
-  statement =
-    { stmtID: "210", bankName: "First Nation Bank", stmtNo: "FNB42/12012019", accNo: "4638001", 
-      accDesc: "DDE Collection Account", period: "21-Jan-2017", strikeDate: "21-Mar-17", allocatedAmount: 451.05} ;
-
   /// end: imported dynmaic data placeholders
 
 }
