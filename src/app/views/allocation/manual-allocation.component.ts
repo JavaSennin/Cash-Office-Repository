@@ -63,7 +63,7 @@ clear(){
 exit(){
   // Re-direct to app landing page
   this.viewMisallocations = false ;
-    this.makeCorrections = false ;
+    this.makeCorrections = true ;
 }
 
 save(){}
