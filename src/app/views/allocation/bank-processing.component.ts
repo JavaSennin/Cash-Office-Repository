@@ -1,5 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+import { FormBuilder, FormArray } from '@angular/forms'; // form array things require FormGroup as well
+
 
 @NgModule({
   imports: [
@@ -39,6 +41,7 @@ export class BankProcessingComponent {
 
     // form-processing code
   }
+  viewtable = false;
   editField: string;
   personList: Array<any> = [
     { id: 1, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
@@ -56,26 +59,46 @@ export class BankProcessingComponent {
     { id: 10, name: 'John Maklowicz', age: 36, companyName: 'Mako', country: 'Poland', city: 'Bialystok' },
   ];
 
-  updateList(id: number, property: string, event: any) {
-    const editField = event.target.textContent;
-    this.personList[id][property] = editField;
+  myForm: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      corrections: this.fb.array([])
+    })
+
   }
 
-  remove(id: any) {
-    this.awaitingPersonList.push(this.personList[id]);
-    this.personList.splice(id, 1);
+  get correctionForms() {
+    return this.myForm.get('corrections') as FormArray
   }
 
-  add() {
-    if (this.awaitingPersonList.length > 0) {
-      const person = this.awaitingPersonList[0];
-      this.personList.push(person);
-      this.awaitingPersonList.splice(0, 1);
-    }
-  }
+  addCorrection() {
 
-  changeValue(id: number, property: string, event: any) {
-    this.editField = event.target.textContent;
+    const correction = this.fb.group({ 
+      corTransType:[],
+      corPeriod: [],
+      corPolicyCode: [],
+      corPayerName: [],
+      corExpectedAmnt: [],
+      corAllocatedAmnt: [],
+      corSunTransType: [],
+      corDescription: [],
+      corTransDate: [],
+      corAllocatedAmnt1: [],
+      corSunTransType1: [],
+      corDescription1: [],
+      corTransDate1: [],
+      corAllocatedAmnt2: [],
+      
+    })
+
+    this.correctionForms.push(correction);
+    this.viewtable = true;
+  }
+  deleteCorrection(i) {
+    this.correctionForms.removeAt(i)
   }
 
 }
