@@ -200,7 +200,201 @@
             </div>
           </div>
 
+          <!-- Unspecified Allocations  -->
+          <div class="row" *ngIf=searchSucceeded>
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <i class="fa fa-align-justify"></i>Unspecified Allocations
+                </div>
+
+                <div class = "card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>TRANSACTION TYPE</th>
+                              <th>DESCRIPTION</th>
+                              <th>PERIOD</th>
+                              <th>AMOUNT</th>
+                              <TH>GL POSTING STATUS</TH>
+                            </tr>
+                          </thead>
+                          
+                          <tbody>
+                            <!-- loop for listing the unspecified --> 
+                            <tr *ngFor="let unspecified of unspecifieds; let i = index" >
+                              <td>{{unspecified.transType}}</td>
+                              <td>{{unspecified.description}}</td>
+                              <td>{{unspecified.period}}</td>
+                              <td>{{unspecified.amount}}</td>
+                              <td>{{unspecified.glPostingStatus}}</td>
+                            </tr>
+                            <!-- Totals -->
+                            <tr class="font-weight-bold">
+                              <td colspan="2" class="text-center">Total Un-allocated CRE Amount</td><td>{{unallocatedCRE | number : '.2-2' }}</td>
+                              <td class="text-center">Total Un-allocated LRE Amount</td><td>{{unallocatedLRE | number : '.2-2' }}</td>
+                            </tr>
+                            <tr class="font-weight-bold">
+                              <td colspan="2" class="text-center">Total Un-allocated CRX Amount</td><td>{{unallocatedCRX | number : '.2-2' }}</td>
+                              <td class="text-center">Total Un-allocated LRX Amount</td><td>{{unallocatedLRX | number : '.2-2' }}</td>
+                            </tr>
+                            
+                          </tbody>
+          
+                        </table>
+                        </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
           <!-- Re-allocations -->
+          <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Re-allocations
+                  </div>
+  
+                  <div class = "card-body">
+
+                    <!-- bgn: editable -->
+
+                    <form [formGroup]="myForm">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th>APPLICATION</th>
+                                  <TH>ACTIVITY</TH>
+                                  <TH>PERIOD</TH>
+                                  <th>REFERENCE No.</th>
+                                  <th>REFERENCE STATUS</th>
+                                  <th>PAYOR</th>
+                                  <TH>TRANSACTION TYPE</TH>
+                                  <th>AMOUNT</th>
+                                  <TH>POSTING STATUS</TH>
+                                  <th>Delete?</th>
+                                </tr>
+                              </thead>
+                              
+                              <tbody formArrayName="corrections">
+
+                                <!-- loop for listing the existing allocations --> 
+                              <tr *ngFor="let reallocation of reallocations; let i = index" >
+                                  <td>{{reallocation.application}}</td>
+                                  <td>{{reallocation.activity}}</td>
+                                  <td>{{reallocation.period}}</td>
+                                  <td>{{reallocation.refNo}}</td>
+                                  <td>{{reallocation.refStatus}}</td>
+                                  <td>{{reallocation.payor}}</td>
+                                  <td>{{reallocation.transType}}</td>
+                                  <td>{{reallocation.amount}}</td>
+                                  <td>{{reallocation.rPostingStatus}}</td>
+                                  <td></td>
+                                </tr>
+                        
+                                <!-- Editable rows-->
+                                <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                                  <td>
+                        
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
+                                      <label class="form-check-label" for="corSelect">
+                                          <input formControlName="corApplication"></label>
+                                    </div>
+                        
+                                  </td>
+                        
+                                      <td><input class="form-control" type="date" 
+                                        formControlName = "corActivity" value = "2018-09-01"></td>
+                                      <td><input formControlName="corPeriod"></td>
+                                      <td><input formControlName="corRefNo"></td>
+                                      <td><input formControlName="corRefStatus"></td>
+                                      <td><input formControlName="corPayor"></td>
+                                      <td><input formControlName="corTransType"></td>
+                                      <td><input formControlName="corAmount"></td>
+                                      <td><input formControlName="corRPostingStatus"></td>
+                                      <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()"><i class="fa fa-trash"></i></button></td>
+                                    </tr>
+
+
+                                    <!-- Add Button for editable table -->
+                                    <tr><td colspan="10"><button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button></td></tr>
+
+                                    <!-- Totals-->
+                                    <tr class="font-weight-bold">
+                                        <td colspan="4" class="text-center">Total Re-allocated CRE Amount</td><td class="text-right">{{reallocatedCRE | number : '.2-2' }}</td>
+                                        <td colspan="4" class="text-center">Total Re-allocated LRE Amount</td><td class="text-right">{{reallocatedLRE | number : '.2-2' }}</td>
+                                      </tr>
+                                      <tr class="font-weight-bold">
+                                        <td colspan="4" class="text-center">Total Re-allocated CRX Amount</td><td class="text-right">{{reallocatedCRX | number : '.2-2' }}</td>
+                                        <td colspan="4" class="text-center">Total Re-allocated LRX Amount</td><td class="text-right">{{reallocatedLRX | number : '.2-2' }}</td>
+                                      </tr>
+                        
+                              </tbody>
+                            </table>
+                            
+                        </div>
+                        
+                        <!-- <p class="h6 text-right">Total Allocated Amount: BWP {{totalAllocatedAmount | number : '.2-2' }}</p> -->
+                            
+                                          <!-- <div class="btn-toolbar">
+                                              <div class="btn-group mr-2">
+                                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                                              </div>
+                                          </div> -->
+                        
+                        </form>
+
+                    <!-- end: editble -->
+
+                      <div class="table-responsive" *ngIf = "false">
+                          <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>APPLICATION</th>
+                                <TH>ACTIVITY</TH>
+                                <TH>PERIOD</TH>
+                                <th>REFERENCE No.</th>
+                                <th>REFERENCE STATUS</th>
+                                <th>PAYOR</th>
+                                <TH>TRANSACTION TYPE</TH>
+                                <th>AMOUNT</th>
+                                <TH>POSTING STATUS</TH>
+                              </tr>
+                            </thead>
+                            
+                            <tbody>
+                              <!-- loop for listing the unspecified --> 
+                              <tr *ngFor="let unspecified of unspecifieds; let i = index" >
+                                <td>{{unspecified.transType}}</td>
+                                <td>{{unspecified.description}}</td>
+                                <td>{{unspecified.period}}</td>
+                                <td>{{unspecified.amount}}</td>
+                                <td>{{unspecified.glPostingStatus}}</td>
+                              </tr>
+                              <!-- Totals -->
+                              <tr>
+                                <td colspan="2">Total Un-allocated CRE Amount</td><td>{{unallocatedCRE | number : '.2-2' }}</td>
+                                <td>Total Un-allocated LRE Amount</td><td>{{unallocatedLRE | number : '.2-2' }}</td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">Total Un-allocated CRX Amount</td><td>{{unallocatedCRX | number : '.2-2' }}</td>
+                                <td>Total Un-allocated LRX Amount</td><td>{{unallocatedLRX | number : '.2-2' }}</td>
+                              </tr>
+                              
+                            </tbody>
+            
+                          </table>
+                          </div>
+                  </div>
+  
+                </div>
+              </div>
+            </div>
           
           <!-- Controls -->
           <div class="row btn-toolbar text-center">

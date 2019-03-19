@@ -65,4 +65,90 @@ export class BankAdjustmentComponent {
 
   }) ;
 
+  // Array to hold dynamic data - Unspecified allocations
+  unspecifieds = [
+    {
+      transType: "CRE", policyCode: "100210611", description: "Premium Allocation", policyID: "210611", 
+       comments: "Unprocessed Allocation", amount: 432.11, glPostingStatus: "", bobiRefNo: 123456, period: "2012-06-21"
+    },
+    {
+      transType: "LRE", policyCode: "100210617", description: "Class Premium Receipts", policyID: "210617", 
+       comments: "Review the Allocation", amount: 114.32, glPostingStatus: "", bobiRefNo: 123457, period: "2013-06-21"
+    },
+    {
+      transType: "LRX", policyCode: "100210618", description: "Premium Allocation", policyID: "210618", 
+       comments: "Unprocessed Allocation", amount: 413.12, glPostingStatus: "", bobiRefNo: 123458, period: "2014-06-21"
+    }
+  ]
+
+  // Array to hold dynamic data - Re-allocations
+  reallocations = [
+    {
+      transType: "CRE", description: "Premium Allocation", policyID: "210611", application: "TPOL", activity:"",
+       payor: "Jane Doe", amount: 432.11, rPostingStatus: "POSTED", refNo: 123456, period: "2012-06-21", refStatus: "Terminated",
+    },
+    {
+      transType: "LRE", description: "Class Premium Receipts", policyID: "210617", application: "ACL", activity:"",
+       payor: "Janelle Done", amount: 114.32, rPostingStatus: "UNPOSTED", refNo: 123457, period: "2013-06-21", refStatus: "SETTLED",
+    },
+    {
+      transType: "LRX", description: "Premium Allocation", policyID: "210618", application: "TPOL", activity:"",
+       payor: "Jane Doe", amount: 413.12, rPostingStatus: "POSTED", refNo: 123458, period: "2014-06-21", refStatus: "Terminated",
+    }
+  ]
+
+  // Dynamic Data - Unspecified Totals
+  unallocatedCRE: number =216.44;
+  unallocatedLRE: number =776.44;
+  unallocatedCRX: number =766.46;
+  unallocatedLRX: number =153.47;
+
+  // Dynamic Data - Re-allocation Totals
+  reallocatedCRE: number =216.44;
+  reallocatedLRE: number =776.44;
+  reallocatedCRX: number =766.46;
+  reallocatedLRX: number =153.47;
+
+  // bgn: editble table
+
+  myForm: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      corrections: this.fb.array([])
+    })
+
+  }
+
+  get correctionForms() {
+    return this.myForm.get('corrections') as FormArray
+  }
+
+  addCorrection() {
+
+    const correction = this.fb.group({ 
+      corSelect:[],
+      corApplication: [],
+corActivity: [],
+corPeriod: [],
+corRefNo: [],
+corRefStatus: [],
+corPayor: [],
+corTransType: [],
+corAmount: [],
+corRPostingStatus: []
+      
+    })
+
+    this.correctionForms.push(correction);
+  }
+
+  deleteCorrection(i) {
+    this.correctionForms.removeAt(i)
+  }
+
+  // end: editable table
+
 }
