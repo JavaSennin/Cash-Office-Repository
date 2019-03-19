@@ -95,6 +95,9 @@ export class DirectDebitComponent {
   addCorrection() {
 
     const correction = this.fb.group({ 
+
+      // DDE/EFT 
+      corTransType: [],
       corSelect:[],
       corPolicyCode: [],
       corPeriod: [],
@@ -103,6 +106,13 @@ export class DirectDebitComponent {
       corExpectedAmnt: [],
       corPurpose: [],
       corAllocatedAmnt: []
+
+      // Policy Exclusions
+      , corPolicyStatus: []
+
+      // Sundry
+      , corSundryDescription: []
+      , corTransDate: []
       
     })
 
@@ -110,18 +120,41 @@ export class DirectDebitComponent {
   }
 
   deleteCorrection(i) {
-    this.correctionForms.removeAt(i)
-  }
-
-  post(){
-    console.table(this.myForm.get('corrections').value) ; // dbg
-
-    // other form-processing code here:
+    this.correctionForms.removeAt(i) ;
   }
 
   // end: Complete Editable Table
 
+  // Dynamic Data - Tab Totals
+  totalDDE: number ; 
+  totalExclusions: number ; 
+  totalReversals: number ; 
+  totalSundry: number ; 
+  totalUnspecified: number ; 
+
+  // Controls
+
+  allocatedPolicies(){}
+
+  clear(){
+    this.bnkAccDetails.reset() ;
+    this.bnkStmtDetails.reset() ;
+    this.myForm.reset() ;
+  }
+
+  exit(){
+    // Re-direct to app landing page
+    window.location.href = "http://localhost:4200/#/dashboard" ;
+  }
+
+  post(){
+    console.table(this.myForm.get('corrections').value) ; // dbg
+  }
+
+  save(){}
+
   // -----------------------------------------------------------------------------------------------------
+
   // bgn: Editable Table
   editField: string;
   personList: Array<any> = [
