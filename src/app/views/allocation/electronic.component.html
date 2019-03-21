@@ -1,5 +1,5 @@
 <!-- Electroninc Allocation - Allocation Module -->
-<!-- TO-DO: Report screen design -->
+
 <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-12">
@@ -16,7 +16,7 @@
                 <div class="col-lg-6">
                           
                   <div class = "form-group row">
-                    <label class="col-md-4 col-form-label" >PAYPOINT ID</label>
+                    <label class="col-md-4 col-form-label" >PAYPOINT ID <span class="text-danger">*</span></label>
                     <div class = "col-md-6">
                       <select class="form-control" id="selectBrCode" 
                         formControlName = "paypointID" [disabled]="disableForm">
@@ -26,7 +26,7 @@
                   </div>
     
                    <div class = "form-group row">
-                    <label class="col-md-4 col-form-label" >CREDIT FILES</label>
+                    <label class="col-md-4 col-form-label" >CREDIT FILES <span class="text-danger">*</span></label>
                     <div class = "col-md-6">
                       <select class="form-control" id="selectCrFile" 
                         formControlName = "creditFile" [disabled]="disableForm">
@@ -36,8 +36,9 @@
                   </div>
                     
                   <div class = "form-group row">
-                    <label class="col-md-4 col-form-label" >RECEIPT No.</label>
+                    <label class="col-md-4 col-form-label" >RECEIPT No. <span class="text-danger">*</span></label>
                     <div class = "col-md-6">
+                      <small class="form-text text-danger">Receipt Number (Allocation Period)</small>
                       <select class="form-control" id="selectReceiptNo" formControlName = "receiptNo" [disabled] = "disableForm">
                         <option [ngValue]="receipt" *ngFor="let receipt of receipts">{{receipt.rctNo}}</option>
                       </select>
@@ -52,7 +53,7 @@
                   </div>
                   
                   <div class = "form-group row">
-                    <label class="col-md-4 col-form-label" >STATEMENT No.</label>
+                    <label class="col-md-4 col-form-label" >STATEMENT No. <span class="text-danger">*</span></label>
                     <div class = "col-md-6">
                       <select class="form-control" id="selectStmtNo" formControlName = "statementNo" [disabled]="disableForm">
                         <option [ngValue]="statement" *ngFor="let statement of statements">{{statement.stmtNo}}</option>
@@ -68,10 +69,10 @@
                   </div>
 
                   <div class="form-group row">
-                     <label class="col-md-4 col-form-label">ALLOCATED PERIOD</label>
+                     <label class="col-md-4 col-form-label">ALLOCATED PERIOD <span class="text-danger">*</span></label>
                     <div class = "col-md-6">
                       <input class="form-control" id="date-input" type="date" 
-                       formControlName = "allocatedPeriod" name="date-input" value = "2018-09-30" required>
+                       formControlName = "allocatedPeriod" name="date-input" value = "2018-09-30">
                      </div>
                   </div>
 
@@ -98,7 +99,7 @@
                   </div>
 
                   <div class = "form-group row">
-                    <label class="col-md-4 col-form-label" >GROSS AMOUNT (R)</label>
+                    <label class="col-md-4 col-form-label" >GROSS AMOUNT</label>
                     <div class = "col-md-6">
                       <input class="form-control" formControlName = "grossAmountReceipt"
                         value = {{electronicInput.value.receiptNo.rctAmnt}}>
@@ -109,7 +110,7 @@
                   <br>
 
                   <p><div class = "form-group row">
-                    <label class="col-md-4 col-form-label" >GROSS AMOUNT (S)</label>
+                    <label class="col-md-4 col-form-label" >GROSS AMOUNT</label>
                       <div class = "col-md-6">
                         <input class="form-control" formControlName = "grossAmountStatement"
                           value = {{electronicInput.value.statementNo.stmtAmnt}}>
