@@ -1,5 +1,4 @@
 <!-- Paypoint Collection History - Allocation Module -->
-<!-- TO-DO: button actions and Paypoint Editable Search i.e. search as you type -->
 
 <div class="animated fadeIn">
 
@@ -18,7 +17,7 @@
               <div class="col-lg-12">
                                  
                 <div class = "form-group row">
-                  <label class="col-md-2 col-form-label" >Paypoint ID</label>
+                  <label class="col-md-2 col-form-label" >Paypoint ID <span class="text-danger">*</span></label>
                   <div class = "col-md-2">
                     <select class="form-control" formControlName = "paypointID">
                       <option [ngValue]="ppid"  *ngFor="let ppid of paypoints">{{ppid.ppID}}</option>        
