@@ -256,25 +256,23 @@
                                   <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
                                     <i class="fa fa-trash"></i></button></td>
                                 </tr>
+
+                                <tr>
+                                  <td>
+                                    <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                                  </td>
+                                  <td colspan="5" class="text-center font-weight-bold">Paypoint Total</td>
+                                  <td class="h6 text-right">{{totalDDE | number : '.2-2' }}</td>
+                                  <td></td>
+                                </tr>
                         
                               </tbody>
                             </table>
                             
                         </div>
 
-                        <br><br>
-                        
-                        <p class="h6 text-right">Paypoint Total: BWP {{totalDDE | number : '.2-2' }}</p>
-                            
-                        <div class="btn-toolbar">
-                          <div class="btn-group mr-2">
-                            <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
-                          </div>
-                        </div>
-                        
                     </form>
                     <!-- end: actual editable -->
-
                   </div>
                 </tab>
 
@@ -315,21 +313,20 @@
                               <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
                                 <i class="fa fa-trash"></i></button></td>
                             </tr>
+
+                            <tr>
+                              <td>
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                              </td>
+                              <td colspan="4" class="text-center font-weight-bold">Expected Premium Total</td>
+                              <td class="h6 text-right">{{totalExclusions | number : '.2-2' }}</td>
+                              <td></td>
+                            </tr>
                           
                           </tbody>
                         </table>
                       </div>
-    
-                      <br><br>
-                      
-                      <p class="h6 text-right">Expected Premium Total: BWP {{totalExclusions | number : '.2-2' }}</p>
-                          
-                      <div class="btn-toolbar">
-                        <div class="btn-group mr-2">
-                          <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
-                        </div>
-                      </div>
-                            
+                                                  
                     </form>
                   </div>
                 </tab>
@@ -343,63 +340,61 @@
                               <tr>
                                 <th>Transaction Type <span class="text-danger">*</span></th>
                                 <th>Period <span class="text-danger">*</span></th>
-                                <th>Paypoint Code</th>
-                                <th>Paypoint Name</th>
-                                <th>Strike Date</th>
-                                <th>Gross Amount</th>
+                                <th>Policy Code <span class="text-danger">*</span></th>
+                                <th>Policy Status</th>
+                                <th>Payor</th>
+                                <th>Expected Premium</th>
                                 <th>Allocated Amount</th>
                                 <th></th>
                               </tr>
                             </thead>
                                 
-                                <tbody formArrayName="corrections">
+                            <tbody formArrayName="corrections">
+                  
+                              <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                                <td>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
+                                    <label class="form-check-label" for="corSelect">
+                                        <input formControlName="corTransType"></label>
+                                  </div>
+                                </td>
                       
-                                  <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
-                                    <td>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
-                                        <label class="form-check-label" for="corSelect">
-                                            <input formControlName="corTransType"></label>
-                                      </div>
-                                    </td>
-                          
-                                    <td><input class="form-control" type="date" 
-                                      formControlName = "corPeriod" value = "2018-09-01"></td>
-                                    <td><input formControlName="corPartyID"></td>
-                                    <td><input formControlName="corPayerName"></td>
-                                    <td><input formControlName="corExpectedAmnt"></td>
-                                    <td><input formControlName="corPurpose"></td>
-                                    <td><input formControlName="corAllocatedAmnt"></td>
-                                    <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
-                                      <i class="fa fa-trash"></i></button></td>
-                                  </tr>
-                          
-                                </tbody>
-                              </table>
-                              
-                          </div>
-  
-                          <br><br>
-                          
-                          <p class="h6 text-right">Expected Reversals Total: BWP {{totalReversals | number : '.2-2' }}</p>
-                              
-                          <div class="btn-toolbar">
-                            <div class="btn-group mr-2">
-                              <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
-                            </div>
-                          </div>
+                                <td><input class="form-control" type="date" 
+                                  formControlName = "corPeriod" value = "2018-09-01"></td>
+                                <td><input formControlName="corPartyID"></td>
+                                <td><input formControlName="corPayerName"></td>
+                                <td><input formControlName="corExpectedAmnt"></td>
+                                <td><input formControlName="corPurpose"></td>
+                                <td><input formControlName="corAllocatedAmnt"></td>
+                                <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
+                                  <i class="fa fa-trash"></i></button></td>
+                              </tr>
 
-                          <br> <!-- FilePicker: Reversal File col-md-4 -->
+                              <tr>
+                                <td>
+                                  <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                                </td>
+                                <td colspan="5" class="text-center font-weight-bold">Expected Reversals Total</td>
+                                <td class="h6 text-right">{{totalReversals | number : '.2-2' }}</td>
+                                <td></td>
+                              </tr>
+                      
+                            </tbody>
+                          </table>
                           
-                          <!-- <div class="form-row justify-content-center"> -->
-                            <div class="form-group row justify-content-center">
-                              <label class="col-form-label"  for="uploadReversal">REVERSAL FILE</label>
-                              <div class="col-md-6">
-                                <input type="file" class="form-control-file" id="uploadReversal" 
-                                  style="border: 1px solid #000;" name="uploadReversal">
-                              </div>
-                            </div>
-                          <!-- </div> -->
+                      </div>
+  
+                      <br>
+                      
+                      <!-- FilePicker: Reversal File col-md-4 -->
+                      <div class="form-group row justify-content-center">
+                        <label class="col-form-label"  for="uploadReversal">REVERSAL FILE</label>
+                        <div class="col-md-6">
+                          <input type="file" class="form-control-file" id="uploadReversal" 
+                            style="border: 1px solid #000;" name="uploadReversal">
+                        </div>
+                      </div>
                                                     
                     </form>
                   </div>
@@ -437,22 +432,21 @@
                               <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
                                 <i class="fa fa-trash"></i></button></td>
                             </tr>
+
+                            <tr>
+                                <td>
+                                  <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                                </td>
+                                <td colspan="2" class="text-center font-weight-bold">Sundry Total</td>
+                                <td class="h6 text-right">{{totalSundry | number : '.2-2' }}</td>
+                                <td></td>
+                              </tr>
                     
                           </tbody>
                         </table>
                             
                       </div>
-  
-                      <br><br>
-                      
-                      <p class="h6 text-right">Sundry Total: BWP {{totalSundry | number : '.2-2' }}</p>
-                          
-                      <div class="btn-toolbar">
-                        <div class="btn-group mr-2">
-                          <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
-                        </div>
-                      </div>
-                        
+                                                  
                     </form>
                   </div>
                 </tab>
@@ -490,22 +484,21 @@
                                   <td><button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">
                                     <i class="fa fa-trash"></i></button></td>
                                 </tr>
+
+                                <tr>
+                                    <td>
+                                      <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
+                                    </td>
+                                    <td colspan="2" class="text-center font-weight-bold">Unspecified Total</td>
+                                    <td class="h6 text-right">{{totalUnspecified | number : '.2-2' }}</td>
+                                    <td></td>
+                                  </tr>
                         
                               </tbody>
                             </table>
                                 
                           </div>
       
-                          <br><br>
-                          
-                          <p class="h6 text-right">Unspecified Total: BWP {{totalUnspecified | number : '.2-2' }}</p>
-                              
-                          <div class="btn-toolbar">
-                            <div class="btn-group mr-2">
-                              <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD</button> 
-                            </div>
-                          </div>
-                            
                         </form>
                     
                   </div>
