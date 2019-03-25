@@ -153,4 +153,9 @@ corRPostingStatus: []
 
   // end: editable table
 
+  // Dynamic Data - Branch/login-name
+  loginName = "user1" ;
+  branch = "Gaborone Head Office";
+  postingStatus = "UNPOSTED" ;
+
 }
