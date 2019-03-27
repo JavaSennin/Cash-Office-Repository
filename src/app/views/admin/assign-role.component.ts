@@ -24,9 +24,8 @@ export class AssignRoleComponent {
 
   // Array to hold dynamic data - Current Roles
   currentRoles = [
-    {roleID: "role_adm_cash", roleName: "Admin Authority for Cash Office"},
-    {roleID: "role_adm_cash", roleName: "Admin Authority for Paypoint"},
-    {roleID: "role_adm_grp", roleName: "Admin Authority for Groups"}
+    {roleID: "role_adm_cash", roleName: "Admin Authority for Cash Office",groupID:21,groupName:"Cash Office Admin",enable:"true"},
+ 
   ] ;
 
   save(){}
