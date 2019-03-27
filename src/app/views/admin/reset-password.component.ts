@@ -18,9 +18,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class ResetPasswordComponent {
 
   userInput = new FormGroup({
-    username: new FormControl('', Validators.required),
-    firstName: new FormControl(''),
-    lastName: new FormControl('')
+    username: new FormControl(''), //Validators.required),
+    firstName: new FormControl({value: '', disabled: true }),
+    lastName: new FormControl({value: '', disabled: true })
   }) ;
 
   clear(){
