@@ -31,19 +31,29 @@ export class PageAccessComponent {
     {screenCode: "APP", screenDesc: "SETUP APPLICATIONS", url:"/pages/cash/apps", application: "CASH OFFICE MASTER"}
   ] ;
 
+  roles = [
+    {screenName: "Setup Cashier", role: "ROLE_ADMIN", enabled:"true"},
+    {screenName: "Setup Cashier", role: "ROLE_ADMIN_CASHOFFICE", enabled:"true"},
+    
+  ] ;
+
   save(){}
 
   find(){}
+  displayPageAccess = false;
+  changeRoles(){
 
-  changeRoles(){}
+    this.displayPageAccess = true;
+  }
 
   clear(){
     this.pageInput.reset() ;
   }
 
   exit(){
+
+    this.displayPageAccess = false;
     // Re-direct to app landing page
-    window.location.href = "http://localhost:4200/#/dashboard" ;
   }
 
 }
