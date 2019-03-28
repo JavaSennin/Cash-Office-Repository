@@ -19,8 +19,18 @@ export class AssignRoleComponent {
 
   roleInput = new FormGroup({
     roleID: new FormControl('', Validators.required),
-    roleDesc: new FormControl('', Validators.required)
+    
+    roleDesc: new FormControl('', Validators.required),
+   
   }) ;
+  roleInput2 = new FormGroup({
+
+    roleID1: new FormControl('', Validators.required),
+    roleDesc1: new FormControl('', Validators.required),
+    groupCode: new FormControl('', Validators.required),
+    
+
+  });
 
   // Array to hold dynamic data - Current Roles
   currentRoles = [
