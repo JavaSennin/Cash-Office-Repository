@@ -31,7 +31,7 @@ export class UserManagementComponent {
   }) ;
 
   groupInput = new FormGroup({
-    username: new FormControl({value:'', disabled:true}, Validators.required),
+    username: new FormControl({value:'', disabled:true}), //Validators.required),
     firstName: new FormControl({value:'', disabled:true}),
     lastName: new FormControl({value:'', disabled:true}),
     groupName: new FormControl('', Validators.required),
