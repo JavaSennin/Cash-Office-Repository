@@ -28,11 +28,16 @@ export class AssignRoleComponent {
  
   ] ;
 
+  displayPopUp = false;
+
   save(){}
 
   find(){}
 
-  assignRole(){}
+  assignRole(){
+
+    this.displayPopUp = true;
+  }
 
   clear(){
     this.roleInput.reset() ;
