@@ -42,18 +42,23 @@ export const navItems = [
     ]
   },
   {
-    name: 'CASHOFFICE TRANSACTION',
-    url: '/cashoffice-transaction',
+    name: 'CASHOFFICE TRANSACTION2',
+    url: '/cash-transaction',
     
     children: [
       {
         name: 'Cash Office Activity',
-        url: '/buttons/buttons',
+        url: '/cash-transaction/cash-officeactivity',
+      
+      },
+      {
+        name: 'Cash Office Activity3',
+        url: '/cash-transaction/cash-officeactivity3',
       
       },
       {
         name: 'Cash Till Activity',
-        url: '/buttons/dropdowns',
+        url: '/cash-transaction/assign-role',
         
       },
       {

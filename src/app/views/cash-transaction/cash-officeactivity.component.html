@@ -1,0 +1,122 @@
+<div class="animated fadeIn" action="" method="post" enctype="multipart/form-data">
+    <form [formGroup]="QueryReceipt" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> CashOfficeActivities Details
+                    </div>
+                    <form novalidate method="post" [formGroup]="ActivityInput" (ngSubmit)="activity()" >
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label" for="text-input">Activity Id</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" id="text-input" type="text" formControlName = "activityId"/>
+                                            </div>
+                                            <label class="col-md-3 col-form-label"
+                                                for="text-input">Cash Office Code</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" id="text-input" type="text" formControlName = "CFCode"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label" for="text-input">Branch Code</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" id="text-input" type="text" formControlName = "BCode"/>
+                                            </div>
+                                            <label class="col-md-3 col-form-label" for="text-input">Receipt Date</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" id="date-input" type="date" formControlName = "RDate" name="date-input" required>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-body" style="align-self: center">
+                                <div class="btn-toolbar">
+
+                                    <label class="col-md-3 col-form-label" for="text-input">Status:</label>
+
+                                    <div class="btn-group mr-2">
+                                        <button type="button" class="btn btn-md btn-primary ">Open</button>
+                                    </div>
+                                    <div class="btn-group mr-2">
+                                        <a href="#"><button type="button"
+                                                class="btn btn-md btn-primary ">Close</button></a>
+                                    </div>
+                                    <div class="btn-group mr-2">
+                                        <button type="submit" class="btn btn-md btn-primary">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form novalidate method="post" [formGroup]="ActivityInput">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <table class="table table-bordered table-striped table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Cashier Code</th>
+                                                        <th>Cashier Name</th>
+                                                        <th>Login Id</th>
+                                                        <th>Branch Code</th>
+                                                        <th>Status</th>
+                                                        <th>Authorize</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody *ngFor="let ca of cashofficeActivity">
+                                                    <tr>
+                                                        <td>{{ca.cashofficeActivityCode}}</td>
+                                                        <td>{{ca.cashofficeActivityDesc}}</td>
+                                                        <td><span *ngIf="ca.enabled == 'Y'"
+                                                                class="badge badge-success">Active</span>
+                                                            <span *ngIf="ca.enabled == 'N'"
+                                                                class="badge badge-danger">Inactive</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-body" style="align-self: center">
+                                    <div class="btn-toolbar">
+
+                                        <div class="btn-group mr-2">
+                                            <button type="submit" class="btn btn-md btn-primary">Print Daily
+                                                Listing</button>
+                                        </div>
+
+                                        <div class="btn-group mr-2">
+                                            <a href="#"><button type="button"
+                                                    class="btn btn-md btn-primary ">Exit</button></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+    <!--form end -->
+</div>
