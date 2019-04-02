@@ -1,6 +1,8 @@
+// CashOffice Activity - Transactions Module
+
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // import { createactivity } from './createactivity.interface';
 // import { apiURL } from '../../_nav';
@@ -26,7 +28,8 @@ export class cashofficeactivity3Component {
   activity: any;
   createactivity: FormGroup;
   activityDetails :any;  
-  constructor(private http: HttpClient) {
+  // constructor(private http: HttpClient) {
+    constructor() {
     this.createactivity = new FormGroup(
       {
         activityId: new FormControl('',Validators.required),
@@ -38,12 +41,12 @@ export class cashofficeactivity3Component {
   }
 
   ngOnInit() {
-    let obs = this.http.get('http://192.168.1.158:9090/CashOffice-Test/api/activity');
-    obs.subscribe(response => {
-      console.log(response);
-      this.activityDetails =response;
-    }
-    );
+    // let obs = this.http.get('http://192.168.1.158:9090/CashOffice-Test/api/activity');
+    // obs.subscribe(response => {
+    //   console.log(response);
+    //   this.activityDetails =response;
+    // }
+    // );
   }
 
   // onSubmit({ value, valid }: { value: createactivity, valid: boolean }) {

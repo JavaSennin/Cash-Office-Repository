@@ -42,7 +42,7 @@ export const navItems = [
     ]
   },
   {
-    name: 'CASHOFFICE TRANSACTION2',
+    name: 'CASHOFFICE TRANSACTION',
     url: '/cash-transaction',
     
     children: [
@@ -100,6 +100,10 @@ export const navItems = [
         name: 'Secure Loan Enquiry',
         url: '/buttons/brand-buttons',
         
+      },
+      {
+        name: 'Group Master Webservice',
+        url: '/cash-transaction/group-master' 
       }
       
     ]
@@ -244,10 +248,6 @@ export const navItems = [
         url: '/allocation/bank-posting'
       }
        
-     
-    
-   
-      
     ]
   },
 

@@ -1,4 +1,4 @@
-// Group Master - Admin Module
+// Practice files - Angular Web Service
 
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';

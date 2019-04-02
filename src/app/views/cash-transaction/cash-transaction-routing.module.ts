@@ -35,7 +35,7 @@ const routes: Routes = [
         path: 'group-master',
         component: GroupMasterComponent,
         data: {
-          title: 'Group Master'
+          title: 'Group Master Webservice'
         }
       },
       {
