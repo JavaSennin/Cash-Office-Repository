@@ -5,6 +5,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { HttpClientModule } from '@angular/common/http';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -30,6 +31,7 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
+ 
 } from '@coreui/angular';
 
 // Import routing module
@@ -57,10 +59,15 @@ import { HttpModule } from '@angular/http';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+<<<<<<< HEAD
     ChartsModule
     ,HttpClientModule
     ,HttpModule
     
+=======
+    ChartsModule,
+    HttpClientModule
+>>>>>>> 10993158aac0644d10e14a2c674f1d03da8f099c
   ],
   declarations: [
     AppComponent,
