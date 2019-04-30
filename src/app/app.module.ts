@@ -40,6 +40,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+// Web Service Things
+import { HttpClientModule,  } from '@angular/common/http';
+import { GroupMasterService } from './views/cash-transaction/group-master.service' ;
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -53,6 +58,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule
+    ,HttpClientModule
+    ,HttpModule
+    
   ],
   declarations: [
     AppComponent,
@@ -61,8 +69,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     P500Component,
     LoginComponent,
     RegisterComponent
+    // ,    GroupMasterService
   ],
-  providers: [{
+  providers: [
+    GroupMasterService,
+    {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }],

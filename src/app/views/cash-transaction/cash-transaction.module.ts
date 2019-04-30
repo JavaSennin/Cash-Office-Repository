@@ -17,7 +17,11 @@ import { AssignRoleComponent } from './assign-role.component';
 import { GroupMasterComponent } from './group-master.component';
 import { PageAccessComponent } from './page-access.component' ;
 import { ResetPasswordComponent } from './reset-password.component' ;
-import { UserManagementComponent } from './user-management.component' ;
+import { UserManagementComponent } from './user-management.component';
+import { AppComponent } from './app/app.component' ;
+
+// import { GroupMasterService } from './group-master.service'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -25,8 +29,11 @@ import { UserManagementComponent } from './user-management.component' ;
     CashTransactionRoutingModule,
     BsDropdownModule.forRoot(),
     FormsModule, ReactiveFormsModule
+    , HttpClientModule
   ],
   declarations: [
+
+    // GroupMasterService,
 
     cashofficeactivityComponent,
     cashofficeactivity3Component,
@@ -36,7 +43,8 @@ import { UserManagementComponent } from './user-management.component' ;
     GroupMasterComponent,
     PageAccessComponent,
     ResetPasswordComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    AppComponent
   ]
 })
 export class CashTransactionModule { }
