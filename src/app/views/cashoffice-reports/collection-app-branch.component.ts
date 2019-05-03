@@ -1,5 +1,11 @@
-import { Component, NgModule } from '@angular/core';
+// TO-DO: Error Handling. and Progress Spinner 
+
+import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { NgxXml2jsonService } from 'ngx-xml2json'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -13,32 +19,78 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 @Component({
   templateUrl: 'collection-app-branch.component.html'
 })
-export class CollectionAppBranchComponent {
+export class CollectionAppBranchComponent implements OnInit {
 
-  cashierInput = new FormGroup({
-  branchCode: new FormControl('', Validators.required)
-  
-  });
-  onSubmit(){
-    this.displayReport = true ; // show container for the results. 
-  
-    console.table(this.cashierInput.value) ;
-  }
+  cashierInput = new FormGroup({ branchCode: new FormControl('', Validators.required)});
 
-  
-  
+  branchName: string = "" ;
+  cashOfficeName: string ;
+
+  cashOfficeCollection: number = 0.0 ; 
+  branchCodes :any;
+  branchCollection: number = 0.0 ;
   displayReport = false ;
 
+  reciepts: any ; 
+
+  url : string;
+
+  constructor(private http:HttpClient){}
+
+  ngOnInit(){
+    
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.url ="http://localhost:8080/cash/collection-branch/"
+   this.http.get(this.url,httpOptions)
+    .subscribe((response)=>{
+      const obj = response;
+      
+      this.branchCodes = obj; 
+
+    }
+    ,err => this.handleError(err));
+  }
+
+  onSubmit(){
+      
+    let bc = this.cashierInput.get('branchCode').value ;
+    let url ="http://localhost:8080/cash/collection-branch/" + bc ;
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.http.get(url, httpOptions)
+    .subscribe((response)=>
+    {
+      this.reciepts = response; 
+      
+      this.cashOfficeCollection = this.reciepts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+           
+      this.branchCollection = this.reciepts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+    }
+    ,err => this.handleError(err)
+    , () => this.sums() 
+  );
+
+    this.displayReport = true ; // show container for the results. 
+  }
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+    this.branchName = this.reciepts[0].branch_name ;
+    this.cashOfficeName = this.reciepts[0].cash_office_desc ;
+
+    this.cashOfficeCollection = this.reciepts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+  }
+    
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
   }
-
-  //Array for Dummy data
-  reciepts: any[]= [
-    {s_no:"",reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},
-    {s_no:"",reciept_number:4567,reciept_date:"27/09/97",amount:"458,253.00"},
-    {s_no:"",reciept_number:4867,reciept_date:"02/09/97",amount:"488,253.00"},
-    {s_no:"",reciept_number:8897,reciept_date:"02/11/07",amount:"888,253.00"},
-    {s_no:"",reciept_number:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
-  ];
+  
 }
