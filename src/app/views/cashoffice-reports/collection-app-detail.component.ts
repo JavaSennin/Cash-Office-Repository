@@ -1,5 +1,10 @@
-import { Component, NgModule } from '@angular/core';
+// http://localhost:8080/cash/collection-detail/106&2019-01-01&2019-01-31
+
+import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -14,48 +19,104 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 @Component({
   templateUrl: 'collection-app-detail.component.html'
 })
-export class CollectionAppDetailComponent {
+export class CollectionAppDetailComponent implements OnInit{
 
   detailInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),
     fromDate: new FormControl('2018-09-01', Validators.required),
     toDate: new FormControl('2018-09-30', Validators.required)
   });
- 
+
+  branchCodes : any;
+  branchName: string = "" ;
+
+  displayReport = false ;
+
+  receipts : any ;
+  receipts_gls : any ; // Group Life System
+  receipts_sun : any ; // Sundry Receipts
+  receipts_tpol : any ; // Policy
+
+  // Collection Totals
+  totalBranch: number = 0.0 ; 
+  totalGls: number = 0.0 ; 
+  totalSun: number = 0.0 ; 
+  totalTPOL: number = 0.0 ; 
+
+  url : string;
+
+  constructor(private http:HttpClient){}
+
+  ngOnInit(){
+    
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.url ="http://localhost:8080/cash/collection-branch/"
+   this.http.get(this.url,httpOptions)
+    .subscribe((response)=>{
+      const obj = response;
+      
+      this.branchCodes = obj; 
+
+    }
+    ,err => this.handleError(err));
+  }
 
   detailReport(){
 
-    this.displayReport = true ;
-    console.table(this.detailInput.value) ;
+    let bc = this.detailInput.get('branchCode').value ;
+    let fd = this.detailInput.get('fromDate').value ;
+    let td = this.detailInput.get('toDate').value ;
 
-    // form-processing code
+    let url ="http://localhost:8080/cash/collection-detail/" + bc + "&" + fd  + "&" + td ;
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.http.get(url, httpOptions)
+    .subscribe((response)=>
+    {
+      this.receipts = response; 
+      
+      // this.cashOfficeCollection = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+           
+      // this.branchCollection = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+    }
+    ,err => this.handleError(err)
+    , () => this.sums() 
+  );
+
+    this.displayReport = true ;
+
   }
-  displayReport = false ;
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+    this.branchName = this.receipts[0].branch_name ;
+
+    this.receipts_gls = this.filterApp(this.receipts, "GPL") ;
+    this.receipts_sun = this.filterApp(this.receipts, "SUN") ;
+    this.receipts_tpol = this.filterApp(this.receipts, "TPOL") ;
+
+    this.totalBranch = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+
+    this.totalGls = this.receipts_gls.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+    this.totalSun = this.receipts_sun.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+    this.totalTPOL = this.receipts_tpol.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+
+    console.log(this.totalSun) ; // dbg
+  }
+
+  // returns all items that have "filter" from the "list"
+  filterApp(list, filter) { return list.filter(e=>e.app_code.includes(filter));}
 
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
   }
-  //Array for Dummy data [Group Life System]
-  reciepts: any[]= [
-    {reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},
-    {reciept_number:4567,reciept_date:"27/09/97",amount:"458,253.00"},
-    {reciept_number:4867,reciept_date:"02/09/97",amount:"488,253.00"},
-    {reciept_number:8897,reciept_date:"02/11/07",amount:"888,253.00"},
-    {reciept_number:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
-  ];
-   //Array for Dummy data
-   reciepts_policy: any[]= [
-    {reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},
-    {reciept_number:4567,reciept_date:"27/09/97",amount:"458,253.00"},
-    {reciept_number:4867,reciept_date:"02/09/97",amount:"488,253.00"},
-    {reciept_number:8897,reciept_date:"02/11/07",amount:"888,253.00"},
-    {reciept_number:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
-  ];
-  reciepts_gls: any[]= [
-    {reciept_number:1234,reciept_date:"27/09/67",amount:"258,896.00"},
-    {reciept_number:4567,reciept_date:"27/09/97",amount:"458,253.00"},
-    {reciept_number:4867,reciept_date:"02/09/97",amount:"488,253.00"},
-    {reciept_number:8897,reciept_date:"02/11/07",amount:"888,253.00"},
-    {reciept_number:9897,reciept_date:"09/11/07",amount:"1,888,253.00"}
-  ];
+
 }
