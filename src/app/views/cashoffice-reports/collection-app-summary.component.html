@@ -1,4 +1,5 @@
-<!-- Collection - Application Detail -->
+<!-- Collection - Application Summary -->
+
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-lg-12">
@@ -20,9 +21,7 @@
                   <div>
                     <select class="form-control" id="selectBrCode" 
                     formControlName = "branchCode" >
-                      <option value="0">Please Select</option>
-                      <option value="1">Branch CODE001</option>
-                      <option value="2">Branch CODE002</option>
+                      <option *ngFor= "let branchCode of branchCodes" [ngValue]="branchCode">{{branchCode}}</option>
                     </select>
                   </div>
                 </div>
@@ -31,7 +30,7 @@
                   <label class="col-md-3 col-form-label">From Date</label>
                   <div>
                     <input class="form-control" id="date-input" type="date" 
-                    formControlName = "fromDate" name="date-input" value = "2018-09-01" required>
+                    formControlName = "fromDate" name="date-input" value = "2018-09-01">
                   </div>
                 </div>
 
@@ -39,7 +38,7 @@
                   <label class="col-md-3 col-form-label">To Date</label>
                   <div>
                     <input class="form-control" id="date-input" type="date" 
-                    formControlName = "toDate" name="date-input" value = "2018-09-30" required>
+                    formControlName = "toDate" name="date-input" value = "2018-09-30">
                   </div>
                 </div>
                         
@@ -57,12 +56,13 @@
       </div>
     </div>
   </div>
+
     <!-- Report/Results Container -->
     <div class="row" *ngIf="displayReport">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> <b>Branch Name : </b>Gaborone Head Office
+              <i class="fa fa-align-justify"></i> <b>Branch Name:</b> &nbsp; {{receipts ? branchName : ""}}
             </div>
        
             <div class="card-body">
@@ -70,7 +70,7 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i>Payment for Policy
+                      <i class="fa fa-align-justify"></i>Payment for POLICY
                     </div>
                     <div class="card-body">
                       <table class="table">
@@ -78,34 +78,28 @@
                           <tr>
                             <th>Payment Method</th>
                             <th>Amount</th>
-                            <th>Count</th>
-                          
+                            <th>Count</th>                        
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let pym of payments_p">
-                            <td>{{pym.payment_method}}</td>
-                            <td>{{pym.amount}}</td>
-                            <td>{{pym.count}}</td>
-                          
-                         
+                          <tr *ngFor="let item of receipts_tpol">
+                            <td>{{item.pay_method_desc}}</td>
+                            <td class="text-right">{{item.allocated_amount | number : '.2-2' }}</td>
+                            <td class="text-right">{{item.receipt_count}}</td>                         
                           </tr>
-                       
-                         
+                          <tr class="font-weight-bold">
+                            <td class="text-center">Total</td>
+                            <td *ngIf="receipts" class="text-right">{{totalTPOL | number : '.2-2' }}</td>
+                            <td *ngIf="receipts" class="text-right">{{totalPCount }}</td>
+                          </tr>
                         </tbody>
-                      </table>
-
-                      
+                      </table>                     
                      
                     </div>
-                  </div>
-
-                  
-
+                  </div>                
                   
                 </div>
               </div>
-    
               
           </div>
 
@@ -115,7 +109,7 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i>Payment for Sundries
+                      <i class="fa fa-align-justify"></i>Payment for SUNDRY RECEIPTS
                     </div>
                     <div class="card-body">
                       <table class="table">
@@ -123,85 +117,37 @@
                           <tr>
                             <th>Payment Method</th>
                             <th>Amount</th>
-                            <th>Count</th>
-                          
+                            <th>Count</th>      
                           </tr>
                         </thead>
+
                         <tbody>
-                          <tr *ngFor="let pyms of payments_s">
-                            <td>{{pyms.payment_method}}</td>
-                            <td>{{pyms.amount}}</td>
-                            <td>{{pyms.count}}</td>
-                          
-                         
+                          <tr *ngFor="let item of receipts_sun">
+                            <td>{{item.pay_method_desc}}</td>
+                            <td class="text-right">{{item.allocated_amount | number : '.2-2' }}</td>
+                            <td class="text-right">{{item.receipt_count}}</td>                         
                           </tr>
-                        
-                         
+                          <tr class="font-weight-bold">
+                            <td class="text-center">Total</td>
+                            <td *ngIf="receipts" class="text-right">{{totalSun | number : '.2-2' }}</td>
+                            <td *ngIf="receipts" class="text-right">{{totalSCount }}</td>
+                          </tr>
                         </tbody>
                       </table>
-
-                      
-                     
                     </div>
                   </div>                  
                 </div>
               </div>
-    
-           
-    
-          </div>
+    </div>
           <!---End table-->
-
           
-          <!--Table 2-->
-          <div class="card-body">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="card">
-                    <div class="card-header">
-                      <i class="fa fa-align-justify"></i>Payment for Group Life System
-                    </div>
-                    <div class="card-body">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Payment Method</th>
-                            <th>Amount</th>
-                            <th>Count</th>
-                          
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let pymg of payments_gls">
-                            <td>{{pymg.payment_method}}</td>
-                            <td>{{pymg.amount}}</td>
-                            <td>{{pymg.count}}</td>
-                          
-                         
-                          </tr>
-                         
-                        
-                         
-                        </tbody>
-                      </table>
-
-                      
-                     
-                    </div>
-                  </div>                  
-                </div>
-              </div>
-    
-    
-          </div>
-          <!---End table-->
           <!--Table 3-->
           <div class="card-body">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i>Payment for Group Life System
+                      <i class="fa fa-align-justify"></i>Payment for GROUP LIFE SYSTEM
                     </div>
                     <div class="card-body">
                       <table class="table">
@@ -209,34 +155,33 @@
                           <tr>
                             <th>Payment Method</th>
                             <th>Amount</th>
-                            <th>Count</th>
-                          
+                            <th>Count</th>                          
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let pymg2 of payments_gls2">
-                            <td>{{pymg2.payment_method}}</td>
-                            <td>{{pymg2.amount}}</td>
-                            <td>{{pymg2.count}}</td>
-                          
-                         
+                          <tr *ngFor="let item of receipts_gls">
+                            <td>{{item.pay_method_desc}}</td>
+                            <td class="text-right">{{item.allocated_amount | number : '.2-2' }}</td>
+                            <td class="text-right">{{item.receipt_count}}</td>                         
                           </tr>
-                         
-                        
-                         
+                          <tr class="font-weight-bold">
+                            <td class="text-center">Total</td>
+                            <td *ngIf="receipts" class="text-right">{{totalGls | number : '.2-2' }}</td>
+                            <td *ngIf="receipts" class="text-right">{{totalGCount }}</td>
+                          </tr>
                         </tbody>
-                      </table>
-
-                      
+                      </table>                     
                      
                     </div>
                   </div>                  
                 </div>
               </div>
-    
-    
           </div>
           <!---End table-->
+
+          <!-- <br> -->
+          <p class="font-weight-bold text-center">Total Collection by Branch: {{totalBranch | number : '.2-2' }}</p>
+
           <div class="card-body">
         <div class="row">
             <div class= "col-lg-12">
@@ -255,5 +200,5 @@
         
         </div>
 
-      </div>
+    </div>
 </div>

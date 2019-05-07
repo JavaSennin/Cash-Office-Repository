@@ -75,17 +75,15 @@ export class CollectionAppDetailComponent implements OnInit{
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
      }
    this.http.get(url, httpOptions)
-    .subscribe((response)=>
-    {
-      this.receipts = response; 
+
+    .subscribe(
       
-      // this.cashOfficeCollection = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
-           
-      // this.branchCollection = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
-    }
-    ,err => this.handleError(err)
-    , () => this.sums() 
-  );
+        (response)=>{ this.receipts = response ; }
+
+      , err => this.handleError(err)
+
+      , () => this.sums() 
+    );
 
     this.displayReport = true ;
 
