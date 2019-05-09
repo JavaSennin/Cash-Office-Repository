@@ -20,9 +20,7 @@
                   <div>
                     <select class="form-control" id="selectBrCode" 
                     formControlName = "branchCode" >
-                      <option value="0">Please Select</option>
-                      <option value="1">Branch CODE001</option>
-                      <option value="2">Branch CODE002</option>
+                    <option *ngFor= "let branchCode of branchCodes" [ngValue]="branchCode">{{branchCode}}</option>
                     </select>
                   </div>
                 </div>
@@ -31,7 +29,7 @@
                   <label class="col-md-3 col-form-label">From Date</label>
                   <div>
                     <input class="form-control" id="date-input" type="date" 
-                    formControlName = "fromDate" name="date-input" value = "2018-09-01" required>
+                    formControlName = "fromDate" name="date-input" value = "2018-09-01">
                   </div>
                 </div>
 
@@ -39,7 +37,7 @@
                   <label class="col-md-3 col-form-label">To Date</label>
                   <div>
                     <input class="form-control" id="date-input" type="date" 
-                    formControlName = "toDate" name="date-input" value = "2018-09-30" required>
+                    formControlName = "toDate" name="date-input" value = "2018-09-30">
                   </div>
                 </div>
                         
@@ -57,20 +55,21 @@
       </div>
     </div>
   </div>
-    <!-- Report/Results Container -->
-    <div class="row" *ngIf="displayReport">
+
+  <!-- Report/Results Container -->
+  <div class="row" *ngIf="displayReport">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> <b>Branch Name : </b>Gaborone Head Office
+              <i class="fa fa-align-justify"></i> <b>Branch Name:</b> &nbsp; {{receipts ? branchName : ""}}
             </div>
        <!--Tafole 1-->
-            <div class="card-body">
+<div class="card-body">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Application: </b>Group Life System
+                      <i class="fa fa-align-justify"></i><b>Application:</b> &nbsp; POLICY
                     </div>
                     <div class="card-body">
                       <table class="table">
@@ -79,34 +78,30 @@
                             <th>Reciept Number</th>
                             <th>Reciept Date</th>
                             <th>Amount (Pula)</th>
-                          
                           </tr>
                         </thead>
+
                         <tbody>
-                          <tr *ngFor="let reciept_g of reciepts_gls">
-                            <td>{{reciept_g.reciept_number}}</td>
-                            <td>{{reciept_g.reciept_date}}</td>
-                            <td>{{reciept_g.amount}}</td>
-                          
+                          <tr *ngFor="let receipt of receipts_tpol">
+                            <td>{{receipt.receipt_no | number : '.0-0'}}</td>
+                            <td>{{receipt.receipt_date | date : 'dd-MMM-yy' | uppercase}}</td>
+                            <td class="text-right">{{receipt.receipt_amount | number : '.2-2'}}</td>
                           </tr>
-                       
-                         
+                          <tr class="font-weight-bold">
+                            <td colspan="2" class="text-center">Total Collection</td>
+                            <td *ngIf="receipts" class="text-right">{{totalTPOL | number : '.2-2'}}</td>
+                          </tr>
                         </tbody>
                       </table>
 
-                      
-                     
                     </div>
                   </div>
-
-                  
-
                   
                 </div>
               </div>
-    
               
           </div>
+
           <!--End Of tafole-->
 
           <!--Table 2-->
@@ -115,42 +110,35 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Application: </b>Policy
+                      <i class="fa fa-align-justify"></i><b>Application:</b> &nbsp; GROUP LIFE SYSTEM
                     </div>
                     <div class="card-body">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Reciept Number</th>
-                            <th>Reciept Date</th>
+                            <th>Receipt Number</th>
+                            <th>Receipt Date</th>
                             <th>Amount (Pula)</th>
-                          
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let reciept_p of reciepts_policy">
-                            <td>{{reciept_p.reciept_number}}</td>
-                            <td>{{reciept_p.reciept_date}}</td>
-                            <td>{{reciept_p.amount}}</td>
-                          
+                          <tr *ngFor="let receipt of receipts_gls">
+                            <td>{{receipt.receipt_no | number : '.0-0'}}</td>
+                            <td>{{receipt.receipt_date | date : 'dd-MMM-yy' | uppercase}}</td>
+                            <td class="text-right">{{receipt.receipt_amount | number : '.2-2'}}</td>
                           </tr>
-                          
-                       
-                         
+                          <tr class="font-weight-bold">
+                            <td colspan="2" class="text-center">Total Collection</td>
+                            <td *ngIf="receipts" class="text-right">{{totalGls | number : '.2-2'}}</td>
+                          </tr>
                         </tbody>
                       </table>
-
-                      
                      
                     </div>
                   </div>
 
-                  
-
-                  
                 </div>
               </div>
-    
               
           </div>
 
@@ -160,7 +148,7 @@
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i><b>Application: </b>Group Life System
+                      <i class="fa fa-align-justify"></i><b>Application:</b> &nbsp; SUNDRY RECEIPTS
                     </div>
                     <div class="card-body">
                       <table class="table">
@@ -169,38 +157,34 @@
                             <th>Reciept Number</th>
                             <th>Reciept Date</th>
                             <th>Amount (Pula)</th>
-                          
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let reciept of reciepts">
-                            <td>{{reciept.reciept_number}}</td>
-                            <td>{{reciept.reciept_date}}</td>
-                            <td>{{reciept.amount}}</td>
-                          
+                          <tr *ngFor="let receipt of receipts_sun">
+                            <td>{{receipt.receipt_no | number : '.0-0'}}</td>
+                            <td>{{receipt.receipt_date | date : 'dd-MMM-yy' | uppercase}}</td>
+                            <td class="text-right">{{receipt.receipt_amount | number : '.2-2'}}</td>
                           </tr>
-                          
-                       
-                         
+                          <tr class="font-weight-bold">
+                            <td colspan="2" class="text-center">Total Collection</td>
+                            <td *ngIf="receipts" class="text-right">{{totalSun | number : '.2-2'}}</td>
+                          </tr>
                         </tbody>
                       </table>
 
-                      
-                     
                     </div>
                   </div>
-
-                  
-
                   
                 </div>
               </div>
-    
+
+              <br>
+              <p class="font-weight-bold text-right">Total by Branch: {{totalBranch | number : '.2-2' }}</p>
               
           </div>
           <!--End Table-->
 
-          <div class="card-body">
+      <div class="card-body">
         <div class="row">
             <div class= "col-lg-12">
               <div class="btn-group mr-2">

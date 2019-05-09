@@ -5,7 +5,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http'; 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -42,6 +42,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+// Web Service Things
+import { HttpClientModule,  } from '@angular/common/http';
+import { GroupMasterService } from './views/cash-transaction/group-master.service' ;
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -64,8 +69,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     P500Component,
     LoginComponent,
     RegisterComponent
+    // ,    GroupMasterService
   ],
-  providers: [{
+  providers: [
+    GroupMasterService,
+    {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }],

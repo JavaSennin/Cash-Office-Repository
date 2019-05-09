@@ -16,10 +16,8 @@
                 <div class = "form-group row">
                   <label class="col-md-3 col-form-label" >Branch Code</label>
                   <div>
-                    <select class="form-control" id="selectBrCode"  formControlName="branchCode" required>
-                      <option value="0">Please Select</option>
-                      <option value="1">Branch CODE001</option>
-                      <option value="2">Branch CODE002</option>
+                    <select class="form-control" id="selectBrCode"  formControlName="branchCode">
+                      <option *ngFor= "let branchCode of branchCodes" [ngValue]="branchCode">{{branchCode}}</option>
                     </select>
                   </div>
                 </div>
@@ -44,7 +42,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> <b>Branch Name : </b>Gaborone Head Office
+          <i class="fa fa-align-justify"></i> <b>Branch Name:</b> &nbsp; {{reciepts ? branchName : ""}}
         </div>
    
         <div class="card-body">
@@ -52,7 +50,7 @@
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-header">
-                  <i class="fa fa-align-justify"></i>Cash Office : CASH OFFICE-MIGRATION
+                  <i class="fa fa-align-justify"></i>Cash Office: &nbsp; {{reciepts ? cashOfficeName : ""}}
                 </div>
                 <div class="card-body">
                   <table class="table">
@@ -66,13 +64,22 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let reciept of reciepts">
-                        <td>{{reciept.s_no}}</td>
-                        <td>{{reciept.reciept_number}}</td>
-                        <td>{{reciept.reciept_date}}</td>
-                        <td>{{reciept.amount}}</td>
+                        <td></td> <!-- <td>{{reciept.s_no}}</td> -->
+                        <td>{{reciept.receipt_no}}</td>
+                        <td>{{reciept.receipt_date | date : 'dd-MMM-yy'}}</td>
+                        <td class="text-right">{{reciept.receipt_amount}}</td>
                       </tr>
+
+                      <tr class="font-weight-bold">
+                        <td colspan="3" class="text-center">Total Collection by Cash Office</td>
+                        <td *ngIf="reciepts" class="text-right">{{cashOfficeCollection | number : '.2-2'}}</td>
+                      </tr>
+
                     </tbody>
                   </table>
+
+                  <br>
+                  <p class="font-weight-bold text-right">Total Collection by Branch: {{branchCollection | number : '.2-2' }}</p>
                  
                 </div>
               </div>

@@ -1,5 +1,11 @@
+// http://localhost:8080/cash/collection-summary/106&2019-01-01&2019-01-31
+
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import * as _ from 'underscore' ; /// npm install underscore
 
 @NgModule({
   imports: [
@@ -18,53 +24,95 @@ export class CollectionAppSummaryComponent {
 
   detailInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),
-    fromDate: new FormControl('2018-09-01', Validators.required),
-    toDate: new FormControl('2018-09-30', Validators.required)
+    fromDate: new FormControl('2019-01-01', Validators.required),
+    toDate: new FormControl('2019-01-31', Validators.required)
   });
- 
+
+  branchCodes : any
+  branchName: string = "" ;  
+
+  displayReport = false ;
+
+  receipts : any ;
+
+  totalBranch: number = 0.0 ; 
+  
+  url : string;
+
+  constructor(private http:HttpClient){}
+
+  ngOnInit(){
+    
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.url ="http://localhost:8080/cash/collection-branch/"
+   this.http.get(this.url,httpOptions)
+    .subscribe((response)=>{
+      const obj = response;
+      
+      this.branchCodes = obj; 
+
+    }
+    ,err => this.handleError(err));
+  }
 
   detailReport(){
 
-    this.displayReport = true ;
-    console.table(this.detailInput.value) ;
+    let bc = this.detailInput.get('branchCode').value ;
+    let fd = this.detailInput.get('fromDate').value ;
+    let td = this.detailInput.get('toDate').value ;
 
-    // form-processing code
+    let url ="http://localhost:8080/cash/collection-summary/" + bc + "&" + fd  + "&" + td ;
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.http.get(url, httpOptions)
+    .subscribe((response)=>
+    {
+      this.receipts = response; 
+    }
+    ,err => this.handleError(err)
+    , () => this.sums() 
+  );
+
+    this.displayReport = true ;
+
   }
-  displayReport = false ;
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+    this.branchName = this.receipts[0].branch_name ;
+
+    this.totalBranch = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.allocated_amount)}, 0 ) ;
+
+    this.showGroupies() ;
+  }
 
   toggleDisplayReport(){
-    this.displayReport = !this.displayReport ; // false
+    this.displayReport = !this.displayReport ;
   }
-  //Payment For Policy
-  payments_p: any[]= [
-    {payment_method:"Cheque",amount:"258,896.00",count:245},
-    {payment_method:"Cash",amount:"558,896.00",count:240},
-    {payment_method:"Cash",amount:"8,896.00",count:502},
-    {payment_method:"Cash",amount:"8,896.00",count:802},
-  
-  ];
- //Payment For Sundries
-  payments_s: any[]= [
-    {payment_method:"Cheque",amount:"258,896.00",count:245},
-    {payment_method:"Cash",amount:"558,896.00",count:240},
-    {payment_method:"Cheque",amount:"8,896.00",count:502},
-    {payment_method:"Cash",amount:"8,896.00",count:802},
-  
-  ];
- //Payment For Group Life System
-  payments_gls: any[]= [
-    {payment_method:"Cheque",amount:"258,896.00",count:245},
-    {payment_method:"Cash",amount:"558,896.00",count:240},
-    {payment_method:"Cheque",amount:"8,896.00",count:6062},
-    {payment_method:"Cash",amount:"8,896.00",count:802},
-  
-  ];
-   //Payment For Group Life System
-  payments_gls2: any[]= [
-    {payment_method:"Cheque",amount:"258,896.00",count:245},
-    {payment_method:"Cash",amount:"558,896.00",count:240},
-    {payment_method:"Cheque",amount:"8,896.00",count:6062},
-    {payment_method:"Cheque",amount:"8,896.00",count:802},
-  
-  ];
+
+  groupies : any ;
+
+  showGroupies(){
+    // console.log( _.groupBy(this.receipts, "app_desc") ) ; // dbg
+    this.groupies = _.groupBy(_.sortBy(this.receipts, "app_desc"), "app_desc") ;
+  }
+
+  getCount(x: any): number {
+    // console.log(x) ; // dbg
+    return  x.reduce( function(accumulator, currentValue){ return accumulator +  parseInt(currentValue.receipt_count)}, 0 ) ;
+  }
+
+  getSum(x: any): number {
+    // console.log(x) ; // dbg
+    return  x.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.allocated_amount)}, 0 ) ;
+  }
+
 }
