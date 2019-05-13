@@ -53,30 +53,33 @@
                   <i class="fa fa-align-justify"></i>Cash Office: &nbsp; {{reciepts ? cashOfficeName : ""}}
                 </div>
                 <div class="card-body">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>S.No</th>
-                        <th>Reciept Number</th>
-                        <th>Reciept Date</th>
-                        <th>Amount (Pula)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let reciept of reciepts">
-                        <td></td> <!-- <td>{{reciept.s_no}}</td> -->
-                        <td>{{reciept.receipt_no}}</td>
-                        <td>{{reciept.receipt_date | date : 'dd-MMM-yy'}}</td>
-                        <td class="text-right">{{reciept.receipt_amount}}</td>
-                      </tr>
+                  <div class="table-responsive" [ngStyle]="{ 'overflow': 'auto', 'max-height': '400px' }">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>S.No</th>
+                          <th>Reciept Number</th>
+                          <th>Reciept Date</th>
+                          <th>Amount (Pula)</th>
+                        </tr>
+                      </thead>
+                      <!-- <tbody> -->
+                      <tbody>
+                        <tr *ngFor="let reciept of reciepts">
+                          <td>{{reciept.s_no}}</td>
+                          <td>{{reciept.receipt_no}}</td>
+                          <td>{{reciept.receipt_date | date : 'dd-MMM-yy'}}</td>
+                          <td class="text-right">{{reciept.receipt_amount}}</td>
+                        </tr>
 
-                      <tr class="font-weight-bold">
-                        <td colspan="3" class="text-center">Total Collection by Cash Office</td>
-                        <td *ngIf="reciepts" class="text-right">{{cashOfficeCollection | number : '.2-2'}}</td>
-                      </tr>
+                        <tr class="font-weight-bold">
+                          <td colspan="3" class="text-center">Total Collection by Cash Office</td>
+                          <td *ngIf="reciepts" class="text-right">{{cashOfficeCollection | number : '.2-2'}}</td>
+                        </tr>
 
-                    </tbody>
-                  </table>
+                      </tbody>
+                    </table>
+                  </div>
 
                   <br>
                   <p class="font-weight-bold text-right">Total Collection by Branch: {{branchCollection | number : '.2-2' }}</p>
