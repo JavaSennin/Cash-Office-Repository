@@ -1,4 +1,4 @@
-// http://localhost:8080/cash/collection-summary/106&2019-01-01&2019-01-31
+// http://10.1.49.225:8080/cash/collection-summary/106&2019-01-01&2019-01-31
 
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
@@ -46,7 +46,7 @@ export class CollectionAppSummaryComponent {
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
      }
-   this.url ="http://localhost:8080/cash/collection-branch/"
+   this.url ="http://10.1.49.225:8080/cash/collection-branch/"
    this.http.get(this.url,httpOptions)
     .subscribe((response)=>{
       const obj = response;
@@ -63,7 +63,7 @@ export class CollectionAppSummaryComponent {
     let fd = this.detailInput.get('fromDate').value ;
     let td = this.detailInput.get('toDate').value ;
 
-    let url ="http://localhost:8080/cash/collection-summary/" + bc + "&" + fd  + "&" + td ;
+    let url ="http://10.1.49.225:8080/cash/collection-summary/" + bc + "&" + fd  + "&" + td ;
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
