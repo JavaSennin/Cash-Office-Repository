@@ -1,8 +1,12 @@
 // REPRINT DEPOSIT SLIP
 
-import { Component,NgModule, OnInit } from '@angular/core';
+import { Component,NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
+import { HttpClient, HttpHeaders } from '@angular/common/http' ;
+import { Observable } from 'rxjs' ;
+
+import * as _ from 'underscore' ;
 
 @NgModule({
   imports: [
@@ -21,13 +25,77 @@ export class DepositSlipComponent {
 
   depositNumber = new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$") ]) ;
 
-  // reprintReceipt = new FormGroup({}) ;
+  accountNumber : string = "001" ; // default/placeholder
+  accountName : string = "BLIL" ; // default/placeholder
+
+  cashSlips : any ;
+  chequeSlips : any ;
+
+  valueDate : string = "" ;
+  reference : string = "" ;
+  slips : any ;
+  
+  totalCash: number = 0.00 ;
+  totalCheque: number = 0.00 ;
+
+  constructor(private http:HttpClient){}
 
   viewReport(){
+
     console.log('Receipt No. ' + this.depositNumber.value) ;
-    this.displayReport = true ; // show container for the results
-  
+
+    let dn = this.depositNumber.value ;
+
+    let url ="http://localhost:8080/cash/reprint-deposit/" + dn ;
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+
+    this.http.get(url, httpOptions)
+
+    .subscribe(
+      
+        (response)=>{ this.slips = response ; }
+
+      , err => this.handleError(err)
+
+      , () => this.sums() 
+    );
+
+    this.displayReport = true ;
+
   }
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+
+    // this.accountNumber = this.slips[0].
+    // this.accountName = this.slips[0].
+    this.valueDate = this.slips[0].deposit_date ;
+    this.reference = this.slips[0].branch_name ;
+
+    let cashS = this.filterApp( this.slips, "CSH") ;
+    console.log(cashS);
+    let cashSl = _.sortBy(cashS, 'deposited_amount');
+    console.log(cashSl) ;
+    this.cashSlips = this.filterApp( this.slips, "CSH") ;
+    this.cashSlips = this.filterApp( this.slips, "CSH") ;
+
+
+    this.chequeSlips = this.filterApp( this.slips, "CHQ") ;
+
+    this.totalCash = this.cashSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
+    this.totalCheque = this.chequeSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
+
+  }
+
+  // returns all items that have "filter" from the "list"
+  filterApp(list, filter) { return list.filter(e=>e.pay_method_id.includes(filter));}
 
   displayReport = false ;
 
@@ -44,21 +112,6 @@ export class DepositSlipComponent {
     // call pdf print preview pop up window here
   }
 
-  // Dynamic Data
-  accountNumber = 123456789;
-  accountName = "Dollars Bank Inc";
-  valueDate = "21-Jun-11";
-  reference = "GHO";
-  totalCash: number = 0.00 ;
+  url : string;
   
-  // An Array to hold dynamic data - Cheques
-  cheques = [
-    {drawer:"Gaborone Motors", chequeNo:"123", amount: 125.05},
-    {drawer:"Matsapa Butchery Inc", chequeNo:"346", amount: 200.00},
-    {drawer:"Tlokweng Insurance", chequeNo:"789", amount: 150.05}
-  ]
-
-  totalCheques: number = 
-    this.cheques.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
-
 }

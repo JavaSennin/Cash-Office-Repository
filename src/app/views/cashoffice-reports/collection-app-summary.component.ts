@@ -59,6 +59,7 @@ export class CollectionAppSummaryComponent {
 
   detailReport(){
 
+    // function btoa(stringToEncode) and atob(stringToDecode) using Base64 things
     let bc = this.detailInput.get('branchCode').value ;
     let fd = this.detailInput.get('fromDate').value ;
     let td = this.detailInput.get('toDate').value ;

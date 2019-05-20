@@ -65,6 +65,7 @@ export class CollectionAppDetailComponent implements OnInit{
 
   detailReport(){
 
+    // let bc = btoa(this.detailInput.get('branchCode').value + "                      ") ; // dbg. Base64 Encoder Things
     let bc = this.detailInput.get('branchCode').value ;
     let fd = this.detailInput.get('fromDate').value ;
     let td = this.detailInput.get('toDate').value ;
