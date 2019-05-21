@@ -1,4 +1,4 @@
-<!-- Cashier Assigment - Cash Office Reports Module -->
+<!-- Cashier Assignment - Cash Office Reports Module -->
 
 <div class="animated fadeIn">
   <div class="row">
@@ -7,12 +7,12 @@
         <div class="card-header">
           <i class="fa fa-align-justify"></i> Cashier Assignment
         </div>
-   
+
         <div class="card-body">
           <form [formGroup] = "cashierInput" (ngSubmit)="onSubmit()">
             <div class="form-row">
               <div class="col">
-                         
+
                 <div class = "form-group row">
                   <label class="col-md-2 col-form-label" >Branch Code</label>
                   <div class = "col-md-4">
@@ -27,19 +27,23 @@
                   <div class = "col-md-4">
                     <select class="form-control" id="selectCOCode" formControlName = "cashOfficeCode">
                       <option [ngValue]="co" *ngFor="let co of cashCodes">{{co[0]}}</option>
-                      
+
                     </select>
                   </div>
                 </div>
 
                 <div class="btn-toolbar">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary" >Report</button> 
+                    <button type="submit" class="btn btn-md btn-primary" [disabled]="!cashierInput.valid" >Report</button>
+                  </div>
+
+                  <div class="btn-group mr-2">
+                    <button type="button" class="btn btn-md btn-primary" (click)="getAllreports()" >All Reports</button>
                   </div>
                 </div>
-                        
+
             </div>
-                      
+
             </div>
           </form>
 
@@ -53,9 +57,12 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Cashier Assignment
+          <i class="fa fa-align-justify"></i> <span style="color: blue; font-size: 10px" >Botswana Life Insurance Ltd</span> &nbsp; | <span style="font-size:10px">Collections</span>
         </div>
-   
+        <div class="card-header">
+             Cashier Assignment
+          </div>
+
         <div class="card-body">
           <div class="row">
             <div class="col-lg-12">
@@ -65,10 +72,11 @@
               <div class="col-lg-6 text-right">{{currentDate | date: "d-MMM-y"}}</div>
             </div>
 
-              <br> 
-              
-              <p class="h4">{{branchName}}</p> 
-              
+              <br>
+
+              <p class="h4">Branch:&nbsp;{{branchName}} BRANCH</p>
+              <p class="h4">Cash Office:&nbsp;{{cashOfficeDesc}}</p>
+
               <br>
 
               <!-- Payment Methods -->
@@ -82,13 +90,13 @@
                     <th>END DATE</th>
                   </tr>
                 </thead>
-                
+
                 <tbody>
                   <tr *ngFor="let pm of paymentMethod">
-                    <td>{{pm[0]}}</td>
-                    <td>{{pm[1]}}</td>
-                    <td>{{pm[2]}}</td>
-                    <td>{{pm[3]}}</td>
+                    <td>{{pm.pay_method_code}}</td>
+                    <td>{{pm.pay_method_desc}}</td>
+                    <td>{{pm.pay_start_date}}</td>
+                    <td>{{pm.pay_end_date}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -104,7 +112,7 @@
                     <th>END DATE</th>
                   </tr>
                 </thead>
-                
+
                 <tbody>
                   <tr *ngFor = "let app of applications">
                     <td>{{app[0]}}</td>
@@ -137,7 +145,7 @@
                   </tr>
                 </tbody>
               </table>
-  
+
             </div>
           </div>
 
@@ -151,11 +159,16 @@
                   <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
                 </div>
             </div>
-          </div> 
+          </div>
 
         </div>
       </div>
     </div>
   </div>
+<div class = "row" *ngIf="displayAll">
+  <div  *ngFor="let all of allReports">
+    <ol> <li>{{all.branch_code}}</li></ol>
 
-</div> 
+</div>
+</div>
+</div>
