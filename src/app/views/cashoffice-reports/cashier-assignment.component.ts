@@ -71,10 +71,13 @@ export class CashierAssignmentComponent implements OnInit {
     this.url = 'http://localhost:8080/cash/cashier-assignment/CashCodes/' + bc;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
-        const obj = response;
-        console.log(obj);
-        this.cashCodes = obj;
-        console.log(this.cashCodes);
+        if (response = ! '') {
+          const obj = response;
+          this.cashCodes = obj;
+
+        } else {
+          this.cashierInput.get('cashOfficeCode').setValue('No CO Code!!');
+        }
 
       }
         , err => this.handleError(err));
