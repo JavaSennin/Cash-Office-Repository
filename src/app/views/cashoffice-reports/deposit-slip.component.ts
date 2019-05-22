@@ -8,6 +8,8 @@ import { Observable } from 'rxjs' ;
 
 import * as _ from 'underscore' ;
 
+import { apiURL } from '../../_nav' ;
+
 @NgModule({
   imports: [
     FormControl,
@@ -46,7 +48,7 @@ export class DepositSlipComponent {
 
     let dn = this.depositNumber.value ;
 
-    let url ="http://localhost:8080/cash/reprint-deposit/" + dn ;
+    let url = apiURL + "reprint-deposit/" + dn ;
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})

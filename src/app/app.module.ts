@@ -47,6 +47,8 @@ import { HttpClientModule,  } from '@angular/common/http';
 import { GroupMasterService } from './views/cash-transaction/group-master.service' ;
 import { HttpModule } from '@angular/http';
 
+import { PagerService,GlobalServices } from './services/index';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -74,9 +76,12 @@ import { HttpModule } from '@angular/http';
   providers: [
     GroupMasterService,
     {
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+
+    , PagerService, GlobalServices
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

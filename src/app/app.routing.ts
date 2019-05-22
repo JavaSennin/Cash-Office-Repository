@@ -67,13 +67,9 @@ export const routes: Routes = [
         loadChildren: './views/paypoint-reports/paypoint-reports.module#PaypointReportsModule'
       },
       {
-        path: 'cash-transaction',
-        loadChildren: './views/cash-transaction/cash-transaction.module#CashTransactionModule'
+        path: 'cashofficetransaction',
+        loadChildren: './views/cashofficetransaction/cashofficetransaction.module#CashOfficeTransactionMasterModule'
       },
-      // {
-      //   path: 'cashoffice-transaction',
-      //   loadChildren: './views/cashoffice-transaction/cash-office-transaction.module#CashOfficeTransactionModule'
-      // },
       {
         path: 'allocation',
         loadChildren: './views/allocation/allocation.module#AllocationModule'

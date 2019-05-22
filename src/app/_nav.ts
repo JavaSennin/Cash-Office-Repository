@@ -41,73 +41,134 @@ export const navItems = [
       }
     ]
   },
+
+  // Cash Office CASH OFFICE TRANSACTION Module
+
   {
-    name: 'CASHOFFICE TRANSACTION',
-    url: '/cash-transaction',
-    
+    name: 'CashOfficeTransactions',
+    url: '/cashofficetransaction',
+    icon: 'icon-puzzle',
     children: [
-      {
-        name: 'Cash Office Activity',
-        url: '/cash-transaction/cash-officeactivity',
-      
-      },
-      {
-        name: 'Cash Office Activity3',
-        url: '/cash-transaction/cash-officeactivity3',
-      
-      },
-      {
-        name: 'Cash Till Activity',
-        url: '/cash-transaction/assign-role',
         
+    {
+      name: 'Cash Office Activity',
+      url: '/cashofficetransaction/cashofficeactivity',
+      icon: 'icon-star'
+    },
+    {
+      name: 'Cash Till Activity',
+      url: '/cashofficetransaction/cashtillactivity',
+      icon: 'icon-star'
+    },
+    {
+      name: 'Payment Receipt',
+      url: '/cashofficetransaction/paymentreceipt',
+      icon: 'icon-star'
+    },
+      {
+        name: 'Query Receipt',
+        url: '/cashofficetransaction/QueryReceipt',
+        icon: 'icon-star'
       },
       {
-        name: 'Payment Reciepts',
-        url: '/buttons/brand-buttons',
-        
+        name: 'Cancel Payment Receipt',
+        url: '/cashofficetransaction/cancelpaymentreceipt',
+        icon: 'icon-star'
       },
+    
+    {
+      name: 'Approve Receipt Cancellation',
+      url: '/cashofficetransaction/Approvecancellation',
+      icon: 'icon-star'
+    },
+    {
+      name: 'Print Bank Deposit Slip',
+      url: '/cashofficetransaction/PrintSlip',
+      icon: 'icon-star'
+    },
+   
+    {
+      name: 'Receipt Posting',
+      url: '/cashofficetransaction/ReceiptPosting',
+      icon: 'icon-star'
+    },
+    
       {
-        name: 'Query Receipts',
-        url: '/cashoffice-transaction/query-receipt',
-      
-      },
-      {
-        name: 'Cancel Payment Reciepts',
-        url: '/buttons/brand-buttons',
-        
-      } ,
-      {
-        name: 'Approve Reciept Cancellation',
-        url: '/buttons/brand-buttons',
-       
-      },
-      {
-        name: 'Print Bank Deposit Slip',
-        url: '/buttons/brand-buttons',
-       
-      },
-      {
-        name: 'Reciept Posting',
-        url: '/buttons/brand-buttons',
-        
-      },
-      {
-        name: 'Adjustment Voucher Reciept',
-        url: '/buttons/brand-buttons',
-       
-      },
-      {
-        name: 'Secure Loan Enquiry',
-        url: '/buttons/brand-buttons',
-        
-      },
-      {
-        name: 'Group Master Webservice',
-        url: '/cash-transaction/group-master' 
-      }
-      
+        name: 'Secured Loan Enquiry',
+        url: '/cashofficetransaction/secureloanenquire',
+        icon: 'icon-star'
+      }             
     ]
   },
+
+  // {
+  //   name: 'CASHOFFICE TRANSACTION',
+  //   url: '/cash-transaction',
+    
+  //   children: [
+  //     {
+  //       name: 'Cash Office Activity',
+  //       url: '/cash-transaction/cash-officeactivity',
+      
+  //     },
+  //     {
+  //       name: 'Cash Office Activity3',
+  //       url: '/cash-transaction/cash-officeactivity3',
+      
+  //     },
+  //     {
+  //       name: 'Cash Till Activity',
+  //       url: '/cash-transaction/assign-role',
+        
+  //     },
+  //     {
+  //       name: 'Payment Reciepts',
+  //       url: '/buttons/brand-buttons',
+        
+  //     },
+  //     {
+  //       name: 'Query Receipts',
+  //       url: '/cashoffice-transaction/query-receipt',
+      
+  //     },
+  //     {
+  //       name: 'Cancel Payment Reciepts',
+  //       url: '/buttons/brand-buttons',
+        
+  //     } ,
+  //     {
+  //       name: 'Approve Reciept Cancellation',
+  //       url: '/buttons/brand-buttons',
+       
+  //     },
+  //     {
+  //       name: 'Print Bank Deposit Slip',
+  //       url: '/buttons/brand-buttons',
+       
+  //     },
+  //     {
+  //       name: 'Reciept Posting',
+  //       url: '/buttons/brand-buttons',
+        
+  //     },
+  //     {
+  //       name: 'Adjustment Voucher Reciept',
+  //       url: '/buttons/brand-buttons',
+       
+  //     },
+  //     {
+  //       name: 'Secure Loan Enquiry',
+  //       url: '/buttons/brand-buttons',
+        
+  //     },
+  //     {
+  //       name: 'Group Master Webservice',
+  //       url: '/cash-transaction/group-master' 
+  //     }
+      
+  //   ]
+  // },
+
   // Cash Office CASH OFFICE REPORTS Module
   {
     name: 'CASHOFFICE REPORTS',
@@ -377,3 +438,6 @@ export const navItems = [
   }
 
 ];
+
+// export const apiURL="http://192.168.1.158:9090/CashOffice-Test/api" ;  
+export const apiURL = "http://localhost:8080/cash/" ;  
