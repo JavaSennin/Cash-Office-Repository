@@ -44,10 +44,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 // Web Service Things
 import { HttpClientModule,  } from '@angular/common/http';
-import { GroupMasterService } from './views/cash-transaction/group-master.service' ;
 import { HttpModule } from '@angular/http';
 
 import { PagerService,GlobalServices } from './services/index';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -71,16 +72,15 @@ import { PagerService,GlobalServices } from './services/index';
     P500Component,
     LoginComponent,
     RegisterComponent
-    // ,    GroupMasterService
   ],
   providers: [
-    GroupMasterService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     }
 
-    , PagerService, GlobalServices
+    , PagerService, GlobalServices // from Ralla
+
   ],
   bootstrap: [ AppComponent ]
 })

@@ -42,6 +42,11 @@ export class DepositSlipComponent {
 
   constructor(private http:HttpClient){}
 
+  exitReport(){
+    // reload the page
+    window.location.reload() ; // "http://localhost:4200/#/cashoffice-reports/deposit-slip" ;
+  }
+
   viewReport(){
 
     // console.log('Receipt No. ' + this.depositNumber.value) ; // dbg.
@@ -75,6 +80,14 @@ export class DepositSlipComponent {
   }
 
   private sums(){
+
+    if ( this.slips.length == 0 ) // do error handling. Put all-else in ELSE part
+    {
+      // look code in ../../Services/~HttpInterceptor.ts to see what's happening there
+      console.log("There is no information for Slip No. " + this.depositNumber.value ) ;
+    }
+    
+    // console.log( this.slips ) ; // dbg.
 
     // this.accountNumber = this.slips[0]. // /?
     // this.accountName = this.slips[0]. // /? 
@@ -111,6 +124,6 @@ export class DepositSlipComponent {
     // call pdf print preview pop up window here
   }
 
-  url : string;
+  url : string ;
   
 }
