@@ -42,7 +42,7 @@ export class DepositSlipComponent {
 
   viewReport(){
 
-    console.log('Receipt No. ' + this.depositNumber.value) ;
+    // console.log('Receipt No. ' + this.depositNumber.value) ; // dbg.
 
     let dn = this.depositNumber.value ;
 
@@ -74,20 +74,17 @@ export class DepositSlipComponent {
 
   private sums(){
 
-    // this.accountNumber = this.slips[0].
-    // this.accountName = this.slips[0].
+    // this.accountNumber = this.slips[0]. // /?
+    // this.accountName = this.slips[0]. // /? 
     this.valueDate = this.slips[0].deposit_date ;
     this.reference = this.slips[0].branch_name ;
 
-    let cashS = this.filterApp( this.slips, "CSH") ;
-    console.log(cashS);
-    let cashSl = _.sortBy(cashS, 'deposited_amount');
-    console.log(cashSl) ;
     this.cashSlips = this.filterApp( this.slips, "CSH") ;
-    this.cashSlips = this.filterApp( this.slips, "CSH") ;
+    this.cashSlips.sort(function( a, b){ return parseFloat(a.deposited_amount) - parseFloat(b.deposited_amount) ;  } ).reverse() ;
 
 
-    this.chequeSlips = this.filterApp( this.slips, "CHQ") ;
+    let chequeSlip = this.filterApp( this.slips, "CHQ").sortBy ;
+    this.chequeSlips = _.sortBy(chequeSlip, 'received_from') ;
 
     this.totalCash = this.cashSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
     this.totalCheque = this.chequeSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
