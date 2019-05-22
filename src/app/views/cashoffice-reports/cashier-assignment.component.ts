@@ -42,6 +42,7 @@ export class CashierAssignmentComponent implements OnInit {
   displayAll = false;
   displayReport = false;
   currentDate = new Date();
+  errormsg = false;
 
   ngOnInit() {
 
@@ -71,12 +72,12 @@ export class CashierAssignmentComponent implements OnInit {
     this.url = 'http://localhost:8080/cash/cashier-assignment/CashCodes/' + bc;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
-        if (response = ! '') {
+        if (response != null) {
           const obj = response;
           this.cashCodes = obj;
 
         } else {
-          this.cashierInput.get('cashOfficeCode').setValue('No CO Code!!');
+          this.errormsg = true;
         }
 
       }
@@ -157,10 +158,7 @@ export class CashierAssignmentComponent implements OnInit {
         const obj = response;
 
         this.applications = obj;
-
-
-
-
+ 
       }
         , err => this.handleError(err));
 

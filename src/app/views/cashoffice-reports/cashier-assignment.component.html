@@ -29,6 +29,7 @@
                       <option [ngValue]="co" *ngFor="let co of cashCodes">{{co[0]}}</option>
 
                     </select>
+                    <p *ngIf="errormsg"><span style="color: red">No cash office code!!</span></p>
                   </div>
                 </div>
 
