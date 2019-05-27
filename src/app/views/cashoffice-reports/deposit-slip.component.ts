@@ -70,8 +70,6 @@ export class DepositSlipComponent {
       , () => this.sums() 
     );
 
-    this.displayReport = true ;
-
   }
 
   private handleError(error:Response){
@@ -79,15 +77,19 @@ export class DepositSlipComponent {
     return Observable.throw('server error');
   }
 
+  noSlip : boolean ;
+
   private sums(){
 
     if ( this.slips.length == 0 ) // do error handling. Put all-else in ELSE part
     {
+      this.noSlip = true ; 
       // look code in ../../Services/~HttpInterceptor.ts to see what's happening there
       console.log("There is no information for Slip No. " + this.depositNumber.value ) ;
     }
-    
-    // console.log( this.slips ) ; // dbg.
+    else 
+    {
+// console.log( this.slips ) ; // dbg.
 
     // this.accountNumber = this.slips[0]. // /?
     // this.accountName = this.slips[0]. // /? 
@@ -104,6 +106,9 @@ export class DepositSlipComponent {
     this.totalCash = this.cashSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
     this.totalCheque = this.chequeSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
 
+    this.displayReport = true ;
+    }
+    
   }
 
   // returns all items that have "filter" from the "list"

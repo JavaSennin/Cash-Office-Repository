@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 // Dropdowns Component
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown' ;
 
 // Admin Routing
 import { CashOfficeReportsRoutingModule } from './cash-office-reports-routing.module';
