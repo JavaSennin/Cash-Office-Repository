@@ -89,17 +89,17 @@
                      <th>CASH</th>  <th>AMOUNT (Pula)</th> </tr>
                  </thead>
                      
-                 <tbody>
-                           
-                   <tr *ngFor="let slip of cashSlips">
-                      <td>{{slip.denomination_code}}</td>
-                      <td class="text-right">{{slip.deposited_amount | number : '.2-2'}}</td>
-                    </tr>
-                           
-                   <tr class="font-weight-bold">
-                      <td>Total</td>
-                      <td class="text-right">{{totalCash | number : '.2-2' }}</td>
+                <tbody>
+
+                  <tr *ngFor="let slip of cashSlips">
+                    <td>{{slip.denomination_code}}</td>
+                    <td class="text-right">{{slip.deposited_amount | number : '.2-2'}}</td>
                    </tr>
+                           
+                  <tr class="font-weight-bold">
+                    <td>Total</td>
+                    <td class="text-right">{{totalCash | number : '.2-2' }}</td>
+                  </tr>
   
                  </tbody>
               </table>
@@ -143,7 +143,7 @@
                 </div>
    
                 <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
+                    <button type="button" class="btn btn-md btn-primary" (click)="exitReport()">Exit</button>
                   </div>
               </div>
               </div>

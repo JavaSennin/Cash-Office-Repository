@@ -8,6 +8,8 @@ import { Observable } from 'rxjs' ;
 
 import * as _ from 'underscore' ;
 
+import { apiURL } from '../../_nav' ;
+
 @NgModule({
   imports: [
     FormControl,
@@ -40,13 +42,18 @@ export class DepositSlipComponent {
 
   constructor(private http:HttpClient){}
 
+  exitReport(){
+    // reload the page
+    window.location.reload() ; // "http://localhost:4200/#/cashoffice-reports/deposit-slip" ;
+  }
+
   viewReport(){
 
-    console.log('Receipt No. ' + this.depositNumber.value) ;
+    // console.log('Receipt No. ' + this.depositNumber.value) ; // dbg.
 
     let dn = this.depositNumber.value ;
 
-    let url ="http://localhost:8080/cash/reprint-deposit/" + dn ;
+    let url = apiURL + "reprint-deposit/" + dn ;
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
@@ -74,20 +81,25 @@ export class DepositSlipComponent {
 
   private sums(){
 
-    // this.accountNumber = this.slips[0].
-    // this.accountName = this.slips[0].
+    if ( this.slips.length == 0 ) // do error handling. Put all-else in ELSE part
+    {
+      // look code in ../../Services/~HttpInterceptor.ts to see what's happening there
+      console.log("There is no information for Slip No. " + this.depositNumber.value ) ;
+    }
+    
+    // console.log( this.slips ) ; // dbg.
+
+    // this.accountNumber = this.slips[0]. // /?
+    // this.accountName = this.slips[0]. // /? 
     this.valueDate = this.slips[0].deposit_date ;
     this.reference = this.slips[0].branch_name ;
 
-    let cashS = this.filterApp( this.slips, "CSH") ;
-    console.log(cashS);
-    let cashSl = _.sortBy(cashS, 'deposited_amount');
-    console.log(cashSl) ;
     this.cashSlips = this.filterApp( this.slips, "CSH") ;
-    this.cashSlips = this.filterApp( this.slips, "CSH") ;
+    this.cashSlips.sort(function( a, b){ return parseFloat(a.deposited_amount) - parseFloat(b.deposited_amount) ;  } ).reverse() ;
 
 
-    this.chequeSlips = this.filterApp( this.slips, "CHQ") ;
+    let chequeSlip = this.filterApp( this.slips, "CHQ").sortBy ;
+    this.chequeSlips = _.sortBy(chequeSlip, 'received_from') ;
 
     this.totalCash = this.cashSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
     this.totalCheque = this.chequeSlips.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.deposited_amount)}, 0 ) ;
@@ -112,6 +124,6 @@ export class DepositSlipComponent {
     // call pdf print preview pop up window here
   }
 
-  url : string;
+  url : string ;
   
 }
