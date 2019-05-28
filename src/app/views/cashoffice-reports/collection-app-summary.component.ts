@@ -1,20 +1,20 @@
 // http://10.1.49.225:8080/cash/collection-summary/106&2019-01-01&2019-01-31
 
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import * as _ from 'underscore' ; /// npm install underscore
+import * as _ from 'underscore'; /// npm install underscore
 
 @NgModule({
   imports: [
     FormControl,
-    FormGroup, 
+    FormGroup,
     FormsModule,
     ReactiveFormsModule,
     Validators
-]
+  ]
 })
 
 @Component({
@@ -28,92 +28,91 @@ export class CollectionAppSummaryComponent {
     toDate: new FormControl('2019-01-31', Validators.required)
   });
 
-  branchCodes : any
-  branchName: string = "" ;  
+  branchCodes: any
+  branchName: string = "";
 
-  displayReport = false ;
+  displayReport = false;
 
-  receipts : any ;
+  receipts: any;
 
-  totalBranch: number = 0.0 ; 
-  
-  url : string;
+  totalBranch: number = 0.0;
 
-  constructor(private http:HttpClient){}
+  url: string;
 
-  ngOnInit(){
-    
-    const httpOptions ={
-      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
-     }
-   this.url ="http://10.1.49.225:8080/cash/collection-branch/"
-   this.http.get(this.url,httpOptions)
-    .subscribe((response)=>{
-      const obj = response;
-      
-      this.branchCodes = obj; 
+  constructor(private http: HttpClient) { }
 
+  ngOnInit() {
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     }
-    ,err => this.handleError(err));
+    this.url = "http://10.1.49.225:8080/cash/collection-branch/"
+    this.http.get(this.url, httpOptions)
+      .subscribe((response) => {
+        const obj = response;
+
+        this.branchCodes = obj;
+
+      }
+        , err => this.handleError(err));
   }
 
-  detailReport(){
+  detailReport() {
 
     // function btoa(stringToEncode) and atob(stringToDecode) using Base64 things
-    let bc = this.detailInput.get('branchCode').value ;
-    let fd = this.detailInput.get('fromDate').value ;
-    let td = this.detailInput.get('toDate').value ;
+    let bc = this.detailInput.get('branchCode').value;
+    let fd = this.detailInput.get('fromDate').value;
+    let td = this.detailInput.get('toDate').value;
 
-    let url ="http://10.1.49.225:8080/cash/collection-summary/" + bc + "&" + fd  + "&" + td ;
+    let url = "http://10.1.49.225:8080/cash/collection-summary/" + bc + "&" + fd + "&" + td;
 
-    const httpOptions ={
-      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
-     }
-   this.http.get(url, httpOptions)
-    .subscribe((response)=>
-    {
-      this.receipts = response; 
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     }
-    ,err => this.handleError(err)
-    , () => this.sums() 
-  );
+    this.http.get(url, httpOptions)
+      .subscribe((response) => {
+        this.receipts = response;
+      }
+        , err => this.handleError(err)
+        , () => this.sums()
+      );
 
-    this.displayReport = true ;
+    this.displayReport = true;
 
   }
 
-  private handleError(error:Response){
+  private handleError(error: Response) {
     console.log(error);
     return Observable.throw('server error');
   }
 
-  private sums(){
-    this.branchName = this.receipts[0].branch_name ;
+  private sums() {
+    this.branchName = this.receipts[0].branch_name;
 
-    this.totalBranch = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.allocated_amount)}, 0 ) ;
+    this.totalBranch = this.receipts.reduce(function (accumulator, currentValue) { return accumulator + parseFloat(currentValue.allocated_amount) }, 0);
 
-    this.showGroupies() ;
+    this.showGroupies();
   }
 
-  toggleDisplayReport(){
-    this.displayReport = !this.displayReport ;
+  toggleDisplayReport() {
+    this.displayReport = !this.displayReport;
   }
 
-  groupies : any ;
+  groupies: any;
 
-  showGroupies(){
+  showGroupies() {
     // console.log( _.groupBy(this.receipts, "app_desc") ) ; // dbg
-    this.groupies = _.groupBy(_.sortBy(this.receipts, "app_desc"), "app_desc") ;
+    this.groupies = _.groupBy(_.sortBy(this.receipts, "app_desc"), "app_desc");
   }
 
   getCount(x: any): number {
     // console.log(x) ; // dbg
-    return  x.reduce( function(accumulator, currentValue){ return accumulator +  parseInt(currentValue.receipt_count)}, 0 ) ;
+    return x.reduce(function (accumulator, currentValue) { return accumulator + parseInt(currentValue.receipt_count) }, 0);
   }
 
   getSum(x: any): number {
     // console.log(x) ; // dbg
-    return  x.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.allocated_amount)}, 0 ) ;
+    return x.reduce(function (accumulator, currentValue) { return accumulator + parseFloat(currentValue.allocated_amount) }, 0);
   }
 
 }

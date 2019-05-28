@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import * as _ from 'underscore'; /// npm install underscore
 
 @NgModule({
   imports: [
@@ -34,6 +35,9 @@ export class CashierAssignmentComponent implements OnInit {
   applications: any;
   cashiers: any;
   allReports: any;
+  receipts: any;
+  groupies: any;
+
 
   constructor(private http: HttpClient) {
 
@@ -42,7 +46,7 @@ export class CashierAssignmentComponent implements OnInit {
   displayAll = false;
   displayReport = false;
   currentDate = new Date();
-  errormsg = false;
+  error_message = false;
 
   ngOnInit() {
 
@@ -77,7 +81,7 @@ export class CashierAssignmentComponent implements OnInit {
           this.cashCodes = obj;
 
         } else {
-          this.errormsg = true;
+          this.error_message = true;
         }
 
       }
@@ -87,7 +91,7 @@ export class CashierAssignmentComponent implements OnInit {
   }
   private handleError(error: Response) {
     console.log(error);
-    return 'Erorr';
+    return 'Error';
   }
 
 
@@ -121,25 +125,27 @@ export class CashierAssignmentComponent implements OnInit {
 
 
   }
-  getAllPaymentMethods() {
+  checkOffice(x: any) {
+    console.log(x);
+  }
+
+  getAll_PaymentMethods(bc: any, co: any, x: any) {
+    // console.log(bc + '  &  ' + co);
+    console.log(x);
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     };
-    this.url = 'http://localhost:8080/cash/cashier-assignment/allpaymentMethods';
+    this.url = 'http://localhost:8080/cash/cashier-assignment/paymentMethods/' + bc + '&' + co;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
-        console.log(obj);
+        // console.log(obj);
+        // console.log(obj);
         this.paymentMethod = obj;
-        this.branchName = this.paymentMethod[0].branch_name;
-        this.cashOfficeDesc = this.paymentMethod[0].cash_office_desc;
-
-
 
       }
         , err => this.handleError(err));
-
 
 
   }
@@ -158,7 +164,7 @@ export class CashierAssignmentComponent implements OnInit {
         const obj = response;
 
         this.applications = obj;
- 
+
       }
         , err => this.handleError(err));
 
@@ -218,7 +224,7 @@ export class CashierAssignmentComponent implements OnInit {
     const co = this.cashierInput.get('cashOfficeCode').value;
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
-    }
+    };
     this.url = 'http://localhost:8080/cash/cashier-assignment/cashier/' + bc + '&' + co;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
@@ -236,37 +242,59 @@ export class CashierAssignmentComponent implements OnInit {
 
   }
 
-
-
-
-
   randomInt() {
-    let max = 10000000;
-    let min = 1346;
+    const max = 10000000;
+    const min = 1346;
 
     this.reportNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  getAllreports() {
+  getAll_reports() {
 
     this.displayAll = true;
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     };
-    this.url = 'http://localhost:8080/cash/cashier-assignment/allreports';
+    this.url = 'http://localhost:8080/cash/cashier-assignment/all-ca/';
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
         this.allReports = obj;
+
         console.log(this.allReports);
 
-
       }
-        , err => this.handleError(err));
+        , err => this.handleError(err)
+        , () => this.sums());
 
 
   }
+
+  // bgn. processing for "when no input"
+
+
+  sums() {
+
+    // this.branchName = this.receipts[0].branch_name;
+
+    // this.totalBranch = this.receipts.reduce(function (accumulator, currentValue)
+    // { return accumulator + parseFloat(currentValue.allocated_amount) }, 0);
+
+    this.showGroupies();
+  }
+
+
+  showGroupies() {
+    this.groupies = _.groupBy(this.allReports, 'branch_code'); // or sort cash_office_desc
+
+    // console.log(this.groupies);
+  }
+  // end. processing for "when no input"
+  sort_value(x: any) {
+    return _.groupBy(x, 'cash_office_code');
+  }
+
 
   onSubmit() {
 
@@ -275,7 +303,7 @@ export class CashierAssignmentComponent implements OnInit {
 
     if (y < 1) {
 
-      console.log('Please Complete all fields')
+      console.log('Please Complete all fields');
       this.displayReport = !this.displayReport;
       // show container for the results
     } else {
