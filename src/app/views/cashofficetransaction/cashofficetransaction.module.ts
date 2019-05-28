@@ -29,7 +29,7 @@ import { CancelpaymentReceiptComponent } from './cancelpaymentreceipt.component'
 import { PrintbankslipComponent } from './print-depositslip.component';
 import { cashofficeactivityComponent } from './cash-officeactivity.component';
 import { CashTillComponent } from './cash-tillactivity.component';
-import { PaymentreceiptComponent } from './payment-receipt.component';
+import { PaymentReceiptComponent } from './payment-receipt.component';
 import { RecieptPostingComponent } from './receipt-posting.component';
 import { SecureLoanEnquireComponent } from './secure-loanenquire.component';
 import { approvereceiptcancellationComponent } from './approve-receiptcancellation.component';
@@ -56,7 +56,7 @@ import { approvereceiptcancellationComponent } from './approve-receiptcancellati
     PrintbankslipComponent,
     cashofficeactivityComponent,
     CashTillComponent,
-    PaymentreceiptComponent,
+    PaymentReceiptComponent,
     RecieptPostingComponent,
     SecureLoanEnquireComponent,
     approvereceiptcancellationComponent,

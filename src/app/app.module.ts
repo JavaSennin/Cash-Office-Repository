@@ -23,7 +23,7 @@ import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
-];
+] ;
 
 import {
   AppAsideModule,

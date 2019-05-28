@@ -7,7 +7,9 @@ import { CancelpaymentReceiptComponent } from './cancelpaymentreceipt.component'
 import { PrintbankslipComponent } from './print-depositslip.component';
 import {cashofficeactivityComponent } from './cash-officeactivity.component';
 import { CashTillComponent } from './cash-tillactivity.component';
-import { PaymentreceiptComponent } from './payment-receipt.component';
+
+import { PaymentReceiptComponent } from './payment-receipt.component' ;
+
 import { RecieptPostingComponent } from './receipt-posting.component';
 import { SecureLoanEnquireComponent } from './secure-loanenquire.component';
 import { approvereceiptcancellationComponent } from './approve-receiptcancellation.component';
@@ -26,7 +28,6 @@ const routes: Routes = [
         data: {
           title: 'Query Receipt'
         }
-
       },
         {
           path: 'cancelpaymentreceipt',
@@ -58,9 +59,9 @@ const routes: Routes = [
 },
     {
       path: 'paymentreceipt',
-    component: PaymentreceiptComponent,
+    component: PaymentReceiptComponent,
     data: {
-      title: 'paymentreceipt'
+      title: 'Receipt'
     }
   },
     {
