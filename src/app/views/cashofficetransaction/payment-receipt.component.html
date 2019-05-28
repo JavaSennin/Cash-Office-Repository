@@ -175,7 +175,7 @@
 
                 <tab heading="TPOL">
                   <div class="card-body">
-                    <form [formGroup]="myForm">
+                    <form [formGroup]="myForm5">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead class="thead-light">
@@ -191,9 +191,9 @@
                             </tr>
                           </thead>
                                     
-                          <tbody formArrayName="corrections">
+                          <tbody formArrayName="corrections5">
                           
-                            <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let correction of correctionForms5.controls; let i=index" [formGroupName]="i">
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
@@ -214,11 +214,11 @@
         
                             <tr>
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection5()">ADD ACTIVITY</button> 
                               </td>
 
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">DELETE ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection5()">DELETE ACTIVITY</button> 
                               </td>
                               <td colspan="3" class="text-center font-weight-bold">Amount</td>
                               <td class="text-right font-weight-bold">{{totalAmount | number : '.2-2' }}</td>
