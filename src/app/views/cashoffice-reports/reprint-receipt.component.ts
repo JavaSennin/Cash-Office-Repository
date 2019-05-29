@@ -1,9 +1,13 @@
+// Sample Receipt Number: 2955 
+
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 // import { ReceiptListingComponent } from './receipt-listing.component';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+import { apiURL } from '../../_nav' ;
 
 @NgModule({
   imports: [
@@ -41,7 +45,7 @@ export class ReprintReceiptComponent {
 
     let rn = this.receiptInput.get('receiptNumber').value ;
 
-    let url ="http://localhost:8080/cash/reprint-receipt/" + rn ;
+    let url = apiURL + "reprint-receipt/" + rn ;
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})

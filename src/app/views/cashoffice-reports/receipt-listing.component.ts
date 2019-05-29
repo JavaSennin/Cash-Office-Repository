@@ -1,5 +1,11 @@
+// Daily Receipt Listing - Cash Office Reports module
+
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import * as _ from 'underscore'; /// npm install underscore
+
+import { apiURL } from '../../_nav' ;
 
 @NgModule({
   imports: [

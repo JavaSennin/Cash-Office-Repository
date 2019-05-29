@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import * as _ from 'underscore'; /// npm install underscore
 
+import { apiURL } from '../../_nav' ;
+
 @NgModule({
   imports: [
     FormControl,
@@ -46,7 +48,7 @@ export class CollectionAppSummaryComponent {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     }
-    this.url = "http://10.1.49.225:8080/cash/collection-branch/"
+    this.url = apiURL + "collection-branch/" ;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
@@ -64,7 +66,7 @@ export class CollectionAppSummaryComponent {
     let fd = this.detailInput.get('fromDate').value;
     let td = this.detailInput.get('toDate').value;
 
-    let url = "http://10.1.49.225:8080/cash/collection-summary/" + bc + "&" + fd + "&" + td;
+    let url = apiURL + "collection-summary/" + bc + "&" + fd + "&" + td;
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
