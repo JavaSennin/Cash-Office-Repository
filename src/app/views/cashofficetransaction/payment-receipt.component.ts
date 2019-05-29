@@ -3,8 +3,6 @@
 import { Component, NgModule } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
-// import { Tpol } from './tpol' ; 
-
 @NgModule({
   imports: [
     FormArray,
@@ -55,109 +53,224 @@ export class PaymentReceiptComponent {
   receiptAllocations = [] ;
   totalAmount: number = 0.0 ; // receipt allocations section
 
-  // Editable Table Things
-  myForm: FormGroup ;
-  myForm5: FormGroup ;
-  viewtable = false ;
-  viewtable5 = false ; 
+  // bgn. Editable Table Things
 
-  // why not have separate form in different ts files, inject in constructor below 
+  myFormACL: FormGroup ;
+  totalAmountACL: number = 0.0 ;
+  viewtableACL = false ;
+
+  myFormGPL: FormGroup ;
+  totalAmountGPL: number = 0.0 ;
+  viewtableGPL = false ;
+
+  myFormSUN: FormGroup ;
+  totalAmountSUN: number = 0.0 ;
+  viewtableSUN = false ;
+
+  myFormTPOL: FormGroup ;
+  totalAmountTPOL: number = 0.0 ;
+  viewtableTPOL = false ;
+
+  myFormTPP: FormGroup ;
+  totalAmountTPP: number = 0.0 ;
+  viewtableTPP = false ;
+
+  myFormUPR: FormGroup ;
+  totalAmountUPR: number = 0.0 ;
+  viewtableUPR = false ;  
+    
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.myForm = this.fb.group({
-      corrections: this.fb.array([])
+
+    this.myFormACL = this.fb.group({
+      correctionsACL: this.fb.array([])
     });
 
-    this.myForm5 = this.fb.group({
-      corrections5: this.fb.array([])
+    this.myFormGPL = this.fb.group({
+      correctionsGPL: this.fb.array([])
+    });
+
+    this.myFormSUN = this.fb.group({
+      correctionsSUN: this.fb.array([])
+    });
+
+    this.myFormTPOL = this.fb.group({
+      correctionsTPOL: this.fb.array([])
+    });
+
+    this.myFormTPP = this.fb.group({
+      correctionsTPP: this.fb.array([])
+    });
+
+    this.myFormUPR = this.fb.group({
+      correctionsUPR: this.fb.array([])
     });
 
   }
 
-  get correctionForms() {
-    return this.myForm.get('corrections') as FormArray
+  // ACL
+  get correctionFormsACL() {
+    return this.myFormACL.get('correctionsACL') as FormArray
   }
-
-  get correctionForms5() {
-    return this.myForm5.get('corrections5') as FormArray
-  }
-
-  addCorrection() {
+  
+  addCorrectionACL() {
 
     const correction = this.fb.group({ 
-      corTransType:[], // Activity
-      corPeriod: [],
-      corPolicyCode: [],
-      corPayerName: [],
-      corExpectedAmnt: [],
-      corAllocatedAmnt: [],
-      corSunTransType: [],
+    
+      corActivity: [],
+      corAllocatedAmount: [],
       corDescription: [],
-      corTransDate: [],
-      corAllocatedAmnt1: [],
-      corSunTransType1: [],
-      corDescription1: [],
-      corTransDate1: [],
-      corAllocatedAmnt2: [],
-
-      corActivityDesc: [],
-      corArrears: [],
       corDealNumber: [],
+      corPeriod: [],
+      corSelect: []
+      
+    })
+
+    this.correctionFormsACL.push(correction);
+    this.viewtableACL = true;
+  }
+  
+  deleteCorrectionACL(i) {
+    this.correctionFormsACL.removeAt(i)
+  }
+
+  // GPL
+  get correctionFormsGPL() {
+    return this.myFormGPL.get('correctionsGPL') as FormArray
+  }
+  
+  addCorrectionGPL() {
+
+    const correction = this.fb.group({ 
+    
+      corActivity: [],
+      corAllocatedAmount: [],
+      corDescription: [],
+      corPeriod: [],
+      corSelect: []
+      
+    })
+
+    this.correctionFormsGPL.push(correction);
+    this.viewtableGPL = true;
+  }
+  
+  deleteCorrectionGPL(i) {
+    this.correctionFormsGPL.removeAt(i)
+  }
+
+  // SUN
+  get correctionFormsSUN() {
+    return this.myFormSUN.get('correctionsSUN') as FormArray
+  }
+  
+  addCorrectionSUN() {
+
+    const correction = this.fb.group({ 
+      
+      corActivity: [],
+      corAllocatedAmount: [],
+      corDescription: [],
+      corPeriod: [],
+      corSelect: []
+      
+    })
+
+    this.correctionFormsSUN.push(correction);
+    this.viewtableSUN = true;
+  }
+  
+  deleteCorrectionSUN(i) {
+    this.correctionFormsSUN.removeAt(i)
+  }
+
+  // TPOL
+  get correctionFormsTPOL() {
+    return this.myFormTPOL.get('correctionsTPOL') as FormArray
+  }
+  
+  addCorrectionTPOL() {
+
+    const correction = this.fb.group({ 
+
+      corActivity: [],      
+      corAllocatedAmount: [],
+      corArrears: [],
+      corExpectedAmount: [],
+      corPayerName: [],
+      corPeriod: [],
+      corPurpose: [],
+      corSelect: [],
+      corStatus: [],
+      
+    })
+
+    this.correctionFormsTPOL.push(correction);
+    this.viewtableTPOL = true;
+  }
+  
+  deleteCorrectionTPOL(i) {
+    this.correctionFormsTPOL.removeAt(i)
+  }
+
+  // TPP
+  get correctionFormsTPP() {
+    return this.myFormTPP.get('correctionsTPP') as FormArray
+  }
+  
+  addCorrectionTPP() {
+
+    const correction = this.fb.group({ 
+
+      corActivity: [],
+      corActivityDesc: [],
       corGrossAmount: [],
       corPaypoint: [],
-      corProductCode: [],
+      corPeriod: [],
       corReceiptedAmount: [],
+      corSelect: []
+      
+    })
+
+    this.correctionFormsTPP.push(correction);
+    this.viewtableTPP = true;
+  }
+  
+  deleteCorrectionTPP(i) {
+    this.correctionFormsTPP.removeAt(i)
+  }
+
+  // UPR
+  get correctionFormsUPR() {
+    return this.myFormUPR.get('correctionsUPR') as FormArray
+  }
+
+  addCorrectionUPR() {
+
+    const correction = this.fb.group({ 
+      
+      corActivity: [],
+      corAllocatedAmount: [],
+      corPayer: [],
+      corPeriod: [],
+      corPolicyCode: [],
+      corProductCode: [],
+      corSelect: [],
       corStatus: [],
       corUnitsEncashed: []
       
     })
 
-    this.correctionForms.push(correction);
-    this.viewtable = true;
+    this.correctionFormsUPR.push(correction);
+    this.viewtableUPR = true;
   }
 
-  addCorrection5() {
-
-    const correction = this.fb.group({ 
-      corTransType:[], // Activity
-      corPeriod: [],
-      corPolicyCode: [],
-      corPayerName: [],
-      corExpectedAmnt: [],
-      corAllocatedAmnt: [],
-      corSunTransType: [],
-      corDescription: [],
-      corTransDate: [],
-      corAllocatedAmnt1: [],
-      corSunTransType1: [],
-      corDescription1: [],
-      corTransDate1: [],
-      corAllocatedAmnt2: [],
-
-      corActivityDesc: [],
-      corArrears: [],
-      corDealNumber: [],
-      corGrossAmount: [],
-      corPaypoint: [],
-      corProductCode: [],
-      corReceiptedAmount: [],
-      corStatus: [],
-      corUnitsEncashed: []
-      
-    })
-
-    this.correctionForms5.push(correction);
-    this.viewtable5 = true;
+  deleteCorrectionUPR(i) {
+    this.correctionFormsUPR.removeAt(i)
   }
 
-  deleteCorrection(i) {
-    this.correctionForms.removeAt(i)
-  }
-
-  deleteCorrection5(i) {
-    this.correctionForms5.removeAt(i)
-  }
+  // end: Editable Table Things
 
   clear(){}
 

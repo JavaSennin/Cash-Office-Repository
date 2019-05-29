@@ -175,7 +175,7 @@
 
                 <tab heading="TPOL">
                   <div class="card-body">
-                    <form [formGroup]="myForm5">
+                    <form [formGroup]="myFormTPOL">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead class="thead-light">
@@ -191,14 +191,14 @@
                             </tr>
                           </thead>
                                     
-                          <tbody formArrayName="corrections5">
+                          <tbody formArrayName="correctionsTPOL">
                           
-                            <tr *ngFor="let correction of correctionForms5.controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let correction of correctionFormsTPOL.controls; let i=index" [formGroupName]="i">
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
                                   <label class="form-check-label" for="corSelect">
-                                      <input formControlName="corTransType"></label>
+                                      <input formControlName="corActivity"></label>
                                 </div>
                               </td>
                     
@@ -208,20 +208,20 @@
                               <td><input formControlName="corPayerName"></td>
                               <td><input formControlName="corPurpose"></td>
                               <td><input formControlName="corArrears"></td>
-                              <td><input formControlName="corExpectedAmnt"></td>
-                              <td><input formControlName="corAllocatedAmnt"></td>
+                              <td><input formControlName="corExpectedAmount"></td>
+                              <td><input formControlName="corAllocatedAmount"></td>
                             </tr>
         
                             <tr>
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection5()">ADD ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrectionTPOL()">ADD ACTIVITY</button> 
                               </td>
 
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection5()">DELETE ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrectionTPOL()">DELETE ACTIVITY</button> 
                               </td>
                               <td colspan="3" class="text-center font-weight-bold">Amount</td>
-                              <td class="text-right font-weight-bold">{{totalAmount | number : '.2-2' }}</td>
+                              <td class="text-right font-weight-bold">{{totalAmountTPOL | number : '.2-2' }}</td>
                             </tr>
                     
                           </tbody>
@@ -235,7 +235,7 @@
     
                 <tab heading="ACL">
                   <div class="card-body">
-                    <form [formGroup]="myForm">
+                    <form [formGroup]="myFormACL">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead class="thead-light">
@@ -248,33 +248,33 @@
                             </tr>
                           </thead>
                               
-                          <tbody formArrayName="corrections">
+                          <tbody formArrayName="correctionsACL">
                         
-                            <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let correction of correctionFormsACL.controls; let i=index" [formGroupName]="i">
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
                                   <label class="form-check-label" for="corSelect">
-                                    <input formControlName="corTransType"></label>
+                                    <input formControlName="corActivity"></label>
                                 </div>
                               </td>
-                              <td><input formControlName="corSundryDescription"></td>
+                              <td><input formControlName="corDescription"></td>
                               <td><input class="form-control" type="date" 
                                 formControlName = "corPeriod" value = "2018-09-01"></td>
                               <td><input formControlName="corDealNumber"></td>
-                              <td class="text-right"><input formControlNmae="corAllocatedAmnt"></td>
+                              <td class="text-right"><input formControlNmae="corAllocatedAmount"></td>
                             </tr>
 
                             <tr>
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrectionACL()">ADD ACTIVITY</button> 
                               </td>
 
                               <td>
-                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">DELETE ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrectionACL()">DELETE ACTIVITY</button> 
                               </td>
                               <td class="text-center font-weight-bold">Secured Loan Total</td>
-                              <td class="text-right font-weight-bold">{{totalAmount | number : '.2-2' }}</td>
+                              <td class="text-right font-weight-bold">{{totalAmountACL | number : '.2-2' }}</td>
                             </tr>
                   
                           </tbody>
@@ -288,7 +288,7 @@
 
                 <tab heading="GPL">
                   <div class="card-body">
-                    <form [formGroup]="myForm">
+                    <form [formGroup]="myFormGPL">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead class="thead-light">
@@ -300,32 +300,32 @@
                             </tr>
                           </thead>
                               
-                          <tbody formArrayName="corrections">
+                          <tbody formArrayName="correctionsGPL">
                         
-                            <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let correction of correctionFormsGPL.controls; let i=index" [formGroupName]="i">
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
                                   <label class="form-check-label" for="corSelect">
-                                    <input formControlName="corTransType"></label>
+                                    <input formControlName="corActivity"></label>
                                 </div>
                               </td>
-                              <td><input formControlName="corSundryDescription"></td>
+                              <td><input formControlName="corDescription"></td>
                               <td><input class="form-control" type="date" 
                                 formControlName = "corPeriod" value = "2018-09-01"></td>
-                              <td class="text-right"><input formControlNmae="corAllocatedAmnt"></td>
+                              <td class="text-right"><input formControlNmae="corAllocatedAmount"></td>
                             </tr>
 
                             <tr>
                               <td>
-                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrectionGPL()">ADD ACTIVITY</button> 
                               </td>
 
                               <td>
-                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">DELETE ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrectionGPL()">DELETE ACTIVITY</button> 
                               </td>
                               <td class="text-center font-weight-bold">Group Total</td>
-                              <td class="text-right font-weight-bold">{{totalAmount | number : '.2-2' }}</td>
+                              <td class="text-right font-weight-bold">{{totalAmountGPL | number : '.2-2' }}</td>
                             </tr>
                   
                           </tbody>
@@ -339,7 +339,7 @@
 
                 <tab heading="UPR">
                   <div class="card-body">
-                    <form [formGroup]="myForm">
+                    <form [formGroup]="myFormUPR">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead class="thead-light">
@@ -355,14 +355,14 @@
                             </tr>
                           </thead>
                                     
-                          <tbody formArrayName="corrections">
+                          <tbody formArrayName="correctionsUPR">
                           
-                            <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let correction of correctionFormsUPR.controls; let i=index" [formGroupName]="i">
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
                                   <label class="form-check-label" for="corSelect">
-                                      <input formControlName="corTransType"></label>
+                                      <input formControlName="corActivity"></label>
                                 </div>
                               </td>
                     
@@ -371,21 +371,21 @@
                               <td><input formControlName="corPolicyCode"></td>
                               <td><input formControlName="corStatus"></td>
                               <td><input formControlName="corProductCode"></td>
-                              <td><input formControlName="corPayerName"</td>
+                              <td><input formControlName="corPayer"</td>
                               <td><input formControlName="corUnitsEncashed"></td>
-                              <td><input formControlName="corAllocatedAmnt"></td>
+                              <td><input formControlName="corAllocatedAmount"></td>
                             </tr>
         
                             <tr>
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrectionUPR()">ADD ACTIVITY</button> 
                               </td>
 
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">DELETE ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrectionUPR()">DELETE ACTIVITY</button> 
                               </td>
                               <td colspan="3" class="text-center font-weight-bold">Amount</td>
-                              <td class="text-right font-weight-bold">{{totalAmount | number : '.2-2' }}</td>
+                              <td class="text-right font-weight-bold">{{totalAmountUPR | number : '.2-2' }}</td>
                             </tr>
                     
                           </tbody>
@@ -399,7 +399,7 @@
 
                 <tab heading="TPP">
                   <div class="card-body">
-                    <form [formGroup]="myForm">
+                    <form [formGroup]="myFormTPP">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead class="thead-light">
@@ -413,14 +413,14 @@
                             </tr>
                           </thead>
                                     
-                          <tbody formArrayName="corrections">
+                          <tbody formArrayName="correctionsTPP">
                           
-                            <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let correction of correctionFormsTPP.controls; let i=index" [formGroupName]="i">
                               <td>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
                                   <label class="form-check-label" for="corSelect">
-                                      <input formControlName="corTransType"></label>
+                                      <input formControlName="corActivity"></label>
                                 </div>
                               </td>
 
@@ -434,14 +434,14 @@
         
                             <tr>
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="addCorrectionTPP()">ADD ACTIVITY</button> 
                               </td>
 
                               <td colspan="2">
-                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">DELETE ACTIVITY</button> 
+                                <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrectionTPP()">DELETE ACTIVITY</button> 
                               </td>
                               <td class="text-center font-weight-bold">Paypoint Total</td>
-                              <td class="text-right font-weight-bold">{{totalAmount | number : '.2-2' }}</td>
+                              <td class="text-right font-weight-bold">{{totalAmountTPP | number : '.2-2' }}</td>
                             </tr>
                     
                           </tbody>
@@ -456,7 +456,7 @@
                 <tab heading="SUN">
                   <div class="card-body">
 
-                      <form [formGroup]="myForm">
+                      <form [formGroup]="myFormSUN">
                           <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                               <thead class="thead-light">
@@ -468,33 +468,33 @@
                                 </tr>
                               </thead>
                                   
-                              <tbody formArrayName="corrections">
+                              <tbody formArrayName="correctionsSUN">
                     
-                                <tr *ngFor="let correction of correctionForms.controls; let i=index" [formGroupName]="i">
+                                <tr *ngFor="let correction of correctionFormsSUN.controls; let i=index" [formGroupName]="i">
                                   <td>
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" name="corSelect" formControlName="corSelect" value={{i}}>
                                       <label class="form-check-label" for="corSelect">
-                                          <input formControlName="corTransType"></label>
+                                          <input formControlName="corActivity"></label>
                                     </div>
                                   </td>
                                   <td><input formControlName="corDescription"></td>
                                   <td><input class="form-control" type="date" 
                                     formControlName = "corPeriod" value = "2018-09-01"></td>
-                                  <td><input formControlName="corAllocatedAmnt"></td>
+                                  <td><input formControlName="corAllocatedAmount"></td>
                                   
                                 </tr>
 
                                 <tr>
                                   <td>
-                                    <button type="submit" class="btn btn-md btn-primary" (click)="addCorrection()">ADD ACTIVITY</button> 
+                                    <button type="submit" class="btn btn-md btn-primary" (click)="addCorrectionSUN()">ADD ACTIVITY</button> 
                                   </td>
     
                                   <td>
-                                    <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrection()">DELETE ACTIVITY</button> 
+                                    <button type="submit" class="btn btn-md btn-primary" (click)="deleteCorrectionSUN()">DELETE ACTIVITY</button> 
                                   </td>
                                   <td class="text-center font-weight-bold">Amount</td>
-                                  <td class="h6 text-right">{{totalAmount | number : '.2-2' }}</td>
+                                  <td class="h6 text-right">{{totalAmountSUN | number : '.2-2' }}</td>
                                 </tr>
                         
                               </tbody>
