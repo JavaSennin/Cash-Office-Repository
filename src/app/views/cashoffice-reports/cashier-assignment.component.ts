@@ -2,7 +2,8 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { NgxPrintModule } from 'ngx-print'; // npm install ngx-print
+import { NgxSpinnerService } from 'ngx-spinner'; //npm install ngx-spinner
 import * as _ from 'underscore'; /// npm install underscore
 
 @NgModule({
@@ -13,6 +14,8 @@ import * as _ from 'underscore'; /// npm install underscore
     ReactiveFormsModule,
     Validators,
     HttpClient,
+    NgxPrintModule,
+ 
   ]
 })
 
@@ -29,6 +32,7 @@ export class CashierAssignmentComponent implements OnInit {
   branchCodes: any;
   cashCodes: any;
   paymentMethod: any;
+  All_paymentMethod: any;
   reportNumber: Number;
   branchName: string;
   cashOfficeDesc: string;
@@ -39,7 +43,7 @@ export class CashierAssignmentComponent implements OnInit {
   groupies: any;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
 
   }
 
@@ -49,6 +53,15 @@ export class CashierAssignmentComponent implements OnInit {
   error_message = false;
 
   ngOnInit() {
+
+  
+/** spinner starts on init */
+this.spinner.show();
+ 
+setTimeout(() => {
+    /** spinner ends after 5 seconds */
+    this.spinner.hide();
+}, 5000);
 
 
     const httpOptions = {
@@ -64,7 +77,7 @@ export class CashierAssignmentComponent implements OnInit {
 
       }
         , err => this.handleError(err));
-
+ 
 
   }
   getCashCodes() {
@@ -96,7 +109,7 @@ export class CashierAssignmentComponent implements OnInit {
 
 
   toggleDisplayReport() {
-    this.displayReport = !this.displayReport; // false
+    this.displayAll = !this.displayAll; // false
   }
   selectMeth() {
 
@@ -129,9 +142,7 @@ export class CashierAssignmentComponent implements OnInit {
     console.log(x);
   }
 
-  getAll_PaymentMethods(bc: any, co: any, x: any) {
-    // console.log(bc + '  &  ' + co);
-    console.log(x);
+  getAll_PaymentMethods(bc: any, co: any) {
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
@@ -140,14 +151,15 @@ export class CashierAssignmentComponent implements OnInit {
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
-        // console.log(obj);
-        // console.log(obj);
-        this.paymentMethod = obj;
+        this.All_paymentMethod = obj;
+
+        console.log(this.All_paymentMethod.branch_name);
 
       }
         , err => this.handleError(err));
 
-
+    console.log(this.All_paymentMethod);
+    return this.All_paymentMethod;
   }
 
   // An Method to hold dynamic data - Application:
@@ -251,6 +263,8 @@ export class CashierAssignmentComponent implements OnInit {
 
   getAll_reports() {
 
+    this.displayReport = !this.displayReport;
+    this.displayReport = false;
     this.displayAll = true;
 
     const httpOptions = {
@@ -295,9 +309,24 @@ export class CashierAssignmentComponent implements OnInit {
     return _.groupBy(x, 'cash_office_code');
   }
 
+  sort_value_Pay(x: any) {
+    return _.groupBy(x, 'pay_method_code');
+  }
+  sort_value_Cashiers(x: any) {
+    return _.groupBy(x, 'cashier_code');
+  }
+
+  sort_value_Applications(x: any) {
+
+
+    return _.groupBy(x, 'app_code');
+
+  }
+
 
   onSubmit() {
 
+    this.displayAll = !this.displayAll;
     const x: number = this.cashierInput.get('branchCode').value.length;
     const y: number = this.cashierInput.get('cashOfficeCode').value.length;
 
@@ -307,7 +336,7 @@ export class CashierAssignmentComponent implements OnInit {
       this.displayReport = !this.displayReport;
       // show container for the results
     } else {
-      console.log(y);
+
       this.getPaymentMethods();
       this.getApplication();
       this.getCashiers();
