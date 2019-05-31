@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule, NgxSpinnerService} from 'ngx-spinner';
 import { NgxPrintModule } from 'ngx-print';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -71,8 +71,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     NgxPrintModule,
     NgxSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDialog
   ],
+  exports: [
+    MatDialogModule
+    , MatDialog,
+    NgxPrintModule,
+    NgxSpinnerModule,
+    NgxSpinnerService],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

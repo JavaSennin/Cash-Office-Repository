@@ -37,13 +37,13 @@
 
                     </select>
                     <div *ngIf="error_message">
-                        <h1 mat-dialog-title>Error!!</h1>
+                        <h1 mat-dialog-title>Error</h1>
                         <div mat-dialog-content>
-                          <p><span style="color: red">{{err_msg}}</span></p>
-
+                          <p>{{err_msg}}</p>
                         </div>
                         <div mat-dialog-actions>
                           <button mat-button (click)="onNoClick()">Ok</button>
+                        </div>
                         </div>
 
                     </div>
