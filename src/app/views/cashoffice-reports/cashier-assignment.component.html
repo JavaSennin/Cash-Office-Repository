@@ -7,7 +7,7 @@
  <!-- <p style="font-size: 20px; color: white">Loading...</p> -->
 
 <div class="animated fadeIn">
-    <ngx-spinner></ngx-spinner>
+
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
@@ -36,7 +36,17 @@
                       <option [ngValue]="co" *ngFor="let co of cashCodes">{{co[0]}}</option>
 
                     </select>
-                    <p *ngIf="error_message"><span style="color: red">No cash office code!!</span></p>
+                    <div *ngIf="error_message">
+                        <h1 mat-dialog-title>Error!!</h1>
+                        <div mat-dialog-content>
+                          <p><span style="color: red">{{err_msg}}</span></p>
+
+                        </div>
+                        <div mat-dialog-actions>
+                          <button mat-button (click)="onNoClick()">Ok</button>
+                        </div>
+
+                    </div>
                   </div>
                 </div>
 
@@ -62,6 +72,7 @@
 
   <!-- Report/Results Container with Input-->
   <div class="row" *ngIf="displayReport">
+
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
