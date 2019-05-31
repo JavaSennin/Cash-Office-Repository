@@ -1,7 +1,11 @@
 // Daily Receipt Listing - Cash Office Reports module
+// Sample Listing - Branch 106 Office LOBA 14-Jan-2019 Cashier SHLA
 
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import * as _ from 'underscore'; /// npm install underscore
 
@@ -30,7 +34,79 @@ export class ReceiptListingComponent {
     reportDate: new FormControl('2018-09-30', Validators.required)
   });
 
+  branchCodes :any;
+  
+  cashierCodes: any ;
+  cashOfficeCodes :any;
+  
   displayReport = false ;
+  
+  url : string;
+
+  constructor(private http:HttpClient){}
+
+  ngOnInit(){
+    
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.url = apiURL + "collection-branch/"
+   this.http.get(this.url,httpOptions)
+    .subscribe((response)=>{
+      const obj = response;
+      
+      this.branchCodes = obj; 
+
+    }
+    ,err => this.handleError(err));
+  }
+
+  getCashierCodes(){
+
+    console.log(this.listingInput.get('branchCode').value) ; // dbg.
+
+    let bc = this.listingInput.get('branchCode').value ;
+    // let coc = this.listingInput.get('cashOfficeCode').value ;
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.url = apiURL + "collection-branch/cashier-codes/" + bc ; //+ "&" + coc ;
+   this.http.get(this.url,httpOptions)
+    .subscribe((response)=>{
+      const obj = response;
+      
+      this.cashierCodes = obj; 
+
+    }
+    ,err => this.handleError(err));
+  }
+
+  getCashOfficeCodes(){
+
+    console.log(this.listingInput.get('branchCode').value) ; // dbg.
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.url = apiURL + "collection-branch/cash-office-codes/" + this.listingInput.get('branchCode').value ;
+   this.http.get(this.url,httpOptions)
+    .subscribe((response)=>{
+      const obj = response;
+      
+      this.cashOfficeCodes = obj; 
+
+    }
+    ,err => this.handleError(err));
+  }
+  
+
+  private handleError(error:Response){
+    console.log(error); // dbg. 
+    return Observable.throw('server error');
+  }
+
+  //////////////////////////////////////////////////////////////
 
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
