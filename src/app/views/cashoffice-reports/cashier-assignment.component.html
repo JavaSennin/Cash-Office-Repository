@@ -1,13 +1,7 @@
 <!-- Cashier Assignment - Cash Office Reports Module -->
-
-  <!-- bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"> -->
- <!-- <p style="font-size: 20px; color: white">Loading...</p> -->
-
 <div class="animated fadeIn">
 
+  <!--Form-->
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
@@ -34,41 +28,37 @@
                   <div class = "col-md-4">
                     <select class="form-control" id="selectCOCode" formControlName = "cashOfficeCode">
                       <option [ngValue]="co" *ngFor="let co of cashCodes">{{co[0]}}</option>
-
                     </select>
-                    <div *ngIf="error_message">
-                        <h1 mat-dialog-title>Error</h1>
-                        <div mat-dialog-content>
-                          <p>{{err_msg}}</p>
+
+                          <span style="color:darkred; text-emphasis: 17px;"><p *ngIf="error_message">{{err_msg}}</p></span>
+
+
                         </div>
-                        <div mat-dialog-actions>
-                          <button mat-button (click)="onNoClick()">Ok</button>
                         </div>
+
+                        <div class="btn-toolbar">
+                          <div class="btn-group mr-2">
+                            <button type="submit" class="btn btn-md btn-primary" [disabled]="!cashierInput.valid" >Report</button>
+                          </div>
+
+                          <div class="btn-group mr-2">
+                            <button type="button" class="btn btn-md btn-primary" (click)="getAll_reports()" >All Reports</button>
+                          </div>
                         </div>
 
                     </div>
                   </div>
+                </form>
                 </div>
 
-                <div class="btn-toolbar">
-                  <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary" [disabled]="!cashierInput.valid" >Report</button>
-                  </div>
 
-                  <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-md btn-primary" (click)="getAll_reports()" >All Reports</button>
-                  </div>
-                </div>
 
             </div>
 
             </div>
-          </form>
+
 
         </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Report/Results Container with Input-->
   <div class="row" *ngIf="displayReport">

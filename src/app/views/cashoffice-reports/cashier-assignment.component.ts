@@ -1,10 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { NgxPrintModule } from 'ngx-print'; // npm install ngx-print
-import { NgxSpinnerService } from 'ngx-spinner'; //npm install ngx-spinner
-import { NgxSpinnerModule } from 'ngx-spinner'; //npm install ngx-spinner
 import * as _ from 'underscore'; /// npm install underscore
 
 @NgModule({
@@ -15,18 +11,10 @@ import * as _ from 'underscore'; /// npm install underscore
     ReactiveFormsModule,
     Validators,
     HttpClient,
-    NgxPrintModule,
-    NgxSpinnerModule,
-    NgxSpinnerService,
-    MatDialogModule
+
 
   ],
-  exports: [
-    MatDialogModule
-    , MatDialog,
-    NgxPrintModule,
-    NgxSpinnerModule,
-    NgxSpinnerService],
+
 })
 
 @Component({
@@ -54,7 +42,7 @@ export class CashierAssignmentComponent implements OnInit {
   err_msg: any;
 
 
-  constructor(private spinner: NgxSpinnerService, private http: HttpClient, public dialog: MatDialog) { }
+  constructor(private http: HttpClient) { }
 
   displayAll = false;
   displayReport = false;
@@ -72,12 +60,14 @@ export class CashierAssignmentComponent implements OnInit {
         const obj = response;
 
         this.branchCodes = obj;
+        this.error_message = false;
 
 
       }
         ,
         (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running ' + err.toString();
+          this.err_msg = 'Server unreachable | Check if ts running';
+          this.cashierInput.disabled;
           this.error_message = true;
         });
   }
@@ -92,13 +82,13 @@ export class CashierAssignmentComponent implements OnInit {
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
 
-        this.spinner.show();
+
         const obj = response;
         this.cashCodes = obj;
 
       }, (err) => {
         this.error_message = true;
-        this.spinner.hide();
+
       });
 
   }
@@ -148,7 +138,6 @@ export class CashierAssignmentComponent implements OnInit {
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
 
-        this.spinner.show();
         const obj = response;
         this.All_paymentMethod = obj;
 
