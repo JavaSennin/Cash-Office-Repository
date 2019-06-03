@@ -18,7 +18,13 @@ import * as _ from 'underscore'; /// npm install underscore
   // selector: 'app-user-management',
   templateUrl: './cashier-assignment.component.html'
 })
-export class CashierAssignmentComponent {
+export class CashierAssignmentComponent implements OnInit {
+
+
+  cashierInput = new FormGroup({
+    branchCode: new FormControl('', Validators.required),
+    cashOfficeCode: new FormControl('', Validators.required),
+  });
   branchCodes: any;
   cashCodes: any;
   paymentMethod: any;
@@ -32,6 +38,7 @@ export class CashierAssignmentComponent {
   receipts: any;
   groupies: any;
   err_msg: any;
+  url: any;
 
 
   constructor(private http: HttpClient) { }
@@ -59,7 +66,7 @@ export class CashierAssignmentComponent {
         ,
         (err) => {
           this.err_msg = 'Server unreachable | Check if ts running';
-          this.cashierInput.disabled;
+          this.cashierInput.disable();
           this.error_message = true;
         });
   }
