@@ -1,12 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-<<<<<<< HEAD
-=======
-import { Observable } from 'rxjs';
-// import { NgxPrintModule } from 'ngx-print'; // npm install ngx-print
-// import { NgxSpinnerService } from 'ngx-spinner'; //npm install ngx-spinner
->>>>>>> ffadf0f3d19e70c2605ceac51989cec349ad95d5
 import * as _ from 'underscore'; /// npm install underscore
 
 @NgModule({
@@ -17,28 +11,14 @@ import * as _ from 'underscore'; /// npm install underscore
     ReactiveFormsModule,
     Validators,
     HttpClient,
-<<<<<<< HEAD
-
-
-  ],
-
-=======
-    // NgxPrintModule,
- 
   ]
->>>>>>> ffadf0f3d19e70c2605ceac51989cec349ad95d5
 })
 
 @Component({
+  // selector: 'app-user-management',
   templateUrl: './cashier-assignment.component.html'
 })
-export class CashierAssignmentComponent implements OnInit {
-
-  cashierInput = new FormGroup({
-    branchCode: new FormControl('', Validators.required),
-    cashOfficeCode: new FormControl('', Validators.required),
-  });
-  url: string;
+export class CashierAssignmentComponent {
   branchCodes: any;
   cashCodes: any;
   paymentMethod: any;
@@ -54,14 +34,7 @@ export class CashierAssignmentComponent implements OnInit {
   err_msg: any;
 
 
-<<<<<<< HEAD
   constructor(private http: HttpClient) { }
-=======
-  // constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
-    constructor(private http: HttpClient) {
-
-  }
->>>>>>> ffadf0f3d19e70c2605ceac51989cec349ad95d5
 
   displayAll = false;
   displayReport = false;
@@ -70,19 +43,6 @@ export class CashierAssignmentComponent implements OnInit {
 
   ngOnInit() {
 
-<<<<<<< HEAD
-=======
-  
-/** spinner starts on init */
-// this.spinner.show();
- 
-// setTimeout(() => {
-//     /** spinner ends after 5 seconds */
-//     this.spinner.hide();
-// }, 5000);
-
-
->>>>>>> ffadf0f3d19e70c2605ceac51989cec349ad95d5
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' }),
     };
