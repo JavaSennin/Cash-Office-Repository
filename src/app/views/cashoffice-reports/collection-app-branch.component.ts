@@ -7,6 +7,8 @@ import { NgxXml2jsonService } from 'ngx-xml2json';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { apiURL } from '../../_nav' ;
+
 @NgModule({
   imports: [
     FormControl,
@@ -42,7 +44,7 @@ export class CollectionAppBranchComponent implements OnInit {
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
      }
-   this.url ="http://localhost:8080/cash/collection-branch/"
+   this.url = apiURL + "collection-branch/"
    this.http.get(this.url,httpOptions)
     .subscribe((response)=>{
       const obj = response;
@@ -56,7 +58,7 @@ export class CollectionAppBranchComponent implements OnInit {
   onSubmit(){
       
     let bc = this.cashierInput.get('branchCode').value ;
-    let url ="http://localhost:8080/cash/collection-branch/" + bc ;
+    let url = apiURL + "collection-branch/" + bc ;
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})

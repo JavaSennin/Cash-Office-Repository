@@ -18,10 +18,11 @@
                 <div class = "form-group row">
                   <label class="col-md-2 col-form-label" >Branch Code</label>
                   <div class = "col-md-4">
-                    <select class="form-control" id="selectBrCode" formControlName = "branchCode" required>
-                      <option value="0">Please Select</option>
-                      <option value="br001">Branch CODE001</option>
-                      <option value="br002">Branch CODE002</option>
+                    <select class="form-control" id="selectBrCode" formControlName = "branchCode"
+                      (change)="getCashOfficeCodes()">
+                      <option *ngFor= "let branchCode of branchCodes" [ngValue]="branchCode"
+                        
+                        >{{branchCode}}</option>
                     </select>
                   </div>
                 </div>
@@ -29,10 +30,10 @@
                 <div class = "form-group row">
                   <label class="col-md-2 col-form-label" >CashOffice Code</label>
                   <div class = "col-md-4">
-                    <select class="form-control" id="selectCOCode" formControlName = "cashOfficeCode">
-                      <option value="0">Please Select</option>
-                      <option value="co001">CashOffice 001</option>
-                      <option value="co002">CashOffice 002</option>
+                    <select class="form-control" id="selectCOCode" formControlName = "cashOfficeCode"
+                    (change)="getCashierCodes()"> <!-- refactoring: might as well call gCC() when picking branchCode -->
+                      <option *ngFor= "let cashOfficeCode of cashOfficeCodes" 
+                        [ngValue]="cashOfficeCode">{{cashOfficeCode}}</option>
                     </select>
                   </div>
                 </div>
@@ -41,9 +42,7 @@
                   <label class="col-md-2 col-form-label" >Cashier Code</label>
                   <div class = "col-md-4">
                     <select class="form-control" id="selectCaCode" formControlName = "cashierCode">
-                      <option value="0">Please Select</option>
-                      <option value="ca001">Cashier 001</option>
-                      <option value="ca002">Cashier 002</option>
+                      <option *ngFor="let cashierCode of cashierCodes" [ngValue]="cashierCode">{{cashierCode}}</option>
                     </select>
                   </div>
                 </div>
@@ -51,7 +50,7 @@
                 <div class="form-group row">
                   <label class="col-md-2 col-form-label">Report Date</label>
                   <div class = "col-md-4">
-                      <input class="form-control" id="date-input" type="date" name="date-input" value = "2018-09-30" formControlName="reportDate" required/>
+                      <input class="form-control" id="date-input" type="date" name="date-input" value = "2018-09-30" formControlName="reportDate"/>
                   </div>
                 </div>
                         

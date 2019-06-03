@@ -77,15 +77,13 @@ export class DepositSlipComponent {
     return Observable.throw('server error');
   }
 
-  noSlip : boolean ;
-
   private sums(){
 
     if ( this.slips.length == 0 ) // do error handling. Put all-else in ELSE part
     {
-      this.noSlip = true ; 
-      // look code in ../../Services/~HttpInterceptor.ts to see what's happening there
       console.log("There is no information for Slip No. " + this.depositNumber.value ) ;
+
+      window.alert("There is no information for Slip No. " + this.depositNumber.value ) ;
     }
     else 
     {
