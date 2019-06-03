@@ -41,6 +41,10 @@ export class ReceiptListingComponent {
   
   displayReport = false ;
   
+  receipts : any ;
+
+  today = new Date() ;
+
   url : string;
 
   constructor(private http:HttpClient){}
@@ -66,7 +70,7 @@ export class ReceiptListingComponent {
     console.log(this.listingInput.get('branchCode').value) ; // dbg.
 
     let bc = this.listingInput.get('branchCode').value ;
-    // let coc = this.listingInput.get('cashOfficeCode').value ;
+    // let coc = this.listingInput.get('cashOfficeCode').value ; 
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
@@ -100,33 +104,47 @@ export class ReceiptListingComponent {
     ,err => this.handleError(err));
   }
   
+  onSubmit(){
+
+    this.receipts = [ // dbg. 
+      { receiptNo: 1234, drawee: "", refNo: 44214, refDate: "24-Jan-2012", payeeType: "", rctAmount: 801.24, 
+        application: "Group Life System", transactionType: "Group Funeral Premium Receipts", paypointID: "", paypointName: "", appAmount: "123.45"},
+      { receiptNo: 1235, drawee: "", refNo: 44215, refDate: "25-Jun-2013", payeeType: "", rctAmount: 811.35, 
+        application: "Policy", transactionType: "Credit Class Premiums", policyNo: "1234567", payer: "John Doe", period: "21-Jun-11", appAmount: "678.90"},
+      { receiptNo: 1236, drawee: "", refNo: 44216, refDate: "27-Nov-2014", payeeType: "", rctAmount: 821.46, 
+        application: "Sundry Receipts", transactionType: "Sundry Re-imbursement of Staff Advances", appAmount: "101.11"}
+    ]
+
+    if ( this.receipts.length == 0 ) // do error handling. Put all-else in ELSE part
+    {
+      console.log("No Receipts caputered" ) ;
+
+      window.alert("No Receipts caputered" ) ;
+    }
+    // else 
+    {
+      console.table(this.listingInput.value) ;
+
+      // form-processing code
+      // this.receipt = this.receipts[ Math.floor( Math.random() * Math.floor( this.receipts.length ) )  ] ; 
+
+      this.displayReport = true ; // show container for the results
+    }
+
+  }
 
   private handleError(error:Response){
     console.log(error); // dbg. 
     return Observable.throw('server error');
   }
+  
+  toggleDisplayReport(){
+    this.displayReport = !this.displayReport ;
+  }
 
   //////////////////////////////////////////////////////////////
 
-  toggleDisplayReport(){
-    this.displayReport = !this.displayReport ; // false
-  }
-
-  onSubmit(){
-    console.table(this.listingInput.value) ;
-
-    // form-processing code
-    this.displayReport = true ; // show container for the results
-
-    console.log( this.today.toDateString ) ;
-
-    // this.receipt = this.receipts[ Math.floor( Math.random() * Math.floor( this.receipts.length ) )  ] ; 
-
-  }
-
   // receipt: any ;
-  
-  today = new Date() ;
 
   // dbg. dummy data for receipt items
   application = "Policy" ; // Group Life System, or Sundry Receipts
@@ -142,13 +160,5 @@ export class ReceiptListingComponent {
   }
 
   // An Array to hold dynamic data - Receipts
-  receipts = [
-    { receiptNo: 1234, drawee: "", refNo: 44214, refDate: "24-Jan-2012", payeeType: "", rctAmount: 801.24, 
-      application: "Group Life System", transactionType: "Group Funeral Premium Receipts", paypointID: "", paypointName: "", appAmount: "123.45"},
-    { receiptNo: 1235, drawee: "", refNo: 44215, refDate: "25-Jun-2013", payeeType: "", rctAmount: 811.35, 
-      application: "Policy", transactionType: "Credit Class Premiums", policyNo: "1234567", payer: "John Doe", period: "21-Jun-11", appAmount: "678.90"},
-    { receiptNo: 1236, drawee: "", refNo: 44216, refDate: "27-Nov-2014", payeeType: "", rctAmount: 821.46, 
-      application: "Sundry Receipts", transactionType: "Sundry Re-imbursement of Staff Advances", appAmount: "101.11"}
-  ]
   
 }

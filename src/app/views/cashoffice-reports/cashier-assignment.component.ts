@@ -2,8 +2,8 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NgxPrintModule } from 'ngx-print'; // npm install ngx-print
-import { NgxSpinnerService } from 'ngx-spinner'; //npm install ngx-spinner
+// import { NgxPrintModule } from 'ngx-print'; // npm install ngx-print
+// import { NgxSpinnerService } from 'ngx-spinner'; //npm install ngx-spinner
 import * as _ from 'underscore'; /// npm install underscore
 
 @NgModule({
@@ -14,7 +14,7 @@ import * as _ from 'underscore'; /// npm install underscore
     ReactiveFormsModule,
     Validators,
     HttpClient,
-    NgxPrintModule,
+    // NgxPrintModule,
  
   ]
 })
@@ -43,7 +43,8 @@ export class CashierAssignmentComponent implements OnInit {
   groupies: any;
 
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
+  // constructor(private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private http: HttpClient) {
 
   }
 
@@ -56,12 +57,12 @@ export class CashierAssignmentComponent implements OnInit {
 
   
 /** spinner starts on init */
-this.spinner.show();
+// this.spinner.show();
  
-setTimeout(() => {
-    /** spinner ends after 5 seconds */
-    this.spinner.hide();
-}, 5000);
+// setTimeout(() => {
+//     /** spinner ends after 5 seconds */
+//     this.spinner.hide();
+// }, 5000);
 
 
     const httpOptions = {
