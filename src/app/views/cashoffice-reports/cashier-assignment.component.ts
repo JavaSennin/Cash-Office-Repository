@@ -79,11 +79,9 @@ export class CashierAssignmentComponent implements OnInit {
         (err) => {
           this.err_msg = 'Server unreachable | Check if ts running ' + err.toString();
           this.error_message = true;
-         
         });
-
-
   }
+
   getCashCodes() {
 
     const bc = this.cashierInput.get('branchCode').value;
