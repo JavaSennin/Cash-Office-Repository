@@ -20,8 +20,6 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import {NgxPrintModule} from 'ngx-print';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -33,7 +31,6 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
- 
  
 } from '@coreui/angular';
 
@@ -66,9 +63,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    HttpClientModule,
-    NgxPrintModule,
-    NgxSpinnerModule
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
