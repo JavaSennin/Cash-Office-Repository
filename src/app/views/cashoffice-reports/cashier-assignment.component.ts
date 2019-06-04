@@ -24,6 +24,7 @@ export class CashierAssignmentComponent implements OnInit {
   cashierInput = new FormGroup({
     branchCode: new FormControl('', Validators.required),
     cashOfficeCode: new FormControl('', Validators.required),
+
   });
   branchCodes: any;
   cashCodes: any;
@@ -47,7 +48,9 @@ export class CashierAssignmentComponent implements OnInit {
   displayReport = false;
   currentDate = new Date();
   error_message = false;
+  DisplayPrint = false;
 
+  // Get Branch Codes
   ngOnInit() {
 
     const httpOptions = {
@@ -65,12 +68,13 @@ export class CashierAssignmentComponent implements OnInit {
       }
         ,
         (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running';
-          this.cashierInput.disable();
+          this.err_msg = 'Server unreachable | Check if ts running |  available branch codes not retrieved';
           this.error_message = true;
+          this.displayReport = false;
         });
   }
 
+  // Get Cash Office Codes for the Corresponding Branch Codes
   getCashCodes() {
 
     const bc = this.cashierInput.get('branchCode').value;
@@ -86,15 +90,19 @@ export class CashierAssignmentComponent implements OnInit {
         this.cashCodes = obj;
 
       }, (err) => {
-        this.error_message = true;
 
+        this.err_msg = 'No Cash Office Codes';
+        this.error_message = true;
+        this.displayReport = false;
       });
 
   }
 
-  toggleDisplayReport() {
-    this.displayAll = !this.displayAll; // false
-    this.displayReport = !this.displayReport; // false
+  ExitReport() {
+    this.displayReport = false;
+    this.displayAll = false;
+    this.cashierInput.reset();
+    this.DisplayPrint = false;
   }
   // An Method to hold dynamic data - Payment Methods:
   getPaymentMethods() {
@@ -108,24 +116,16 @@ export class CashierAssignmentComponent implements OnInit {
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
-        console.log(obj);
         this.paymentMethod = obj;
         this.branchName = this.paymentMethod[0].branch_name;
         this.cashOfficeDesc = this.paymentMethod[0].cash_office_desc;
 
-
-
       }
         , (err) => {
-          this.err_msg = 'Could not reach Server, Payment Methods = Null!! ' + err;
-          console.log(this.err_msg);
+          this.err_msg = 'Could not reach Server, Payment Methods = Null!! ';
+          this.error_message = true;
         });
 
-
-
-  }
-  checkOffice(x: any) {
-    console.log(x);
   }
 
   getAll_PaymentMethods(bc: any, co: any) {
@@ -139,16 +139,12 @@ export class CashierAssignmentComponent implements OnInit {
 
         const obj = response;
         this.All_paymentMethod = obj;
-
-        console.log(this.All_paymentMethod.branch_name);
-
       }
         , (err) => {
           this.err_msg = 'Server unreachable | Check if ts running ' + err;
-          console.error(this.err_msg);
-        });
+          this.error_message = true;
 
-    console.log(this.All_paymentMethod);
+        });
     return this.All_paymentMethod;
   }
 
@@ -170,39 +166,9 @@ export class CashierAssignmentComponent implements OnInit {
       }
         ,
         (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running ' + err;
-          console.error(this.err_msg);
+          this.err_msg = 'Server unreachable | Check if ts running ';
+          this.error_message = true;
         });
-
-
-
-  }
-  getAllApplication() {
-
-    const bc = this.cashierInput.get('branchCode').value;
-    const co = this.cashierInput.get('cashOfficeCode').value;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
-    };
-    this.url = 'http://localhost:8080/cash/cashier-assignment/application/' + bc + '&' + co;
-    this.http.get(this.url, httpOptions)
-      .subscribe((response) => {
-        const obj = response;
-
-        this.applications = obj;
-
-
-
-
-      }
-        ,
-        (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running ' + err;
-          console.error(this.err_msg);
-        });
-
-
-
   }
   getCashiers() {
 
@@ -215,45 +181,13 @@ export class CashierAssignmentComponent implements OnInit {
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
-
         this.cashiers = obj;
-
-
-
 
       }
         ,
         (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running ' + err;
-          console.error(this.err_msg);
-        });
-
-
-
-  }
-
-  getAllCashiers() {
-
-    const bc = this.cashierInput.get('branchCode').value;
-    const co = this.cashierInput.get('cashOfficeCode').value;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
-    };
-    this.url = 'http://localhost:8080/cash/cashier-assignment/cashier/' + bc + '&' + co;
-    this.http.get(this.url, httpOptions)
-      .subscribe((response) => {
-        const obj = response;
-
-        this.cashiers = obj;
-
-
-
-
-      }
-        ,
-        (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running ' + err;
-          console.error(this.err_msg);
+          this.err_msg = 'Server unreachable | Check if ts running ';
+          this.error_message = true;
         });
 
 
@@ -269,10 +203,6 @@ export class CashierAssignmentComponent implements OnInit {
 
   getAll_reports() {
 
-    this.displayReport = !this.displayReport;
-    this.displayReport = false;
-    this.displayAll = true;
-
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     };
@@ -281,37 +211,30 @@ export class CashierAssignmentComponent implements OnInit {
       .subscribe((response) => {
         const obj = response;
         this.allReports = obj;
-
-        console.log(this.allReports);
-
+        this.displayReport = false;
+        this.displayAll = true;
+        this.DisplayPrint = true;
       },
         (err) => {
-          this.err_msg = 'Server unreachable | Check if ts running ' + err;
-          console.error(this.err_msg);
+          this.err_msg = 'Server unreachable | Check if ts running ';
+          this.error_message = true;
+          this.displayReport = false;
+          this.displayAll = false;
+          this.DisplayPrint = false;
         }
         , () => this.sums());
-
-
   }
 
   // bgn. processing for "when no input"
 
 
   sums() {
-
-    // this.branchName = this.receipts[0].branch_name;
-
-    // this.totalBranch = this.receipts.reduce(function (accumulator, currentValue)
-    // { return accumulator + parseFloat(currentValue.allocated_amount) }, 0);
-
     this.showGroupies();
   }
 
 
   showGroupies() {
     this.groupies = _.groupBy(this.allReports, 'branch_code'); // or sort cash_office_desc
-
-    // console.log(this.groupies);
   }
   // end. processing for "when no input"
   sort_value(x: any) {
@@ -335,23 +258,24 @@ export class CashierAssignmentComponent implements OnInit {
 
   onSubmit() {
 
-    this.displayAll = !this.displayAll;
-    const x: number = this.cashierInput.get('branchCode').value.length;
-    const y: number = this.cashierInput.get('cashOfficeCode').value.length;
-
-    if (y < 1) {
-
-      console.log('Please Complete all fields');
-      this.displayReport = !this.displayReport;
-      // show container for the results
-    } else {
-
-      this.getPaymentMethods();
-      this.getApplication();
-      this.getCashiers();
-      this.displayReport = true;
-      // this.cashierInput.disabled;
-    }
-
+    this.displayAll = false;
+    this.getPaymentMethods();
+    this.getApplication();
+    this.getCashiers();
+    this.displayReport = true;
+    this.DisplayPrint = true;
+    this.cashierInput.reset();
   }
+  printWindow(divName) {
+
+    const innerContents = document.getElementById(divName).innerHTML;
+    // open a popup window to draw your html
+    const popup = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+    popup.document.open();
+    // embed your css file and CDN css file into head, embed html content into body
+    popup.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" /></head><body onload="window.print()">' + innerContents + '</html>');
+    popup.document.close();
+  }
+
 }
+
