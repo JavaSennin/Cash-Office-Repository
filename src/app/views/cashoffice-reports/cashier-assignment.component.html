@@ -1,13 +1,7 @@
 <!-- Cashier Assignment - Cash Office Reports Module -->
-
-  <!-- bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"> -->
- <!-- <p style="font-size: 20px; color: white">Loading...</p> -->
-
 <div class="animated fadeIn">
-    <!-- <ngx-spinner></ngx-spinner> -->
+
+  <!--Form-->
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
@@ -21,7 +15,7 @@
               <div class="col">
 
                 <div class = "form-group row">
-                  <label class="col-md-2 col-form-label" >Branch Code</label>
+                  <label class="col-md-2 col-form-label" >Branch Code<span style="color: red">*</span></label>
                   <div class = "col-md-4">
                     <select  class="form-control" id="selectBrCode" formControlName = "branchCode" (change)="getCashCodes()" required>
                       <option [ngValue]="bc" *ngFor="let bc of branchCodes">{{bc[0]}}</option>
@@ -30,38 +24,47 @@
                 </div>
 
                 <div class = "form-group row">
-                  <label class="col-md-2 col-form-label" >Cash Office Code</label>
+                  <label class="col-md-2 col-form-label" >Cash Office Code<span style="color: red">*</span></label>
                   <div class = "col-md-4">
                     <select class="form-control" id="selectCOCode" formControlName = "cashOfficeCode">
                       <option [ngValue]="co" *ngFor="let co of cashCodes">{{co[0]}}</option>
-
                     </select>
-                    <p *ngIf="error_message"><span style="color: red">No cash office code!!</span></p>
+
+                          <span style="color:darkred; text-emphasis: 17px;"><p *ngIf="error_message">{{err_msg}}</p></span>
+
+
+                        </div>
+                        </div>
+
+                        <div class="btn-toolbar">
+                          <div class="btn-group mr-2">
+                            <button type="submit" class="btn btn-md btn-primary" [disabled]="!cashierInput.valid" >Report</button>
+                          </div>
+
+                          <div class="btn-group mr-2">
+                            <button  type="button" class="btn btn-md btn-primary" (click)="getAll_reports()" >All Reports</button>
+                          </div>
+                        </div>
+
+                    </div>
                   </div>
+                </form>
                 </div>
 
-                <div class="btn-toolbar">
-                  <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary" [disabled]="!cashierInput.valid" >Report</button>
-                  </div>
 
-                  <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-md btn-primary" (click)="getAll_reports()" >All Reports</button>
-                  </div>
-                </div>
 
             </div>
 
             </div>
-          </form>
+
 
         </div>
-      </div>
-    </div>
-  </div>
+
+
 
   <!-- Report/Results Container with Input-->
-  <div class="row" *ngIf="displayReport">
+  <div id ="print-section" class="row" *ngIf="displayReport">
+
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
@@ -157,176 +160,21 @@
             </div>
           </div>
 
-          <div class="row text-center btn-toolbar">
-            <div class= "col-lg-12">
-              <div class="btn-group mr-2">
-                <button type="button" class="btn btn-md btn-primary">Print</button>
-              </div>
-
-              <div class="btn-group mr-2">
-                  <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
-                </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
-<div class = "row" *ngIf="false">
-  <div  *ngFor="let all of allReports">
-    <ol> <li>{{all.branch_code}}</li></ol>
 
-</div>
-</div>
-
-<!-- bgn. when no input -->
-
-<div class="row" *ngIf="false">
-  <!-- <div> -->
-  <div class="col-lg-12">
-    <div class="card" >
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <span style="color: blue; font-size: 10px" >Botswana Life Insurance Ltd</span> &nbsp; | <span style="font-size:10px">Collections</span>
-      </div>
-      <div class="card-header">
-           Cashier Assignment
-        </div>
-
-<!-- <ol>
-    <li *ngFor = "let branch of groupies | keyvalue">{{branch.key}} <hr>
-      <div *ngFor="let office of sort_value(branch.value) | keyvalue" >
-
-        <ol>
-            <h6>{{office.key}}</h6>
-            </li>
-        </ol>
-      </div>
-      </li>
-</ol> -->
-
-
-
-      <div class="card-body"*ngFor = "let branch of groupies | keyvalue">
-          <div *ngFor="let office of sort_value(branch.value) | keyvalue" >
-        <div class="row">
-          <div class="col-lg-12">
-
-            <div class="row">
-            <div class="col-lg-6 text-left">{{reportNumber}}</div>
-            <div class="col-lg-6 text-right">{{currentDate | date: "d-MMM-y"}}</div>
-          </div>
-
-            <br>
-
-          <p class="h4">Branch:&nbsp;{{branch.value[0].branch_name}}</p>
-            <p class="h4">Cash Office:&nbsp; {{office.value[0].cash_office_desc}}</p>
-
-            <br>
-
-            <!-- Payment Methods -->
-            <p class="h6">Payment Methods</p>
-            <table class="table table-bordered table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th>CODE</th>
-                  <th>DESCRIPTION</th>
-                  <th>START DATE</th>
-                  <th>END DATE</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <!-- <tr *ngFor="let pm of getAll_PaymentMethods(branch.key,office.key)"> -->
-                <tr *ngFor="let pm of getAll_PaymentMethods(branch.key,office.key)">
-                  <td>{{pm.pay_method_code}}</td>
-                  <td>{{pm.pay_method_desc}}</td>
-                  <td>{{pm.pay_start_date}}</td>
-                  <td>{{pm.pay_end_date}}</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Application -->
-            <p class="h6">Application</p>
-            <table class="table table-bordered table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th>CODE</th>
-                  <th>DESCRIPTION</th>
-                  <th>START DATE</th>
-                  <th>END DATE</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr *ngFor = "let app of applications">
-                  <td>{{app[0]}}</td>
-                  <td>{{app[1]}}</td>
-                  <td>{{app[2]}}</td>
-                  <td>{{app[3]}}</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Cashiers -->
-            <p class="h6">Cashiers</p>
-            <table class="table table-bordered table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th>CASHIER ID</th>
-                  <th>CASHIER NAME</th>
-                  <th>Snr. CASHIER (Y/N)</th>
-                  <th>START DATE</th>
-                  <th>END DATE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor = "let cashier of cashiers">
-                  <td>{{cashier[0]}}</td>
-                  <td>{{cashier[1]}}</td>
-                  <td>{{cashier[2]}}</td>
-                  <td>{{cashier[3]}}</td>
-                  <td>{{cashier[4]}}</td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
-        </div>
-
-
-
-      </div>
-    </div>
-    </div>
-  </div>
-  <!-- </div> -->
-</div>
-
-<!-- bgn. 2nd Try -->
-
-<div id="print-section" class="row"  *ngIf="displayAll">
+<!--View All Reports -->
+<div id ="print-section"  class="row"  *ngIf="displayAll">
 
   <div class="col-lg-12">
     <div class="card" *ngFor="let branch of groupies | keyvalue">
-      <!-- <div class="card-header">
-        <i class="fa fa-align-justify"></i> <span style="color: blue; font-size: 10px" >Botswana Life Insurance Ltd</span> &nbsp; | <span style="font-size:10px">Collections</span>
-      </div> -->
-      <div class="card-header">{{branch.value[0].branch_name}}</div>
+        <div class="card-header">{{branch.value[0].branch_name}}</div>
 
       <div class="card-body" *ngFor="let office of sort_value(branch.value) | keyvalue">
         <div class="row">
           <div class="col-lg-12">
-
-            <!-- <div class="row">
-            <div class="col-lg-6 text-left">{{reportNumber}}</div>
-            <div class="col-lg-6 text-right">{{currentDate | date: "d-MMM-y"}}</div>
-          </div> -->
-
-            <!-- <br> -->
-
-            <!-- <p class="h4">Branch:&nbsp;{{branchName}} BRANCH</p> -->
             <p class="h4">Cash Office:&nbsp;{{office.value[0].cash_office_desc}}</p>
 
             <br>
@@ -410,85 +258,18 @@
 
 <!-- end. 2nd Try -->
 
-<div class="row text-center btn-toolbar">
+<div class="row text-center btn-toolbar" style="padding: 10px" *ngIf='DisplayPrint'>
     <div class= "col-lg-12">
       <div class="btn-group mr-2">
         <!-- <button class="btn btn-md btn-primary" printSectionId="print-section"  ngxPrint >Print</button> -->
-        <button class="btn btn-md btn-primary">Print</button>
+        <button class="btn btn-md btn-primary" (click) = "printWindow('print-section')">Print</button>
       </div>
 
       <div class="btn-group mr-2">
-          <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
+          <button type="button" class="btn btn-md btn-primary" (click)="ExitReport()">Exit</button>
         </div>
     </div>
   </div>
 
 <!-- end. when no input -->
-
-<!-- groupies -->
-<div class="row" *ngIf="false">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <b>All Applications:</b> &nbsp; {{receipts ? branchName : ""}}
-      </div>
-
-      <div class="card-body" *ngFor="let groupie of groupies | keyvalue">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header">
-                <i class="fa fa-align-justify"></i>Payment for {{groupie.key}}
-              </div>
-              <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Payment Method</th>
-                      <th>Amount</th>
-                      <th>Count</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of groupie.value">
-                      <td>{{item.pay_method_desc}}</td>
-                      <td class="text-right">{{item.allocated_amount | number : '.2-2' }}</td>
-                      <td class="text-right">{{item.receipt_count}}</td>
-                    </tr>
-                    <tr class="font-weight-bold">
-                      <td class="text-center">Total</td>
-                      <td *ngIf="receipts" class="text-right">{{ getSum(groupie.value) | number : '.2-2' }}</td>
-                      <td *ngIf="receipts" class="text-right">{{ getCount(groupie.value) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <p class="font-weight-bold text-center">Total Collection by Branch: {{totalBranch | number : '.2-2' }}</p>
-
-      <div class="row text-center btn-toolbar">
-        <div class= "col-lg-12">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-md btn-primary">Print</button>
-          </div>
-
-          <div class="btn-group mr-2">
-              <button type="button" class="btn btn-md btn-primary" (click)="toggleDisplayReport()">Exit</button>
-            </div>
-        </div>
-      </div>
-
-      <br> <!-- /? -->
-
-    </div>
-  </div>
-</div>
-
 </div>
