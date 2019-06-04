@@ -50,13 +50,13 @@
                 <div class="form-group row">
                   <label class="col-md-2 col-form-label">Report Date</label>
                   <div class = "col-md-4">
-                      <input class="form-control" id="date-input" type="date" name="date-input" value = "2018-09-30" formControlName="reportDate"/>
+                      <input class="form-control" id="date-input" type="date" name="date-input" value = "2019-01-01" formControlName="reportDate"/>
                   </div>
                 </div>
                         
                 <div class="btn-toolbar">
                   <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-md btn-primary " [disabled]="!listingInput.valid">Report</button>                    
+                    <button type="submit" class="btn btn-md btn-primary" [disabled]="!listingInput.valid">Report</button>
                   </div>
                 </div>
                         
@@ -76,7 +76,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Daily Receipts / Debit Listing
+          <i class="fa fa-align-justify"></i>Daily Receipts / Debit Listing
           <span class="text float-right">{{ today | date : "d-MMM-y" }}</span>
         </div>
    
@@ -95,7 +95,7 @@
               <br>
 
               <!-- Daily Receipts / Debit Listing -->
-              <table class="table table-bordered table-hover">
+              <table class="table table-borderless">
                 <thead class="thead-light">
                   <tr>
                     <th>RECEIPT NUMBER</th>
@@ -107,69 +107,64 @@
                   </tr>
                 </thead>
                 
-                <tbody>
-                  <!-- begin: loop for listing the receipts --> 
-                  
-                  <ng-template ngFor let-receipt [ngForOf]="receipts">
+                <tbody *ngFor = "let receipt of groupies | keyvalue" >
 
                   <tr>
-                    <td>{{receipt.receiptNo}}</td>
-                    <td>{{receipt.drawee}}</td>
-                    <td>{{receipt.refNo}}</td>
-                    <td>{{receipt.refDate}}</td>
-                    <td>{{receipt.payeeType}}</td>
-                    <td class="text-right">{{receipt.rctAmount}}</td>                    
+                      <td>{{receipt.key}}</td>
+                      <td>{{receipt.value[0].drawee}}</td>
+                      <td>{{receipt.value[0].reference_number}}</td>
+                      <td>{{receipt.value[0].reference_date}}</td>
+                      <td>{{receipt.value[0].pay_method_code}}</td>
+                      <td class="text-right">{{receipt.value[0].rec_allocated_amount}}</td>                    
                   </tr>
 
-                  <tr> <td colspan="6">
-                    <table class="h-100 w-100">
-                      <thead class="thead-light">
+                    <tr *ngFor="let app of getApps(receipt.value) | keyvalue">
+                      <td colspan="6">
+                        <table class="h-100 w-100 table-sm table-hover">
+                          <thead class="thead-light">
 
-                        <tr><td colspan="6">Application: {{receipt.application}} </td></tr>
+                            <tr><td colspan="6">Application: {{app.key}} </td></tr>
+                            <tr *ngIf="app.key=='SUNDRY RECEIPTS'"> <!-- application = Sundry Receipts -->
+                              <th colspan="5">Transaction Type</th><th>Amount</th>
+                            </tr>
 
-                          <tr *ngIf="receipt.application=='Group Life System'"> <!-- application = Group Life System -->
-                            <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th> </tr>
-
-                          <tr *ngIf="receipt.application=='Policy'"> <!-- application = Policy -->
-                            <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th></tr>
-
-                          <tr *ngIf="receipt.application=='Sundry Receipts'"> <!-- application = Sundry Receipts -->
-                            <th colspan="5">Transaction Type</th><th>Amount</th></tr>
-                      </thead>
+                            <tr *ngIf="app.key=='policy'"> <!-- TODO: change search string to uppercase when getting data from DB -->
+                              <th>Transaction Type</th> <th>Policy No.</th> <th colspan="2">Payer</th> <th>Period</th> <th>Amount</th>
+                            </tr>
+                      
+                            <tr *ngIf="app.key=='GROUP LIFE SYSTEM'"> <!-- application = Group Life System -->
+                              <th colspan="2">Transaction Type</th> <th>Pay Point ID</th> <th colspan="2">Pay Point Name</th> <th>Amount</th>
+                            </tr>
+                              
+                          </thead>
+                          <tbody>
                             
-                      <tbody>
-                        <tr *ngIf="receipt.application=='Policy'">
-                          <td>{{receipt.transactionType}}</td> <td>{{receipt.policyNo}}</td> <td colspan="2">{{receipt.payer}}</td> 
-                          <td>{{receipt.period}}</td> <td class="text-right">{{receipt.appAmount}}</td></tr> 
-                                  
-                        <tr *ngIf="receipt.application=='Group Life System'">
-                          <td colspan="2">{{receipt.transactionType}}</td> <td>{{receipt.paypointID}}</td> <td colspan="2">{{receipt.paypointName}}</td> 
-                          <td class="text-right">{{receipt.appAmount}}</td> </tr>
+                            <tr *ngFor="let item of getPolicies(app.key, app.value) | keyvalue; let i = index">
+                              <td colspan="2" *ngIf="app.key=='GROUP LIFE SYSTEM'">{{app.value[i].app_activity_desc}}</td>
+                              <td *ngIf="app.key=='GROUP LIFE SYSTEM'">{{app.value[i].paypoint_id}}</td> 
+                              <td colspan="2" *ngIf="app.key=='GROUP LIFE SYSTEM'">{{app.value[i].paypoint_name}}</td> 
+                              <td *ngIf="app.key=='GROUP LIFE SYSTEM'" class="text-right">{{app.value[i].act_allocated_amount}}</td>
 
-                        <tr *ngIf="receipt.application=='Sundry Receipts'">
-                          <td colspan="5">{{receipt.transactionType}}</td> <td class="text-right">{{receipt.appAmount}}</td></tr>
+                              <td *ngIf="app.key=='policy'">{{app.value[i].app_activity_desc}}</td>
+                              <td *ngIf="app.key=='policy'">{{app.value[i].policy_code}}</td> 
+                              <td *ngIf="app.key=='policy'" colspan="2">{{app.value[i].received_from}}</td> 
+                              <td *ngIf="app.key=='policy'">{{app.value[i].period}}</td> 
+                              <td *ngIf="app.key=='policy'" class="text-right">{{app.value[i].act_allocated_amount}}</td>
+                            </tr>
 
-                        <tr class="font-weight-bold">
-                          <td colspan="5" class="text-center">Total Payment Received</td>
-                          <td class="text-right">{{receipt.appAmount}}</td>
-                        </tr>
-
-                        </tbody>
-
-                      </table>
-
-                    </td>
+                          </tbody>
+                        </table>
+                      </td>
                     </tr>
-                  </ng-template>
 
-                </tbody>
+                  </tbody>
               </table>
 
               <br>
-              <p class="h6 text-right">Total by Payment Methood: 1234.56</p>
-              <p class="h6 text-right">Total by Posting Status: 1234.56</p>
+              <p class="h6 text-right">Total by Payment Methood: {{totalPayment}}</p>
+              <p class="h6 text-right">Total by Posting Status: {{totalStatus}}</p>
               <br>
-              <p class="h6 text-right">Grand Total: 1234.56</p>
+              <p class="h6 text-right">Grand Total: {{totalGrand}}</p>
 
               <div *ngIf="printPreview">
 

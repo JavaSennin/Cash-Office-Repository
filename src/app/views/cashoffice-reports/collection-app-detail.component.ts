@@ -6,6 +6,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { apiURL } from '../../_nav' ;
+
 @NgModule({
   imports: [
     FormControl,
@@ -52,7 +54,7 @@ export class CollectionAppDetailComponent implements OnInit{
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
      }
-   this.url ="http://localhost:8080/cash/collection-branch/"
+   this.url = apiURL + "collection-branch/"
    this.http.get(this.url,httpOptions)
     .subscribe((response)=>{
       const obj = response;
@@ -70,7 +72,7 @@ export class CollectionAppDetailComponent implements OnInit{
     let fd = this.detailInput.get('fromDate').value ;
     let td = this.detailInput.get('toDate').value ;
 
-    let url ="http://localhost:8080/cash/collection-detail/" + bc + "&" + fd  + "&" + td ;
+    let url = apiURL + "collection-detail/" + bc + "&" + fd  + "&" + td ;
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
