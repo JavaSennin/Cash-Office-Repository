@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-// import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http'; 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -20,11 +20,12 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {NgxPrintModule} from 'ngx-print';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
-];
+] ;
 
 import {
   AppAsideModule,
@@ -32,8 +33,8 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
-
-
+ 
+ 
 } from '@coreui/angular';
 
 // Import routing module
@@ -45,10 +46,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 // Web Service Things
-import { HttpClientModule, } from '@angular/common/http';
+import { HttpClientModule,  } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
-import { PagerService, GlobalServices } from './services/index';
+import { PagerService,GlobalServices } from './services/index';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -66,22 +67,19 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     TabsModule.forRoot(),
     ChartsModule,
     HttpClientModule,
-
+    NgxPrintModule,
+    NgxSpinnerModule
   ],
-
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
-
+    RegisterComponent
   ],
   providers: [
     {
-
-
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     }
@@ -89,7 +87,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     , PagerService, GlobalServices // from Ralla
 
   ],
-  bootstrap: [AppComponent],
-
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
