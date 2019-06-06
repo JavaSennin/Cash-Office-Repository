@@ -3,7 +3,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
-import { NgxXml2jsonService } from 'ngx-xml2json'; 
+// import { NgxXml2jsonService } from 'ngx-xml2json'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
