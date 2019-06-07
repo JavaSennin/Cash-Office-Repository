@@ -3,7 +3,7 @@
 // TO-DO: Back-end service - MySQL and Spring.
 
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms'; 
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -147,7 +147,8 @@ export class recieptAllocationStatusComponent {
     // } // end: Actual Data Functionality
   }
 
-  toggleDisplayReport(){ // /?/?/?
+  toggleDisplayReport()
+  {
     this.displayReport = !this.displayReport ; // false
 
     this.detailInput.enable() ;
