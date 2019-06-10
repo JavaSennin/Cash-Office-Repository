@@ -1,5 +1,13 @@
+// Unallocated Cash Receipts - Paypoint Report Receipts
+// localhost:8080/cash/paypoint-reports/unallocated-cash-receipts/06-AUG-2018&03-SEP-2018
+
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms'; 
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { apiURL } from '../../_nav' ;
 
 @NgModule({
   imports: [
@@ -8,7 +16,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
     FormsModule,
     ReactiveFormsModule,
     Validators
-    
 ]
 })
 
@@ -16,63 +23,111 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
   templateUrl: 'unallocated-cashReciepts.component.html'
 })
 export class unallocatedCashRecieptsComponent {
-
+  
   detailInput = new FormGroup({
-    fromDate: new FormControl('2018-09-30', Validators.required),
-    to_Date: new FormControl('2018-09-30', Validators.required)
+    fromDate: new FormControl('2019-01-01', Validators.required),
+    to_Date: new FormControl('2019-01-31', Validators.required)
   });
- 
-
-  detailReport(){
-    this.detailInput.disable() ;
-    this.displayReport = true ;
-    
-    console.table(this.detailInput.value) ;
-
-    // form-processing code
-  }
-  displayReport = false ;
 
   disableForm = false;
-
-  toggleDisplayReport(){
-    this.displayReport = !this.displayReport ; // false
-    
-    this.detailInput.enable() ;
-   
-    
-    
-  }
-  
-  // paypointIds: any[]= [
-  records = [ 
-    {ppID:1234, ppName: "Botswana Railways"},
-    {ppID:4567, ppName: "Botswana Post"},
-    {ppID:4867, ppName: "Botswana Meat Commission"},
-    {ppID:8897, ppName: "Botswana Life"},
-    {ppID:9897, ppName: "Hollard Insurance"}
-  ];
-
-  // PayPointID1 = this.paypointIds[2] ;
-
-  //Array for Dummy data [Group Life System]
-  ucrReport: any[]= [
-    {p_mode:"ESO(Electronic)",rNum:"31445",brNum:234567,sDate:"27/09/19",pid:197,pname:"Zambezi Motors",branch:"Head Office",rdate:"23/09/91",ndays:31,ga:34567.35,aa:9876492.34,ra:234566.45,status:"P",uaa:566253.47},
-    {p_mode:"ESO(Electronic)",rNum:"3143445",brNum:234567,sDate:"27/09/19",pid:197,pname:"Zambezi Motors",branch:"Head Office",rdate:"23/09/91",ndays:31,ga:34567.35,aa:9876492.34,ra:234566.45,status:"P",uaa:566253.47},
-    {p_mode:"ESO(Electronic)",rNum:"3143945",brNum:234567,sDate:"27/09/19",pid:197,pname:"Zambezi Motors",branch:"Head Office",rdate:"23/09/91",ndays:31,ga:34567.35,aa:9876492.34,ra:234566.45,status:"P",uaa:566253.47},
-    
-  ];
-  totalGrossAmount: number = 
-  this.ucrReport.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.ga}, 0 ) ;
-  totalAllocatedAmount: number = 
-  this.ucrReport.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.aa}, 0 ) ;
-  totalRecieptAmount: number = 
-  this.ucrReport.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.ra}, 0 ) ;
-  totalUnallocatedAmount: number = 
-  this.ucrReport.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.uaa}, 0 ) ;
+  displayReport = false ;
  
-  today = new Date() ;
+  headerDetails: any ;
 
-  reportNo = 1234 ;  
+  paypointIds: any ;
+
+  receipt_status = "" ;
+  reportNo = 1234 ;  // /?
   
+  today = new Date() ;
+  totalAllocated: number = 0.0 ;
+  totalGross: number = 0.0 ;
+  totalReceipt: number = 0.0 ;
+  totalUnallocated: number = 0.0 ;
+
+  unallocated_cash_receipts: any ;
+  url: string = "" ;
+
+  constructor(private http:HttpClient){}
+  
+  detailReport(){
+    
+    this.detailInput.disable() ;
+    
+    // let fd = this.detailInput.get('fromDate').value ; /// actual fuctionality
+    // let td = this.detailInput.get('to_Date').value  ; /// actual fuctionality
+    
+    let url = apiURL + "receipt-listing/" + '14-Jan-2019' + "&" + 'LOBA' + "&" + 106 + "&" + 'SHLA' ; // dbg. dummy functionality
+    // let url = apiURL + "paypoint-reports/unallocated-cash-receipts/" + fd + "&" + td ; /// actual fuctionality
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.http.get(url, httpOptions)
+
+    .subscribe(
+      
+        (response)=>{ this.unallocated_cash_receipts = response ; }
+
+      , err => this.handleError(err)
+
+      , () => this.sums() 
+    );
+
+  }
+
+  print(){
+    // Print-handler functionality
+    console.log("Printing...") ; //
+  }
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+
+    if ( this.unallocated_cash_receipts.length == 0 ) // Error handling. Put all-else in ELSE part
+    {
+      console.log("[No Matching Data Found]" ) ;
+
+      window.alert("[No Matching Data Found]" ) ;
+    }
+    // else // bgn: Actual Data Functionality
+    // {
+      
+    // Dummy Data from THITOE2
+    this.unallocated_cash_receipts =  [
+      {"receipt_no": 340541, "bobi_rec_no": "----", "pay_mode": "ESO(Semi-Electronic)","paypoint_id": 219, "pay_point_name":"MOTOR CENTRE BOTSWANA", "paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 146778.82, "receipt_amount": 142669.01, "allocated_amount": 146778.82, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340543, "bobi_rec_no": "----", "pay_mode": "ESO(Electronic)", "paypoint_id":1044, "pay_point_name":"BCL LIQUIDATION ", "paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 65902.98, "receipt_amount": 64255.41, "allocated_amount": 65902.98, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340567, "bobi_rec_no": "----", "pay_mode": "GSO", "paypoint_id":513, "pay_point_name":"GSO-PERMANENT","paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 1262.95, "receipt_amount": 1262.95, "allocated_amount": 1262.95, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340596, "bobi_rec_no": "----", "pay_mode": "ESO(Semi-Electronic)", "paypoint_id":2035, "pay_point_name":"BOTSWANA EXAMINATIONS COUNCIL", "paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 62160.82, "receipt_amount": 60606.8, "allocated_amount": 62160.82, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340702, "bobi_rec_no": "----", "pay_mode": "ESO(Electronic)", "paypoint_id":4036, "pay_point_name":"TSABONG ADMINISTRATIVE AUTHORITY PERMANENT","paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 119714.98, "receipt_amount": 113729.23, "allocated_amount": 119714.98, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340709, "bobi_rec_no": "----", "pay_mode": "ESO(Electronic)", "paypoint_id":201,"pay_point_name": "AIR BOTSWANA", "paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 100101.77, "receipt_amount": 97599.23, "allocated_amount": 100101.77, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340713, "bobi_rec_no": "----", "pay_mode": "ESO(Semi-Electronic)", "paypoint_id":654,"pay_point_name": "ELEPHANT BACK SAFARIS","paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "03-01-2019", "rcpt_date_1": "03-01-2019", "no_of_days": 155, "gross_amount": 15339.77, "receipt_amount": 14956.28, "allocated_amount": 15339.77, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" },
+      {"receipt_no": 340893, "bobi_rec_no": "----", "pay_mode": "ESO(Electronic)", "paypoint_id":574,"pay_point_name": "ELECTRONIC - FRANCISTOWN CITY COUNCIL - PERMANENT","paypoint_due_date":"01-JAN-2019", "branch": "GABORONE HEAD OFFICE", "rcpt_date": "04-01-2019", "rcpt_date_1": "04-01-2019", "no_of_days": 154, "gross_amount": 151973.1, "receipt_amount": 149037.4, "allocated_amount": 151973.1, "status": "P", "temp_value": 1, "start_date": "01-01-2019", "end_date": "31-01-2019" }
+    ]  ; 
+
+      this.headerDetails = this.unallocated_cash_receipts[0] ; // track features common to all receipt items
+      console.table( this.headerDetails ) ;
+
+      this.receipt_status = "Allocated" ; /// frontEnd.status (bold tableCaption) is "Allocated":: What is backEnd field?
+
+      this.totalAllocated = this.unallocated_cash_receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.allocated_amount}, 0 ) ;
+      this.totalGross = this.unallocated_cash_receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.gross_amount}, 0 ) ;
+      this.totalReceipt = this.unallocated_cash_receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.receipt_amount}, 0 ) ;
+      this.totalUnallocated = this.totalGross - this.totalAllocated ; 
+
+      this.displayReport = true ;
+      // } // end: Actual Data Functionality
+    }
+
+  toggleDisplayReport()
+  {
+    this.displayReport = !this.displayReport ; // false
+
+    this.detailInput.enable() ;
+  }
+
 }

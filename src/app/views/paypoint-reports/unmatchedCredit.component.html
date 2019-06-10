@@ -19,7 +19,7 @@
                   <label class="col-md-3 col-form-label" >Paypoint ID <span class="text-danger">*</span></label>
                   <div class = "col-md-4">
                     <select class="form-control" id="selectBrCode" 
-                    formControlName = "PayPointID" [disabled]="disableForm">
+                      formControlName = "PayPointID" [disabled]="disableForm">
                       <option [ngValue]="ppid"  *ngFor="let ppid of paypointIds">{{ppid[0]}}</option>
                     </select>
                   </div>
