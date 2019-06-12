@@ -59,4 +59,30 @@ export class UnspecifiedBankComponent {
 
   totalUnallocated: number = 
     this.bankStatements.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.unallocated}, 0 ) ;
+
+  // sample data from the database
+  unspecified_report_bank = [
+    {
+    "pay_mode": 'BSO', 
+    "bank_stmt_id": 315590, 
+    "bank_stmt_number": "SCB03/AUG/08-120818", 
+    "bank_ac_no": "0100110111403", 
+    "bank_code": 66, 
+    "bank_name": "STANDARD CHARTERED BANK", 
+    "stmt_start_date": "09-AUG-2018" , 
+    "stmt_end_date": "12-AUG-2018" , 
+    "posting_status": "P", 
+    "creation_date": "2018-08-13", 
+    "stmt_opening_balance": 0, 
+    "stmt_closing_balance": 0, 
+    "trans_type": "CRE", 
+    "trans_desc": "CLASS PREMIUM RECEIPTS", 
+    "payment_mode": "BSO", 
+    "period": "01-AUG-2018", 
+    "alloc_amt": 0, 
+    "fromdate": "11-AUG-2018", 
+    "todate": "11-SEP-2018"
+    }
+  ] ;
+  
 }

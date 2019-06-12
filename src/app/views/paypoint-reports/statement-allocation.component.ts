@@ -10,7 +10,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
     FormsModule,
     ReactiveFormsModule,
     Validators
-    
 ]
 })
 
