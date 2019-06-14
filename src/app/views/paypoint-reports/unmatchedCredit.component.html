@@ -103,6 +103,7 @@
                     
                 <div class="card-row">
                   <div class="col-lg-12">
+                    <div class="pre-scrollable">
                     <table class="table">
                       <thead>
                         <tr>
@@ -118,13 +119,14 @@
                           <td>{{unmatched_credit.emp_ref_name}}</td>
                           <td>{{unmatched_credit.coll_trans_id}}</td>
                           <td class="text-right">{{unmatched_credit.cr_amount | number : '.2-2'}}</td>
-                        </tr>
+                        </tr> 
                         <tr class="text-right font-weight-bold">
                           <td colspan="3">Total</td>
                           <td>{{totalUnmatched | number : '.2-2'}}</td>
                         </tr>
                       </tbody>
                     </table>
+                    </div>
 
                     <p class="h6 text-center">*** End of Report - Thito ***</p> <br>
 
