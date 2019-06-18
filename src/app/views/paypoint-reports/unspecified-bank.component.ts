@@ -1,7 +1,7 @@
 // Unspecified Bank - Paypoint Reports Module
 // http://localhost:8080/cash/paypoint-reports/unspecified-bank/2011-11-01&2011-11-01
 
-import { Component,NgModule, OnInit } from '@angular/core';
+import { Component,NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';

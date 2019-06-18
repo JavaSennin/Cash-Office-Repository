@@ -1,5 +1,13 @@
-import { Component,NgModule, OnInit } from '@angular/core';
+// Unspecified GSO-ESO - Paypoint Reports module
+// http://localhost:8080/cash/paypoint-reports/unspecified-gsoeso/2006-03-01&2019-03-31
+
+import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { apiURL } from '../../_nav' ;
 
 @NgModule({
   imports: [
@@ -17,58 +25,92 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class UnspecifiedGsoesoComponent {
 
   unspecifiedInput = new FormGroup({
-    fromDate: new FormControl('2018-09-01', Validators.required),
-    toDate: new FormControl('2018-09-30', Validators.required)
+    fromDate: new FormControl('2006-03-01', Validators.required),
+    toDate: new FormControl('2019-03-31', Validators.required)
   });
+
+  displayReport = false ;
+
+  receipts : any ;
+  reportNo = 1234 ;  // how is this generated /? 
+
+  today = new Date() ;
+  totalAllocated: number = 0.0 ; 
+  totalGross: number = 0.0 ; 
+  totalReceipts: number = 0.0 ; 
+  totalUnallocated: number = 0.0 ; 
+
+  constructor(private http:HttpClient){}
 
   onSubmit(){
     this.unspecifiedInput.disable() ;
 
-    this.displayReport = true ; // show container for the results
-  
-    console.table(this.unspecifiedInput.value) ;
+    let fdate = this.unspecifiedInput.get('fromDate').value  ;
+    let tdate = this.unspecifiedInput.get('toDate').value  ;
+    console.table(this.unspecifiedInput.value) ; // dbg
+
+    let url = apiURL + "paypoint-reports/unspecified-gsoeso/" + fdate + "&" + tdate ; 
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+   this.http.get(url, httpOptions)
+
+    .subscribe(
+      
+        (response)=>{ this.receipts = response ; }
+
+      , err => this.handleError(err)
+
+      , () => this.sums() 
+    );
 
   }
 
-  displayReport = false ;
+  print(){
+    // Print-handler functionality
+    console.log("Printing...") ; //
+  }
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+
+    if ( this.receipts.length == 0 ) // Error handling. Put all-else in ELSE part
+    {
+      console.log("[No Matching Data Found]" ) ;
+
+      window.alert("[No Matching Data Found]" ) ;
+
+      this.unspecifiedInput.enable() ;
+    }
+    else
+    {
+      this.totalUnallocated = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.alloc_amt)}, 0 ) ;
+
+      this.totalAllocated = 
+        this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.allocated_amount)}, 0 ) ;
+    
+      this.totalGross = 
+        this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.gross_amount)}, 0 ) ;
+        
+      this.totalReceipts = 
+        this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.receipt_amount)}, 0 ) ;
+        
+      this.totalUnallocated = 
+        this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.unallocated_amount)}, 0 ) ;
+
+      this.displayReport = true ;
+    }
+  }
 
   toggleDisplayReport(){
+
     this.displayReport = !this.displayReport ; // false
     this.unspecifiedInput.enable() ;
   }
-      
-  today = new Date() ;
 
-  reportNo = 1234 ;  
-
-  // An Array to hold dynamic data - Bank Statements:
-  receipts = [
-    {
-      days: 20, payMode: "DDE", bankBranch: "Gaborone Main", 
-      receiptNo: "210611", rctDate: "21-Jun-2016", rcvFrom: "GSO-Permanent", 
-      gross: 142.34, allocated: 281.56, rctAmnt: 314.34, unallocated:213.44
-    },
-    {
-      days: 14, payMode: "BSO", bankBranch: "Serowe Satellite", 
-      receiptNo: "210617", rctDate: "21-Jan-2017", rcvFrom: "Annuitant Staff", 
-      gross: 152.34, allocated: 291.56, rctAmnt: 313.56, unallocated:323.84
-    },
-    {
-      days: 12, payMode: "DDE", bankBranch: "Francistown", 
-      receiptNo: "210618", rctDate: "21-Aug-2018", rcvFrom: "GSO-Permanent", 
-      gross: 162.34, allocated: 201.56, rctAmnt: 311.75, unallocated:123.45
-    }
-  ]
-
-  totalGross: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.gross}, 0 ) ;
-  
-  totalAllocated: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.allocated}, 0 ) ;
-    
-  totalReceipts: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.rctAmnt}, 0 ) ;
-    
-  totalUnallocated: number = 
-    this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.unallocated}, 0 ) ;
 }
