@@ -1,5 +1,13 @@
-import { Component,NgModule, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+// Manual Adjustment Report - Paypoint Reports module
+// http://localhost:8080/cash/paypoint-reports/manual-adjustment/2006-03-01&2019-03-31
+
+import { Component,NgModule } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms' ; 
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { apiURL } from '../../_nav' ;
 
 @NgModule({
   imports: [
@@ -15,47 +23,79 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: './manual-adjustment.component.html'
 })
 export class ManualAdjustmentComponent {
-
-  unspecifiedInput = new FormGroup({
-    fromDate: new FormControl('2018-09-01', Validators.required),
-    toDate: new FormControl('2018-09-30', Validators.required)
-  });
-
-  onSubmit(){
-    this.unspecifiedInput.disable() ;
-
-    this.displayReport = true ; // show container for the results
   
-    console.table(this.unspecifiedInput.value) ;
-
-  }
+  unspecifiedInput = new FormGroup({
+    fromDate: new FormControl('2006-03-01', Validators.required),
+    toDate: new FormControl('2019-03-31', Validators.required)
+  });
+  
+  adjustments : any ;
 
   displayReport = false ;
+  
+  today = new Date() ;
+  totalAmount: number = 0.0 ;
+
+  constructor(private http:HttpClient){}
+
+  onSubmit(){
+
+    this.unspecifiedInput.disable() ;
+
+    let fdate = this.unspecifiedInput.get('fromDate').value  ;
+    let tdate = this.unspecifiedInput.get('toDate').value  ;
+    console.table(this.unspecifiedInput.value) ; // dbg
+
+    let url = apiURL + "paypoint-reports/manual-adjustment/" + fdate + "&" + tdate ; 
+
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+
+    this.http.get(url, httpOptions)
+
+    .subscribe(
+      
+        (response)=>{ this.adjustments = response ; }
+
+      , err => this.handleError(err)
+
+      , () => this.sums() 
+    );
+
+  }
+  
+  print(){
+    // Print-handler functionality
+    console.log("Printing...") ; //
+  }
+  
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+    
+    if ( this.adjustments.length == 0 ) // Error handling. Put all-else in ELSE part
+    {
+      console.log("[No Matching Data Found]" ) ;
+      
+      window.alert("[No Matching Data Found]" ) ;
+      
+      this.unspecifiedInput.enable() ;
+    }
+    else
+    {
+      this.totalAmount = this.adjustments.reduce( function(accumulator, currentValue){ return accumulator + parseFloat(currentValue.amount)}, 0 ) ;
+
+      this.displayReport = true ;
+    }
+  }
 
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
     this.unspecifiedInput.enable() ;
   }
-      
-  today = new Date() ;
-
-  // An Array to hold dynamic data - Manual Adjustments:
-  adjustments = [
-    {
-      mnAdjID: 20, policyCode: "100210611", transType: "Premium Allocation", policyID: "210611", 
-      period: "21-Jun-2016", payerName: "A. B. Doe", payerNo: 14234, amount: 281.56, comments: "Unprocessed Allocation", purpose: 2, postingStatus: "POSTED", bobiRefNo: 123456, creation: "21-Jun-2012"
-    },
-    {
-      mnAdjID: 14, policyCode: "100210617", transType: "Premium Allocation", policyID: "210617", 
-      period: "21-Jan-2017", payerName: "C. D. Doe", payerNo: 15234, amount: 291.56, comments: "Review the Allocation", purpose: 4, postingStatus: "UNPOSTED", bobiRefNo: 123457, creation: "21-Jun-2013"
-    },
-    {
-      mnAdjID: 12, policyCode: "100210618", transType: "Premium Allocation", policyID: "210618", 
-      period: "21-Aug-2018", payerName: "E. F. Doe", payerNo: 16234, amount: 201.56, comments: "Unprocessed Allocation", purpose: 5, postingStatus: "POSTED", bobiRefNo: 123458, creation: "21-Jun-2014"
-    }
-  ]
-
-  totalAmount: number = 
-    this.adjustments.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.amount}, 0 ) ;
   
 }
