@@ -1,7 +1,10 @@
-import { Component, ViewEncapsulation, NgModule, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, NgModule, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as _ from 'underscore'; /// npm install underscore
+// import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from '../../ui/loading-spinner/loading-spinner.component';
+import { ModalService } from '../../services/_service';
 
 @NgModule({
   imports: [
@@ -10,16 +13,17 @@ import * as _ from 'underscore'; /// npm install underscore
     FormsModule,
     ReactiveFormsModule,
     Validators,
+    LoadingSpinnerComponent
 
-
+  ], exports: [LoadingSpinnerComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ]
-
 })
 
 @Component({
   templateUrl: 'oversandunders.component.html',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./spinner.component.scss'],
+  styleUrls: ['./oversandunders.component.scss'],
 })
 export class OversandUndersComponent implements OnInit {
 
@@ -39,8 +43,7 @@ export class OversandUndersComponent implements OnInit {
   showSpinner: boolean;
   total: number;
   totalCred: number;
-  content: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalService: ModalService) { }
 
   displayReport = false;
   disableForm = false;
@@ -51,6 +54,15 @@ export class OversandUndersComponent implements OnInit {
 
     // form-processing code
   }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+
 
   toggleDisplayReport() {
 
@@ -113,9 +125,10 @@ export class OversandUndersComponent implements OnInit {
         this.report = response;
         if (this.report.length == 0) // Error handling. Put all-else in ELSE part
         {
-          this.error_message = true;
           this.showSpinner = false;
           this.err = "No Matching Data Found";
+          this.error_message = true;
+          
           this.displayReport = false;
         } else {
           this.totalDebitsAndCredits();
