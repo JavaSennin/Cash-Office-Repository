@@ -29,7 +29,7 @@ export class CollectionAppBranchComponent implements OnInit {
   cashOfficeName: string ;
 
   cashOfficeCollection: number = 0.0 ; 
-  branchCodes :any;
+  branchCodes: any;
   branchCollection: number = 0.0 ;
   displayReport = false ;
 

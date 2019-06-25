@@ -44,7 +44,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Web Service Things
 import { HttpClientModule, } from '@angular/common/http';
@@ -73,7 +73,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
     HttpClientModule,
     NgxPrintModule,
     NgxSpinnerModule,
-    NgbModule
+    // NgbModule
 
   ],
   exports: [LoadingSpinnerComponent],

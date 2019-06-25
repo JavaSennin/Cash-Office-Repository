@@ -40,7 +40,7 @@ export class recieptAllocationStatusComponent {
   receipt_status = "" ;
   receipts: any ;
   
-  subscription: Subscription ; // rfc. 
+  subscription: Subscription ;
 
   today = new Date() ;
 
@@ -89,56 +89,11 @@ export class recieptAllocationStatusComponent {
       console.log("No Receipts captured" ) ;
 
       window.alert("No Receipts captured" ) ;
+
+      this.detailInput.enable() ;
     }
     else // bgn: Actual Data Functionality
     {
-
-    // Dummy Data from THITOE2
-  // this.receipts = [
-  //   {
-  //     "receipt_no": "1606",
-  //     "receipt_date": "24-MAR-2009",
-  //     "branch_code": "103",
-  //     "trn_narration": "GOVERMNET STOP ORDER",
-  //     "payment_mode": "GSO",
-  //     "receipt_type_code": "PCL",
-  //     "receipt_type": "PREMIUM COLLECTION",
-  //     "allocated": "0",
-  //     "receipt": "0.35",
-  //     "gross_receipted": "0.35",
-  //     "policy_num": "80661384",
-  //     "product_abbr": "BMFW-1",
-  //     "status": "Inforce",
-  //     "accounting_date": "01-OCT-2011",
-  //     "premium": "251.2",
-  //     "amount": "3.35",
-  //     "payor_client_no": "1960292",
-  //     "party_name": "KESEGOFADITSWE TSHWARO",
-  //     "paypoint_id": "501"
-  //   },
-  //   {
-  //     "receipt_no": "1606",
-  //     "receipt_date": "24-MAR-2009",
-  //     "branch_code": "103",
-  //     "trn_narration": "GOVERMNET STOP ORDER",
-  //     "payment_mode": "GSO",
-  //     "receipt_type_code": "PCL",
-  //     "receipt_type": "PREMIUM COLLECTION",
-  //     "allocated": "0",
-  //     "receipt": "6.35",
-  //     "gross_receipted": "3",
-  //     "policy_num": "80661384",
-  //     "product_abbr": "BMFW-1",
-  //     "status": "Inforce",
-  //     "accounting_date": "01-OCT-2011",
-  //     "premium": "251.2",
-  //     "amount": "3.35",
-  //     "payor_client_no": "1960292",
-  //     "party_name": "KESEGOFADITSWE TSHWARO",
-  //     "paypoint_id": "513"
-  //   }
-  // ] ; 
-
       this.amount = this.receipts.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.amount)}, 0 ) ;
 
       this.headerDetails = this.receipts[0] ; // track features common to all receipt items
