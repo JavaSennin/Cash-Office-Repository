@@ -7,7 +7,7 @@ import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs'; // rfc: Subscription
+import { Observable, Subscription} from 'rxjs'; // rfc: Subscription
 
 import { apiURL } from '../../_nav' ;
 
@@ -24,7 +24,7 @@ import { apiURL } from '../../_nav' ;
 @Component({
   templateUrl: 'reciept-allocation-status.component.html'
 })
-export class recieptAllocationStatusComponent {
+export class recieptAllocationStatusComponent { // implements OnDestroy {
 
   detailInput = new FormGroup({
     receipt_number: new FormControl('', Validators.required)
@@ -101,7 +101,6 @@ export class recieptAllocationStatusComponent {
 
       this.receipt_status = "Allocated" ; /// frontEnd.status (bold tableCaption) is "Allocated":: What is backEnd field?
 
-      // this.http.unsubscribe() ; // rfc. m. refactoring
       this.displayReport = true ;
     } // end: Actual Data Functionality
   }
@@ -115,7 +114,13 @@ export class recieptAllocationStatusComponent {
 
   // rfc.
   ngOnDestroy() {
-    this.subscription.unsubscribe() ;
+    
+    // Check before attempting to close connection
+    if ( !this.subscription.closed ) 
+    {
+      this.subscription.unsubscribe() ; 
+    }
+
   }
 
 }

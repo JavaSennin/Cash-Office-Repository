@@ -1,5 +1,6 @@
 // Paypoint Summary - Paypoint Reports Module
-// http://localhost:8080/cash/paypoint-reports/paypoint-summary/544&2013-11-01
+// http://localhost:8080/cash/paypoint-reports/paypoint-summary/604&2011-10-01
+// Tested PIDs: 150, 283,505,508,517,552,578,582,588,604,628,634,640,642,649,659,660,786,802,820,825 Period: 2011-10-01
 
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
@@ -27,7 +28,7 @@ export class paypointSummaryComponent implements OnInit {
   detailInput = new FormGroup({
     PayPointID: new FormControl('', Validators.required),
     Paypoint_Name: new FormControl({value:"", disabled: true}),
-    Period: new FormControl('2018-09-30', Validators.required)
+    Period: new FormControl('2011-10-01', Validators.required)
   });
   
   disableForm = false;
@@ -37,8 +38,10 @@ export class paypointSummaryComponent implements OnInit {
   ppReport: any ; 
   
   subscription: Subscription ; // rfc. 
-  subscription2: Subscription
+  subscription2: Subscription ; 
   
+  today = new Date() ;
+  totalDayTotals: number = 0.0 ;
   totalRaisedAmount: number = 0.0 ;
 
   url: string = "" ;
@@ -53,7 +56,7 @@ export class paypointSummaryComponent implements OnInit {
 
    this.url = apiURL + "collection-branch/paypoints" ; // returns array-list: {[paypoint_id, paypoint_name]}
 
-   this.subscription =
+   this.subscription = 
     this.http.get(this.url,httpOptions)
       .subscribe((response)=>{
         const obj = response;
@@ -61,14 +64,19 @@ export class paypointSummaryComponent implements OnInit {
         this.paypointIds = obj; 
 
       }
-      ,err => this.handleError(err)) ;
+      ,err => this.handleError(err))
+    
+      ;
   }
   
   detailReport(){
     this.detailInput.disable() ;
     console.table(this.detailInput.value) ; // dbg.
 
-    this.subscription.unsubscribe() ; // rfc. /? 
+    if ( !this.subscription.closed ) 
+    {
+      this.subscription.unsubscribe() ; // rfc. /? 
+    }
 
     let paypoint = this.detailInput.get('PayPointID').value[0] ;
     console.log("Summary for PPID " + paypoint + "\n") ; // dbg.
@@ -115,8 +123,10 @@ export class paypointSummaryComponent implements OnInit {
     }
     else // bgn: Actual Data Functionality
     {
+      // console.log( this.ppReport ) ; // dbg.
 
-      this.totalRaisedAmount = this.ppReport.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.day_total)}, 0 ) ;
+      this.totalDayTotals = this.ppReport.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.day_total)}, 0 ) ;
+      this.totalRaisedAmount = this.ppReport[0].total_raised_amount ;
 
       this.displayReport = true ;
     } // end: Actual Data Functionality
@@ -130,8 +140,18 @@ export class paypointSummaryComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe() ;
-    this.subscription2.unsubscribe() ;
+    // this.subscription.unsubscribe() ; 
+
+    if ( !this.subscription.closed ) 
+    {
+      this.subscription.unsubscribe() ;
+    }
+
+    if ( !this.subscription2.closed ) 
+    {
+      this.subscription2.unsubscribe() ;
+    }
+
   }
  
 }
