@@ -139,9 +139,8 @@ export class paypointSummaryComponent implements OnInit {
     this.detailInput.get('Paypoint_Name').disable();
   }
 
-  ngOnDestroy() {
-    // this.subscription.unsubscribe() ; 
-
+  ngOnDestroy() 
+  {
     if ( !this.subscription.closed ) 
     {
       this.subscription.unsubscribe() ;
@@ -151,7 +150,6 @@ export class paypointSummaryComponent implements OnInit {
     {
       this.subscription2.unsubscribe() ;
     }
-
   }
  
 }
