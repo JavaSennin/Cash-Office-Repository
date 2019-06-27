@@ -1,10 +1,7 @@
-import { Component, NgModule, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as _ from 'underscore'; /// npm install underscore
-// import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.component';
-import { LoadingSpinnerComponent } from '../../ui/loading-spinner/loading-spinner.component';
-import { ModalService } from '../../services/_service';
 
 @NgModule({
   imports: [
@@ -12,24 +9,19 @@ import { ModalService } from '../../services/_service';
     FormGroup,
     FormsModule,
     ReactiveFormsModule,
-    Validators,
-    LoadingSpinnerComponent
+    Validators
 
-  ], exports: [LoadingSpinnerComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 
 @Component({
-  templateUrl: 'oversandunders.component.html',
-  styleUrls: ['./oversandunders.component.scss'],
+  templateUrl: 'rejections.component.html',
+  styleUrls: ['./spinner.component.scss']
 })
-export class OversandUndersComponent implements OnInit {
+export class rejectionsComponent implements OnInit {
 
   detailInput = new FormGroup({
     PayPointID: new FormControl('', Validators.required),
-
     Paypoint_Name: new FormControl(''),
     Period: new FormControl('', Validators.required)
   });
@@ -43,38 +35,17 @@ export class OversandUndersComponent implements OnInit {
   showSpinner: boolean;
   total: number;
   totalCred: number;
-  constructor(private http: HttpClient, private modalService: ModalService) { }
-
   displayReport = false;
+
   disableForm = false;
-  detailReport() {
-    this.displayReport = true;
+  constructor(private http: HttpClient) { }
 
-    console.table(this.detailInput.value);
-
-    // form-processing code
-  }
-
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
-  }
-
-
-  toggleDisplayReport() {
-
-    this.displayReport = false;
-    this.detailInput.reset();
-  }
   ngOnInit() {
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' }),
     };
-    this.url = 'http://localhost:8080/cash/oversunders/paypoints';
+    this.url = 'http://localhost:8080/cash/rejections/paypoints';
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
         const obj = response;
@@ -96,7 +67,7 @@ export class OversandUndersComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     };
-    this.url = 'http://localhost:8080/cash/oversunders/paypointname/' + ppID;
+    this.url = 'http://localhost:8080/cash/rejections/paypointname/' + ppID;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
 
@@ -115,20 +86,20 @@ export class OversandUndersComponent implements OnInit {
     this.showSpinner = true;
     const ppID = this.detailInput.get('PayPointID').value;
     const period = this.detailInput.get('Period').value;
+    console.log(period);
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'application/json' })
     };
-    this.url = 'http://localhost:8080/cash/oversunders/report/' + ppID + '&' + period;
+    this.url = 'http://localhost:8080/cash/rejections/report/' + ppID + '&' + period;
     this.http.get(this.url, httpOptions)
       .subscribe((response) => {
 
         this.report = response;
         if (this.report.length == 0) // Error handling. Put all-else in ELSE part
         {
+          this.error_message = true;
           this.showSpinner = false;
           this.err = "No Matching Data Found";
-          this.error_message = true;
-          
           this.displayReport = false;
         } else {
           this.totalDebitsAndCredits();
@@ -151,13 +122,21 @@ export class OversandUndersComponent implements OnInit {
     this.showGroupies();
   }
   showGroupies() {
-    this.groupies = _.groupBy(this.report, 'pay_point_id'); // or sort cash_office_desc
+    this.groupies = _.groupBy(this.report, 'paypoint_ID'); // or sort cash_office_desc
   }
 
 
   totalDebitsAndCredits() {
-    this.total = this.report.reduce(function (accumulator, currentValue) { return accumulator + parseFloat(currentValue.debits) }, 0);
-    this.totalCred = this.report.reduce(function (accumulator, currentValue) { return accumulator + parseFloat(currentValue.credits) }, 0);
+    this.total = this.report.reduce(function (accumulator, currentValue) { return accumulator + parseFloat(currentValue.amount) }, 0);
+    this.totalCred = this.report.reduce(function (accumulator, currentValue) { return accumulator + parseFloat(currentValue.credit_AMOUNT) }, 0);
 
   }
+
+
+  toggleDisplayReport() {
+    this.displayReport = false;
+    this.detailInput.reset();
+  }
+
+
 }
