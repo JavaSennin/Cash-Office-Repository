@@ -1,5 +1,14 @@
-import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms'; 
+// Paypoint Summary - Paypoint Reports Module
+// http://localhost:8080/cash/paypoint-reports/paypoint-summary/604&2011-10-01
+// Tested PIDs: 150, 283,505,508,517,552,578,582,588,604,628,634,640,642,649,659,660,786,802,820,825 Period: 2011-10-01
+
+import { Component, NgModule, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+
+import { apiURL } from '../../_nav' ;
 
 @NgModule({
   imports: [
@@ -8,62 +17,141 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, F
     FormsModule,
     ReactiveFormsModule,
     Validators
-    
 ]
 })
 
 @Component({
   templateUrl: 'paypoint-summary.component.html'
 })
-export class paypointSummaryComponent {
+export class paypointSummaryComponent implements OnInit {
 
   detailInput = new FormGroup({
     PayPointID: new FormControl('', Validators.required),
-    
-    Paypoint_Name: new FormControl({value:"", disabled: true}, Validators.required),
-    Period: new FormControl('2018-09-30', Validators.required)
+    Paypoint_Name: new FormControl({value:"", disabled: true}),
+    Period: new FormControl('2011-10-01', Validators.required)
   });
- 
+  
+  disableForm = false;
+  displayReport = false ;
+  
+  paypointIds: any ;
+  ppReport: any ; 
+  
+  subscription: Subscription ; // rfc. 
+  subscription2: Subscription ; 
+  
+  today = new Date() ;
+  totalDayTotals: number = 0.0 ;
+  totalRaisedAmount: number = 0.0 ;
 
+  url: string = "" ;
+
+  constructor(private http:HttpClient){}
+
+  ngOnInit(){
+    
+    const httpOptions = {
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     }
+
+   this.url = apiURL + "collection-branch/paypoints" ; // returns array-list: {[paypoint_id, paypoint_name]}
+
+   this.subscription = 
+    this.http.get(this.url,httpOptions)
+      .subscribe((response)=>{
+        const obj = response;
+        
+        this.paypointIds = obj; 
+
+      }
+      ,err => this.handleError(err))
+    
+      ;
+  }
+  
   detailReport(){
     this.detailInput.disable() ;
-    this.displayReport = true ;
-    
-    console.table(this.detailInput.value) ;
+    console.table(this.detailInput.value) ; // dbg.
+
+    if ( !this.subscription.closed ) 
+    {
+      this.subscription.unsubscribe() ; // rfc. /? 
+    }
+
+    let paypoint = this.detailInput.get('PayPointID').value[0] ;
+    console.log("Summary for PPID " + paypoint + "\n") ; // dbg.
+    let period = this.detailInput.get('Period').value ;
 
     // form-processing code
-  }
-  displayReport = false ;
+    let url = apiURL + "paypoint-reports/paypoint-summary/" + paypoint + "&" + period ; /// actual fuctionality
 
-  disableForm = false;
+    const httpOptions ={
+      headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
+     } ; 
+
+     this.subscription2 =
+   this.http.get(url, httpOptions).subscribe(
+      
+        (response)=>{ this.ppReport = response ; }
+
+      , err => this.handleError(err)
+
+      , () => this.sums() 
+    );
+  }
+
+  print(){
+    // Print-handler functionality
+    console.log("Printing...") ; //
+  }
+
+  private handleError(error:Response){
+    console.log(error);
+    return Observable.throw('server error');
+  }
+
+  private sums(){
+
+    if ( this.ppReport.length == 0 ) // Error handling. Put all-else in ELSE part
+    {
+      console.log("No Receipts captured" ) ;
+
+      window.alert("No Receipts captured" ) ;
+
+      this.detailInput.enable() ;
+      this.detailInput.get('Paypoint_Name').disable();
+    }
+    else // bgn: Actual Data Functionality
+    {
+      // console.log( this.ppReport ) ; // dbg.
+
+      this.totalDayTotals = this.ppReport.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.day_total)}, 0 ) ;
+      this.totalRaisedAmount = this.ppReport[0].total_raised_amount ;
+
+      this.displayReport = true ;
+    } // end: Actual Data Functionality
+  }
 
   toggleDisplayReport(){
     this.displayReport = !this.displayReport ; // false
     
     this.detailInput.enable() ;
     this.detailInput.get('Paypoint_Name').disable();
-    
-    
   }
-  
-  // paypointIds: any[]= [
-  paypointIds = [ 
-    {ppID:1234, ppName: "Botswana Railways"},
-    {ppID:4567, ppName: "Botswana Post"},
-    {ppID:4867, ppName: "Botswana Meat Commission"},
-    {ppID:8897, ppName: "Botswana Life"},
-    {ppID:9897, ppName: "Hollard Insurance"}
-  ];
 
-  // PayPointID1 = this.paypointIds[2] ;
+  ngOnDestroy() {
+    // this.subscription.unsubscribe() ; 
 
-  //Array for Dummy data [Group Life System]
-  ppReport: any[]= [
-    {pp_id:1234,ppType:"E",tCode:4567,sDate:"27/09/19",nP:197,gda:566253.47},
-    {pp_id:1234,ppType:"E",tCode:5567,sDate:"27/10/19",nP:755,gda:280371.33}
-  ];
-  totalRaisedAmount: number = 
-  this.ppReport.reduce( function(accumulator, currentValue){ return accumulator +  currentValue.gda}, 0 ) ;
+    if ( !this.subscription.closed ) 
+    {
+      this.subscription.unsubscribe() ;
+    }
+
+    if ( !this.subscription2.closed ) 
+    {
+      this.subscription2.unsubscribe() ;
+    }
+
+  }
  
-  
 }
