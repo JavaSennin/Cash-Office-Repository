@@ -1,6 +1,7 @@
 // Unmatched Credits - Paypoints Reports Module
 // http://localhost:8080/cash/paypoint-reports/unmatched-credits/32&2017-03-01
 // TO-DO: Back-end service - MySQL and Spring. inc. retrieving PPIDs and corresponding PPNs
+// 649 - ELECTRONIC - HUKUNTSI SUB-DISTRICT COUNCIL - PERM || 508 - STANDARD CHARTERED BANK - DIRECT DEBITS
 
 import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'; 
@@ -70,12 +71,17 @@ export class unmatchedCreditComponent implements OnInit {
 
     this.detailInput.disable() ;
 
-    // let ppid = this.detailInput.get('PayPointID').value ; /// actual fuctionality
-    console.log(this.detailInput.get('Paypoint_Name').value ) ; // this is not showing PPN /? 
-    // let prd = this.detailInput.get('Period').value  ; /// actual fuctionality
-    
-    let url = apiURL + "receipt-listing/" + '14-Jan-2019' + "&" + 'LOBA' + "&" + 106 + "&" + 'SHLA' ; // dbg. dummy functionality
-    // let url = apiURL + "paypoint-reports/unmatched-credits/" + ppid + "&" + prd ; /// actual fuctionality
+    let ppid = this.detailInput.get('PayPointID').value[0] ; /// actual fuctionality
+    // console.log(this.detailInput.get('PayPointID').value) ;
+    console.log(this.detailInput.get('PayPointID').value[0] ) ;
+    // console.log(this.detailInput.get('Paypoint_Name').value ) ; // this is not showing PPN /? 
+    let ppn = this.detailInput.get('PayPointID').value[1] ;
+    console.log(this.detailInput.get('PayPointID').value[1]) ;
+    let prd = this.detailInput.get('Period').value  ; /// actual fuctionality
+    console.log(this.detailInput.get('Period').value);
+
+    // let url = apiURL + "receipt-listing/" + '14-Jan-2019' + "&" + 'LOBA' + "&" + 106 + "&" + 'SHLA' ; // dbg. dummy functionality
+    let url = apiURL + "paypoint-reports/unmatched-credits/" + ppid + "&" + ppn + "&" + prd ; /// actual fuctionality
 
     const httpOptions ={
       headers : new HttpHeaders({'Content-Type':'application/json','responseType':'application/json'})
@@ -110,37 +116,39 @@ export class unmatchedCreditComponent implements OnInit {
       console.log("[No Matching Data Found]" ) ;
 
       window.alert("[No Matching Data Found]" ) ;
-    }
-    // else // bgn: Actual Data Functionality
-    // {
 
-    // Dummy Data from THITOE2
-  this.unmatched_credits = [
+      this.detailInput.enable() ;
+      this.detailInput.get('Paypoint_Name').disable();
+    }
+    else // bgn: Actual Data Functionality
     {
-      "emp_ref": 73816517, 
-      "emp_ref_name": "GOMOLEMO TSHOTEGO", 
-      "paypnt_id": 32, 
-      "coll_trans_id": 9711727, 
-      "cr_amount": 245.07, 
-      "period": "01-MAR-2017", 
-      "paypoint_name": "DEREK BRINK HOLDINGS",
-      "pay_mode": "ESO(Semi-Electronic)", 
-      "tot_dbt_amt": 3789.11, 
-      "tot_crd_amt": 3083.96
-     },
-     {
-      "emp_ref": 93910709, 
-      "emp_ref_name": "GABASEKWE MONTSHIWA", 
-      "paypnt_id": 32, 
-      "coll_trans_id": 9711728, 
-      "cr_amount": 113.60, 
-      "period": "01-MAR-2017", 
-      "paypoint_name": "DEREK BRINK HOLDINGS", 
-      "pay_mode": "ESO(Semi-Electronic)", 
-      "tot_dbt_amt": 3789.11, 
-      "tot_crd_amt": 3083.96
-     }
-    ] ;
+    // Dummy Data from THITOE2
+  // this.unmatched_credits = [
+    // {
+      // "emp_ref": 73816517, 
+      // "emp_ref_name": "GOMOLEMO TSHOTEGO", 
+    //   // "paypnt_id": 32, 
+    //   "coll_trans_id": 9711727, 
+    //   "cr_amount": 245.07, 
+    //   "period": "01-MAR-2017", 
+    //   "paypoint_name": "DEREK BRINK HOLDINGS",
+    //   "pay_mode": "ESO(Semi-Electronic)", 
+    //   "tot_dbt_amt": 3789.11, 
+    //   "tot_crd_amt": 3083.96
+    //  },
+    //  {
+    //   "emp_ref": 93910709, 
+    //   "emp_ref_name": "GABASEKWE MONTSHIWA", 
+    //   "paypnt_id": 32, 
+    //   "coll_trans_id": 9711728, 
+    //   "cr_amount": 113.60, 
+    //   "period": "01-MAR-2017", 
+    //   "paypoint_name": "DEREK BRINK HOLDINGS", 
+    //   "pay_mode": "ESO(Semi-Electronic)", 
+    //   "tot_dbt_amt": 3789.11, 
+    //   "tot_crd_amt": 3083.96
+    //  }
+    // ] ;
 
       this.headerDetails = this.unmatched_credits[0] ; // track features common to all receipt items
       console.table( this.headerDetails ) ;
@@ -150,7 +158,7 @@ export class unmatchedCreditComponent implements OnInit {
       this.totalUnmatched = this.unmatched_credits.reduce( function(accumulator, currentValue){ return accumulator +  parseFloat(currentValue.cr_amount)}, 0 ) ;
 
       this.displayReport = true ;
-    // } // end: Actual Data Functionality
+    } // end: Actual Data Functionality
   }
 
   toggleDisplayReport()

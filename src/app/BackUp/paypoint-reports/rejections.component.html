@@ -4,7 +4,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Overs and Unders Report
+          <i class="fa fa-align-justify"></i> Rejections Report
         </div>
 
         <div class="card-body">
@@ -20,8 +20,8 @@
                   <label class="col-md-3 col-form-label" >Paypoint ID:</label>
                   <div class = "col-md-4">
                     <select class="form-control" id="selectBrCode"
-                    formControlName = "PayPointID" [disabled]="disableForm"  (change)="getPaypointName()" required>
-                      <option [ngValue]="ppid"  *ngFor="let ppid of paypointIds">{{ppid[0]}}</option>
+                    formControlName = "PayPointID"  (change)="getPaypointName()" required>
+                    <option [ngValue]="ppid"  *ngFor="let ppid of paypointIds">{{ppid[0]}}</option>
 
                     </select>
                   </div>
@@ -32,13 +32,13 @@
                   <div class = "col-md-4">
                     <input  class="form-control" id="disabled-input" type="text"
                     formControlName = "Paypoint_Name" name="disabled-input" placeholder="Enter Paypoint Name"
-                      value={{paypointName}} disabled >
+                    value={{paypointName}} disabled>
 
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label">Period :</label>
+                  <label class="col-md-3 col-form-label">Period:</label>
                   <div  class = "col-md-4">
                     <input class="form-control" id="date-input" type="date"
                     formControlName = "Period" name="date-input" required>
@@ -57,24 +57,13 @@
           </form>
 
 
-<!-- bgn -->
-<!-- <form [formGroup]="form">
-  <select formControlName="state">
-    <option *ngFor="let state of states" [ngValue]="state">
-      {{ state.abbrev }}
-    </option>
-  </select>
-</form>
-
- <p>Form value: {{ form.value.state.name | json }}</p>  -->
-
-<!-- end -->
 
 
         </div>
       </div>
     </div>
   </div>
+
     <!-- Report/Results Container -->
     <!--Show Spinner while data is loading-->
     <div class="spinner" *ngIf="showSpinner">
@@ -85,32 +74,26 @@
       <div class="rect5"></div>
       <p>Processing....</p>
     </div>
-    <!--Incase of an Error or Empty result-->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="error_message">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+        <!--Incase of an Error or Empty result-->
+        <div class="card text-center" *ngIf='error_message'>
+          <div class="card-header">
+            Error Message
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><span style="color: red">{{err}}</span></h5>
+            <p class="card-text"><span style="color: green">*Please select a different paypoint / period*</span></p>
+                 </div>
+          <div class="card-footer text-muted">
+            Description : Error code 100393 | on Paypoint ID:{{detailInput.value.PayPointID}}, Period: {{detailInput.value.Period}}
           </div>
         </div>
-      </div>
 
+    <!-- Report/Results Container -->
     <div class="row" *ngIf="displayReport">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i> Overs and Unders Report
+              <i class="fa fa-align-justify"></i> Rejections
             </div>
        <!--Tafole 1-->
             <div class="card-body">
@@ -120,7 +103,7 @@
                     <div class="card-header">
                       <i class="fa fa-align-justify"></i><b>Period: </b>{{detailInput.value.Period}}
                     </div>
-                    <div class="card-body" >
+                    <div class="card-body">
                       <table class="table">
                         <thead>
                           <tr>
@@ -133,10 +116,10 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let paypoint of groupies | keyvalue">
-                            <td>{{paypoint.value[0].paypoint_id}}</td>
-                            <td>{{paypoint.value[0].pay_point_name}}</td>
-                            <td>{{paypoint.value[0].type_value}}</td>
-                            <td>{{paypoint.value[0].payment_mode}}</td>
+                            <td>{{paypoint.key}}</td>
+                            <td>{{paypoint.value[0].pay_POINT_NAME}}</td>
+                            <td>{{paypoint.value[0].type_VALUE}}</td>
+                            <td>{{paypoint.value[0].payment_MODE}}</td>
 
                           </tr>
 
@@ -166,7 +149,7 @@
                   <div class="card">
 
                     <div class="card-body">
-                      <table class="table table-sm">
+                      <table class="table">
                         <thead>
                           <tr>
                             <th>Collection Type</th>
@@ -179,6 +162,8 @@
                           <tr>
                             <td>DEBITS: </td>
                             <td>{{total | number : '1.2'}}</td>
+
+
                           </tr>
                           <tr>
                             <td>CREDITS: </td>
@@ -214,28 +199,28 @@
                     <div class="card-header">
 
                     <div class="card-body">
-                      <table class="table table-sm">
+                      <table class="table">
                         <thead>
                           <tr>
                             <th>Reference Number</th>
                             <th>Reference Name</th>
-                            <th>Policy Code</th>
-                            <th>Status</th>
-                            <th>Dr Amount</th>
-                            <th>Allocated Amount</th>
-                            <th>Difference Amount</th>
+                            <th>Party ID</th>
+                            <th>Policy Number</th>
+                            <th>Product Code</th>
+                            <th>Policy Status</th>
+                            <th>Debit Amount</th>
 
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let ppr3 of report">
-                            <td>{{ppr3.reference_no}}</td>
-                            <td>{{ppr3.reference_name}}</td>
-                            <td>{{ppr3.policy_code}}</td>
-                            <td>{{ppr3.status_desc}}</td>
-                            <td>{{ppr3.debits}}</td>
-                            <td>{{ppr3.credits}}</td>
-                            <td>{{ppr3.difference_amt}}</td>
+                            <td>{{ppr3.employee_CODE}}</td>
+                            <td>{{ppr3.employee_NAME}}</td>
+                            <td>{{ppr3.party_ID}}</td>
+                            <td>{{ppr3.policy_CODE}}</td>
+                            <td>{{ppr3.product_CODE}}</td>
+                            <td>{{ppr3.status}}</td>
+                            <td>{{ppr3.amount}}</td>
 
                           </tr>
 
